@@ -11,6 +11,7 @@ public static class UtilityFunctions
 
     public static T2 GetRandom<T1, T2>(T1 objects) where T1 : IEnumerable<T2> => objects.ElementAt(random.Next(objects.Count()));
     public static T GetRandom<T>(this IEnumerable<T> objects) => objects.ElementAt(random.Next(objects.Count()));
+    public static bool Empty<T>(this IEnumerable<T> objects) => objects.Count() == 0;
     public static float RandomFloat(float minValue, float maxValue) => (float)random.NextDouble() * (maxValue - minValue) + minValue;
     public static int RandomInteger(int minValue, int maxValue) => random.Next(minValue, maxValue);
     public static int RandomInteger(int maxValue) => random.Next(maxValue);
@@ -96,5 +97,41 @@ public static class UtilityFunctions
             return null;
         }
         return returnValue.ToArray();
+    }
+
+    public static Vector3 ClosestPointOnLine(this Vector2 basePosition, Vector2 lineStart, Vector2 lineEnd, bool infinite = true)
+    {
+        Vector2 lineDirection = (lineEnd - lineStart);
+        float len = lineDirection.magnitude;
+        lineDirection.Normalize();
+
+        Vector2 projection = basePosition - lineStart;
+        float distance = Vector3.Dot(projection, lineDirection);
+        distance = infinite ? distance : Mathf.Clamp(distance, 0f, len);
+
+        return lineStart + lineDirection * distance;
+    }
+
+    public static Vector3? GetIntersection(this Vector3 startPosition, Vector3 direction, Vector3 lineStart, Vector3 lineEnd)
+    {
+        Vector3 baseLineStart = startPosition;
+        Vector3 baseLineEnd = startPosition + direction;
+
+        float denominator = (lineEnd.y - lineStart.y) * (baseLineEnd.x - baseLineStart.x) - (lineEnd.x - lineStart.x) * (baseLineEnd.y - baseLineStart.y);
+
+        if (denominator == 0) return null;
+
+        float u_a = ((lineEnd.x - lineStart.x) * (baseLineStart.y - lineStart.y) - (lineEnd.y - lineStart.y) * (baseLineStart.x - lineStart.x)) / denominator;
+        float u_b = ((baseLineEnd.x - baseLineStart.x) * (baseLineStart.y - lineStart.y) - (baseLineEnd.y - baseLineStart.y) * (baseLineStart.x - lineStart.x)) / denominator;
+
+        if (u_b >= 0 && u_b <= 1)
+        {
+            float intersectionX = baseLineStart.x + u_a * (baseLineEnd.x - baseLineStart.x);
+            float intersectionY = baseLineStart.y + u_a * (baseLineEnd.y - baseLineStart.y);
+
+            return new Vector3(intersectionX, intersectionY);
+        }
+
+        return null;
     }
 }

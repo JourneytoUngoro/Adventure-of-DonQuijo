@@ -20,12 +20,63 @@ public abstract class Movement : CoreComponent
 
     public void SetVelocityX(float velocity)
     {
-        v2WorkSpace.Set(velocity, entity.rigidBody.velocity.y);
+        if (facingDirection * velocity < 0)
+        {
+            if (entity.entityDetection.horizontalObstacleHeight.y > entity.entityDetection.currentEntityHeight)
+            {
+                v2WorkSpace.Set(0.0f, entity.rigidBody.velocity.y);
+            }
+            else
+            {
+                v2WorkSpace.Set(velocity, entity.rigidBody.velocity.y);
+            }
+        }
+        else
+        {
+            if (entity.entityDetection.horizontalObstacleHeight.x > entity.entityDetection.currentEntityHeight)
+            {
+                v2WorkSpace.Set(0.0f, entity.rigidBody.velocity.y);
+            }
+            else
+            {
+                v2WorkSpace.Set(velocity, entity.rigidBody.velocity.y);
+            }
+        }
+
         entity.rigidBody.velocity = v2WorkSpace;
         synchronizeValues?.Invoke();
     }
 
     public void SetVelocityY(float velocity)
+    {
+        if (velocity < 0)
+        {
+            if (entity.entityDetection.verticalObstacleHeight.y > entity.entityDetection.currentEntityHeight)
+            {
+                v2WorkSpace.Set(entity.rigidBody.velocity.x, 0.0f);
+            }
+            else
+            {
+                v2WorkSpace.Set(entity.rigidBody.velocity.x, velocity);
+            }
+        }
+        else
+        {
+            if (entity.entityDetection.verticalObstacleHeight.x > entity.entityDetection.currentEntityHeight)
+            {
+                v2WorkSpace.Set(entity.rigidBody.velocity.x, 0.0f);
+            }
+            else
+            {
+                v2WorkSpace.Set(entity.rigidBody.velocity.x, velocity);
+            }
+        }
+        
+        entity.rigidBody.velocity = v2WorkSpace;
+        synchronizeValues?.Invoke();
+    }
+
+    public void SetVelocityZ(float velocity)
     {
         v2WorkSpace.Set(entity.rigidBody.velocity.x, velocity);
         entity.rigidBody.velocity = v2WorkSpace;
@@ -40,15 +91,14 @@ public abstract class Movement : CoreComponent
 
     public void SetVelocity(float velocityX, float velocityY)
     {
-        v2WorkSpace.Set(velocityX, velocityY);
-        entity.rigidBody.velocity = v2WorkSpace;
-        synchronizeValues?.Invoke();
+        SetVelocityX(velocityX);
+        SetVelocityY(velocityY);
     }
 
     public void SetVelocity(Vector2 velocity)
     {
-        entity.rigidBody.velocity = velocity;
-        synchronizeValues?.Invoke();
+        SetVelocityX(velocity.x);
+        SetVelocityY(velocity.y);
     }
 
     public void CheckIfShouldFlip(float velocityX)
@@ -67,39 +117,7 @@ public abstract class Movement : CoreComponent
         synchronizeValues?.Invoke();
     }
 
-    /*private void FixedUpdate()
-    {
-        isOnSlope = entity.entityDetection.isOnSlope();
-        isGrounded = entity.entityDetection.isGrounded();
-    }
-
-    public void SetVelocityX(float velocity, bool considerGroundCondition = false)
-    {
-        if (considerGroundCondition)
-        {
-            if (isOnSlope && isGrounded)
-            {
-                SetVelocity(entity.entityDetection.slopePerpNormal * velocity);
-            }
-            else
-            {
-                if (isGrounded)
-                {
-                    SetVelocityLimitY(0.0f);
-                }
-
-                SetVelocityX(velocity);
-            }
-        }
-        else
-        {
-            SetWorkSpace(velocity, rigidBody.velocity.y);
-            rigidBody.velocity = workSpace;
-        }
-        synchronizeValues?.Invoke();
-    }
-
-    public void SetVelocityChangeOverTime(float speed, Vector2 direction, float moveTime, Ease easeFunction, bool slowDown, bool considerGroundCondition, bool isDetectingLedge)
+    /*public void SetVelocityChangeOverTime(float speed, Vector2 direction, float moveTime, Ease easeFunction, bool slowDown, bool considerGroundCondition, bool isDetectingLedge)
     {
 
     }

@@ -14,7 +14,7 @@ public class Entity : MonoBehaviour
     public EntityStateMachine entityStateMachine { get; protected set; }
     public Animator animator { get; protected set; }
     public SpriteRenderer spriteRenderer { get; protected set; }
-    public BoxCollider2D entityCollider { get; protected set; }
+    public BoxCollider2D collider { get; protected set; }
     public Core core { get; protected set; }
     public StateMachineToAnimator stateMachineToAnimator { get; protected set; }
     #endregion
@@ -42,7 +42,7 @@ public class Entity : MonoBehaviour
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        entityCollider = GetComponentInChildren<BoxCollider2D>();
+        collider = GetComponentInChildren<BoxCollider2D>();
         stateMachineToAnimator = GetComponent<StateMachineToAnimator>();
 
         core = GetComponentInChildren<Core>();

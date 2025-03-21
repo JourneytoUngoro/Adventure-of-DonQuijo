@@ -18,15 +18,12 @@ public class PlayerState : EntityState
     protected bool dodgeInputPressed;
     #endregion
 
-    protected Vector2 facingObstacleHeight;
-    protected Vector2 colliderInitialOffset;
     protected Vector2 stateEnterInitialPosition;
 
     public PlayerState(Player player, string animBoolName) : base(player, animBoolName)
     {
         this.player = player;
         stateMachine = player.playerStateMachine;
-        colliderInitialOffset = player.entityCollider.offset;
     }
 
     public override void Enter()
@@ -52,8 +49,6 @@ public class PlayerState : EntityState
     protected override void SetMovementVariables()
     {
         base.SetMovementVariables();
-
-        facingObstacleHeight = player.entityDetection.facingObstacleHeight;
     }
 
     protected void SetInputVariables()

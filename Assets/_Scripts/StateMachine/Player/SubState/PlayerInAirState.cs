@@ -18,7 +18,7 @@ public class PlayerInAirState : PlayerState
         base.Enter();
 
         isGrounded = false;
-        player.rigidBody.gravityScale = 1.0f;
+        player.rigidBody.gravityScale = 15.0f;
         prevEntityHeight = currentGroundHeight;
         initialPosition = player.transform.position;
         player.shadow.enabled = true;
@@ -72,14 +72,7 @@ public class PlayerInAirState : PlayerState
 
             player.movement.CheckIfShouldFlip(inputX);
 
-            if (facingObstacleHeight.x <= currentEntityHeight)
-            {
-                player.movement.SetVelocityX(inputX * player.movement.horizontalSpeed);
-            }
-            else
-            {
-                player.movement.SetVelocityX(0.0f);
-            }
+            player.movement.SetVelocityX(inputX * player.movement.horizontalSpeed);
 
             player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, Mathf.Max(player.transform.position.y - initialPosition.y + prevEntityHeight, currentGroundHeight));
         }

@@ -12,6 +12,8 @@ public class PlayerMoveState : PlayerGroundedState
     {
         base.PhysicsUpdate();
 
+        // inputX = -1;
+
         if (!onStateExit)
         {
             if (inputX == 0 && inputY == 0)
@@ -22,14 +24,7 @@ public class PlayerMoveState : PlayerGroundedState
 
         if (!onStateExit)
         {
-            if (facingObstacleHeight.x <= currentEntityHeight && facingObstacleHeight.y <= currentEntityHeight)
-            {
-                player.movement.SetVelocity(inputX * player.movement.horizontalSpeed, inputY * player.movement.verticalSpeed);
-            }
-            else
-            {
-                player.movement.SetVelocityZero();
-            }
+            player.movement.SetVelocity(inputX * player.movement.horizontalSpeed, inputY * player.movement.verticalSpeed);
         }
     }
 }

@@ -19,9 +19,9 @@ public class PlayerJumpState : PlayerState
         isGrounded = false;
         Manager.Instance.inputHandler.InactiveJumpInput();
         player.inAirState.SetVariableJumpHeight();
-        player.movement.SetVelocityY(player.movement.jumpSpeed);
+        player.movement.SetVelocityZ(player.movement.jumpSpeed);
         player.playerStateMachine.ChangeState(player.inAirState);
-        player.rigidBody.gravityScale = 1.0f;
+        player.rigidBody.gravityScale = 15.0f;
     }
 
     public void CanJump() => canJump = true;
