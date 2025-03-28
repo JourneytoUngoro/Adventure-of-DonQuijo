@@ -21,17 +21,18 @@ ________________ |/______________________ |/____________________________________
 |_______________________________________________________________________________________|/__________|/__________
 (지면의 높이는 h_ground, 박스의 높이는 h_box -> Player가 박스 위에 있을 때 c는 h_ground + h_box)
 
- 위와 같은 상황이 있다고 가정하자. 화면 상의 Player의 위치를 (x, y), 3차원 공간에서 나타내고 싶은 플레이어의 위치를 (a, b, c)라고 한다면, (x, y) = (a, b + c)라는 공식이 성립한다. 플레이어 게임 오브젝트는 매 FixedUpdate마다 아래의 좌표들을 재설정한다.
+ 위와 같은 상황이 있다고 가정하자. 화면 상의 Player의 위치를 (x, y), 3차원 공간에서 나타내고 싶은 플레이어의 위치를 (a, b, c)라고 한다면, (x, y) = (a, b + c)라는 공식이 성립한다. Player 게임 오브젝트는 매 FixedUpdate마다 아래의 좌표들을 재설정한다.
 * currentScreenPosition = (x, y) = (a, b + c)
 * currentSpacePosition = (a, b, c)
 * currentProjectedPosition = (a, b, h_ground)
 * currentEntityHeight = c
 * currentGroundHeight = h_ground
 * facingObstacleHeight = h_box
+* currentEntityVelocity
 
 Player와 적을 포함한 모든 Entity들은 StateMachine 방식으로 작동한다. StateMachine의 대부분의 로직은 FixedUpdate에서 이루어지며, 이는 FixedUpdate에서 계산되는 Detection값으로 State 전이가 이루어짐으로써 발생하는, Update와 FixedUpdate 간의 동기화 문제를 방지하기 위함이다. 각 Entity는 Core를 가지고 있으며, Core는 현재 4개의 CoreComponent를 갖는 것으로 계획되어 있다. 각 CoreComponent는 서로 다른 기능을 담당하며, 현재 계획상 CoreComponent에는 Detection, Movement, Combat, Stat이 존재한다.
 
-Player는 Character 게임 오브젝트와 Entity 게임 오브젝트로 분류된다. 우리는 십자키를 사용하여 Entity 게임 오브젝트를 조종하게 되며, 스페이스바를 누름으로써 Character 게임 오브젝트에 z축 방향으로의 속력을 가하게 된다. 이를 통해 기존의 방식에서 완전히 벗어나 공중에서도 자유롭게 이동이 가능하며, Collider를 통해 좀 더 섬세한 충돌을 다룰 수 있게 되었다.
+Player는 Character 게임 오브젝트와 Entity 게임 오브젝트로 분류된다. 우리는 십자키를 사용하여 Entity 게임 오브젝트를 조종하게 되며, 스페이스바를 누름으로써 Character 게임 오브젝트에 z축 방향으로의 속력을 가하게 된다. Entity는 FixedUpdate의 매 프레임마다 Entity의 현재 높이와 지면의 높이를 비교하며 Entity의 높이가 지면의 높이보다 높을 경우, IgnoreCollision을 통해 충돌을 무시하게 된다. isGrounded의 경우도 조건이 바뀌게 되었는데, 현재 속도의 z축 값이 0보다 작으면서 Entity의 높이가 지면의 높이보다 낮거나 같은 경우 지면에 닿은 것으로 판정한다. 이를 통해 기존의 이동 방식에서 완전히 벗어나 공중에서도 자유롭게 이동이 가능하며, Collider를 통해 좀 더 섬세한 충돌을 다룰 수 있게 되었다.
 
 현재 고려 사항은 아래와 같다.
 1. 비직관적인 맵 설계
