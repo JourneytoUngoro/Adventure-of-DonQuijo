@@ -4,15 +4,54 @@ using UnityEngine;
 
 public class PlayerMoveState : PlayerGroundedState
 {
+    public Timer dashInputXBufferTimer { get; private set; }
+    public Timer dashInputYBufferTimer { get; private set; }
+    public bool isDashing { get; private set; }
+    private int prevInputX;
+    private int prevInputY;
+
     public PlayerMoveState(Player player, string animBoolName) : base(player, animBoolName)
     {
+        dashInputXBufferTimer = new Timer(playerData.commandBufferTime);
+        dashInputXBufferTimer.timerAction += () => { prevInputX = 0; };
+        dashInputYBufferTimer = new Timer(playerData.commandBufferTime);
+        dashInputYBufferTimer.timerAction += () => { prevInputY = 0; };
+    }
+
+    public override void Enter()
+    {
+        base.Enter();
+
+        if (!isDashing)
+        {
+            isDashing = (inputX != 0 && prevInputX == inputX) || (inputY != 0 && prevInputY == inputY);
+            prevInputX = isDashing ? 0 : inputX;
+            prevInputY = isDashing ? 0 : inputY;
+        }
+
+        dashInputXBufferTimer.StartSingleUseTimer();
+        dashInputYBufferTimer.StartSingleUseTimer();
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        if (stateMachine.nextState != player.jumpState && stateMachine.nextState != player.idleState && stateMachine.nextState != player.inAirState)
+        {
+            isDashing = false;
+        }
+
+        if (stateMachine.nextState != player.idleState)
+        {
+            prevInputX = 0;
+            prevInputY = 0;
+        }
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-
-        // inputX = -1;
 
         if (!onStateExit)
         {
@@ -24,7 +63,16 @@ public class PlayerMoveState : PlayerGroundedState
 
         if (!onStateExit)
         {
-            player.movement.SetVelocity(inputX * player.movement.horizontalSpeed, inputY * player.movement.verticalSpeed);
+            if (isDashing)
+            {
+                player.movement.SetVelocity(inputX * playerData.dashSpeed.x, inputY * playerData.dashSpeed.y);
+            }
+            else
+            {
+                player.movement.SetVelocity(inputX * playerData.moveSpeed.x, inputY * playerData.moveSpeed.y);
+            }
         }
     }
+
+    public void StopDash() => isDashing = false;
 }

@@ -6,86 +6,92 @@ using UnityEngine;
 
 public abstract class Movement : CoreComponent
 {
-    [field: SerializeField] public float horizontalSpeed { get; private set; }
-    [field: SerializeField] public float verticalSpeed { get; private set; }
-    
     public event Action synchronizeValues;
-
     public int facingDirection { get; private set; }
+
+    protected bool isGrounded { get; private set; }
+
+    private Coroutine velocityChangeCoroutine;
 
     protected virtual void Start()
     {
-        facingDirection = entity.transform.rotation.y == 0 ? 1 : -1;
+        facingDirection = entity.orthogonalRigidbody.transform.rotation.y == 0 ? 1 : -1;
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        isGrounded = entity.entityDetection.isGrounded();
     }
 
     public void SetVelocityX(float velocity)
     {
         if (facingDirection * velocity < 0)
         {
-            if (entity.entityDetection.horizontalObstacleHeight.y > entity.entityDetection.currentEntityHeight)
+            if (entity.entityDetection.horizontalGroundHeight.y > entity.entityDetection.currentEntityHeight)
             {
-                v2WorkSpace.Set(0.0f, entity.rigidBody.velocity.y);
+                workSpace.Set(0.0f, entity.rigidbody.velocity.y, 0.0f);
             }
             else
             {
-                v2WorkSpace.Set(velocity, entity.rigidBody.velocity.y);
+                workSpace.Set(velocity, entity.rigidbody.velocity.y, 0.0f);
             }
         }
         else
         {
-            if (entity.entityDetection.horizontalObstacleHeight.x > entity.entityDetection.currentEntityHeight)
+            if (entity.entityDetection.horizontalGroundHeight.x > entity.entityDetection.currentEntityHeight)
             {
-                v2WorkSpace.Set(0.0f, entity.rigidBody.velocity.y);
+                workSpace.Set(0.0f, entity.rigidbody.velocity.y, 0.0f);
             }
             else
             {
-                v2WorkSpace.Set(velocity, entity.rigidBody.velocity.y);
+                workSpace.Set(velocity, entity.rigidbody.velocity.y, 0.0f);
             }
         }
-
-        entity.rigidBody.velocity = v2WorkSpace;
+        // workSpace.Set(velocity, entity.rigidbody.velocity.y, 0.0f);
+        entity.rigidbody.velocity = workSpace;
         synchronizeValues?.Invoke();
     }
 
     public void SetVelocityY(float velocity)
     {
-        if (velocity < 0)
+        /*if (velocity < 0)
         {
-            if (entity.entityDetection.verticalObstacleHeight.y > entity.entityDetection.currentEntityHeight)
+            if (entity.entityDetection.verticalGroundHeight.y > entity.entityDetection.currentEntityHeight)
             {
-                v2WorkSpace.Set(entity.rigidBody.velocity.x, 0.0f);
+                workSpace.Set(entity.rigidbody.velocity.x, 0.0f, 0.0f);
             }
             else
             {
-                v2WorkSpace.Set(entity.rigidBody.velocity.x, velocity);
+                workSpace.Set(entity.rigidbody.velocity.x, velocity, 0.0f);
             }
         }
         else
         {
-            if (entity.entityDetection.verticalObstacleHeight.x > entity.entityDetection.currentEntityHeight)
+            if (entity.entityDetection.verticalGroundHeight.x > entity.entityDetection.currentEntityHeight)
             {
-                v2WorkSpace.Set(entity.rigidBody.velocity.x, 0.0f);
+                workSpace.Set(entity.rigidbody.velocity.x, 0.0f, 0.0f);
             }
             else
             {
-                v2WorkSpace.Set(entity.rigidBody.velocity.x, velocity);
+                workSpace.Set(entity.rigidbody.velocity.x, velocity, 0.0f);
             }
-        }
-        
-        entity.rigidBody.velocity = v2WorkSpace;
+        }*/
+        workSpace.Set(entity.rigidbody.velocity.x, velocity, 0.0f);
+        entity.rigidbody.velocity = workSpace;
         synchronizeValues?.Invoke();
     }
 
     public void SetVelocityZ(float velocity)
     {
-        v2WorkSpace.Set(entity.rigidBody.velocity.x, velocity);
-        entity.rigidBody.velocity = v2WorkSpace;
+        // v2WorkSpace.Set(entity.rigidBody.velocity.x, velocity);
+        // entity.rigidBody.velocity = v2WorkSpace;
+        entity.orthogonalRigidbody.velocity = velocity;
         synchronizeValues?.Invoke();
     }
 
     public void SetVelocityZero()
     {
-        entity.rigidBody.velocity = Vector2.zero;
+        entity.rigidbody.velocity = Vector2.zero;
         synchronizeValues?.Invoke();
     }
 
@@ -109,38 +115,46 @@ public abstract class Movement : CoreComponent
         }
     }
 
-    public void Flip()
+    public virtual void Flip()
     {
         facingDirection *= -1;
-        entity.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
-        entity.shadow.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
+        entity.orthogonalRigidbody.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
+        entity.shadow.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
         synchronizeValues?.Invoke();
     }
 
-    /*public void SetVelocityChangeOverTime(float speed, Vector2 direction, float moveTime, Ease easeFunction, bool slowDown, bool considerGroundCondition, bool isDetectingLedge)
+    public void SetVelocityXChangeOverTime(float velocity, float moveTime, Ease easeFunction, bool slowDown, bool stopBeforeLedge)
     {
-
+        StopVelocityChangeOverTime();
+        velocityChangeCoroutine = StartCoroutine(VelocityChangeOverTime(Vector2.right * velocity, moveTime, easeFunction, slowDown, stopBeforeLedge, Vector2.one));
     }
 
-    public void SetVelocityXChangeOverTime(float velocity, float moveTime, Ease easeFunction, bool slowDown, bool isDetectingLedge = false, bool considerGroundCondition = true)
+    public void SetVelocityYChangeOverTime(float velocity, float moveTime, Ease easeFunction, bool slowDown, bool stopBeforeLedge)
     {
-        if (moveTime == 0.0f)
-        {
-            SetVelocityX(velocity, considerGroundCondition);
-        }
-        else
-        {
-            if (velocityChangeOverTimeCoroutine != null)
-            {
-                StopCoroutine(velocityChangeOverTimeCoroutine);
-            }
-            velocityChangeOverTimeCoroutine = StartCoroutine(VelocityChangeOverTime(velocity, moveTime, easeFunction, slowDown, isDetectingLedge));
-        }
+        StopVelocityChangeOverTime();
+        velocityChangeCoroutine = StartCoroutine(VelocityChangeOverTime(Vector2.up * velocity, moveTime, easeFunction, slowDown, stopBeforeLedge, Vector2.one));
     }
 
-    private IEnumerator VelocityChangeOverTime(float velocity, float moveTime, Ease easeFunction, bool slowDown, bool isDetectingLedge)
+    public void SetVelocityChangeOverTime(Vector2 velocity, float moveTime, Ease easeFunction, bool slowDown, bool stopBeforeLedge, Vector2? horizontalVerticalRatio = null)
     {
-        coroutineEnabled = true;
+        horizontalVerticalRatio = horizontalVerticalRatio ?? Vector2.one;
+        horizontalVerticalRatio = new Vector2(horizontalVerticalRatio.Value.x / Mathf.Max(horizontalVerticalRatio.Value.x, horizontalVerticalRatio.Value.y), horizontalVerticalRatio.Value.y / Mathf.Max(horizontalVerticalRatio.Value.x, horizontalVerticalRatio.Value.y));
+
+        StopVelocityChangeOverTime();
+        velocityChangeCoroutine = StartCoroutine(VelocityChangeOverTime(velocity, moveTime, easeFunction, slowDown, stopBeforeLedge, horizontalVerticalRatio.Value));
+    }
+
+    public void SetVelocityChangeOverTime(float speed, Vector2 direction, float moveTime, Ease easeFunction, bool slowDown, bool stopBeforeLedge, Vector2? horizontalVerticalRatio = null)
+    {
+        horizontalVerticalRatio = horizontalVerticalRatio ?? Vector2.one;
+        horizontalVerticalRatio = new Vector2(horizontalVerticalRatio.Value.x / Mathf.Max(horizontalVerticalRatio.Value.x, horizontalVerticalRatio.Value.y), horizontalVerticalRatio.Value.y / Mathf.Max(horizontalVerticalRatio.Value.x, horizontalVerticalRatio.Value.y));
+
+        StopVelocityChangeOverTime();
+        velocityChangeCoroutine = StartCoroutine(VelocityChangeOverTime(speed * direction.normalized, moveTime, easeFunction, slowDown, stopBeforeLedge, horizontalVerticalRatio.Value));
+    }
+
+    private IEnumerator VelocityChangeOverTime(Vector2 velocity, float moveTime, Ease easeFunction, bool slowDown, bool stopBeforeLedge, Vector2 horizontalVerticalRatio)
+    {
         float coroutineElapsedTime = 0.0f;
         WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
 
@@ -148,18 +162,26 @@ public abstract class Movement : CoreComponent
         {
             float velocityMultiplierOverTime = slowDown ? Mathf.Clamp(DOVirtual.EasedValue(1.0f, 0.0f, coroutineElapsedTime / moveTime, easeFunction), 0.0f, 1.0f) : Mathf.Clamp(DOVirtual.EasedValue(0.0f, 1.0f, coroutineElapsedTime / moveTime, easeFunction), 0.0f, 1.0f);
 
-            if (isGrounded && isDetectingLedge)
+            if (isGrounded && stopBeforeLedge)
             {
-                SetVelocityX(0.0f);
+                if (entity.entityDetection.isDetectingLedge(CheckPositionAxis.Horizontal, CheckPositionDirection.Heading))
+                {
+                    SetVelocity(0.0f, velocityMultiplierOverTime * velocity.y * horizontalVerticalRatio.y);
+                }
+                
+                if (entity.entityDetection.isDetectingLedge(CheckPositionAxis.Vertical, CheckPositionDirection.Heading))
+                {
+                    SetVelocity(velocityMultiplierOverTime * velocity.x * horizontalVerticalRatio.x, 0.0f);
+                }
             }
             else
             {
-                SetVelocityX(velocityMultiplierOverTime * velocity, true);
+                Debug.Log(velocityMultiplierOverTime * velocity.x * horizontalVerticalRatio.x + ", " + velocityMultiplierOverTime * velocity.y * horizontalVerticalRatio.y);
+                SetVelocity(velocityMultiplierOverTime * velocity.x * horizontalVerticalRatio.x, velocityMultiplierOverTime * velocity.y * horizontalVerticalRatio.y);
             }
 
             if (coroutineElapsedTime > moveTime)
             {
-                coroutineEnabled = false;
                 yield break;
             }
             else
@@ -167,191 +189,15 @@ public abstract class Movement : CoreComponent
                 yield return waitForFixedUpdate;
             }
 
-            coroutineElapsedTime += Time.deltaTime;
+            coroutineElapsedTime += Time.fixedDeltaTime;
         }
     }
 
-    public void StopVelocityXChangeOverTime()
+    public void StopVelocityChangeOverTime()
     {
-        if (velocityChangeOverTimeCoroutine != null)
+        if (velocityChangeCoroutine != null)
         {
-            coroutineEnabled = false;
-            StopCoroutine(velocityChangeOverTimeCoroutine);
+            StopCoroutine(velocityChangeCoroutine);
         }
     }
-
-    public void SetVelocityY(float velocity)
-    {
-        // workSpace.Set(rigidBody.velocity.x, velocity);
-        SetWorkSpace(rigidBody.velocity.x, velocity);
-        rigidBody.velocity = workSpace;
-        synchronizeValues?.Invoke();
-        // player.playerStateMachine.currentState.SetMovementVariables();
-    }
-
-    public void SetVelocityLimitY(float velocity)
-    {
-        if (rigidBody.velocity.y > velocity)
-        {
-            SetWorkSpace(rigidBody.velocity.x, velocity);
-            rigidBody.velocity = workSpace;
-            synchronizeValues?.Invoke();
-        }
-    }
-
-    public void SetVelocity(Vector2 velocity)
-    {
-        SetWorkSpace(velocity.x, velocity.y);
-        rigidBody.velocity = workSpace;
-        synchronizeValues?.Invoke();
-    }
-
-    public void AddVelocityX(float velocity)
-    {
-        rigidBody.velocity = new Vector2(rigidBody.velocity.x + velocity, rigidBody.velocity.y);
-        synchronizeValues?.Invoke();
-    }
-
-    public void MultiplyVelocity(float multiplier)
-    {
-        rigidBody.velocity = multiplier * rigidBody.velocity;
-        synchronizeValues?.Invoke();
-    }
-
-    public void SetVelocityWithDirection(Vector2 angleVector, int direction, float speed)
-    {
-        workSpace.Set(angleVector.x * direction, angleVector.y);
-        rigidBody.velocity = workSpace.normalized * speed;
-        synchronizeValues?.Invoke();
-    }
-
-    public void SetVelocityZero(bool considerGroundCondition = true)
-    {
-        if (considerGroundCondition)
-        {
-            if (isGrounded)
-            {
-                SetVelocityX(0.0f);
-
-                if (isOnSlope)
-                {
-                    SetVelocityY(0.0f);
-                }
-            }
-        }
-        else
-        {
-            workSpace = Vector2.zero;
-            rigidBody.velocity = workSpace;
-            synchronizeValues?.Invoke();
-        }
-    }
-
-    public void SetPositionX(float xPos)
-    {
-        workSpace.Set(xPos, transform.position.y);
-        entity.transform.position = workSpace;
-    }
-
-    public void SetPositionY(float yPos)
-    {
-        workSpace.Set(transform.position.x, yPos);
-        entity.transform.position = workSpace;
-    }
-
-    public void SetPosition(Vector2 position)
-    {
-        entity.transform.position = position;
-    }
-
-    public void MovePosition(Vector2 angleVector, float direction, float distance)
-    {
-        workSpace.Set(angleVector.x * direction, angleVector.y);
-        transform.position += (Vector3)workSpace.normalized * distance;
-    }
-
-    public void ChangeBaseVelocity(Vector2 baseVelocity)
-    {
-        this.baseVelocity += baseVelocity;
-    }
-
-    public void SetBaseVelocity(Vector2 baseVelocity)
-    {
-        this.baseVelocity = baseVelocity;
-    }
-
-    public void MultiplyVelocityMultiplier(Vector2 velocityMultiplier)
-    {
-        workSpace.Set(this.velocityMultiplier.x * velocityMultiplier.x, this.velocityMultiplier.y * velocityMultiplier.y);
-        this.velocityMultiplier = workSpace;
-    }
-
-    public void SetVelocityMultiplier(Vector2 velocityMultiplier)
-    {
-        this.velocityMultiplier = velocityMultiplier;
-    }
-
-    public void RigidBodyController(bool isMovingForward = true, bool limitYVelocity = true)
-    {
-        if (isGrounded)
-        {
-            if (isOnSlope)
-            {
-                rigidBody.gravityScale = rigidBody.velocity.magnitude < epsilon ? 0.0f : 9.5f;
-
-                if (isMovingForward)
-                {
-                    if (entity.entityDetection.slopePerpNormal.y * facingDirection > 0)
-                    {
-                        SetVelocityMultiplier(Vector2.one * 0.8f);
-                    }
-                    else
-                    {
-                        SetVelocityMultiplier(Vector2.one * 1.4f);
-                    }
-                }
-                else
-                {
-                    if (entity.entityDetection.slopePerpNormal.y * -facingDirection > 0)
-                    {
-                        SetVelocityMultiplier(Vector2.one * 0.8f);
-                    }
-                    else
-                    {
-                        SetVelocityMultiplier(Vector2.one * 1.4f);
-                    }
-                }
-            }
-            else
-            {
-                SetVelocityMultiplier(Vector2.one);
-                entity.rigidBody.gravityScale = 9.5f;
-
-                if (limitYVelocity)
-                {
-                    SetVelocityLimitY(0.0f);
-                }
-            }
-        }
-        else
-        {
-            if (entity.entityDetection.isOnSlopeVertical(CheckPositionHorizontal.Back))
-            {
-                if (limitYVelocity)
-                {
-                    SetVelocityLimitY(0.0f); // 튀어오르는 현상 방지
-                }
-            }
-
-            SetVelocityMultiplier(Vector2.one);
-            entity.rigidBody.gravityScale = 9.5f;
-        }
-    }
-
-    private void SetWorkSpace(float x, float y)
-    {
-        workSpace.Set(x, y);
-        workSpace += baseVelocity;
-        workSpace *= velocityMultiplier;
-    }*/
 }

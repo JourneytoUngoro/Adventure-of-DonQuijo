@@ -12,10 +12,9 @@ public class PlayerGroundedState : PlayerState
     {
         base.Enter();
 
-        player.shadow.enabled = false; // Disabling the collider because it stops rigidbody moving downward.
-        player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - player.transform.position.z + currentGroundHeight, currentGroundHeight);
-        player.jumpState.CanJump();
-        player.rigidBody.gravityScale = 0.0f;
+        Manager.Instance.inputHandler.UnlockMoveInput();
+        player.jumpState.SetAvailable(true);
+        player.orthogonalRigidbody.gravityScale = 0.0f;
         player.movement.SetVelocityY(0.0f);
     }
 
@@ -25,14 +24,17 @@ public class PlayerGroundedState : PlayerState
 
         if (!onStateExit)
         {
-            if (jumpInputPressed && player.jumpState.canJump)
+            if (!isGrounded)
+            {
+                stateMachine.ChangeState(player.inAirState);
+            }
+            else if (jumpInputPressed && player.jumpState.available)
             {
                 stateMachine.ChangeState(player.jumpState);
             }
-            else if (!isGrounded)
+            else if (dodgeInputPressed && player.dodgeState.available)
             {
-                stateMachine.ChangeState(player.inAirState);
-                player.inAirState.prevEntityHeight = currentEntityHeight;
+                stateMachine.ChangeState(player.dodgeState);
             }
         }
 

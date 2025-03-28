@@ -22,7 +22,7 @@ public abstract class EntityState
     protected Vector3 currentScreenPosition;
     protected Vector3 currentProjectedPosition;
     protected Vector3 currentSpacePosition;
-    protected Vector2 currentVelocity;
+    protected Vector3 currentVelocity;
     protected float currentEntityHeight;
     protected float currentGroundHeight;
     protected int facingDirection;
@@ -31,11 +31,10 @@ public abstract class EntityState
 
     #region Other Variables
     // protected Timer afterImageTimer;
-
-    protected Vector2 v2WorkSpace;
-    protected Vector3 v3WorkSpace;
-
+    protected bool canTransit; // This variable is to keep entity's state fixed for specific amount of time. For example, when the entity gets hit, it needs to stay in GotHitState for a few seconds before transiting to other states.
+    protected Vector3 workSpace;
     protected float epsilon = 0.001f;
+    private Vector3 shadowOffset;
     #endregion
 
     public float startTime { get; protected set; }
@@ -46,6 +45,7 @@ public abstract class EntityState
         this.entityStateMachine = entity.entityStateMachine;
         this.animBoolName = animBoolName;
         entity.entityMovement.synchronizeValues += SetMovementVariables;
+        shadowOffset = entity.shadow.localPosition;
         // afterImageTimer = new Timer(0.1f);
         // afterImageTimer.StartMultiUseTimer();
     }
@@ -74,6 +74,7 @@ public abstract class EntityState
     public virtual void Enter()
     {
         startTime = Time.time;
+        canTransit = true;
         onStateExit = false;
         isAnimationStarted = false;
         isAnimationActionTriggered = false;
@@ -95,14 +96,14 @@ public abstract class EntityState
     {
         TickPublicTimers();
         SetMovementVariables();
-        entity.shadow.transform.position = currentProjectedPosition + Vector3.up * currentProjectedPosition.z;
     }
 
     public virtual void PhysicsUpdate()
     {
         DoChecks();
         SetMovementVariables();
-        entity.shadow.transform.position = currentProjectedPosition + Vector3.up * currentProjectedPosition.z;
+        workSpace.Set(shadowOffset.x, currentGroundHeight + shadowOffset.y, currentGroundHeight);
+        entity.shadow.localPosition = workSpace;
     }
 
     public virtual void LateLogicUpdate()
@@ -112,7 +113,8 @@ public abstract class EntityState
 
     protected virtual void SetMovementVariables()
     {
-        currentVelocity = entity.rigidBody.velocity;
+        workSpace.Set(entity.rigidbody.velocity.x, entity.rigidbody.velocity.y, entity.orthogonalRigidbody.velocity);
+        currentVelocity = workSpace;
         currentScreenPosition = entity.entityDetection.currentScreenPosition;
         currentProjectedPosition = entity.entityDetection.currentProjectedPosition;
         currentSpacePosition = entity.entityDetection.currentSpacePosition;

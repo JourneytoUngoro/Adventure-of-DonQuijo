@@ -1,29 +1,54 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDodgeState : PlayerGroundedState // Need to be changed to PlayerAbilityState
+public class PlayerDodgeState : PlayerAbilityState
 {
-    public bool canDodge { get; private set; }
-    public Timer dodgeCoolDownTimer { get; private set; }
-
     public PlayerDodgeState(Player player, string animBoolName) : base(player, animBoolName)
     {
-        canDodge = true;
-        dodgeCoolDownTimer = new Timer(2.0f);
-        dodgeCoolDownTimer.timerAction += () => { canDodge = true; };
+        available = true;
+        abilityCoolDownTimer = new Timer(playerData.dodgeCoolDownTime);
+        abilityCoolDownTimer.timerAction += () => { available = true; };
+    }
+
+    public override void AnimationActionTrigger(int index)
+    {
+        base.AnimationActionTrigger(index);
+
+        player.orthogonalRigidbody.gameObject.tag = "Idle";
+    }
+
+    public override void AnimationFinishTrigger(int index)
+    {
+        base.AnimationFinishTrigger(index);
+
+        if (index == 0)
+        {
+            isAbilityDone = !isGrounded;
+        }
+        else if (index == 1)
+        {
+            isAbilityDone = true;
+        }
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        canDodge = false;
-        player.gameObject.tag = "Dodge";
+        available = false;
         player.stateMachineToAnimator.state = this;
-        if (inputX == 0)
+        player.orthogonalRigidbody.gameObject.tag = "Dodge";
+
+        if (inputX == 0 && inputY == 0)
         {
-            player.animator.SetTrigger("backstep");
+            player.animator.SetBool("backstep", true);
+            player.movement.SetVelocityXChangeOverTime(playerData.backstepSpeed * -facingDirection, playerData.backstepTime, Ease.InCubic, true, false);
+        }
+        else
+        {
+            player.movement.SetVelocityChangeOverTime(playerData.dodgeSpeed, new Vector2(inputX, inputY), playerData.dodgeTime, Ease.InSine, true, false, playerData.moveSpeed);
         }
     }
 
@@ -31,8 +56,8 @@ public class PlayerDodgeState : PlayerGroundedState // Need to be changed to Pla
     {
         base.Exit();
 
-        dodgeCoolDownTimer.StartSingleUseTimer();
-        player.gameObject.tag = "Idle";
-        player.animator.ResetTrigger("backstep");
+        player.orthogonalRigidbody.gameObject.tag = "Idle";
+        player.animator.SetBool("backstep", false);
+        abilityCoolDownTimer.StartSingleUseTimer();
     }
 }

@@ -9,6 +9,7 @@ public abstract class Stats : CoreComponent
 {
     [field: SerializeField] public StatComponent level { get; protected set; }
     [field: SerializeField] public StatComponent health { get; protected set; }
+    [field: SerializeField] public StatComponent posture { get; protected set; }
     // [field: SerializeField, PreventAdd, Tooltip("Warning: Status effects system is based on enum. You should NEVER change the order of the list!!!!!!")] public List<StatComponent> statusEffects { get; protected set; }
     // [field: EnumFlags] public StatusEffect currentlyAppliedStatusEffect { get; protected set; }
 
@@ -54,9 +55,8 @@ public abstract class Stats : CoreComponent
         {
             StatComponent statComponent = property.GetValue(this) as StatComponent;
             MethodInfo initMethod = typeof(StatComponent).GetMethod("Init");
-            initMethod.Invoke(statComponent, null);
-            statComponent.entity = entity;
-            statComponent.name = property.Name;
+            object[] parameters = new object[] { entity, property.Name };
+            initMethod.Invoke(statComponent, parameters);
         }
 
         /*foreach (StatComponent statComponent in statusEffects)

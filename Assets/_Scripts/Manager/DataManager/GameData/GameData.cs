@@ -10,18 +10,11 @@ public class GameData
 {
     public string displayedLastPlayTime;
     public long lastPlayTime;
-    public int playerLevel;
-    public int statPoints;
-    public int attackLevel;
-    // 공격력, 에너지 관련
-    public int enduranceLevel;
-    // 최대 체력 및 방어력
-    public int postureLevel;
-    // 체간
-    public int dexterityLevel;
-    // 민첩
-    public Vector3 lastSavePosition;
-    public string lastSavePoint;
+    public int currentLevel;
+    public float currentHealth;
+    public float currentPosture;
+    public float currentExperience;
+    public Vector3 lastPlayerPosition;
     public bool[] bossDefeat;
     public string currentScene;
     // public SerializableDictionary<string, bool> mapOpened
@@ -61,14 +54,11 @@ public class GameData
     {
         this.displayedLastPlayTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         this.lastPlayTime = DateTime.Now.Ticks;
-        this.playerLevel = 1;
-        this.statPoints = 0;
-        this.attackLevel = 1;
-        this.enduranceLevel = 1;
-        this.postureLevel = 1;
-        this.dexterityLevel = 1;
-        this.lastSavePosition = Vector2.zero;
-        this.lastSavePoint = "";
+        this.currentLevel = 1;
+        this.currentHealth = 100.0f;
+        this.currentPosture = 0.0f;
+        this.currentExperience = 0.0f;
+        this.lastPlayerPosition = Vector3.zero;
         this.currentScene = "SampleScene";
         // mapOpened = new Dictionary<string, bool>();
     }

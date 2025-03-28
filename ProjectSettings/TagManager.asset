@@ -16,10 +16,10 @@ TagManager:
   - Ground
   - Water
   - UI
-  - Entity
-  - EntityFeet
-  - EntityBody
   - Player
+  - PlayerHit
+  - 
+  - 
   - 
   - 
   - 

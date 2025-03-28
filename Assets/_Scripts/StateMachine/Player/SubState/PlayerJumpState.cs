@@ -2,27 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerJumpState : PlayerState
+public class PlayerJumpState : PlayerAbilityState
 {
-    public bool canJump { get; private set; }
-
     public PlayerJumpState(Player player, string animBoolName) : base(player, animBoolName)
     {
-        canJump = true;
+        available = true;
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        canJump = false;
-        isGrounded = false;
         Manager.Instance.inputHandler.InactiveJumpInput();
         player.inAirState.SetVariableJumpHeight();
-        player.movement.SetVelocityZ(player.movement.jumpSpeed);
-        player.playerStateMachine.ChangeState(player.inAirState);
-        player.rigidBody.gravityScale = 15.0f;
-    }
 
-    public void CanJump() => canJump = true;
+        isGrounded = false;
+        available = false;
+        player.movement.SetVelocityZ(playerData.jumpSpeed);
+        player.playerStateMachine.ChangeState(player.inAirState);
+        player.orthogonalRigidbody.gravityScale = playerData.gravityScale;
+    }
 }

@@ -16,10 +16,22 @@ public class PlayerStateMachine : EntityStateMachine
 
     public override void ChangeState(EntityState nextState)
     {
+        entityNextState = nextState;
         this.nextState = nextState as PlayerState;
-        base.ChangeState(nextState);
+
+        currentState.Exit();
+
+        entityPrevState = entityCurrentState;
         prevState = currentState;
+        
+        entityCurrentState = nextState;
         currentState = nextState as PlayerState;
+
         currentState.Enter();
+
+        if (currentState.player.printStateChange)
+        {
+            Debug.Log($"State changed from {prevState} to {currentState}");
+        }
     }
 }

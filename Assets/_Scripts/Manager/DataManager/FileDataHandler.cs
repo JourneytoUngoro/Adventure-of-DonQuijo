@@ -11,7 +11,7 @@ public class FileDataHandler
     private string dataDirPath = "";
     private string dataFileName = "";
     private bool useEncryption = false;
-    private readonly string encryptionCodeWord = "AdventureOfDonkiho";
+    private readonly string encryptionCodeWord = "AdventureOfDonquijo";
     private readonly string backupExtension = ".bak";
 
     public FileDataHandler(string dataDirPath, string dataFileName, bool useEncryption)
@@ -28,6 +28,7 @@ public class FileDataHandler
         string fullPath = Path.Combine(dataDirPath, profileId, dataFileName);
 
         GameData loadedData = null;
+
         if (File.Exists(fullPath))
         {
             try

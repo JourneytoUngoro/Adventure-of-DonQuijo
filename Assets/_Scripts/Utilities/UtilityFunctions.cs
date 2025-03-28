@@ -17,6 +17,7 @@ public static class UtilityFunctions
     public static int RandomInteger(int maxValue) => random.Next(maxValue);
     public static bool IsInLayerMask(this GameObject obj, LayerMask mask) => (mask.value & (1 << obj.layer)) != 0;
     public static bool IsInLayerMask(int layer, LayerMask mask) => (mask.value & (1 << layer)) != 0;
+    public static bool isEqual(float a, float b) => Mathf.Abs(a - b) < float.Epsilon;
     public static int RandomOption(this IEnumerable<float> possibilities)
     {
         int totalOption = possibilities.Count();
@@ -133,5 +134,28 @@ public static class UtilityFunctions
         }
 
         return null;
+    }
+
+    public static bool CompleteOverlap(this BoxCollider2D overlappedCollider, Collider2D overlappingCollider)
+    {
+        List<Vector3> edgePoints = new List<Vector3>();
+
+        for (int xPos = -1; xPos <= 1; xPos++)
+        {
+            for (int yPos = -1; yPos <= 1; yPos++)
+            {
+                edgePoints.Add(overlappedCollider.bounds.center + Vector3.right * xPos * overlappedCollider.bounds.extents.x + Vector3.up * yPos * overlappedCollider.bounds.extents.y);
+            }
+        }
+        
+        foreach (Vector3 edgePoint in edgePoints)
+        {
+            if (!overlappingCollider.OverlapPoint(edgePoint))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

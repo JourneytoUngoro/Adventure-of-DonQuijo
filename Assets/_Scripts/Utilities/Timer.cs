@@ -3,21 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// Timer class is for replacing the coroutines when a class is not inheriting from Monobehavior
-/// Timer must be used in Update function
-/// Using Timer in FixedUpdate might cause serious problems
+/// Timer class is for replacing the coroutines when a class is not inheriting from Monobehavior.
+/// Timer must be used in Update function.
+/// Using Timer in FixedUpdate might cause serious problems.
+/// Basically, Timers override previous ones.
 /// </summary>
 public class Timer
 {
+    public bool timerActive { get; private set; }
     public event Action timerAction;
 
-    public float duration { get; private set; }
+    private float duration;
     private float startTime;
     private float timeOffset;
 
-    private bool timerActive;
     private bool isSingleUse;
-    // private bool resetStartTime;
     private bool isAdjustTimeSingleUse;
 
     private int maxMultiUseAmount;
@@ -31,7 +31,8 @@ public class Timer
     }
 
     /// <summary>
-    /// A Default Timer that is affected by Time.timeScale. Only active when condition is fit. If resetTime parameter is true, it will continuously reset startTime until the condition is fit.
+    /// A Default Timer that is affected by Time.timeScale. Only active when condition is fit. If resetTime parameter is true, it will continuously reset startTime until the condition is fit. Which means that the timer will start ticking time after the condition is met.
+    /// 예를 들어, 만약 resetTime이 false일 경우, StartTimer류 함수를 부른 이후의 시간에서부터 duration만큼의 시간이 지났다면 condition이 만족되자마자 timerAction이 실행되지만, resetTime이 true일 경우, condition이 만족한 이후 duration만큼의 시간이 지나야한다.
     /// </summary>
     /// <param name="condition"></param>
     public void Tick(bool condition = true, bool resetTime = false)
@@ -155,6 +156,11 @@ public class Timer
         timerActive = false;
     }
 
+    /// <summary>
+    /// 쿨타임 반환 기능
+    /// </summary>
+    /// <param name="adjustTimeAmount"></param>
+    /// <param name="isAdjustTimeSingleUse"></param>
     public void AdjustTimeFlow(float adjustTimeAmount, bool isAdjustTimeSingleUse = true)
     {
         timeOffset = adjustTimeAmount;

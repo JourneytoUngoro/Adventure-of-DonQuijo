@@ -7,30 +7,34 @@ using UnityEngine.UI;
 [Serializable]
 public class StatComponent
 {
-    [HideInInspector] public string name { get; set; }
-    [HideInInspector] public Entity entity { get; set; }
+    public string name { get; private set; }
+    public Entity entity { get; private set; }
+
     public event Action OnCurrentValueMin;
     public event Action OnCurrentValueMax;
+    public event Action OnCurrentValueChange;
 
     [SerializeField] private Slider slider;
 
     [field: SerializeField] public float maxValue { get; private set; }
     [field: SerializeField] public float minValue { get; private set; }
     [field: SerializeField] public float currentValue { get; private set; }
+    [field: SerializeField] public bool enableRecovery { get; private set; }
     [field: SerializeField] public float recoveryStartTime { get; private set; }
-    [field: SerializeField, Tooltip("Recovery delay time of -1 means it does not recover automatically (ex. health). Recovery delay time of 0 means it will recover every frame (ex. posture)")] public float recoveryDuration { get; private set; }
+    [field: SerializeField, Tooltip("Recovery duration of -1 means it does not recover automatically (ex. health). Recovery duration of 0 means it will recover every frame.")] public float recoveryDuration { get; private set; }
     [field: SerializeField] public float recoveryValue { get; private set; }
+    [field: SerializeField] public AnimationCurve incrementPerLevel { get; private set; }
+    [field: SerializeField] public AnimationCurve accumulationPerLevel { get; private set; }
 
     private Timer recoveryStartTimer;
-
     private Timer recoveryTimer;
-
     private bool onRecovery;
-
     private float epsilon = 0.001f;
 
-    public void Init()
+    public void Init(Entity entity, string name)
     {
+        this.entity = entity;
+        this.name = name;
         recoveryStartTimer = new Timer(recoveryStartTime);
         recoveryStartTimer.timerAction += () => { onRecovery = true; recoveryTimer.ChangeStartTime(Time.time); };
         recoveryTimer = new Timer(recoveryDuration);
@@ -60,6 +64,7 @@ public class StatComponent
         currentValue += amount;
         currentValue = allowMaxValue ? Mathf.Clamp(currentValue, minValue, maxValue) : Mathf.Clamp(currentValue, minValue, maxValue - epsilon);
         SetSliderValue();
+        OnCurrentValueChange?.Invoke();
 
         if (currentValue == maxValue)
         {
@@ -72,10 +77,28 @@ public class StatComponent
         currentValue -= amount;
         currentValue = allowMinValue ? Mathf.Clamp(currentValue, minValue, maxValue) : Mathf.Clamp(currentValue, minValue + epsilon, maxValue);
         SetSliderValue();
+        OnCurrentValueChange?.Invoke();
         onRecovery = false;
         recoveryStartTimer.StartSingleUseTimer();
 
-        if (currentValue == 0.0f)
+        if (currentValue == minValue)
+        {
+            OnCurrentValueMin?.Invoke();
+        }
+    }
+
+    public void SetCurrentValue(float value)
+    {
+        currentValue = Mathf.Clamp(value, minValue, maxValue);
+        SetSliderValue();
+        OnCurrentValueChange?.Invoke();
+
+        if (currentValue == maxValue)
+        {
+            OnCurrentValueMax?.Invoke();
+        }
+
+        if (currentValue == minValue)
         {
             OnCurrentValueMin?.Invoke();
         }
@@ -84,7 +107,6 @@ public class StatComponent
     public void IncreaseMaxValue(float amount)
     {
         maxValue += amount;
-        IncreaseCurrentValue(amount);
         SetSliderValue();
     }
 

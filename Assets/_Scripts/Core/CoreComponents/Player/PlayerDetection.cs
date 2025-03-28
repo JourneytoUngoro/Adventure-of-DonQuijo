@@ -4,10 +4,10 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerDetection : Detection
+public class PlayerDetection : Detection, IDataPersistance
 {
     public List<Collider2D> groundColliders;
-
+    private Vector3 lastGroundedPosition;
     private Player player;
 
     protected override void Awake()
@@ -31,11 +31,16 @@ public class PlayerDetection : Detection
     {
         base.FixedUpdate();
 
+        if (isGrounded())
+        {
+            lastGroundedPosition = currentSpacePosition;
+        }
+
         foreach (Collider2D groundCollider in groundColliders)
         {
             if (groundCollider != null)
             {
-                Physics2D.IgnoreCollision(groundCollider, player.collider, player.transform.position.z >= groundCollider.transform.position.z);
+                Physics2D.IgnoreCollision(groundCollider, player.collider, player.orthogonalRigidbody.transform.localPosition.z >= groundCollider.transform.position.z);
             }
         }
     }
@@ -45,15 +50,24 @@ public class PlayerDetection : Detection
         groundColliders = UtilityFunctions.FindGameObjectsByLayer(whatIsGround, FindObjectsSortMode.None).Select(groundObject => groundObject.GetComponent<Collider2D>()).ToList();
     }
 
-    public override bool isGrounded()
+    public bool isTouchingWall()
     {
-        if (player.playerStateMachine.currentState.GetType().IsSubclassOf(typeof(PlayerGroundedState)))
-        {
-            return currentEntityHeight <= currentGroundHeight + epsilon;
-        }
-        else
-        {
-            return currentEntityHeight <= currentGroundHeight + epsilon && player.rigidBody.velocity.y < epsilon;
-        }
+        return currentGroundHeight + epsilon < currentEntityHeight && currentEntityHeight + player.playerData.wallTouchHeight < horizontalGroundHeight.x;
+    }
+
+    public void LoadData(GameData data)
+    {
+        currentSpacePosition = data.lastPlayerPosition;
+        currentProjectedPosition = currentSpacePosition;
+        currentEntityHeight = currentSpacePosition.z;
+        currentGroundHeight = currentSpacePosition.z;
+        player.transform.position = new Vector3(currentSpacePosition.x, currentSpacePosition.y, 0.0f);
+        player.orthogonalRigidbody.transform.localPosition = new Vector3(0.0f, currentEntityHeight, currentEntityHeight);
+        currentScreenPosition = player.orthogonalRigidbody.transform.position;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.lastPlayerPosition = lastGroundedPosition;
     }
 }

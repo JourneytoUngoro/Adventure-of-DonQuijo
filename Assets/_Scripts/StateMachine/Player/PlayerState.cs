@@ -5,7 +5,8 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerState : EntityState
 {
-    protected Player player;
+    public Player player { get; private set; }
+    protected PlayerData playerData;
     protected PlayerStateMachine stateMachine;
 
     #region Input Variables
@@ -23,6 +24,7 @@ public class PlayerState : EntityState
     public PlayerState(Player player, string animBoolName) : base(player, animBoolName)
     {
         this.player = player;
+        playerData = player.playerData;
         stateMachine = player.playerStateMachine;
     }
 
@@ -64,7 +66,12 @@ public class PlayerState : EntityState
     {
         base.TickPublicTimers();
 
-        player.dodgeState.dodgeCoolDownTimer.Tick();
+        foreach (PlayerAbilityState abilityState in player.abilityStates)
+        {
+            abilityState.abilityCoolDownTimer.Tick();
+        }
+        player.moveState.dashInputXBufferTimer.Tick();
+        player.moveState.dashInputYBufferTimer.Tick();
     }
 
     protected virtual void FixColliderPositionY()
