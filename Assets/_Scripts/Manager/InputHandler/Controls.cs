@@ -53,6 +53,60 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""92aac6f1-7df0-4d3e-b76c-620d36dcc799"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact/Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""2b482404-694d-49fb-90de-0244f68c2a4c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Return"",
+                    ""type"": ""Button"",
+                    ""id"": ""58b61811-db2b-459f-b782-41ed92816ea0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause/Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""2891114b-29ad-460f-9f7c-10ab8d5ef33d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Equipment"",
+                    ""type"": ""Button"",
+                    ""id"": ""7c0a1817-012e-4aa7-969c-5f84f0927723"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Map"",
+                    ""type"": ""Button"",
+                    ""id"": ""7fdd7626-3791-462b-a7f9-6372d741c28a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +186,72 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Dodge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""72d11ab1-b7fe-4c7e-a492-4ac73d4a0aac"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";PC"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c01eaef6-84ab-4e29-9b77-e81eba03bfd5"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact/Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""43c103b8-848e-4e2d-96bd-e7660dc643eb"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Return"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c8051434-0b70-4c6d-9715-72713d7d6346"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause/Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f4a1b799-4824-4468-8124-951348907bef"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Equipment"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4550bcbc-7aa6-437a-bdd0-dc9ebe6f76cb"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Map"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -160,6 +280,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_CharacterControl_Movement = m_CharacterControl.FindAction("Movement", throwIfNotFound: true);
         m_CharacterControl_Jump = m_CharacterControl.FindAction("Jump", throwIfNotFound: true);
         m_CharacterControl_Dodge = m_CharacterControl.FindAction("Dodge", throwIfNotFound: true);
+        m_CharacterControl_Attack = m_CharacterControl.FindAction("Attack", throwIfNotFound: true);
+        m_CharacterControl_InteractSelect = m_CharacterControl.FindAction("Interact/Select", throwIfNotFound: true);
+        m_CharacterControl_Return = m_CharacterControl.FindAction("Return", throwIfNotFound: true);
+        m_CharacterControl_PauseMenu = m_CharacterControl.FindAction("Pause/Menu", throwIfNotFound: true);
+        m_CharacterControl_Equipment = m_CharacterControl.FindAction("Equipment", throwIfNotFound: true);
+        m_CharacterControl_Map = m_CharacterControl.FindAction("Map", throwIfNotFound: true);
     }
 
     ~@Controls()
@@ -229,6 +355,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControl_Movement;
     private readonly InputAction m_CharacterControl_Jump;
     private readonly InputAction m_CharacterControl_Dodge;
+    private readonly InputAction m_CharacterControl_Attack;
+    private readonly InputAction m_CharacterControl_InteractSelect;
+    private readonly InputAction m_CharacterControl_Return;
+    private readonly InputAction m_CharacterControl_PauseMenu;
+    private readonly InputAction m_CharacterControl_Equipment;
+    private readonly InputAction m_CharacterControl_Map;
     public struct CharacterControlActions
     {
         private @Controls m_Wrapper;
@@ -236,6 +368,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_CharacterControl_Movement;
         public InputAction @Jump => m_Wrapper.m_CharacterControl_Jump;
         public InputAction @Dodge => m_Wrapper.m_CharacterControl_Dodge;
+        public InputAction @Attack => m_Wrapper.m_CharacterControl_Attack;
+        public InputAction @InteractSelect => m_Wrapper.m_CharacterControl_InteractSelect;
+        public InputAction @Return => m_Wrapper.m_CharacterControl_Return;
+        public InputAction @PauseMenu => m_Wrapper.m_CharacterControl_PauseMenu;
+        public InputAction @Equipment => m_Wrapper.m_CharacterControl_Equipment;
+        public InputAction @Map => m_Wrapper.m_CharacterControl_Map;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -254,6 +392,24 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Dodge.started += instance.OnDodge;
             @Dodge.performed += instance.OnDodge;
             @Dodge.canceled += instance.OnDodge;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
+            @InteractSelect.started += instance.OnInteractSelect;
+            @InteractSelect.performed += instance.OnInteractSelect;
+            @InteractSelect.canceled += instance.OnInteractSelect;
+            @Return.started += instance.OnReturn;
+            @Return.performed += instance.OnReturn;
+            @Return.canceled += instance.OnReturn;
+            @PauseMenu.started += instance.OnPauseMenu;
+            @PauseMenu.performed += instance.OnPauseMenu;
+            @PauseMenu.canceled += instance.OnPauseMenu;
+            @Equipment.started += instance.OnEquipment;
+            @Equipment.performed += instance.OnEquipment;
+            @Equipment.canceled += instance.OnEquipment;
+            @Map.started += instance.OnMap;
+            @Map.performed += instance.OnMap;
+            @Map.canceled += instance.OnMap;
         }
 
         private void UnregisterCallbacks(ICharacterControlActions instance)
@@ -267,6 +423,24 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Dodge.started -= instance.OnDodge;
             @Dodge.performed -= instance.OnDodge;
             @Dodge.canceled -= instance.OnDodge;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
+            @InteractSelect.started -= instance.OnInteractSelect;
+            @InteractSelect.performed -= instance.OnInteractSelect;
+            @InteractSelect.canceled -= instance.OnInteractSelect;
+            @Return.started -= instance.OnReturn;
+            @Return.performed -= instance.OnReturn;
+            @Return.canceled -= instance.OnReturn;
+            @PauseMenu.started -= instance.OnPauseMenu;
+            @PauseMenu.performed -= instance.OnPauseMenu;
+            @PauseMenu.canceled -= instance.OnPauseMenu;
+            @Equipment.started -= instance.OnEquipment;
+            @Equipment.performed -= instance.OnEquipment;
+            @Equipment.canceled -= instance.OnEquipment;
+            @Map.started -= instance.OnMap;
+            @Map.performed -= instance.OnMap;
+            @Map.canceled -= instance.OnMap;
         }
 
         public void RemoveCallbacks(ICharacterControlActions instance)
@@ -298,5 +472,11 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
+        void OnInteractSelect(InputAction.CallbackContext context);
+        void OnReturn(InputAction.CallbackContext context);
+        void OnPauseMenu(InputAction.CallbackContext context);
+        void OnEquipment(InputAction.CallbackContext context);
+        void OnMap(InputAction.CallbackContext context);
     }
 }

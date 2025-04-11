@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum Intensity { Ðñ, î¸, øÁ, êË, ß¯ }
-
 [CreateAssetMenu(fileName = "newCombatAbilityData", menuName = "Data/Combat Ability Data")]
 public class CombatAbility : ScriptableObject
 {
     [field: SerializeField] public Sprite combatAbilityIcon { get; private set; }
     [field: SerializeField] public string combatAbilityName { get; private set; } = "Default Combat Ability Name";
-    [field: SerializeField, Tooltip("When target gets knockback only when its stance level is lower than threat level.")] public Intensity threatLevel { get; private set; } = Intensity.øÁ;
+    [field: SerializeField, Tooltip("When target gets knockback only when its stance level is lower than threat level.")] public int threatLevel { get; private set; }
     [field: SerializeField, TextArea] public string combatAbilityDescription { get; private set; } = "Default Combat Ability Description";
     [field: SerializeField] public bool canBeDodged { get; private set; } = true;
-    [field: SerializeField] public bool canBeShielded { get; private set; } = true;
+    [field: SerializeField] public bool canBeBlocked { get; private set; } = true;
     [field: SerializeField] public bool canBeParried { get; private set; } = true;
     // TODO: Add stance & superstance logic
     [field: SerializeField, Tooltip("stanceWhenHit will be controlled by entity's stanceLevel by script.")] public bool stanceWhenParried { get; private set; } = false;

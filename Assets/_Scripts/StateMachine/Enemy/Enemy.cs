@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Xml;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : Entity
 {
     #region State Variables
-    public EnemyStateMachine enemyStateMachine;
+    public EnemyStateMachine enemyStateMachine { get; private set; }
 
+    public EnemyIdleState idleState { get; private set; }
+    public EnemyTargetInDetectionRangeState targetInDetectionRangeState { get; private set; }
+    public List<EnemyAbilityState> abilityStates { get; protected set; }
     #endregion
 
     #region Enemy Components
@@ -17,7 +22,17 @@ public class Enemy : Entity
     public EnemyDetection detection { get; private set; }
     public EnemyStats stats { get; private set; }
     public EnemyData enemyData { get; private set; }
+    public NavMeshAgent navMeshAgent { get; private set; }
     #endregion
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent.updateRotation = false;
+        navMeshAgent.updateUpAxis = false;
+    }
 
     protected override void Start()
     {
@@ -31,27 +46,28 @@ public class Enemy : Entity
         enemyStateMachine = new EnemyStateMachine();
         entityStateMachine = enemyStateMachine;
 
-        /*idleState = new PlayerIdleState(this, "idle");
-        moveState = new PlayerMoveState(this, "move");
-        jumpState = new PlayerJumpState(this, "inAir");
+        idleState = new EnemyIdleState(this, "idle");
+        targetInDetectionRangeState = new EnemyTargetInDetectionRangeState(this, "move");
+
+        abilityStates = new List<EnemyAbilityState>();
+        IEnumerable<PropertyInfo> abilityStateProperties = GetType()
+            .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+            .Where(property => property.PropertyType.IsSubclassOf(typeof(EnemyAbilityState)));
+
+        foreach (PropertyInfo property in abilityStateProperties)
+        {
+            EnemyAbilityState abilityState = property.GetValue(this) as EnemyAbilityState;
+            abilityStates.Add(abilityState);
+        }
+
+        enemyStateMachine.Initialize(idleState);
+
+        /*jumpState = new PlayerJumpState(this, "inAir");
         inAirState = new PlayerInAirState(this, "inAir");
         dodgeState = new PlayerDodgeState(this, "dodge");
         deadState = new PlayerDeadState(this, "dead");
         stunnedState = new PlayerStunnedState(this, "stunned");
         landingState = new PlayerLandingState(this, "landing");
-        knockbackState = new PlayerKnockbackState(this, "knockback");
-
-        abilityStates = new List<PlayerAbilityState>();
-        IEnumerable<PropertyInfo> abilityStateProperties = GetType()
-            .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-            .Where(property => property.PropertyType.IsSubclassOf(typeof(PlayerAbilityState)));
-
-        foreach (PropertyInfo property in abilityStateProperties)
-        {
-            PlayerAbilityState abilityState = property.GetValue(this) as PlayerAbilityState;
-            abilityStates.Add(abilityState);
-        }
-
-        playerStateMachine.Initialize(idleState);*/
+        knockbackState = new PlayerKnockbackState(this, "knockback");*/
     }
 }

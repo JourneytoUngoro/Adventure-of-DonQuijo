@@ -68,7 +68,7 @@ public abstract class EntityState
 
     public virtual void DoChecks()
     {
-        isGrounded = entity.entityDetection.isGrounded();
+        isGrounded = entity.entityDetection.IsGrounded();
     }
 
     public virtual void Enter()

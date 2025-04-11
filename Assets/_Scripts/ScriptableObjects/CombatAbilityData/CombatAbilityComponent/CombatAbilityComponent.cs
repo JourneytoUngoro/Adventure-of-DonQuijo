@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public abstract class CombatAbilityComponent
+public abstract class CombatAbilityComponent: ICombatAbility
 {
     [SerializeField, HideInInspector] private string name = "";
     [field: SerializeField] public CombatAbility pertainedCombatAbility { get; set; }
@@ -14,5 +14,5 @@ public abstract class CombatAbilityComponent
         name = GetType().Name;
     }
 
-    public abstract void ApplyCombatAbility(params object[] variables);
+    public abstract void ApplyCombatAbility(Entity target, OverlapCollider[] overlapColliders);
 }

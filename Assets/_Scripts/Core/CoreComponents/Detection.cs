@@ -3,25 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum CheckPositionAxis { Horizontal, Vertical }
 public enum CheckPositionDirection { Front, Back, Heading }
 
 public abstract class Detection : CoreComponent
 {
-    // TODO: All functions should be revised when using extra script for describing height.
-
     [field: SerializeField] public LayerMask whatIsGround { get; private set; }
-
-    #region Check Transform
-    // [SerializeField] protected Vector2 groundCheckLength;
-    // [SerializeField] protected OverlapCollider ledgeCheck;
-    // [SerializeField, Min(0.01f)] private float recaliberationStepSize;
-    // [SerializeField] private const int maxIteration = 1000;
-    #endregion
+    public List<Collider2D> groundColliders { get; private set; }
 
     [SerializeField] private bool showPositionInformation;
     [SerializeField] private bool showColliderInformation;
+    [SerializeField] private bool showFacingObstacleInformation;
 
     // Suppose that we want the character to appear in (x, y, z) position in 3D space
     public Vector3 currentScreenPosition { get; protected set; } // orthogonal rigidbody's screen position: (x, y + z, z)
@@ -29,17 +23,31 @@ public abstract class Detection : CoreComponent
     public Vector3 currentProjectedPosition { get; protected set; } // orthogonal rigidbody's position when it is projected on plane: (x, y, projected ground height)
     public float currentEntityHeight { get; protected set; } // orthogonal rigidbody's local position = (0, z, z)
     public float currentGroundHeight { get; protected set; } // projected ground height
-    public float currentCeilingHeight { get; protected set; } // Do we need this?
-    public Vector2 horizontalGroundHeight { get; protected set; } // height of the ground in horizontal axis (forwardDirection, backwardDirection)
-    public Vector2 verticalGroundHeight { get; protected set; } // height of the ground in vertical axis (upwardDirection, downwardDirection)
+    public float? currentCeilingHeight { get; protected set; } // Do we need this?
+    public bool isGrounded { get; protected set; }
+    public pair<bool, bool> detectingHorizontalObstacle { get; protected set; } = new pair<bool, bool>(false, false);
+    public pair<bool, bool> detectingVerticalObstacle { get; protected set; } = new pair<bool, bool>(false, false);
 
     protected Collider2D currentGroundCollider;
-    protected Collider2D forwardGroundCollider;
-    protected Collider2D backwardGroundCollider;
-    protected Collider2D upwardGroundCollider;
-    protected Collider2D downwardGroundCollider;
+    protected Collider2D currentCeilingCollider;
+    protected Collider2D[] projectedPositionColliders = new Collider2D[maxDetectionCount];
+    protected Collider2D[] forwardObstacleColliders = new Collider2D[maxDetectionCount];
+    protected Collider2D[] backwardObstacleColliders = new Collider2D[maxDetectionCount];
+    protected Collider2D[] upwardObstacleColliders = new Collider2D[maxDetectionCount];
+    protected Collider2D[] downwardObstacleColliders = new Collider2D[maxDetectionCount];
 
-    // Collider offset's y position should be zero.
+    protected const int maxDetectionCount = 10;
+
+    protected virtual void OnEnable()
+    {
+        SceneManager.sceneLoaded += GetLoadedGrounds;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= GetLoadedGrounds;
+    }
+
     protected virtual void FixedUpdate()
     {
         currentScreenPosition = entity.orthogonalRigidbody.transform.position;
@@ -49,61 +57,90 @@ public abstract class Detection : CoreComponent
         currentSpacePosition = workSpace;
 
         workSpace.Set(entity.collider.offset.x * entity.entityMovement.facingDirection, entity.collider.offset.y, 0.0f);
-        Vector2 groundCheckPosition = entity.transform.position + workSpace;
-        currentGroundHeight = GetCurrentGroundHeight(groundCheckPosition);
+        Vector3 groundCheckPosition = entity.transform.position + workSpace;
+
+        Array.Clear(projectedPositionColliders, 0, maxDetectionCount);
+        Physics2D.OverlapBoxNonAlloc(groundCheckPosition, entity.collider.size, 0.0f, projectedPositionColliders, whatIsGround);
+        currentGroundHeight = GetCurrentGroundHeight();
+        currentCeilingHeight = GetCurrentCeilingHeight();
+        isGrounded = IsGrounded();
 
         workSpace.Set(entity.transform.position.x, entity.transform.position.y, currentGroundHeight);
         currentProjectedPosition = workSpace;
 
-        workSpace.Set(GetSurroundingGroundHeight(groundCheckPosition, CheckPositionAxis.Horizontal, CheckPositionDirection.Front), GetSurroundingGroundHeight(groundCheckPosition, CheckPositionAxis.Horizontal, CheckPositionDirection.Back), 0.0f);
-        horizontalGroundHeight = workSpace;
-        workSpace.Set(GetSurroundingGroundHeight(groundCheckPosition, CheckPositionAxis.Vertical, CheckPositionDirection.Front), GetSurroundingGroundHeight(groundCheckPosition, CheckPositionAxis.Vertical, CheckPositionDirection.Back), 0.0f);
-        verticalGroundHeight = workSpace;
+        Array.Clear(forwardObstacleColliders, 0, maxDetectionCount);
+        Physics2D.OverlapBoxNonAlloc(groundCheckPosition + entity.orthogonalRigidbody.transform.right * (entity.collider.bounds.extents.x + entity.collider.bounds.extents.y), Vector2.one * entity.collider.bounds.size.y, 0.0f, forwardObstacleColliders, whatIsGround);
+        Array.Clear(backwardObstacleColliders, 0, maxDetectionCount);
+        Physics2D.OverlapBoxNonAlloc(groundCheckPosition - entity.orthogonalRigidbody.transform.right * (entity.collider.bounds.extents.x + entity.collider.bounds.extents.y), Vector2.one * entity.collider.bounds.size.y, 0.0f, backwardObstacleColliders, whatIsGround);
+        Array.Clear(upwardObstacleColliders, 0, maxDetectionCount);
+        Physics2D.OverlapBoxNonAlloc(groundCheckPosition + entity.orthogonalRigidbody.transform.up * entity.collider.bounds.size.y, entity.collider.bounds.size, 0.0f, upwardObstacleColliders, whatIsGround);
+        Array.Clear(downwardObstacleColliders, 0, maxDetectionCount);
+        Physics2D.OverlapBoxNonAlloc(groundCheckPosition - entity.orthogonalRigidbody.transform.up * entity.collider.bounds.size.y, entity.collider.bounds.size, 0.0f, downwardObstacleColliders, whatIsGround);
+        detectingHorizontalObstacle.first = IsDetectingObstacle(CheckPositionAxis.Horizontal, CheckPositionDirection.Front);
+        detectingHorizontalObstacle.second = IsDetectingObstacle(CheckPositionAxis.Horizontal, CheckPositionDirection.Back);
+        detectingVerticalObstacle.first = IsDetectingObstacle(CheckPositionAxis.Vertical, CheckPositionDirection.Front);
+        detectingVerticalObstacle.second = IsDetectingObstacle(CheckPositionAxis.Vertical, CheckPositionDirection.Back);
+
+        foreach (Collider2D groundCollider in groundColliders)
+        {
+            if (groundCollider != null)
+            {
+                Physics2D.IgnoreCollision(groundCollider, entity.collider, currentEntityHeight >= groundCollider.transform.position.z + groundCollider.GetComponent<HeightData>().height);
+            }
+        }
 
         if (showPositionInformation)
         {
-            Debug.Log($"ScreenPosition: {currentScreenPosition}, SpacePosition: {currentSpacePosition}, ProjectedPosition: {currentProjectedPosition}, EntityHeight: {currentEntityHeight}, GroundHeight: {currentGroundHeight}, FacingHeight: {horizontalGroundHeight}");
+            Debug.Log($"Screen Position: {currentScreenPosition} | Space Position: {currentSpacePosition} | Projected Position: {currentProjectedPosition} | Entity Height: {currentEntityHeight} | Ground Height: {currentGroundHeight} | Ceiling Height: {currentCeilingHeight}");
+        }
+        if (showFacingObstacleInformation)
+        {
+            Debug.Log($"Horizontal Obstacle: ({detectingHorizontalObstacle.first}, {detectingHorizontalObstacle.second}) | Vertical Obstacle: ({detectingVerticalObstacle.first}, {detectingVerticalObstacle.second})");
         }
         if (showColliderInformation)
         {
-            Debug.Log($"CurrentGround: {currentGroundCollider?.name}, HorizontalFacingObstacle: ({forwardGroundCollider?.name}: {horizontalGroundHeight.x}, {backwardGroundCollider?.name}: {horizontalGroundHeight.y}), VerticalFacingObstacle: ({upwardGroundCollider?.name}: {verticalGroundHeight.x}, {downwardGroundCollider?.name}: {verticalGroundHeight.y})");
+            Debug.Log($"CurrentGround: {currentGroundCollider?.name} | Current Ceiling: {currentCeilingCollider?.name} | Forward Obstacle: {string.Join(", ", forwardObstacleColliders.Where(component => component != null).Select(component => $"[{component.name} - ({component.transform.position.z}, {component.transform.position.z + component.GetComponent<HeightData>().height})]"))} | Backward Obstacle: {string.Join(", ", backwardObstacleColliders.Where(component => component != null).Select(component => $"[{component.name} - ({component.transform.position.z}, {component.transform.position.z + component.GetComponent<HeightData>().height})]"))} | Upward Obstacle: {string.Join(", ", upwardObstacleColliders.Where(component => component != null).Select(component => $"[{component.name} - ({component.transform.position.z}, {component.transform.position.z + component.GetComponent<HeightData>().height})]"))} | Downward Obstacle: {string.Join(", ", downwardObstacleColliders.Where(component => component != null).Select(component => $"[{component.name} - ({component.transform.position.z}, {component.transform.position.z + component.GetComponent<HeightData>().height})]"))}");
         }
     }
 
-    public virtual bool isGrounded()
+    public virtual bool IsGrounded()
     {
         return currentEntityHeight <= currentGroundHeight + epsilon && entity.orthogonalRigidbody.velocity < epsilon;
     }
 
-    public float GetCurrentGroundHeight(Vector2 groundCheckPosition)
+    public float GetCurrentGroundHeight()
     {
-        currentGroundCollider = Physics2D.OverlapBoxAll(groundCheckPosition, entity.collider.size, 0.0f, whatIsGround, -Mathf.Infinity, currentEntityHeight).OrderByDescending(groundCollider => groundCollider.transform.position.z).FirstOrDefault();
-        return currentGroundCollider ? currentGroundCollider.transform.position.z : 0.0f;
+        currentGroundCollider = projectedPositionColliders.Where(groundCollider => groundCollider != null && groundCollider.transform.position.z + groundCollider.GetComponent<HeightData>().height <= currentEntityHeight).OrderByDescending(groundCollider => groundCollider.transform.position.z + groundCollider.GetComponent<HeightData>().height).FirstOrDefault();
+        return currentGroundCollider ? currentGroundCollider.transform.position.z + currentGroundCollider.GetComponent<HeightData>().height : 0.0f;
     }
 
-    public float GetSurroundingGroundHeight(Vector2 groundCheckPosition, CheckPositionAxis checkPositionAxis, CheckPositionDirection checkPositionDirection)
+    public float? GetCurrentCeilingHeight()
+    {
+        currentCeilingCollider = projectedPositionColliders.Where(groundCollider => groundCollider != null && groundCollider.transform.position.z >= currentEntityHeight).OrderBy(groundCollider => groundCollider.transform.position.z + groundCollider.GetComponent<HeightData>().height).FirstOrDefault();
+        return currentCeilingCollider ? currentCeilingCollider.transform.position.z : null;
+    }
+
+    public bool IsDetectingObstacle(CheckPositionAxis checkPositionAxis, CheckPositionDirection checkPositionDirection)
     {
         if (checkPositionAxis == CheckPositionAxis.Horizontal)
         {
             if (checkPositionDirection == CheckPositionDirection.Front)
             {
-                forwardGroundCollider = Physics2D.OverlapBoxAll(groundCheckPosition + (Vector2)entity.orthogonalRigidbody.transform.right * (entity.collider.bounds.extents.x + entity.collider.bounds.extents.y), Vector2.one * entity.collider.bounds.size.y, 0.0f, whatIsGround).Where(overlap => overlap != currentGroundCollider).OrderByDescending(overlap => overlap.transform.position.z).FirstOrDefault();
-                return forwardGroundCollider ? forwardGroundCollider.transform.position.z : currentGroundHeight;
+                return !forwardObstacleColliders.Where(groundCollider => groundCollider != null && groundCollider != currentGroundCollider && !(groundCollider.transform.position.z > currentEntityHeight + entity.currentEntityStature || groundCollider.transform.position.z + groundCollider.GetComponent<HeightData>().height < currentEntityHeight)).Empty();
             }
             else if (checkPositionDirection == CheckPositionDirection.Back)
             {
-                backwardGroundCollider = Physics2D.OverlapBoxAll(groundCheckPosition - (Vector2)entity.orthogonalRigidbody.transform.right * (entity.collider.bounds.extents.x + entity.collider.bounds.extents.y), Vector2.one * entity.collider.bounds.size.y, 0.0f, whatIsGround).Where(overlap => overlap != currentGroundCollider).OrderByDescending(overlap => overlap.transform.position.z).FirstOrDefault();
-                return backwardGroundCollider ? backwardGroundCollider.transform.position.z : currentGroundHeight;
+                return !backwardObstacleColliders.Where(groundCollider => groundCollider != null && groundCollider != currentGroundCollider && !(groundCollider.transform.position.z > currentEntityHeight + entity.currentEntityStature || groundCollider.transform.position.z + groundCollider.GetComponent<HeightData>().height < currentEntityHeight)).Empty();
             }
             else if (checkPositionDirection == CheckPositionDirection.Heading)
             {
                 if (entity.rigidbody.velocity.x * entity.entityMovement.facingDirection < 0)
                 {
-                    return GetSurroundingGroundHeight(groundCheckPosition, checkPositionAxis, CheckPositionDirection.Back);
+                    return IsDetectingObstacle(checkPositionAxis, CheckPositionDirection.Back);
                 }
                 else
                 {
-                    return GetSurroundingGroundHeight(groundCheckPosition, checkPositionAxis, CheckPositionDirection.Front);
+                    return IsDetectingObstacle(checkPositionAxis, CheckPositionDirection.Front);
                 }
             }
             else
@@ -115,23 +152,21 @@ public abstract class Detection : CoreComponent
         {
             if (checkPositionDirection == CheckPositionDirection.Front)
             {
-                upwardGroundCollider = Physics2D.OverlapBoxAll(groundCheckPosition + (Vector2)entity.orthogonalRigidbody.transform.up * entity.collider.bounds.size.y, entity.collider.bounds.size, 0.0f, whatIsGround).Where(overlap => overlap != currentGroundCollider).OrderByDescending(overlap => overlap.transform.position.z).FirstOrDefault();
-                return upwardGroundCollider ? upwardGroundCollider.transform.position.z : currentGroundHeight;
+                return !upwardObstacleColliders.Where(groundCollider => groundCollider != null && groundCollider != currentGroundCollider && !(groundCollider.transform.position.z > currentEntityHeight + entity.currentEntityStature || groundCollider.transform.position.z + groundCollider.GetComponent<HeightData>().height < currentEntityHeight)).Empty();
             }
             else if (checkPositionDirection == CheckPositionDirection.Back)
             {
-                downwardGroundCollider = Physics2D.OverlapBoxAll(groundCheckPosition - (Vector2)entity.orthogonalRigidbody.transform.up * entity.collider.bounds.size.y, entity.collider.bounds.size, 0.0f, whatIsGround).Where(overlap => overlap != currentGroundCollider).OrderByDescending(overlap => overlap.transform.position.z).FirstOrDefault();
-                return downwardGroundCollider ? downwardGroundCollider.transform.position.z : currentGroundHeight;
+                return !downwardObstacleColliders.Where(groundCollider => groundCollider != null && groundCollider != currentGroundCollider && !(groundCollider.transform.position.z > currentEntityHeight + entity.currentEntityStature || groundCollider.transform.position.z + groundCollider.GetComponent<HeightData>().height < currentEntityHeight)).Empty();
             }
             else if (checkPositionDirection == CheckPositionDirection.Heading)
             {
                 if (entity.rigidbody.velocity.x * entity.entityMovement.facingDirection < 0)
                 {
-                    return GetSurroundingGroundHeight(groundCheckPosition, checkPositionAxis, CheckPositionDirection.Back);
+                    return IsDetectingObstacle(checkPositionAxis, CheckPositionDirection.Back);
                 }
                 else
                 {
-                    return GetSurroundingGroundHeight(groundCheckPosition, checkPositionAxis, CheckPositionDirection.Front);
+                    return IsDetectingObstacle(checkPositionAxis, CheckPositionDirection.Front);
                 }
             }
             else
@@ -145,33 +180,27 @@ public abstract class Detection : CoreComponent
         }
     }
 
-    public bool isDetectingCeiling()
-    {
-        // TODO: Implement ceiling detection. To implement this, we should use extra script to describe informations for each ground objects.
-        return false;
-    }
-
-    public bool isDetectingLedge(CheckPositionAxis checkPositionAxis, CheckPositionDirection checkPositionDirection)
+    public bool IsDetectingLedge(CheckPositionAxis checkPositionAxis, CheckPositionDirection checkPositionDirection)
     {
         if (checkPositionAxis == CheckPositionAxis.Horizontal)
         {
             if (checkPositionDirection == CheckPositionDirection.Front)
             {
-                return currentEntityHeight > horizontalGroundHeight.x;
+                return !detectingHorizontalObstacle.first && forwardObstacleColliders.Where(overlap => overlap != null && overlap != currentGroundCollider).All(overlap => currentEntityHeight > overlap.transform.position.z + overlap.GetComponent<HeightData>().height);
             }
             else if (checkPositionDirection == CheckPositionDirection.Back)
             {
-                return currentEntityHeight > horizontalGroundHeight.y;
+                return !detectingHorizontalObstacle.second && backwardObstacleColliders.Where(overlap => overlap != null && overlap != currentGroundCollider).All(overlap => currentEntityHeight > overlap.transform.position.z + overlap.GetComponent<HeightData>().height);
             }
             else if (checkPositionDirection == CheckPositionDirection.Heading)
             {
                 if (entity.rigidbody.velocity.x * entity.entityMovement.facingDirection < 0)
                 {
-                    return isDetectingLedge(checkPositionAxis, CheckPositionDirection.Front);
+                    return IsDetectingLedge(checkPositionAxis, CheckPositionDirection.Front);
                 }
                 else
                 {
-                    return isDetectingLedge(checkPositionAxis, CheckPositionDirection.Front);
+                    return IsDetectingLedge(checkPositionAxis, CheckPositionDirection.Front);
                 }
             }
             else
@@ -183,21 +212,21 @@ public abstract class Detection : CoreComponent
         {
             if (checkPositionDirection == CheckPositionDirection.Front)
             {
-                return currentEntityHeight > verticalGroundHeight.x;
+                return !detectingVerticalObstacle.first && upwardObstacleColliders.Where(overlap => overlap != null && overlap != currentGroundCollider).All(overlap => currentEntityHeight > overlap.transform.position.z + overlap.GetComponent<HeightData>().height);
             }
             else if (checkPositionDirection == CheckPositionDirection.Back)
             {
-                return currentEntityHeight > verticalGroundHeight.y;
+                return !detectingVerticalObstacle.second && downwardObstacleColliders.Where(overlap => overlap != null && overlap != currentGroundCollider).All(overlap => currentEntityHeight > overlap.transform.position.z + overlap.GetComponent<HeightData>().height);
             }
             else if (checkPositionDirection == CheckPositionDirection.Heading)
             {
                 if (entity.rigidbody.velocity.x * entity.entityMovement.facingDirection < 0)
                 {
-                    return isDetectingLedge(checkPositionAxis, CheckPositionDirection.Back);
+                    return IsDetectingLedge(checkPositionAxis, CheckPositionDirection.Back);
                 }
                 else
                 {
-                    return isDetectingLedge(checkPositionAxis, CheckPositionDirection.Front);
+                    return IsDetectingLedge(checkPositionAxis, CheckPositionDirection.Front);
                 }
             }
             else
@@ -211,86 +240,10 @@ public abstract class Detection : CoreComponent
         }
     }
 
-    /*private void RecaliberatePosition(Vector2 groundCheckPosition)
+    private void GetLoadedGrounds(Scene loadedScene, LoadSceneMode loadSceneMode)
     {
-        if (currentEntityHeight >= currentGroundHeight) return;
-
-        if (entity.rigidbody.velocity.sqrMagnitude > epsilon)
-        {
-            entity.transform.position = RecaliberatePosition(groundCheckPosition, -entity.rigidbody.velocity, recaliberationStepSize);
-        }
-        else
-        {
-            if (currentGroundCollider.GetType().Equals(typeof(PolygonCollider2D)))
-            {
-                PolygonCollider2D groundPolygon = currentGroundCollider as PolygonCollider2D;
-
-                float minDistance = float.MaxValue;
-                Vector3 minClosestPoint = transform.position;
-
-                for (int i = 0; i < groundPolygon.points.Count(); i++)
-                {
-                    Vector2 pointA = (Vector2)groundPolygon.transform.position + groundPolygon.points[i];
-                    Vector2 pointB = (Vector2)groundPolygon.transform.position + groundPolygon.points[(i + 1) % groundPolygon.points.Count()];
-
-                    Vector3 currentClosestPoint = groundCheckPosition.ClosestPointOnLine(pointA, pointB, false);
-                    float currentDistance = Vector3.Distance(currentClosestPoint, transform.position);
-
-                    if (currentDistance < minDistance)
-                    {
-                        minDistance = currentDistance;
-                        minClosestPoint = currentClosestPoint;
-                    }
-                }
-
-                Vector2 recaliberateDirection = groundPolygon.OverlapPoint(groundCheckPosition) ? (minClosestPoint - transform.position).normalized : (transform.position - minClosestPoint).normalized;
-                entity.transform.position = recaliberateDirection != Vector2.zero ? RecaliberatePosition(minClosestPoint, recaliberateDirection, recaliberationStepSize) : transform.position;
-            }
-            else
-            {
-                // TODO: Use ColliderDistance2D for non-polygon type colliders
-            }
-        }
-
-        workSpace.Set(entity.transform.position.x, entity.transform.position.y, currentEntityHeight);
-        currentProjectedPosition = workSpace;
-
-        if (isGrounded())
-        {
-            if (Mathf.Abs(entity.rigidbody.velocity.x) > epsilon)
-            {
-                entity.entityMovement.SetVelocityX(0.0f);
-            }
-
-            if (Mathf.Abs(entity.rigidbody.velocity.y) > epsilon)
-            {
-                entity.entityMovement.SetVelocityY(0.0f);
-            }
-        }
-        else
-        {
-            entity.entityMovement.SetVelocityX(0.0f);
-        }
+        groundColliders = UtilityFunctions.FindGameObjectsByLayer(whatIsGround, FindObjectsSortMode.None).Select(groundObject => groundObject.GetComponent<Collider2D>()).ToList();
     }
-
-    private Vector3 RecaliberatePosition(Vector2 startPosition, Vector2 recaliberateDirection, float recaliberateStepSize)
-    {
-        int currentIteration = 0;
-        Vector2 currentPosition = startPosition + recaliberateDirection.normalized * recaliberateStepSize;
-
-        while (currentIteration < maxIteration)
-        {
-            if (GetCurrentGroundHeight(currentPosition) <= currentEntityHeight)
-            {
-                break;
-            }
-            currentIteration += 1;
-            currentPosition += recaliberateStepSize * recaliberateDirection.normalized;
-        }
-
-        workSpace.Set(currentPosition.x, currentPosition.y, currentEntityHeight);
-        return workSpace;
-    }*/
 
     protected virtual void OnDrawGizmos()
     {

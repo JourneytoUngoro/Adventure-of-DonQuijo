@@ -8,7 +8,7 @@ using UnityEngine;
 public class Player : Entity
 {
     #region State Variables
-    public PlayerStateMachine playerStateMachine;
+    public PlayerStateMachine playerStateMachine { get; private set; }
 
     public PlayerIdleState idleState { get; private set; }
     public PlayerMoveState moveState { get; private set; }
@@ -29,6 +29,10 @@ public class Player : Entity
     public PlayerDetection detection { get; private set; }
     public PlayerStats stats { get; private set; }
     public PlayerData playerData { get; private set; }
+    #endregion
+
+    #region Other variables
+    public List<InteractBase> interactableGameObjects { get; private set; } = new List<InteractBase>();
     #endregion
 
     protected override void Start()
