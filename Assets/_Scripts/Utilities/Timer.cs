@@ -32,7 +32,7 @@ public class Timer
 
     /// <summary>
     /// A Default Timer that is affected by Time.timeScale. Only active when condition is fit. If resetTime parameter is true, it will continuously reset startTime until the condition is fit. Which means that the timer will start ticking time after the condition is met.
-    /// ¿¹¸¦ µé¾î, ¸¸¾à resetTimeÀÌ falseÀÏ °æ¿ì, StartTimer·ù ÇÔ¼ö¸¦ ºÎ¸¥ ÀÌÈÄÀÇ ½Ã°£¿¡¼­ºÎÅÍ duration¸¸Å­ÀÇ ½Ã°£ÀÌ Áö³µ´Ù¸é conditionÀÌ ¸¸Á·µÇÀÚ¸¶ÀÚ timerActionÀÌ ½ÇÇàµÇÁö¸¸, resetTimeÀÌ trueÀÏ °æ¿ì, conditionÀÌ ¸¸Á·ÇÑ ÀÌÈÄ duration¸¸Å­ÀÇ ½Ã°£ÀÌ Áö³ª¾ßÇÑ´Ù.
+    /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ resetTimeï¿½ï¿½ falseï¿½ï¿½ ï¿½ï¿½ï¿½, StartTimerï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ durationï¿½ï¿½Å­ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½ conditionï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½ timerActionï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, resetTimeï¿½ï¿½ trueï¿½ï¿½ ï¿½ï¿½ï¿½, conditionï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ durationï¿½ï¿½Å­ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
     /// </summary>
     /// <param name="condition"></param>
     public void Tick(bool condition = true, bool resetTime = false)
@@ -157,7 +157,7 @@ public class Timer
     }
 
     /// <summary>
-    /// ÄðÅ¸ÀÓ ¹ÝÈ¯ ±â´É
+    /// ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½È¯ ï¿½ï¿½ï¿½
     /// </summary>
     /// <param name="adjustTimeAmount"></param>
     /// <param name="isAdjustTimeSingleUse"></param>

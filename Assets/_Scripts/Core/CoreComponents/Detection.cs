@@ -66,7 +66,7 @@ public abstract class Detection : CoreComponent
         }
         if (showColliderInformation)
         {
-            Debug.Log($"CurrentGround: {currentGroundCollider?.name}, HorizontalFacingObstacle: ({forwardGroundCollider?.name}: {horizontalGroundHeight.x}, {backwardGroundCollider?.name}: {horizontalGroundHeight.y}), VerticalFacingObstacle: ({upwardGroundCollider?.name}: {verticalGroundHeight.x}, {downwardGroundCollider?.name}: {verticalGroundHeight.y})");
+            //Debug.Log($"CurrentGround: {currentGroundCollider?.name}, HorizontalFacingObstacle: ({forwardGroundCollider?.name}: {horizontalGroundHeight.x}, {backwardGroundCollider?.name}: {horizontalGroundHeight.y}), VerticalFacingObstacle: ({upwardGroundCollider?.name}: {verticalGroundHeight.x}, {downwardGroundCollider?.name}: {verticalGroundHeight.y})");
         }
     }
 

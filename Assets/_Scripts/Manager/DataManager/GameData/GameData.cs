@@ -18,37 +18,44 @@ public class GameData
     public bool[] bossDefeat;
     public string currentScene;
     // public SerializableDictionary<string, bool> mapOpened
-    // public bool[] abilityGained; µî
-    // ¾Æ·¡¿Í °°Àº ÇÔ¼ö¸¦ ÀÛ¼ºÇØ¼­ Guid¸¦ ¸¸µé ¼ö ÀÖ´Ù. °¡·É ContextMenu¸¦ ÅëÇØ¼­ Á÷Á¢ ¸¸µé°Å³ª Start ¶Ç´Â Awake¿¡¼­ ÀÚµ¿À¸·Î ½ÇÇàµÇµµ·Ï ¸¸µé´ø°¡.
-    /*[ContextMenu("Generate guid for id")]
+    // public bool[] abilityGained; ï¿½ï¿½
+
+    public InventoryData inventoryData;
+
+    #region Not Used Yet 
+
+    // ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½Ø¼ï¿½ Guidï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½. ï¿½ï¿½ï¿½ï¿½ ContextMenuï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å³ï¿½ Start ï¿½Ç´ï¿½ Awakeï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+    /*[ContextMenu("Generate guid for type")]
     private void GenerateGuid()
     {
-        id = System.Guid.NewGuid().ToString();
+        type = System.Guid.NewGuid().ToString();
     }
     
     public void LoadData(GameData data)
     {
-        // °³º° µ¥ÀÌÅÍ Á¢±Ù
-        data.dictionaryName.TryGetValue(id, out value);
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        data.dictionaryName.TryGetValue(type, out value);
         // do something
         
-        // ¸ðµç µ¥ÀÌÅÍ Á¢±Ù
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         foreach(KeyValuePair<T1, T2> pair in data.dictionaryName)
         {
-            // pair.Key ¶Ç´Â pair.Value¸¦ ÅëÇØ Å°¿Í µ¥ÀÌÅÍ¿¡ Á¢±Ù
+            // pair.Key ï¿½Ç´ï¿½ pair.Valueï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½
             // do something
         }
     }
 
     public void SaveData(ref GameData data)
     {
-        if (data.dictionaryName.ContainsKey(id))
+        if (data.dictionaryName.ContainsKey(type))
         {
-            data.dictionaryName.Remove(id);
+            data.dictionaryName.Remove(type);
         }
-        data.dictionaryName.Add(id, value);
+        data.dictionaryName.Add(type, value);
     }
     */
+
+    #endregion
 
     public GameData()
     {
@@ -61,5 +68,7 @@ public class GameData
         this.lastPlayerPosition = Vector3.zero;
         this.currentScene = "SampleScene";
         // mapOpened = new Dictionary<string, bool>();
+
+        inventoryData = new InventoryData();
     }
 }

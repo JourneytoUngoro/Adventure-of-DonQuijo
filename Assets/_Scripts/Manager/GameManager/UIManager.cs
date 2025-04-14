@@ -1,0 +1,153 @@
+using JetBrains.Annotations;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor.UIElements;
+using UnityEngine;
+using UnityEngine.Events;
+
+public class UIManager : MonoBehaviour
+{
+    // TODO : 이후 Managers에 통합
+    public static UIManager Instance;
+    [HideInInspector] public static Dictionary<UIType, UIBase> startingUIDictionary = new Dictionary<UIType, UIBase>();
+
+    // TODO : 테스트, 폴더 통합 이후 Load 하는 방식으로 바꾸기
+    public PopupUI popupPrefab;
+    public TextInfoUI textInfoPrefab;
+    public ImageUI imagePrefab;
+
+    public Stack<PopupUI> activatedPopups = new Stack<PopupUI>();
+    public Stack<TextInfoUI> activatedTextInfos = new Stack<TextInfoUI>();
+    public Stack<ImageUI> activatedImages = new Stack<ImageUI>();
+
+    public UIObjectPool<PopupUI> popupPool;
+    public UIObjectPool<TextInfoUI> textInfoPool;
+    public UIObjectPool<ImageUI> imagePool;
+
+    int objectCount = 2;
+
+    Transform uiCanvas; // UI Object가 표시될 전용 캔버스 
+    GameObject clickBlocker; // TODO : UI 활성화 시 클릭 막는 로직 추가 
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(this);
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        uiCanvas = GameObject.Find("UICanvas").transform;
+
+        RegisterUIObjects();
+        CreatePool();
+    }
+
+    private void RegisterUIObjects()
+    {
+        UIBase[] startingUIs = uiCanvas.GetComponentsInChildren<UIBase>();
+
+        foreach (UIBase ui in startingUIs)
+        {
+            if (!startingUIDictionary.ContainsKey(ui.type))
+            {
+                startingUIDictionary.Add(ui.type, ui);
+            }
+        }
+    }
+
+    void CreatePool()
+    {
+        popupPool = new UIObjectPool<PopupUI>(popupPrefab, objectCount);
+        textInfoPool = new UIObjectPool<TextInfoUI>(textInfoPrefab, objectCount);
+        imagePool = new UIObjectPool<ImageUI>(imagePrefab, objectCount);
+    }
+
+    /// <summary>
+    /// UIBase로 반환되므로 반드시 명시적 캐스팅이 필요하다 
+    /// </summary>
+    public UIBase GetUI(UIType type)
+    {
+        return startingUIDictionary[type];
+    }
+
+    public PopupUI ShowDynamicPopup(PopupData data)
+    {
+        PopupUI popup = popupPool.Get();
+        popup.transform.SetParent(uiCanvas);
+        return popup.SetDynamicPopup(data);
+    }
+
+    public TextInfoUI ShowDynamicTextInfo(TextInfoData data)
+    {
+        TextInfoUI textInfo = textInfoPool.Get();
+        textInfo.transform.SetParent(uiCanvas);
+        return textInfo.SetDynamicTextInfo(data);
+    }
+
+    public ImageUI ShowDynamicImage(UnityEngine.UI.Image data)
+    {
+        ImageUI image = imagePool.Get();
+        image.transform.SetParent(uiCanvas);
+        return image.SetDynamicImage(data);
+    }
+
+    public void AddStartingUIs(UIType type, UIBase ui)
+    {
+        if (!startingUIDictionary.ContainsKey(type))
+        {
+            startingUIDictionary.Add(type, ui);
+        }
+    }
+
+    public void RemoveStartingUIs(UIType type)
+    {
+        if (startingUIDictionary.ContainsKey(type))
+        {
+            startingUIDictionary.Remove(type);
+        }
+
+    }
+
+    public void HideAllPopups()
+    {
+        if (UIManager.Instance.activatedPopups.Count <= 0) return;
+
+        var copied = new Stack<PopupUI>(UIManager.Instance.activatedPopups);
+
+        foreach (PopupUI popup in copied)
+        {
+            UIManager.Instance.activatedPopups.TryPop(out _);
+            popup.HideUI();
+        }
+    }
+
+
+    public void HideAllTextInfos()
+    {
+        if (UIManager.Instance.activatedTextInfos.Count <= 0) return;
+
+        var copied = new Stack<TextInfoUI>(UIManager.Instance.activatedTextInfos);
+
+        foreach (TextInfoUI textInfo in copied)
+        {
+            UIManager.Instance.activatedTextInfos.TryPop(out _);
+            textInfo.HideUI();
+        }
+    }
+
+    public void HideAllTextImages()
+    {
+        if (UIManager.Instance.activatedImages.Count <= 0) return;
+
+        var copied = new Stack<ImageUI>(UIManager.Instance.activatedImages);
+
+        foreach (ImageUI image in copied)
+        {
+            UIManager.Instance.activatedImages.TryPop(out _);
+            image.HideUI();
+        }
+    }
+
+}

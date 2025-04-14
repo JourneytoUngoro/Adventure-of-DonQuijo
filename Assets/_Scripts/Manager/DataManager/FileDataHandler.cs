@@ -96,10 +96,11 @@ public class FileDataHandler
 
             GameData verifiedGameData = Load(profileId);
 
+            // TODO : 자동 저장 시, 60 초마다 백업 파일 복사는 성능 저하로 이어진다 
+            // 백업 파일은 씬 전환이나 종료 시에만 생성되도록 수정한다
             if (verifiedGameData != null)
             {
                 File.Copy(fullPath, backupFilePath, true);
-                // ������ ���ڴ� ����⸦ ������� ����
             }
             else
             {

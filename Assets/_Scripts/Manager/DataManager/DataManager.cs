@@ -24,14 +24,27 @@ public class DataManager : MonoBehaviour
     private List<IDataPersistance> dataPersistanceObjects;
     private FileDataHandler dataHandler;
 
+    [SerializeField] private float autoSaveTimeSeconds = 60f;
+    Coroutine AutoSaveCoroutine = null;
+
+    public static DataManager Instance { get; private set; }
+
     private void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        DontDestroyOnLoad(this.gameObject);
+
+
         if (disableAutoSaving)
         {
             Debug.LogWarning("Auto saving is currently disabled. No auto save supported when you leave the game.");
         }
 
-        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
+        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
 
         InitializeSelectedProfileId();
     }
@@ -39,7 +52,6 @@ public class DataManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        // sceneLoaded´Â OnEnable°ú Start »çÀÌ¿¡ È£ÃâµÈ´Ù. Unity °ø½Ä ¹®¼­¿¡¼­ ÃßÃµÇÏ´Â subscribe À§Ä¡´Â OnEnableÀÌ´Ù.
     }
 
     private void OnDisable()
@@ -49,16 +61,17 @@ public class DataManager : MonoBehaviour
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // ¸Å¹ø sceneÀÌ loadµÉ¶§¸¶´Ù Monobehaviour¸¦ »ó¼Ó¹Ş°í ÀÖ´Â ¿ÀºêÁ§Æ® Áß¿¡¼­ IDataPersistance¸¦ °®°í ÀÖ´Â ¿ÀºêÁ§Æ®¸¦ Ã£¾Æ List ÇüÅÂ·Î º¸°ü
-        // ¸Å¹ø ÇÒ ÇÊ¿ä´Â ¾ø¾îº¸ÀÓ.
-        // TODO: ÃßÈÄ¿¡ °³¼±
-        dataPersistanceObjects = FindAllDataPersistenceObjects();
+        // ì‹±ê¸€í†¤ ê°ì²´ì´ë¯€ë¡œ ê²Œì„ì´ ì‹¤í–‰ë˜ëŠ” ì²« ìˆœê°„ì—ë§Œ ì‹¤í–‰ëœë‹¤
+        this.dataPersistanceObjects = FindAllDataPersistenceObjects();
         LoadGame();
+
+        // ìë™ ì €ì¥ ê¸°ëŠ¥ì€ ì•„ì§ í…ŒìŠ¤íŠ¸í•˜ì§€ ì•ŠìŒ 
+        // AutoSaveCoroutine = StartCoroutine(AutoSave());
     }
 
-    public void ChangeSelectedProfileIdAndLoadGameWithData(string newProfileId)
+    public void ChangeSelectedProfileId(string newProfileId)
     {
-        selectedProfileId = newProfileId;
+        this.selectedProfileId = newProfileId;
         LoadGame();
     }
 
@@ -71,10 +84,12 @@ public class DataManager : MonoBehaviour
 
     private void InitializeSelectedProfileId()
     {
+        this.selectedProfileId = dataHandler.GetMostRecentlyUpdatedProfileId();
+
         if (overrideSelectedProfileId)
         {
             selectedProfileId = testSelectedProfileId;
-            Debug.LogWarning("Overrode selected profile id with test id: " + testSelectedProfileId);
+            Debug.LogWarning("Overrode selected profile type with test type: " + testSelectedProfileId);
         }
     }
 
@@ -86,9 +101,7 @@ public class DataManager : MonoBehaviour
 
     public void SaveGame()
     {
-        if (disableAutoSaving) return;
-
-        if (gameData == null)
+        if (this.gameData == null)
         {
             Debug.LogWarning("No data was found. A new game needs to be started before data can be saved.");
             return;
@@ -107,16 +120,14 @@ public class DataManager : MonoBehaviour
 
     public void LoadGame()
     {
-        if (disableAutoSaving) return;
+        this.gameData = dataHandler.Load(selectedProfileId);
 
-        gameData = dataHandler.Load(selectedProfileId);
-
-        if (gameData == null && initializeDataIfNull)
+        if (this.gameData == null && initializeDataIfNull)
         {
             NewGame();
         }
 
-        if (gameData == null)
+        if (this.gameData == null)
         {
             Debug.Log("No Data found. A new game has to be started.");
             return;
@@ -153,5 +164,16 @@ public class DataManager : MonoBehaviour
     public Dictionary<string, GameData> GetAllProfilesGameData()
     {
         return dataHandler.LoadAllProfiles();
+    }
+
+    private IEnumerator AutoSave()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(autoSaveTimeSeconds);
+
+            SaveGame();
+            Debug.Log("Auto Saved");
+        }
     }
 }

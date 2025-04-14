@@ -21,34 +21,34 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public @Controls()
     {
         asset = InputActionAsset.FromJson(@"{
-    ""name"": ""Controls"",
+    ""label"": ""Controls"",
     ""maps"": [
         {
-            ""name"": ""CharacterControl"",
-            ""id"": ""a95179cd-7314-4720-ba7a-6dc4725bddd4"",
+            ""label"": ""CharacterControl"",
+            ""type"": ""a95179cd-7314-4720-ba7a-6dc4725bddd4"",
             ""actions"": [
                 {
-                    ""name"": ""Movement"",
+                    ""label"": ""Movement"",
                     ""type"": ""Value"",
-                    ""id"": ""efc41806-cb98-4354-bdc3-93d9e12c7b84"",
+                    ""type"": ""efc41806-cb98-4354-bdc3-93d9e12c7b84"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Jump"",
+                    ""label"": ""Jump"",
                     ""type"": ""Button"",
-                    ""id"": ""dd6c1bf3-a355-4024-9cac-0eb1282de376"",
+                    ""type"": ""dd6c1bf3-a355-4024-9cac-0eb1282de376"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Dodge"",
+                    ""label"": ""Dodge"",
                     ""type"": ""Button"",
-                    ""id"": ""d7c2cd8e-6496-477a-b697-9619ee7a6420"",
+                    ""type"": ""d7c2cd8e-6496-477a-b697-9619ee7a6420"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -57,8 +57,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": ""Arrow Key"",
-                    ""id"": ""814ec9b0-9ceb-4056-9734-5be5bb47979f"",
+                    ""label"": ""Arrow Key"",
+                    ""type"": ""814ec9b0-9ceb-4056-9734-5be5bb47979f"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -68,8 +68,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
-                    ""id"": ""0825a59e-b251-4a9e-8366-53fec28f27ab"",
+                    ""label"": ""up"",
+                    ""type"": ""0825a59e-b251-4a9e-8366-53fec28f27ab"",
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -79,8 +79,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""down"",
-                    ""id"": ""4bb5d562-7f33-4f96-8b20-1d9927943379"",
+                    ""label"": ""down"",
+                    ""type"": ""4bb5d562-7f33-4f96-8b20-1d9927943379"",
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -90,8 +90,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""left"",
-                    ""id"": ""000b78c6-38b8-4b90-85f3-59d2efb6fa3f"",
+                    ""label"": ""left"",
+                    ""type"": ""000b78c6-38b8-4b90-85f3-59d2efb6fa3f"",
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -101,8 +101,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""right"",
-                    ""id"": ""9556fd20-9197-44c0-8b7a-bfbfd4cdb2a6"",
+                    ""label"": ""right"",
+                    ""type"": ""9556fd20-9197-44c0-8b7a-bfbfd4cdb2a6"",
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -112,8 +112,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""c52adda0-e4dc-470a-8195-c2fde6781ee9"",
+                    ""label"": """",
+                    ""type"": ""c52adda0-e4dc-470a-8195-c2fde6781ee9"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -123,8 +123,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""57874adc-8af0-4808-a18b-950c5c40a471"",
+                    ""label"": """",
+                    ""type"": ""57874adc-8af0-4808-a18b-950c5c40a471"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -138,7 +138,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": [
         {
-            ""name"": ""PC"",
+            ""label"": ""PC"",
             ""bindingGroup"": ""PC"",
             ""devices"": [
                 {
