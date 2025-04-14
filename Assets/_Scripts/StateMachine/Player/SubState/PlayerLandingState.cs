@@ -17,6 +17,7 @@ public class PlayerLandingState : PlayerState
         base.Enter();
 
         canTransit = false;
+        player.movement.SetVelocityZero();
         landRecoveryTimer.StartSingleUseTimer();
     }
 

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerState : EntityState
 {
@@ -46,11 +45,6 @@ public class PlayerState : EntityState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-    }
-
-    protected override void SetMovementVariables()
-    {
-        base.SetMovementVariables();
     }
 
     protected void SetInputVariables()

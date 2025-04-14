@@ -12,14 +12,12 @@ public class PlayerData : EntityData
     [field: SerializeField] public float variableJumpHeightMultiplier { get; private set; } = 0.5f;
     [field: SerializeField] public float coyoteTime { get; private set; } = 0.2f;
 
-    [field: Header("Jump State")]
-    [field: SerializeField] public float jumpSpeed { get; private set; } = 80.0f;
-
     [field: Header("Wall Jump State")]
     [field: SerializeField] public float wallJumpSpeed { get; private set; } = 60.0f;
     [field: SerializeField] public float wallTouchHeight { get; private set; } = 11.5f;
 
     [field: Header("Dodge State")]
+    [field: SerializeField] public float dodgeHeight { get; private set; } = 40.0f;
     [field: SerializeField] public float dodgeSpeed { get; private set; } = 80.0f;
     [field: SerializeField] public float backstepSpeed { get; private set; } = 60.0f;
     [field: SerializeField] public float dodgeCoolDownTime { get; private set; } = 1.0f;

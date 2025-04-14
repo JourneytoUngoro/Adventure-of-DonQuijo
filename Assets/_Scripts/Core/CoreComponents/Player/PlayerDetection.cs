@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerDetection : Detection, IDataPersistance
 {
-    public List<Collider2D> groundColliders;
     private Vector3 lastGroundedPosition;
     private Player player;
 
@@ -17,42 +16,19 @@ public class PlayerDetection : Detection, IDataPersistance
         player = entity as Player;
     }
 
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += GetLoadedGrounds;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= GetLoadedGrounds;
-    }
-
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
 
-        if (isGrounded())
+        if (IsGrounded())
         {
             lastGroundedPosition = currentSpacePosition;
         }
-
-        foreach (Collider2D groundCollider in groundColliders)
-        {
-            if (groundCollider != null)
-            {
-                Physics2D.IgnoreCollision(groundCollider, player.collider, player.orthogonalRigidbody.transform.localPosition.z >= groundCollider.transform.position.z);
-            }
-        }
-    }
-
-    private void GetLoadedGrounds(Scene loadedScene, LoadSceneMode loadSceneMode)
-    {
-        groundColliders = UtilityFunctions.FindGameObjectsByLayer(whatIsGround, FindObjectsSortMode.None).Select(groundObject => groundObject.GetComponent<Collider2D>()).ToList();
     }
 
     public bool isTouchingWall()
     {
-        return currentGroundHeight + epsilon < currentEntityHeight && currentEntityHeight + player.playerData.wallTouchHeight < horizontalGroundHeight.x;
+        return forwardObstacleColliders.Where(overlap => overlap != null && overlap != currentGroundCollider).Any(overlap => !(overlap.transform.position.z > currentEntityHeight + player.playerData.wallTouchHeight || overlap.transform.position.z + overlap.GetComponent<HeightData>().height < currentEntityHeight));
     }
 
     public void LoadData(GameData data)

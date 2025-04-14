@@ -12,30 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b0c88ffbf70e7e4d904df43f444088e, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  <baseHealth>k__BackingField: 100
-  <basePosture>k__BackingField: 100
-  <healthIncrementPerLevel>k__BackingField: 20
-  <postureIncrementPerLevel>k__BackingField: 20
-  <entityHeight>k__BackingField: 16
-  <moveSpeed>k__BackingField: {x: 30, y: 15}
-  <dashSpeed>k__BackingField: {x: 60, y: 30}
+  <entityHeight>k__BackingField: 80
+  <gravityScale>k__BackingField: 100
+  <moveSpeed>k__BackingField: {x: 150, y: 75}
+  <dashSpeed>k__BackingField: {x: 300, y: 150}
+  <jumpSpeed>k__BackingField: 500
+  <gotoLandingStateTime>k__BackingField: 2
   <stunRecoveryTime>k__BackingField: 3
   <landingRecoveryTime>k__BackingField: 1
-  <baseExperienceRequirement>k__BackingField: 0
-  <experienceRequirementIncrementPerLevel>k__BackingField: []
   <commandBufferTime>k__BackingField: 1
   <dashMaintainTime>k__BackingField: 0.2
   <jumpInputBufferTime>k__BackingField: 0.2
   <variableJumpHeightMultiplier>k__BackingField: 0.5
-  <jumpSpeed>k__BackingField: 80
-  <wallJumpSpeed>k__BackingField: 60
-  <wallJumpMovementLockTime>k__BackingField: 1
   <coyoteTime>k__BackingField: 0.2
-  <gotoLandingStateTime>k__BackingField: 2
-  <dodgeSpeed>k__BackingField: 80
-  <backstepSpeed>k__BackingField: 60
+  <wallJumpSpeed>k__BackingField: 300
+  <wallTouchHeight>k__BackingField: 57.5
+  <dodgeHeight>k__BackingField: 40
+  <dodgeSpeed>k__BackingField: 400
+  <backstepSpeed>k__BackingField: 300
   <dodgeCoolDownTime>k__BackingField: 1
   <dodgeTime>k__BackingField: 0.4
   <backstepTime>k__BackingField: 0.2
   <shieldParryCoolDownTime>k__BackingField: 1
-  <landRecoveryTime>k__BackingField: 1

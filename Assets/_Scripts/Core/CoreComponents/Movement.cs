@@ -9,8 +9,7 @@ public abstract class Movement : CoreComponent
     public event Action synchronizeValues;
     public int facingDirection { get; private set; }
 
-    protected bool isGrounded { get; private set; }
-
+    private bool onContact;
     private Coroutine velocityChangeCoroutine;
 
     protected virtual void Start()
@@ -20,14 +19,14 @@ public abstract class Movement : CoreComponent
 
     protected virtual void FixedUpdate()
     {
-        isGrounded = entity.entityDetection.isGrounded();
+
     }
 
     public void SetVelocityX(float velocity)
     {
         if (facingDirection * velocity < 0)
         {
-            if (entity.entityDetection.horizontalGroundHeight.y > entity.entityDetection.currentEntityHeight)
+            if (onContact && entity.entityDetection.detectingHorizontalObstacle.second)
             {
                 workSpace.Set(0.0f, entity.rigidbody.velocity.y, 0.0f);
             }
@@ -38,7 +37,7 @@ public abstract class Movement : CoreComponent
         }
         else
         {
-            if (entity.entityDetection.horizontalGroundHeight.x > entity.entityDetection.currentEntityHeight)
+            if (onContact && Mathf.Abs(entity.rigidbody.velocity.y) < epsilon && entity.entityDetection.detectingHorizontalObstacle.first)
             {
                 workSpace.Set(0.0f, entity.rigidbody.velocity.y, 0.0f);
             }
@@ -47,35 +46,13 @@ public abstract class Movement : CoreComponent
                 workSpace.Set(velocity, entity.rigidbody.velocity.y, 0.0f);
             }
         }
-        // workSpace.Set(velocity, entity.rigidbody.velocity.y, 0.0f);
+        
         entity.rigidbody.velocity = workSpace;
         synchronizeValues?.Invoke();
     }
 
     public void SetVelocityY(float velocity)
     {
-        /*if (velocity < 0)
-        {
-            if (entity.entityDetection.verticalGroundHeight.y > entity.entityDetection.currentEntityHeight)
-            {
-                workSpace.Set(entity.rigidbody.velocity.x, 0.0f, 0.0f);
-            }
-            else
-            {
-                workSpace.Set(entity.rigidbody.velocity.x, velocity, 0.0f);
-            }
-        }
-        else
-        {
-            if (entity.entityDetection.verticalGroundHeight.x > entity.entityDetection.currentEntityHeight)
-            {
-                workSpace.Set(entity.rigidbody.velocity.x, 0.0f, 0.0f);
-            }
-            else
-            {
-                workSpace.Set(entity.rigidbody.velocity.x, velocity, 0.0f);
-            }
-        }*/
         workSpace.Set(entity.rigidbody.velocity.x, velocity, 0.0f);
         entity.rigidbody.velocity = workSpace;
         synchronizeValues?.Invoke();
@@ -162,14 +139,14 @@ public abstract class Movement : CoreComponent
         {
             float velocityMultiplierOverTime = slowDown ? Mathf.Clamp(DOVirtual.EasedValue(1.0f, 0.0f, coroutineElapsedTime / moveTime, easeFunction), 0.0f, 1.0f) : Mathf.Clamp(DOVirtual.EasedValue(0.0f, 1.0f, coroutineElapsedTime / moveTime, easeFunction), 0.0f, 1.0f);
 
-            if (isGrounded && stopBeforeLedge)
+            if (entity.entityDetection.isGrounded && stopBeforeLedge)
             {
-                if (entity.entityDetection.isDetectingLedge(CheckPositionAxis.Horizontal, CheckPositionDirection.Heading))
+                if (entity.entityDetection.IsDetectingLedge(CheckPositionAxis.Horizontal, CheckPositionDirection.Heading))
                 {
                     SetVelocity(0.0f, velocityMultiplierOverTime * velocity.y * horizontalVerticalRatio.y);
                 }
                 
-                if (entity.entityDetection.isDetectingLedge(CheckPositionAxis.Vertical, CheckPositionDirection.Heading))
+                if (entity.entityDetection.IsDetectingLedge(CheckPositionAxis.Vertical, CheckPositionDirection.Heading))
                 {
                     SetVelocity(velocityMultiplierOverTime * velocity.x * horizontalVerticalRatio.x, 0.0f);
                 }
@@ -200,4 +177,6 @@ public abstract class Movement : CoreComponent
             StopCoroutine(velocityChangeCoroutine);
         }
     }
+
+    public void OnContact(bool onContact) => this.onContact = onContact;
 }

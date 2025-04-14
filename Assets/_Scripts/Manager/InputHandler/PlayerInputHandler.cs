@@ -12,6 +12,8 @@ public class PlayerInputHandler : MonoBehaviour
     public bool jumpInputHolding { get; private set; }
     public bool jumpInputPressed { get; private set; }
     public bool dodgeInputPressed { get; private set; }
+    public bool attackInputPressed { get; private set; }
+    public bool interactInputPressed { get; private set; }
     public int normInputX { get; private set; }
     public int normInputY { get; private set; }
 
@@ -38,6 +40,8 @@ public class PlayerInputHandler : MonoBehaviour
         lockMovementTimer.Tick();
 
         dodgeInputPressed = controls.CharacterControl.Dodge.WasPressedThisFrame();
+        attackInputPressed = controls.CharacterControl.Attack.WasPressedThisFrame();
+        interactInputPressed = controls.CharacterControl.InteractSelect.WasPressedThisFrame();
     }
 
     public void OnMoveInput(InputAction.CallbackContext context)

@@ -7,7 +7,7 @@ public class Manager : MonoBehaviour
     public static Manager Instance { get; private set; }
     public PlayerInputHandler inputHandler { get; private set; }
     public GameManager gameManager { get; private set; }
-    public ItemManager itemManager { get; private set; }
+    public ObjectPoolingManager objectPoolingManager { get; private set; }
 
     private void Awake()
     {
@@ -26,6 +26,6 @@ public class Manager : MonoBehaviour
 
         inputHandler = GetComponentInChildren<PlayerInputHandler>();
         gameManager = GetComponentInChildren<GameManager>();
-        itemManager = GetComponentInChildren<ItemManager>();
+        objectPoolingManager = GetComponentInChildren<ObjectPoolingManager>();
     }
 }

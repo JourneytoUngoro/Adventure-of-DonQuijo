@@ -18,6 +18,9 @@ TagManager:
   - UI
   - Player
   - PlayerHit
+  - Enemy
+  - EnemyHit
+  - PlayerInteraction
   - 
   - 
   - 
@@ -37,11 +40,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Detection
+  - Navmesh
   m_SortingLayers:
   - name: Default
     uniqueID: 0

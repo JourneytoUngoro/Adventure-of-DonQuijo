@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
 // TODO: Conditions
-public enum CurrentStatus { GotHit, HealthDamage, PostureDamage, Knockback, Parried, Shielded, wasParried }
+public enum CurrentStatus { GotHit, HealthDamage, PostureDamage, Knockback, Parried, Blocked, wasParried }
 
 public class Entity : MonoBehaviour
 {
@@ -24,6 +24,7 @@ public class Entity : MonoBehaviour
     #region Entity Components
     public Movement entityMovement { get; protected set; }
     public Detection entityDetection { get; protected set; }
+    public Combat entityCombat { get; protected set; }
     public Stats entityStats { get; protected set; }
     [field: SerializeField] public Transform shadow { get; private set; }
     [field: SerializeField] public EntityData entityData { get; private set; }
@@ -34,6 +35,7 @@ public class Entity : MonoBehaviour
     public int entityLevel { get; protected set; }
     public bool isDead { get; protected set; }
     public bool[] status { get; protected set; }
+    public float currentEntityStature { get; protected set; }
 
     protected Vector3 workSpace;
     #endregion
@@ -55,7 +57,7 @@ public class Entity : MonoBehaviour
     {
         entityDetection = core.GetCoreComponent<Detection>();
         entityMovement = core.GetCoreComponent<Movement>();
-        // entityCombat = core.GetCoreComponent<Combat>();
+        entityCombat = core.GetCoreComponent<Combat>();
         entityStats = core.GetCoreComponent<Stats>();
     }
 
@@ -78,6 +80,22 @@ public class Entity : MonoBehaviour
         Array.Fill(status, false);
     }
 
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.IsInLayerMask(entityDetection.whatIsGround))
+        {
+            entityMovement.OnContact(true);
+        }
+    }
+
+    protected virtual void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.IsInLayerMask(entityDetection.whatIsGround))
+        {
+            entityMovement.OnContact(false);
+        }
+    }
+
     /*public void UseAfterImage(Color color)
     {
         GameObject afterImage = Manager.Instance.objectPoolingManager.GetGameObject("AfterImage");
@@ -88,4 +106,6 @@ public class Entity : MonoBehaviour
     }*/
 
     public void SetStatusValues(CurrentStatus currentStatus) => status[(int)currentStatus] = true;
+
+    public void SetCurrentEntityStature(float currentStature) => currentEntityStature = currentStature;
 }

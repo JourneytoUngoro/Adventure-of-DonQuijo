@@ -9,9 +9,8 @@ public static class UtilityFunctions
 {
     private static Random random = new Random();
 
-    public static T2 GetRandom<T1, T2>(T1 objects) where T1 : IEnumerable<T2> => objects.ElementAt(random.Next(objects.Count()));
     public static T GetRandom<T>(this IEnumerable<T> objects) => objects.ElementAt(random.Next(objects.Count()));
-    public static bool Empty<T>(this IEnumerable<T> objects) => objects.Count() == 0;
+    public static bool Empty<T>(this IEnumerable<T> objects) => objects.Count() == 0 || objects.All(element => element == null);
     public static float RandomFloat(float minValue, float maxValue) => (float)random.NextDouble() * (maxValue - minValue) + minValue;
     public static int RandomInteger(int minValue, int maxValue) => random.Next(minValue, maxValue);
     public static int RandomInteger(int maxValue) => random.Next(maxValue);
