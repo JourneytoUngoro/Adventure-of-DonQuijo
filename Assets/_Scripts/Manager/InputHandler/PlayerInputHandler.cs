@@ -16,6 +16,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool interactInputPressed { get; private set; }
     public int normInputX { get; private set; }
     public int normInputY { get; private set; }
+    public bool itemInputPressed { get; private set; }
 
     private Timer jumpInputBufferTimer; // This is a timer to keep player's jump input for better control. For example, if it holds jump input for 0.1s and the player character hits the ground in 0.1s, the character will automatically jump right after hitting the ground even when the player does not press another jump input.
     private Timer lockMovementTimer;
@@ -42,6 +43,7 @@ public class PlayerInputHandler : MonoBehaviour
         dodgeInputPressed = controls.CharacterControl.Dodge.WasPressedThisFrame();
         attackInputPressed = controls.CharacterControl.Attack.WasPressedThisFrame();
         interactInputPressed = controls.CharacterControl.InteractSelect.WasPressedThisFrame();
+        itemInputPressed = controls.CharacterControl.UseItem.WasPressedThisFrame();
     }
 
     public void OnMoveInput(InputAction.CallbackContext context)
@@ -69,6 +71,36 @@ public class PlayerInputHandler : MonoBehaviour
             jumpInputHolding = false;
         }
     }
+    public void OnPauseMenu(InputAction.CallbackContext context)
+    {
+        // TODO : GameManager 시간 멈추도록 
+        Manager.Instance.uiManager.GetUI(UIType.MainPopup).ShowUI();
+
+    }
+
+    public void OnUseItem(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            var control = context.control;
+
+            string keyName = control.name;
+            int itemIndex = -1;
+
+            #region figure item id
+            switch (keyName)
+            {
+                case "1": itemIndex = 1; break; case "2": itemIndex = 2; break;  case "3": itemIndex = 3; break;
+            }
+            #endregion
+
+            if (itemIndex > 0)
+            {
+                Manager.Instance.itemManager.UseItem(itemIndex);
+            }
+        }
+    }
+
 
     public void LockMoveInput(Vector2 direction, float duration)
     {
@@ -95,6 +127,7 @@ public class PlayerInputHandler : MonoBehaviour
             normInputY = Mathf.RoundToInt(movementInput.y);
         }
     }
+
 
     public void InactiveJumpInput() => jumpInputPressed = false;
 }

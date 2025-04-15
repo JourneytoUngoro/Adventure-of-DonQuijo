@@ -20,6 +20,7 @@ public class Player : Entity
     public PlayerLandingState landingState { get; private set; }
     public PlayerKnockbackState knockbackState { get; private set; }
     public PlayerDeadState deadState { get; private set; }
+    public PlayerCureState cureState { get; private set; }
 
     public List<PlayerAbilityState> abilityStates { get; private set; }
     #endregion
@@ -57,6 +58,8 @@ public class Player : Entity
         landingState = new PlayerLandingState(this, "landing");
         knockbackState = new PlayerKnockbackState(this, "knockback");
         deadState = new PlayerDeadState(this, "dead");
+        cureState = new PlayerCureState(this, "cure");
+
 
         abilityStates = new List<PlayerAbilityState>();
         IEnumerable<PropertyInfo> abilityStateProperties = GetType()

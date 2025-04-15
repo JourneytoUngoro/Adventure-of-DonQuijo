@@ -36,6 +36,10 @@ public class PlayerGroundedState : PlayerState
             {
                 stateMachine.ChangeState(player.dodgeState);
             }
+            else if (itemInputPressed && player.cureState.available)
+            {
+                stateMachine.ChangeState(player.cureState);
+            }
         }
 
         if (!onStateExit)

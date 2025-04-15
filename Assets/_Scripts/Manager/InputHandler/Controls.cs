@@ -21,34 +21,34 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public @Controls()
     {
         asset = InputActionAsset.FromJson(@"{
-    ""label"": ""Controls"",
+    ""name"": ""Controls"",
     ""maps"": [
         {
-            ""label"": ""CharacterControl"",
-            ""type"": ""a95179cd-7314-4720-ba7a-6dc4725bddd4"",
+            ""name"": ""CharacterControl"",
+            ""id"": ""a95179cd-7314-4720-ba7a-6dc4725bddd4"",
             ""actions"": [
                 {
-                    ""label"": ""Movement"",
+                    ""name"": ""Movement"",
                     ""type"": ""Value"",
-                    ""type"": ""efc41806-cb98-4354-bdc3-93d9e12c7b84"",
+                    ""id"": ""efc41806-cb98-4354-bdc3-93d9e12c7b84"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
                 {
-                    ""label"": ""Jump"",
+                    ""name"": ""Jump"",
                     ""type"": ""Button"",
-                    ""type"": ""dd6c1bf3-a355-4024-9cac-0eb1282de376"",
+                    ""id"": ""dd6c1bf3-a355-4024-9cac-0eb1282de376"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""label"": ""Dodge"",
+                    ""name"": ""Dodge"",
                     ""type"": ""Button"",
-                    ""type"": ""d7c2cd8e-6496-477a-b697-9619ee7a6420"",
+                    ""id"": ""d7c2cd8e-6496-477a-b697-9619ee7a6420"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -107,12 +107,21 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""16b64fc7-f4a8-4daf-890d-3d94c04d23b8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
-                    ""label"": ""Arrow Key"",
-                    ""type"": ""814ec9b0-9ceb-4056-9734-5be5bb47979f"",
+                    ""name"": ""Arrow Key"",
+                    ""id"": ""814ec9b0-9ceb-4056-9734-5be5bb47979f"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -122,8 +131,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""label"": ""up"",
-                    ""type"": ""0825a59e-b251-4a9e-8366-53fec28f27ab"",
+                    ""name"": ""up"",
+                    ""id"": ""0825a59e-b251-4a9e-8366-53fec28f27ab"",
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -133,8 +142,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""label"": ""down"",
-                    ""type"": ""4bb5d562-7f33-4f96-8b20-1d9927943379"",
+                    ""name"": ""down"",
+                    ""id"": ""4bb5d562-7f33-4f96-8b20-1d9927943379"",
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -144,8 +153,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""label"": ""left"",
-                    ""type"": ""000b78c6-38b8-4b90-85f3-59d2efb6fa3f"",
+                    ""name"": ""left"",
+                    ""id"": ""000b78c6-38b8-4b90-85f3-59d2efb6fa3f"",
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -155,8 +164,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""label"": ""right"",
-                    ""type"": ""9556fd20-9197-44c0-8b7a-bfbfd4cdb2a6"",
+                    ""name"": ""right"",
+                    ""id"": ""9556fd20-9197-44c0-8b7a-bfbfd4cdb2a6"",
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -166,8 +175,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""label"": """",
-                    ""type"": ""c52adda0-e4dc-470a-8195-c2fde6781ee9"",
+                    ""name"": """",
+                    ""id"": ""c52adda0-e4dc-470a-8195-c2fde6781ee9"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -177,8 +186,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""label"": """",
-                    ""type"": ""57874adc-8af0-4808-a18b-950c5c40a471"",
+                    ""name"": """",
+                    ""id"": ""57874adc-8af0-4808-a18b-950c5c40a471"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -252,13 +261,46 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Map"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c42039a0-ceec-417b-8d84-c6601702fe1d"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";PC"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b293ca5d-9ded-4a15-9191-a3619e80d804"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";PC"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""51320f69-e5d6-4018-846b-d2314928e5bb"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";PC"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
     ],
     ""controlSchemes"": [
         {
-            ""label"": ""PC"",
+            ""name"": ""PC"",
             ""bindingGroup"": ""PC"",
             ""devices"": [
                 {
@@ -286,6 +328,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_CharacterControl_PauseMenu = m_CharacterControl.FindAction("Pause/Menu", throwIfNotFound: true);
         m_CharacterControl_Equipment = m_CharacterControl.FindAction("Equipment", throwIfNotFound: true);
         m_CharacterControl_Map = m_CharacterControl.FindAction("Map", throwIfNotFound: true);
+        m_CharacterControl_UseItem = m_CharacterControl.FindAction("UseItem", throwIfNotFound: true);
     }
 
     ~@Controls()
@@ -361,6 +404,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControl_PauseMenu;
     private readonly InputAction m_CharacterControl_Equipment;
     private readonly InputAction m_CharacterControl_Map;
+    private readonly InputAction m_CharacterControl_UseItem;
     public struct CharacterControlActions
     {
         private @Controls m_Wrapper;
@@ -374,6 +418,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @PauseMenu => m_Wrapper.m_CharacterControl_PauseMenu;
         public InputAction @Equipment => m_Wrapper.m_CharacterControl_Equipment;
         public InputAction @Map => m_Wrapper.m_CharacterControl_Map;
+        public InputAction @UseItem => m_Wrapper.m_CharacterControl_UseItem;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -410,6 +455,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Map.started += instance.OnMap;
             @Map.performed += instance.OnMap;
             @Map.canceled += instance.OnMap;
+            @UseItem.started += instance.OnUseItem;
+            @UseItem.performed += instance.OnUseItem;
+            @UseItem.canceled += instance.OnUseItem;
         }
 
         private void UnregisterCallbacks(ICharacterControlActions instance)
@@ -441,6 +489,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Map.started -= instance.OnMap;
             @Map.performed -= instance.OnMap;
             @Map.canceled -= instance.OnMap;
+            @UseItem.started -= instance.OnUseItem;
+            @UseItem.performed -= instance.OnUseItem;
+            @UseItem.canceled -= instance.OnUseItem;
         }
 
         public void RemoveCallbacks(ICharacterControlActions instance)
@@ -478,5 +529,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnPauseMenu(InputAction.CallbackContext context);
         void OnEquipment(InputAction.CallbackContext context);
         void OnMap(InputAction.CallbackContext context);
+        void OnUseItem(InputAction.CallbackContext context);
     }
 }
