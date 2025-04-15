@@ -7,14 +7,16 @@ using TMPro;
 
 public class InventoryView : MonoBehaviour
 {
-    public GameObject inventory;
+    GameObject inventory;
 
-    public ItemSlot[] itemSlots;
-    public TextMeshProUGUI coinTMP;
+    ItemSlot[] itemSlots;
+    TextMeshProUGUI coinTMP;
 
     public IEnumerator InitializeView()
     {
+        inventory = gameObject;
         itemSlots = gameObject.GetComponentsInChildren<ItemSlot>();
+        coinTMP = transform.parent.Find("Coin").GetComponentInChildren<TextMeshProUGUI>();
         yield return null;
     }
 

@@ -58,6 +58,7 @@ public abstract class DraggableObject<T> : MonoBehaviour, IBeginDragHandler, IEn
 
     public void OnDrag(PointerEventData eventData)
     {
+
         if (element == null) return;
 
         transform.position = Input.mousePosition;

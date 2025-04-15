@@ -14,7 +14,7 @@ public class ItemSlot : Slot<Item>
     {
         base.AfterSwapElement(slot1, slot2);
 
-        ItemManager.Instance.SwapItems(slot1.SlotId, slot2.SlotId);
+        Manager.Instance.itemManager.SwapItems(slot1.SlotId, slot2.SlotId);
 
 /*        ItemSlot tmp1 = slot1 as ItemSlot;
         ItemSlot tmp2 = slot2 as ItemSlot;

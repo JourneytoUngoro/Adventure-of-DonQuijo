@@ -6,7 +6,7 @@ using UnityEngine;
 
 public enum UIType
 {
-    OptionPopup, // 설정 팝업
+    MainPopup, // 메인 팝업
     VendingMachine,
     PurchasePopup, // 구매 팝업
     QuestPopup, // 퀘스트 진행 팝업

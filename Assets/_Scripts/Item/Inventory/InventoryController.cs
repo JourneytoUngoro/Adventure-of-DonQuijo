@@ -66,13 +66,15 @@ public class InventoryController
             if (model.PlusQuantity(indexIfExist, item, quantity))
             {
                 // 추가 성공
-                Debug.Log($"Success Acquire Item {item.details.name}, now quantity {model.Quantity(item)} ");
+                Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(
+                    $"Success Acquire Item {item.details.name}, now quantity {model.Quantity(item)} ")).ShowAndHideUI(3f);
                 return true;
             }
             else
             {
                 // 수량 초과로 추가 실패
-                Debug.Log($"Fail Acquire Item {item.details.name}, now quantity {model.Quantity(item)} > max quantity {item.details.maxStack} ");
+                Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(
+                    $"Fail Acquire Item {item.details.name}, now quantity {model.Quantity(item)} > max quantity {item.details.maxStack} ")).ShowAndHideUI(3f);
                 return false;
             }
         }
@@ -82,13 +84,15 @@ public class InventoryController
             if (model.Add(item))
             {
                 // 인벤토리 추가 성공
-                Debug.Log($"Success Acquire Item {item.details.name}, now index {model.Contains(item)}, now quantity {model.Quantity(item)} ");
+                Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(
+                    $"Success Acquire Item {item.details.name}, now index {model.Contains(item)}, now quantity {model.Quantity(item)} ")).ShowAndHideUI(3f);
                 return true;
             }
             else
             {
                 // 인벤토리 용량 초과로 추가 실패
-                Debug.Log($"Fail Acquire Item {item.details.name}, now count {model.Items.Count}");
+                Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(
+                    $"Fail Acquire Item {item.details.name}, now count {model.Items.Count}")).ShowAndHideUI(3f);
                 return false;
 
             }
@@ -151,24 +155,26 @@ public class InventoryController
         return false;
     }
 
-    public void UseItem(int index, Player player, int quantity = 1)
+    public bool UseItem(int index, Player player, int quantity = 1)
     {
-        Item item = model.Get(index);
+        // 1번 키 입력 -> 0번 슬롯 사용 
+        Item item = model.Get(index-1);
         if (item == null)
         {
             // 비어있는 슬롯 사용
             Debug.Log("비어있는 인벤토리를 사용했습니다.");
-            return;
+            return false;
         }
         if (UseItem(item, quantity))
         {
             item.details.UseItem(player);
+            return true;
         }
+        return false;
     }
 
     public void SwapItems(int index1, int index2)
     {
-        Debug.Log($"{index1} <-> {index2}");
         model.Swap(index1-1, index2-1);
     }
 

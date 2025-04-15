@@ -16,6 +16,8 @@ public class PlayerState : EntityState
     protected bool jumpInputPressed;
 
     protected bool dodgeInputPressed;
+
+    protected bool itemInputPressed;
     #endregion
 
     protected Vector2 stateEnterInitialPosition;
@@ -54,6 +56,7 @@ public class PlayerState : EntityState
         jumpInputHolding = Manager.Instance.inputHandler.jumpInputHolding;
         jumpInputPressed = Manager.Instance.inputHandler.jumpInputPressed;
         dodgeInputPressed = Manager.Instance.inputHandler.dodgeInputPressed;
+        itemInputPressed = Manager.Instance.inputHandler.itemInputPressed;
     }
 
     protected override void TickPublicTimers()

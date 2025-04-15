@@ -13,17 +13,17 @@ public class ItemTest : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Alpha1))
         {
-            ItemManager.Instance.UseItem(0);
+            Manager.Instance.itemManager.UseItem(0);
         }
 
         else if (Input.GetKeyUp(KeyCode.Alpha2))
         {
-            ItemManager.Instance.UseItem(1);
+            Manager.Instance.itemManager.UseItem(1);
         }
 
         else if (Input.GetKeyUp(KeyCode.Alpha3))
         {
-            ItemManager.Instance.UseItem(2);
+            Manager.Instance.itemManager.UseItem(2);
         }
     }
 
@@ -35,7 +35,7 @@ public class ItemTest : MonoBehaviour
 
         Item item = ItemDatabase.GetDetailsById(index).Create();
 
-        ItemManager.Instance.AcquireItem(item);
+        Manager.Instance.itemManager.AcquireItem(item);
 
     }
 
@@ -46,7 +46,7 @@ public class ItemTest : MonoBehaviour
 
         Item item = ItemDatabase.GetDetailsById(index).Create();
 
-        ItemManager.Instance.PurchaseItem(item);
+        Manager.Instance.itemManager.PurchaseItem(item);
 
     }
 

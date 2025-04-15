@@ -5,14 +5,9 @@ using static UnityEditor.Progress;
 
 public class ItemManager : MonoBehaviour
 {
-    private static ItemManager instance;
 
-    //TODO : Manager 통합 전까지는 임시로 이용한다 
-    public static ItemManager Instance { get => instance; set => instance = value; }
-
-    public Inventory inventory;
-
-    private InventoryController controller() => inventory.GetInventoryController();
+    Inventory inventory;
+    InventoryController controller() => inventory.GetInventoryController();
 
     // TODO : 할당할 방법 찾아야 한다 
     // 테스트 시 인스펙터 할당 
@@ -21,16 +16,7 @@ public class ItemManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null)
-        {
-            Destroy(this); return;
-        }
-        instance = this;
-
-        DontDestroyOnLoad(gameObject);
-
-        inventory = GetComponent<Inventory>();
-
+        inventory = GameObject.Find("Item Inventory").GetComponent<Inventory>();
     }
 
     public void AcquireItem(Item item)
@@ -51,9 +37,10 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    public void UseItem(int index)
+    public bool UseItem(int index)
     {
-        controller().UseItem(index, player);
+        bool use = controller().UseItem(index, player);
+        return use;
     }
 
     public void SwapItems(int index1, int index2)

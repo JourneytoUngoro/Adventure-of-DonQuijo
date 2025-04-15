@@ -20,7 +20,6 @@ public class TestVendingMachine : MonoBehaviour
 
     private void ShowVendinMachinePanel()
     {
-        Debug.Log("클릭됨");
         popup.ShowUI();
     }
 

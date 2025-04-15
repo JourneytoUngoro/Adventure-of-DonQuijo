@@ -8,6 +8,8 @@ public class Manager : MonoBehaviour
     public PlayerInputHandler inputHandler { get; private set; }
     public GameManager gameManager { get; private set; }
     public ObjectPoolingManager objectPoolingManager { get; private set; }
+    public ItemManager itemManager { get; private set; }
+    public UIManager uiManager { get; private set; }
 
     private void Awake()
     {
@@ -27,5 +29,7 @@ public class Manager : MonoBehaviour
         inputHandler = GetComponentInChildren<PlayerInputHandler>();
         gameManager = GetComponentInChildren<GameManager>();
         objectPoolingManager = GetComponentInChildren<ObjectPoolingManager>();
+        itemManager = GetComponentInChildren<ItemManager>();
+        uiManager = GetComponentInChildren<UIManager>();
     }
 }
