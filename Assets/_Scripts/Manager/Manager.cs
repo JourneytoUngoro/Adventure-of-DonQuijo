@@ -10,6 +10,7 @@ public class Manager : MonoBehaviour
     public ObjectPoolingManager objectPoolingManager { get; private set; }
     public ItemManager itemManager { get; private set; }
     public UIManager uiManager { get; private set; }
+    public DataManager dataManager { get; private set; }
 
     private void Awake()
     {
@@ -31,5 +32,6 @@ public class Manager : MonoBehaviour
         objectPoolingManager = GetComponentInChildren<ObjectPoolingManager>();
         itemManager = GetComponentInChildren<ItemManager>();
         uiManager = GetComponentInChildren<UIManager>();
+        dataManager = GetComponentInChildren<DataManager>();
     }
 }

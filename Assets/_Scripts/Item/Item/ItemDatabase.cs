@@ -25,7 +25,7 @@ public static class ItemDatabase
     {
         try
         {
-            Debug.Log(itemDetailsDictionary[id] == null ? "DB에 존재하지 않는 아이템" : "DB에 존재하는 아이템");
+            // Debug.Log(itemDetailsDictionary[id] == null ? "DB에 존재하지 않는 아이템" : "DB에 존재하는 아이템");
             return itemDetailsDictionary[id];
         }
         catch

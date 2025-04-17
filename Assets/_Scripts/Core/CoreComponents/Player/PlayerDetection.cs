@@ -33,6 +33,7 @@ public class PlayerDetection : Detection, IDataPersistance
 
     public void LoadData(GameData data)
     {
+        Debug.Log("Load Data in PlayerDetection");
         currentSpacePosition = data.lastPlayerPosition;
         currentProjectedPosition = currentSpacePosition;
         currentEntityHeight = currentSpacePosition.z;

@@ -12,15 +12,11 @@ public class ImageUI : UIBase
     public override void ShowUI()
     {
         base.ShowUI();
-
-        UIManager.Instance.activatedImages.Push(this);
     }
 
     public override void HideUI()
     {
         base.HideUI();
-
-        UIManager.Instance.activatedImages.TryPop(out _);
     }
 
     public override void ShowAndHideUI(float waitTime)
@@ -42,7 +38,8 @@ public class ImageUI : UIBase
     }
     protected override void ReturnToPool()
     {
-        UIManager.Instance.imagePool.Return(this);
+        if (type == UIType.DynamicImage)
+        Manager.Instance.uiManager.imagePool.Return(this);
     }
 
 }

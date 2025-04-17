@@ -73,8 +73,10 @@ public class PlayerInputHandler : MonoBehaviour
     }
     public void OnPauseMenu(InputAction.CallbackContext context)
     {
-        // TODO : GameManager 시간 멈추도록 
-        Manager.Instance.uiManager.GetUI(UIType.MainPopup).ShowUI();
+        if (context.started)
+        {
+            Manager.Instance.uiManager.EscPressed();
+        }
 
     }
 

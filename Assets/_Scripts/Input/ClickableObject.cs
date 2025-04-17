@@ -12,7 +12,6 @@ public class ClickableObject : MonoBehaviour, IClickable
 
     private void OnMouseDown()
     {
-        Debug.Log("clicked!");
         onClick?.Invoke();
     }
 }

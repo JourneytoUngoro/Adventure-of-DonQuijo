@@ -7,9 +7,7 @@ using UnityEngine.Events;
 
 public class UIManager : MonoBehaviour
 {
-    // TODO : 이후 Managers에 통합
-    public static UIManager Instance;
-    [HideInInspector] public static Dictionary<UIType, UIBase> startingUIDictionary = new Dictionary<UIType, UIBase>();
+   public static Dictionary<UIType, UIBase> startingUIDictionary = new Dictionary<UIType, UIBase>();
 
     // TODO : 테스트, 폴더 통합 이후 Load 하는 방식으로 바꾸기
     public PopupUI popupPrefab;
@@ -17,28 +15,23 @@ public class UIManager : MonoBehaviour
     public ImageUI imagePrefab;
 
     public Stack<PopupUI> activatedPopups = new Stack<PopupUI>();
-    public Stack<TextInfoUI> activatedTextInfos = new Stack<TextInfoUI>();
-    public Stack<ImageUI> activatedImages = new Stack<ImageUI>();
 
+    #region UI Object Pool
     public UIObjectPool<PopupUI> popupPool;
     public UIObjectPool<TextInfoUI> textInfoPool;
     public UIObjectPool<ImageUI> imagePool;
 
     int objectCount = 2;
+    #endregion
 
     Transform uiCanvas; // UI Object가 표시될 전용 캔버스 
+    Transform pool; 
     GameObject clickBlocker; // TODO : UI 활성화 시 클릭 막는 로직 추가 
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(this);
-        }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-
         uiCanvas = GameObject.Find("UICanvas").transform;
+        pool = GameObject.Find("Pooled Objects").transform;
 
         RegisterUIObjects();
         CreatePool();
@@ -59,13 +52,13 @@ public class UIManager : MonoBehaviour
 
     void CreatePool()
     {
-        popupPool = new UIObjectPool<PopupUI>(popupPrefab, objectCount);
-        textInfoPool = new UIObjectPool<TextInfoUI>(textInfoPrefab, objectCount);
-        imagePool = new UIObjectPool<ImageUI>(imagePrefab, objectCount);
+        popupPool = new UIObjectPool<PopupUI>(popupPrefab, objectCount, pool);
+        textInfoPool = new UIObjectPool<TextInfoUI>(textInfoPrefab, objectCount, pool);
+        imagePool = new UIObjectPool<ImageUI>(imagePrefab, objectCount, pool);
     }
 
     /// <summary>
-    /// UIBase로 반환되므로 반드시 명시적 캐스팅이 필요하다 
+    /// UIBase로 반환되므로 캐스팅이 필요하다 
     /// </summary>
     public UIBase GetUI(UIType type)
     {
@@ -76,6 +69,7 @@ public class UIManager : MonoBehaviour
     {
         PopupUI popup = popupPool.Get();
         popup.transform.SetParent(uiCanvas);
+        popup.type = UIType.DynamicPopup;
         return popup.SetDynamicPopup(data);
     }
 
@@ -83,6 +77,7 @@ public class UIManager : MonoBehaviour
     {
         TextInfoUI textInfo = textInfoPool.Get();
         textInfo.transform.SetParent(uiCanvas);
+        textInfo.type = UIType.DynamicTextInfo;
         return textInfo.SetDynamicTextInfo(data);
     }
 
@@ -90,6 +85,7 @@ public class UIManager : MonoBehaviour
     {
         ImageUI image = imagePool.Get();
         image.transform.SetParent(uiCanvas);
+        image.type = UIType.DynamicImage;
         return image.SetDynamicImage(data);
     }
 
@@ -110,43 +106,16 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void HideAllPopups()
+    public void EscPressed()
     {
-        if (UIManager.Instance.activatedPopups.Count <= 0) return;
-
-        var copied = new Stack<PopupUI>(UIManager.Instance.activatedPopups);
-
-        foreach (PopupUI popup in copied)
+        if (activatedPopups.Count > 0)
         {
-            UIManager.Instance.activatedPopups.TryPop(out _);
-            popup.HideUI();
+            Debug.Log($"activated popup : {activatedPopups.Count}");
+            activatedPopups.Peek().HideUI();
         }
-    }
-
-
-    public void HideAllTextInfos()
-    {
-        if (UIManager.Instance.activatedTextInfos.Count <= 0) return;
-
-        var copied = new Stack<TextInfoUI>(UIManager.Instance.activatedTextInfos);
-
-        foreach (TextInfoUI textInfo in copied)
+        else
         {
-            UIManager.Instance.activatedTextInfos.TryPop(out _);
-            textInfo.HideUI();
-        }
-    }
-
-    public void HideAllTextImages()
-    {
-        if (UIManager.Instance.activatedImages.Count <= 0) return;
-
-        var copied = new Stack<ImageUI>(UIManager.Instance.activatedImages);
-
-        foreach (ImageUI image in copied)
-        {
-            UIManager.Instance.activatedImages.TryPop(out _);
-            image.HideUI();
+            startingUIDictionary[UIType.MainPopup].ShowUI();
         }
     }
 

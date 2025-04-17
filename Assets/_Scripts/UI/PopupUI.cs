@@ -31,15 +31,14 @@ public class PopupUI : UIBase
     public override void ShowUI()
     {
         base.ShowUI();
-        Debug.Log("실행됨");
-        UIManager.Instance.activatedPopups.Push(this);
+        Manager.Instance.uiManager.activatedPopups.Push(this);
     }
 
     public override void HideUI()
     {
         base.HideUI();
 
-        UIManager.Instance.activatedPopups.TryPop(out _);
+        Manager.Instance.uiManager.activatedPopups.TryPop(out _);
     }
 
     public override void ShowAndHideUI(float waitTime)
@@ -99,7 +98,7 @@ public class PopupUI : UIBase
             Debug.Log("cannot find cancel  button");
         }
 
-        rectTransform.anchoredPosition = new Vector2(0, 0);
+        rectTransform.anchoredPosition = position;
 
         return this;
     }
@@ -122,7 +121,8 @@ public class PopupUI : UIBase
 
     protected override void ReturnToPool()
     {
-        UIManager.Instance.popupPool.Return(this);
+        if (type == UIType.DynamicPopup)
+            Manager.Instance.uiManager.popupPool.Return(this);
     }
 
 }

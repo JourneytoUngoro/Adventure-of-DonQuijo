@@ -22,6 +22,9 @@ public class GameData
 
     public InventoryData inventoryData;
 
+    public int mentality;
+    public float totalPlayTime;
+
     #region Not Used Yet 
 
     // �Ʒ��� ���� �Լ��� �ۼ��ؼ� Guid�� ���� �� �ִ�. ���� ContextMenu�� ���ؼ� ���� ����ų� Start �Ǵ� Awake���� �ڵ����� ����ǵ��� �������.
@@ -69,6 +72,6 @@ public class GameData
         this.currentScene = "SampleScene";
         // mapOpened = new Dictionary<string, bool>();
 
-        inventoryData = new InventoryData();
+        this.inventoryData = new InventoryData();
     }
 }

@@ -91,6 +91,7 @@ public class FileDataHandler
                 using (StreamWriter writer = new StreamWriter(stream))
                 {
                     writer.Write(dataToStore);
+                    Debug.Log($"{fullPath} saved");
                 }
             }
 
@@ -164,6 +165,12 @@ public class FileDataHandler
             }
         }
         return profileDictionary;
+    }
+
+    public int AllProfilesCount()
+    {
+        int profileCount = new DirectoryInfo(dataDirPath).EnumerateDirectories().Count();
+        return profileCount;
     }
 
     public string GetMostRecentlyUpdatedProfileId()

@@ -18,6 +18,9 @@ public class DataManager : MonoBehaviour
     [SerializeField] private string fileName;
     [SerializeField] private bool useEncryption;
 
+    //============================== 삭제
+    public int count;
+
     public string selectedProfileId { get; private set; } // Profile Id of current save file. Initial value is null when nothing is selected. Value changes when the player selects a save slot.
 
     public GameData gameData { get; private set; } // current selected Profile Id's game data
@@ -27,18 +30,8 @@ public class DataManager : MonoBehaviour
     [SerializeField] private float autoSaveTimeSeconds = 60f;
     Coroutine AutoSaveCoroutine = null;
 
-    public static DataManager Instance { get; private set; }
-
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-        DontDestroyOnLoad(this.gameObject);
-
-
         if (disableAutoSaving)
         {
             Debug.LogWarning("Auto saving is currently disabled. No auto save supported when you leave the game.");
@@ -54,18 +47,21 @@ public class DataManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void OnDisable()
+/*    private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
+    }*/
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // 싱글톤 객체이므로 게임이 실행되는 첫 순간에만 실행된다
+        if (scene.name == "MainMenu") return;
+
         this.dataPersistanceObjects = FindAllDataPersistenceObjects();
         LoadGame();
+        
+        // ================================================================= ( 인스펙터 확인 용 )
+        count = dataPersistanceObjects.Count;
 
-        // 자동 저장 기능은 아직 테스트하지 않음 
         // AutoSaveCoroutine = StartCoroutine(AutoSave());
     }
 
@@ -120,6 +116,8 @@ public class DataManager : MonoBehaviour
 
     public void LoadGame()
     {
+        if (SceneManager.GetActiveScene().name == "MainMenu") return;
+
         this.gameData = dataHandler.Load(selectedProfileId);
 
         if (this.gameData == null && initializeDataIfNull)
@@ -165,6 +163,8 @@ public class DataManager : MonoBehaviour
     {
         return dataHandler.LoadAllProfiles();
     }
+
+    public int AllProfilesCount() => dataHandler.AllProfilesCount();
 
     private IEnumerator AutoSave()
     {

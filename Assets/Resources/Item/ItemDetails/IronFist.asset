@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IronFist
   m_EditorClassIdentifier: 
   <id>k__BackingField: 3
-  <name>k__BackingField: Iron Fist
+  <label>k__BackingField: Iron Fist
   <maxStack>k__BackingField: 3
   <maxOverlap>k__BackingField: 3
   <description>k__BackingField: 'Strong Attack Defense Reduction +20% '

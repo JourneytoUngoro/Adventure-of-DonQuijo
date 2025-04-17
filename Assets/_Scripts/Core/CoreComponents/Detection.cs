@@ -91,7 +91,7 @@ public abstract class Detection : CoreComponent
 
         if (showPositionInformation)
         {
-            Debug.Log($"Screen Position: {currentScreenPosition} | Space Position: {currentSpacePosition} | Projected Position: {currentProjectedPosition} | Entity Height: {currentEntityHeight} | Ground Height: {currentGroundHeight} | Ceiling Height: {currentCeilingHeight}");
+            Debug.Log($"Screen position: {currentScreenPosition} | Space position: {currentSpacePosition} | Projected position: {currentProjectedPosition} | Entity Height: {currentEntityHeight} | Ground Height: {currentGroundHeight} | Ceiling Height: {currentCeilingHeight}");
         }
         if (showFacingObstacleInformation)
         {

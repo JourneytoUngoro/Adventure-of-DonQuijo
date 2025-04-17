@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Medkit
   m_EditorClassIdentifier: 
   <id>k__BackingField: 1
-  <name>k__BackingField: Emergency Medical Kit
+  <label>k__BackingField: Med kit
   <maxStack>k__BackingField: 3
   <maxOverlap>k__BackingField: 99999
   <description>k__BackingField: Instantly restores 30% of the player's health.

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LifePotion
   m_EditorClassIdentifier: 
   <id>k__BackingField: 2
-  <name>k__BackingField: Life Potion
+  <label>k__BackingField: Life Potion
   <maxStack>k__BackingField: 5
   <maxOverlap>k__BackingField: 5
   <description>k__BackingField: Increase Health Capacity

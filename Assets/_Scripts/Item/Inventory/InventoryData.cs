@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[SerializeField]
-// 여러 객체에서 구조체처럼 쓰인다
+[System.Serializable]
 public class InventoryData
 {
     public Item[] items;

@@ -6,6 +6,7 @@ using UnityEngine;
 
 public enum UIType
 {
+    StaticPopup,
     MainPopup, // 메인 팝업
     VendingMachine,
     PurchasePopup, // 구매 팝업
@@ -28,7 +29,7 @@ public abstract class UIBase : MonoBehaviour
     protected RectTransform rectTransform;
 
     [Tooltip("the position to appear when dynamically created")]
-    public Vector2 DynamicPosition;
+    public Vector2 position;
 
     private Coroutine showCoroutine = null;
     private Coroutine showAndHideCoroutine = null;
@@ -48,17 +49,11 @@ public abstract class UIBase : MonoBehaviour
 
     public virtual void ShowUI()
     {
-        if (showCoroutine != null) { UIManager.Instance.StopCoroutine(showCoroutine); }
+        if (showCoroutine != null) { Manager.Instance.uiManager.StopCoroutine(showCoroutine); }
         
         rectTransform.SetAsLastSibling();
-        showCoroutine = UIManager.Instance.StartCoroutine(ShowUICoroutine(delayTime));
+        showCoroutine = Manager.Instance.uiManager.StartCoroutine(ShowUICoroutine(delayTime));
     }
-
-    void OnDisable()
-    {
-        Debug.Log($"[{name}] OnDisable called!");
-    }
-
 
     public IEnumerator ShowUICoroutine(float delayTime)
     {
@@ -70,10 +65,10 @@ public abstract class UIBase : MonoBehaviour
 
     public virtual void ShowAndHideUI(float waitTime)
     {
-        if (showAndHideCoroutine != null) { UIManager.Instance.StopCoroutine(showAndHideCoroutine); }
+        if (showAndHideCoroutine != null) { Manager.Instance.uiManager.StopCoroutine(showAndHideCoroutine); }
 
         rectTransform.SetAsLastSibling();
-        showAndHideCoroutine = UIManager.Instance.StartCoroutine(ShowAndHideCoroutine(waitTime));   
+        showAndHideCoroutine = Manager.Instance.uiManager.StartCoroutine(ShowAndHideCoroutine(waitTime));   
     }
 
     public IEnumerator ShowAndHideCoroutine(float waitTime)

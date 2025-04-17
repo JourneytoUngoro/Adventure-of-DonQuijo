@@ -7,9 +7,8 @@ using UnityEngine;
 public class ItemDetails : ScriptableObject
 {
     [field: SerializeField] public int id { get; private set; }
-    [field: SerializeField] public string name { get; private set; }
+    [field: SerializeField] public string label { get; private set; }
     [field: SerializeField] public int maxStack { get; private set; }
-    [field: SerializeField] public int nowOverlap { get; private set; }
     [field: SerializeField] public int maxOverlap { get; private set; }
     [field: SerializeField] public string description { get; private set; }
     [field: SerializeField] public int price { get; private set; }

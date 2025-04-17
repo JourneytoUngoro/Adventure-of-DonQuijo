@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MemoryFragment
   m_EditorClassIdentifier: 
   <id>k__BackingField: 4
-  <name>k__BackingField: Memory Fragment
+  <label>k__BackingField: Memory Fragment
   <maxStack>k__BackingField: 1
   <maxOverlap>k__BackingField: 1
   <description>k__BackingField: Extra Life x1

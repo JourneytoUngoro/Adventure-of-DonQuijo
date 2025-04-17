@@ -21,15 +21,11 @@ public class TextInfoUI : UIBase
     public override void ShowUI()
     {
         base.ShowUI();
-
-        UIManager.Instance.activatedTextInfos.Push(this);
     }
 
     public override void HideUI()
     {
         base.HideUI();
-
-        UIManager.Instance.activatedTextInfos.TryPop(out _);
     }
 
     public override void ShowAndHideUI(float waitTime)
@@ -51,14 +47,15 @@ public class TextInfoUI : UIBase
         if (data.info != null && infoTMP) infoTMP.text = data.info;
         if (data.background != null && backgroundImage != null) backgroundImage.sprite = data.background;
 
-        rectTransform.anchoredPosition = DynamicPosition;
+        rectTransform.anchoredPosition = position;
 
         return this;
     }
 
     protected override void ReturnToPool()
     {
-        UIManager.Instance.textInfoPool.Return(this);
+        if (type == UIType.DynamicTextInfo) 
+        Manager.Instance.uiManager.textInfoPool.Return(this);
     }
 
 }

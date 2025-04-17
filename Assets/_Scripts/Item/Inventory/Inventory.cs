@@ -28,15 +28,18 @@ public class Inventory : MonoBehaviour, IDataPersistance
     public void LoadData(GameData data)
     {
         // Save-Load System에서 호출된다
-        // TODO : Load 로직 작성하기
-
-        // controller.LoadData();
+        controller.LoadData(data.inventoryData);
      }
 
     public void SaveData(GameData data)
     {
         // Save-Load System에서 호출된다
         // TODO Save 로직 작성하기
+
+        Debug.Log("Save inventory Data");
+
+        data.inventoryData = controller.SaveData();
+
     }
 
     public InventoryController GetInventoryController()

@@ -7,16 +7,16 @@ using UnityEngine;
 public class Item
 {
     [field: SerializeField] public int id;
-    [field: SerializeField] public int detailsId;
     public ItemDetails details;
     public int quantity;
+    public int nowUseCount;
 
     public Item(ItemDetails details, int quantity = 1)
     {
-        id = details.id;
-        this.detailsId = details.id;
+        this.id = details.id;
         this.details = details;
         this.quantity = quantity;
+        nowUseCount = 0;
     }
 
 
