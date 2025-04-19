@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class LifeEffect : ItemEffect
 {
-    [SerializeField] private int additionalLife= 1;
+    // [SerializeField] private int additionalLife= 1;
     public override void ApplyEffect(Player target)
     {
 

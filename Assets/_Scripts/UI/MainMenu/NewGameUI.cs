@@ -20,17 +20,19 @@ public class NewGameUI : MonoBehaviour
 
     void OnClickConfirmButton()
     {
+        popup.HideUI();
+        loadGamePanel.GetComponent<PopupUI>().ShowUI();
         if (Manager.Instance.dataManager.AllProfilesCount() < 3)
         {
-            loadGamePanel.GetComponent<PopupUI>().ShowUI();
+            Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData("Choose New Slot")).ShowAndHideUI(5f);
         }
         else
         {
             Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData("Slots Full. Delete Slot")).ShowAndHideUI(3f);
+            loadGamePanel.GetComponent<LoadGameUI>().OnClickEditButton();
         }
-        popup.HideUI();
+
         
-        //loadGamePopup.ShowUI();
     }
 
     void OnClickCancelButton()

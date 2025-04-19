@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour
+public class MainMenuUI : MonoBehaviour
 {
+    #region UI 오브젝트 변수
 
     // TODO : odin 패키지 설치 후 인스펙터 정리 
     [Header("Main Menu Buttons")]
-    [SerializeField] Button newGameButton;
-    [SerializeField] Button loadGameButton;
-    [SerializeField] Button creditButton;
-    [SerializeField] Button exitGameButton;
+    public Button newGameButton;
+    public Button loadGameButton;
+    public Button creditButton;
+    public Button exitGameButton;
+    public Button settingButton;
 
     [Header("Main Menu Panels")]
     public GameObject newGamePanel;
     public GameObject loadGamePanel;
     public GameObject creditPanel;
     public GameObject exitGamePanel;
+
+    #endregion
 
     private PopupUI newGamePopup;
     private PopupUI loadGamePopup;
@@ -31,15 +35,18 @@ public class MainMenu : MonoBehaviour
 
     void InitalizeMainMenu()
     {
+        // Popup 스크립트 할당
         newGamePopup = newGamePanel.GetComponent<PopupUI>();
         loadGamePopup = loadGamePanel.GetComponent<PopupUI>();
         creditPopup = creditPanel.GetComponent<PopupUI>();
         exitGamePopup = exitGamePanel.GetComponent<PopupUI>();
 
+        // 이벤트 할당
         newGameButton.onClick.AddListener(OnClickNewGameButton);
         loadGameButton.onClick.AddListener(OnClickLoadGameButton);
         creditButton.onClick.AddListener(OnClickCreditButton);
-        exitGameButton.onClick.AddListener (OnClickExitGameButton);
+        exitGameButton.onClick.AddListener(OnClickExitGameButton);
+        settingButton.onClick.AddListener(OnClickSettingButton);
     }
 
 
@@ -61,6 +68,11 @@ public class MainMenu : MonoBehaviour
     public void OnClickExitGameButton()
     {
         exitGamePopup.ShowUI();
+    }
+
+    public void OnClickSettingButton()
+    {
+        Manager.Instance.uiManager.GetUI(UIType.settingPopup).ShowUI();
     }
 
 

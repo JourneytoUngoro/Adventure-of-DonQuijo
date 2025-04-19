@@ -49,7 +49,6 @@ public class UIObjectPool<T> where T : MonoBehaviour
         {
             pool.Enqueue(obj);
             obj.transform.SetParent(parent);
-            Debug.Log("Returned obj");
         }
         else
         {
@@ -57,7 +56,6 @@ public class UIObjectPool<T> where T : MonoBehaviour
             if (obj is Component comp)
             {
                 UnityEngine.Object.Destroy(comp.gameObject);
-                Debug.Log("Destroyed obj");
             }
         }
     }

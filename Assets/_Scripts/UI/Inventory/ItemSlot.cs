@@ -29,7 +29,7 @@ public class ItemSlot : Slot<Item>
 
     public void SetItemToSlot(Item item)
     {
-        if (item == null)
+        if (item == null || item.id == 0)
         {
             DraggableElement.elementImage.sprite = nullSprite;
             quantityTMP.text = string.Empty;

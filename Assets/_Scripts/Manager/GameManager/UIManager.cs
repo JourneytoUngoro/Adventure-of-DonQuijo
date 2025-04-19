@@ -115,7 +115,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            startingUIDictionary[UIType.MainPopup].ShowUI();
+            // startingUIDictionary[UIType.pausePopup].ShowUI();
         }
     }
 

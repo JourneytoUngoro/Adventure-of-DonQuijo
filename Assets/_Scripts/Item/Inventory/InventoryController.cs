@@ -10,6 +10,8 @@ public class InventoryController
     InventoryModel model;
     int capacity;
 
+    Item[] itemUsageData;
+
     InventoryController(InventoryView view, in InventoryModel model, int capacity)
     {
         Debug.Assert(view != null, "View is null");
@@ -24,8 +26,22 @@ public class InventoryController
         view.StartCoroutine(Initialize());
     }
 
-    public void LoadData(InventoryData data) => model.LoadData(data);
-    public InventoryData SaveData() => model.SaveData();
+    public void LoadInventoryData(InventoryData data) => model.LoadData(data);
+
+    public InventoryData SaveInventoryData() => model.SaveData();
+
+    public void LoadItemUsageData(ItemUsageData data)
+    {
+        this.itemUsageData = data.itemUsageData;
+    }
+
+    public ItemUsageData SaveItemUsageData()
+    {
+        ItemUsageData data = new ItemUsageData();
+        data.itemUsageData = this.itemUsageData;
+
+        return data;
+    }
 
     IEnumerator Initialize()
     {
@@ -45,8 +61,6 @@ public class InventoryController
         for (int i = 0; i < capacity; i++)
         {
             var item = model.Get(i);
-
-            Debug.Log(item != null ? $"{i}번째 슬롯 아이템 {item.details.label}" : $"{i} 번째 슬롯 비어있음");
 
             view.RefreshSlots(i, item);
         }
@@ -145,10 +159,16 @@ public class InventoryController
             // 인벤토리에 아이템 존재
             if (model.MinusQuantity(indexIfExist, item, quantity))
             {
-                // 수량 감소 성공
+                if (IsUnderMaxOverlap(item))
+                {
+                    // 수량 감소 성공
+                    Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(
+                        $"Success Use Item {item.details.label}, now quantity {model.Quantity(item)}")).ShowAndHideUI(3f);
+                    return true;
+                }
+                // 최대 가용 횟수 초과
                 Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(
-                    $"Success Use Item {item.details.label}, now quantity {model.Quantity(item)}")).ShowAndHideUI(3f);
-                return true;
+                    $"Fail Use Item {item.details.label}")).ShowAndHideUI(3f);
             } 
             else
             {
@@ -173,6 +193,24 @@ public class InventoryController
         {
             item.details.UseItem(player);
             return true;
+        }
+        return false;
+    }
+
+    public bool IsUnderMaxOverlap(Item item)
+    {
+        for (int i = 0; i < this.itemUsageData.Length; i++)
+        {
+            if (item.id == this.itemUsageData[i].id)
+            {
+                Debug.Log("itemUsageData에서 아이템 발견");
+                if (this.itemUsageData[i].nowUseCount < this.itemUsageData[i].details.maxOverlap)
+                {
+                    this.itemUsageData[i].nowUseCount++;
+                    Debug.Log($"사용 가능 {this.itemUsageData[i].nowUseCount} < {this.itemUsageData[i].details.maxOverlap} ");
+                    return true;
+                }
+            }
         }
         return false;
     }

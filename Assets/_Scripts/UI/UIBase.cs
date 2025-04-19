@@ -7,8 +7,9 @@ using UnityEngine;
 public enum UIType
 {
     StaticPopup,
-    MainPopup, // 메인 팝업
-    VendingMachine,
+    pausePopup, // 메인 팝업
+    settingPopup, //  설정 팝업
+    VendingMachine, 
     PurchasePopup, // 구매 팝업
     QuestPopup, // 퀘스트 진행 팝업
     TextInfo, // 텍스트 정보 
@@ -17,6 +18,7 @@ public enum UIType
     DynamicImage,  // 동적으로 생성되는 이미지 
  }
 
+[RequireComponent(typeof(CanvasGroup))]
 public abstract class UIBase : MonoBehaviour
 {
     public UIType type;

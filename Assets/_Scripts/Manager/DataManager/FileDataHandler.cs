@@ -116,7 +116,13 @@ public class FileDataHandler
 
     public void Delete(string profileId)
     {
-        if (profileId == null) return;
+        if (profileId == null)
+        {
+            Debug.Log($"{profileId} is null id , no delete");
+
+            return;
+        }
+
 
         string fullPath = Path.Combine(dataDirPath, profileId, dataFileName);
         try

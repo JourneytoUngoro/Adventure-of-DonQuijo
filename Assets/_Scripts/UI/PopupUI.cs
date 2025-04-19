@@ -13,10 +13,10 @@ using UnityEngine.UI;
 public class PopupUI : UIBase
 {
     // 오브젝트
-    public TextMeshProUGUI titleTMP; // Title TMP
-    public TextMeshProUGUI infoTMP; // Info TMP
-    public Button confirmButton; // Confirm Button
-    public Button cancelButton; // Cancel Button
+    [HideInInspector] public TextMeshProUGUI titleTMP; // Title TMP
+    [HideInInspector] public TextMeshProUGUI infoTMP; // Info TMP
+    [HideInInspector] public Button confirmButton; // Confirm Button
+    [HideInInspector] public Button cancelButton; // Cancel Button
 
     // Starting Popup으로 씬 상에 미리 생성되어 있는 팝업창
 

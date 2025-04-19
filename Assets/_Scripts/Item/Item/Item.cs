@@ -1,12 +1,23 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+
+/*public enum ItemType
+{
+    LifePotion,
+    IronFist,
+    SwiftFeather,
+    MemoryFragment,
+    MedKit,
+    None,
+}
+*/
 
 [Serializable]
 public class Item
 {
-    [field: SerializeField] public int id;
+    // public ItemType type;
+    public int id;
     public ItemDetails details;
     public int quantity;
     public int nowUseCount;
@@ -18,6 +29,4 @@ public class Item
         this.quantity = quantity;
         nowUseCount = 0;
     }
-
-
 }

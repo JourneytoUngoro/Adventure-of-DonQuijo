@@ -21,6 +21,7 @@ public class GameData
     // public bool[] abilityGained; ��
 
     public InventoryData inventoryData;
+    public ItemUsageData itemUsageData;
 
     public int mentality;
     public float totalPlayTime;
@@ -34,7 +35,7 @@ public class GameData
         type = System.Guid.NewGuid().ToString();
     }
     
-    public void LoadData(GameData data)
+    public void LoadInventoryData(GameData data)
     {
         // ���� ������ ����
         data.dictionaryName.TryGetValue(type, out value);
@@ -48,7 +49,7 @@ public class GameData
         }
     }
 
-    public void SaveData(ref GameData data)
+    public void SaveInventoryData(ref GameData data)
     {
         if (data.dictionaryName.ContainsKey(type))
         {
@@ -73,5 +74,6 @@ public class GameData
         // mapOpened = new Dictionary<string, bool>();
 
         this.inventoryData = new InventoryData();
+        this.itemUsageData = new ItemUsageData();
     }
 }

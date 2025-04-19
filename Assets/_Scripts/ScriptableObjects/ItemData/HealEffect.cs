@@ -10,7 +10,7 @@ public class HealEffect : ItemEffect
     {
         float debugging = target.stats.health.currentValue;
 
-        float healAmount = target.stats.health.currentValue * 0.3f;
+        float healAmount = target.stats.health.currentValue * percentage;
 
         target.stats.health.IncreaseCurrentValue(healAmount);
 

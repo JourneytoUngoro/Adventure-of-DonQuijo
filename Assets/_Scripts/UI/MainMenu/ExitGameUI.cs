@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public class ExitGame : MonoBehaviour
+public class ExitGameUI : MonoBehaviour
 {
     PopupUI popup;
     private void Awake()
@@ -29,6 +29,4 @@ public class ExitGame : MonoBehaviour
     {
         popup.HideUI();
     }
-
-
 }

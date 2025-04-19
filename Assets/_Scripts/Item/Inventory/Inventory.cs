@@ -6,7 +6,7 @@ using UnityEngine;
 public class Inventory : MonoBehaviour, IDataPersistance
 {
     [field : SerializeField] public int capacity { get; private set; }
-    [field : SerializeField] public List<ItemDetails> startingItems { get;  set; } // 테스트 용도 
+    [field : SerializeField] public List<ItemDetails> startingItems { get;  set; } // 테스트 or 시작 시 기본 아이템에 사용 
 
     InventoryView view;
     InventoryController controller;
@@ -28,18 +28,14 @@ public class Inventory : MonoBehaviour, IDataPersistance
     public void LoadData(GameData data)
     {
         // Save-Load System에서 호출된다
-        controller.LoadData(data.inventoryData);
+        controller.LoadItemUsageData(data.itemUsageData);
+        controller.LoadInventoryData(data.inventoryData);
      }
 
     public void SaveData(GameData data)
     {
-        // Save-Load System에서 호출된다
-        // TODO Save 로직 작성하기
-
-        Debug.Log("Save inventory Data");
-
-        data.inventoryData = controller.SaveData();
-
+        data.itemUsageData = controller.SaveItemUsageData();
+        data.inventoryData = controller.SaveInventoryData();
     }
 
     public InventoryController GetInventoryController()

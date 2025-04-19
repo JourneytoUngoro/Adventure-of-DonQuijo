@@ -15,11 +15,9 @@ public class DataManager : MonoBehaviour
     [SerializeField] private string testSelectedProfileId = "test";
 
     [Header("File Storage Config")]
+    [Tooltip("Full Path \"C:/Users/users/AppData/LocalLow/DefaultCompany/Belt Scroller/nowProfileId/fileName\"")]
     [SerializeField] private string fileName;
     [SerializeField] private bool useEncryption;
-
-    //============================== 삭제
-    public int count;
 
     public string selectedProfileId { get; private set; } // Profile Id of current save file. Initial value is null when nothing is selected. Value changes when the player selects a save slot.
 
@@ -27,8 +25,10 @@ public class DataManager : MonoBehaviour
     private List<IDataPersistance> dataPersistanceObjects;
     private FileDataHandler dataHandler;
 
+    [SerializeField] private List<SceneField> excludedScenesForData; // 
+
     [SerializeField] private float autoSaveTimeSeconds = 60f;
-    Coroutine AutoSaveCoroutine = null;
+    // Coroutine AutoSaveCoroutine = null;
 
     private void Awake()
     {
@@ -47,20 +47,17 @@ public class DataManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-/*    private void OnDisable()
+    private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-    }*/
+    }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "MainMenu") return;
+        if (IsExcludedScene()) return;
 
         this.dataPersistanceObjects = FindAllDataPersistenceObjects();
         LoadGame();
-        
-        // ================================================================= ( 인스펙터 확인 용 )
-        count = dataPersistanceObjects.Count;
 
         // AutoSaveCoroutine = StartCoroutine(AutoSave());
     }
@@ -97,6 +94,14 @@ public class DataManager : MonoBehaviour
 
     public void SaveGame()
     {
+        Debug.Log("Try save game");
+
+        if (IsExcludedScene())
+        {
+            Debug.Log("Excluded Scene");
+            return;
+        }
+
         if (this.gameData == null)
         {
             Debug.LogWarning("No data was found. A new game needs to be started before data can be saved.");
@@ -116,7 +121,11 @@ public class DataManager : MonoBehaviour
 
     public void LoadGame()
     {
-        if (SceneManager.GetActiveScene().name == "MainMenu") return;
+        if (IsExcludedScene())
+        {
+            Debug.Log("Excluded Scene");
+            return;
+        }
 
         this.gameData = dataHandler.Load(selectedProfileId);
 
@@ -165,6 +174,12 @@ public class DataManager : MonoBehaviour
     }
 
     public int AllProfilesCount() => dataHandler.AllProfilesCount();
+
+    public bool IsExcludedScene()
+    {
+        string currentScene = SceneManager.GetActiveScene().name;
+        return excludedScenesForData.Any(sceneField => sceneField.SceneName == currentScene);
+    }
 
     private IEnumerator AutoSave()
     {
