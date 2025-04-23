@@ -88,6 +88,7 @@ public abstract class UIBase : MonoBehaviour
 
     public virtual void HideUI()
     {
+        Debug.Assert(rectTransform != null, "rectTransform null!");
         rectTransform.SetAsFirstSibling();
 
         group.DOFade(0, fadeTime).SetUpdate(true);

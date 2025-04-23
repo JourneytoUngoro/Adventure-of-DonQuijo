@@ -82,14 +82,14 @@ public class InventoryController
             {
                 // 추가 성공
                 Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(
-                    $"Success Acquire Item {item.details.label}, now quantity {model.Quantity(item)} ")).ShowAndHideUI(3f);
+                    $"Success Acquire Item {item.details.label}, now useQuantity {model.Quantity(item)} ")).ShowAndHideUI(3f);
                 return true;
             }
             else
             {
                 // 수량 초과로 추가 실패
                 Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(
-                    $"Fail Acquire Item {item.details.label}, now quantity {model.Quantity(item)} > max quantity {item.details.maxStack} ")).ShowAndHideUI(3f);
+                    $"Fail Acquire Item {item.details.label}, now useQuantity {model.Quantity(item)} > max useQuantity {item.details.maxStack} ")).ShowAndHideUI(3f);
                 return false;
             }
         }
@@ -100,7 +100,7 @@ public class InventoryController
             {
                 // 인벤토리 추가 성공
                 Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(
-                    $"Success Acquire Item {item.details.label}, now index {model.Contains(item)}, now quantity {model.Quantity(item)} ")).ShowAndHideUI(3f);
+                    $"Success Acquire Item {item.details.label}, now index {model.Contains(item)}, now useQuantity {model.Quantity(item)} ")).ShowAndHideUI(3f);
                 return true;
             }
             else
@@ -150,31 +150,36 @@ public class InventoryController
         return false;
     }
 
-    public bool UseItem(Item item, int quantity = 1)
+    public bool UseItem(Item item, int useQuantity = 1)
     {
         int indexIfExist = model.Contains(item);
 
-        if (indexIfExist != -1)
+        if (indexIfExist == -1) return false;
+
+        // 인벤토리에 아이템 존재
+        if (model.Quantity(item) >= useQuantity)
         {
-            // 인벤토리에 아이템 존재
-            if (model.MinusQuantity(indexIfExist, item, quantity))
+            // 가용 횟수 제한 
+            if (!IsUnderMaxOverlap(item))
             {
-                if (IsUnderMaxOverlap(item))
-                {
-                    // 수량 감소 성공
-                    Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(
-                        $"Success Use Item {item.details.label}, now quantity {model.Quantity(item)}")).ShowAndHideUI(3f);
-                    return true;
-                }
                 // 최대 가용 횟수 초과
                 Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(
-                    $"Fail Use Item {item.details.label}")).ShowAndHideUI(3f);
-            } 
-            else
+                        $"Fail Use Item {item.details.label}")).ShowAndHideUI(3f);
+                return false;
+            }
+
+            // 사용 가능 여부
+            if (model.MinusQuantity(indexIfExist, item, useQuantity))
             {
                 Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(
-                    $"Fail Use Item {item.details.label}, now quantity {model.Quantity(item)}")).ShowAndHideUI(3f);
+                        $"Success Use Item {item.details.label}, current quntity {model.Quantity(item)}")).ShowAndHideUI(3f);
+                return true;
             }
+        } 
+        else
+        {
+            Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(
+                    $"Fail Use Item {item.details.label}, current quntity {model.Quantity(item)}")).ShowAndHideUI(3f);
         }
         return false;
     }
@@ -203,11 +208,9 @@ public class InventoryController
         {
             if (item.id == this.itemUsageData[i].id)
             {
-                Debug.Log("itemUsageData에서 아이템 발견");
                 if (this.itemUsageData[i].nowUseCount < this.itemUsageData[i].details.maxOverlap)
                 {
                     this.itemUsageData[i].nowUseCount++;
-                    Debug.Log($"사용 가능 {this.itemUsageData[i].nowUseCount} < {this.itemUsageData[i].details.maxOverlap} ");
                     return true;
                 }
             }
@@ -219,9 +222,6 @@ public class InventoryController
     {
         model.Swap(index1-1, index2-1);
     }
-
-
-
 
 
     #region Builder : 컨트롤러 객체를 조건대로 생성하여 반환하는 클래스
@@ -257,11 +257,7 @@ public class InventoryController
 
             return new InventoryController(view, model, capacity);
         }
-
-
-
         #endregion
-
 
     }
 }

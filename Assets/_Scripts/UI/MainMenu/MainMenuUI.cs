@@ -28,6 +28,8 @@ public class MainMenuUI : MonoBehaviour
     private PopupUI creditPopup;
     private PopupUI exitGamePopup;
 
+    private LoadGameUI loadGameUI;
+
     private void Awake()
     {
         InitalizeMainMenu();
@@ -40,6 +42,9 @@ public class MainMenuUI : MonoBehaviour
         loadGamePopup = loadGamePanel.GetComponent<PopupUI>();
         creditPopup = creditPanel.GetComponent<PopupUI>();
         exitGamePopup = exitGamePanel.GetComponent<PopupUI>();
+
+        // 패널 컨트롤 스크립트 할당
+        loadGameUI = loadGamePanel.GetComponent<LoadGameUI>();
 
         // 이벤트 할당
         newGameButton.onClick.AddListener(OnClickNewGameButton);
@@ -57,6 +62,7 @@ public class MainMenuUI : MonoBehaviour
 
     public void OnClickLoadGameButton()
     {
+        loadGameUI.ShowLoadGamePanel();
         loadGamePopup.ShowUI();
     }
 

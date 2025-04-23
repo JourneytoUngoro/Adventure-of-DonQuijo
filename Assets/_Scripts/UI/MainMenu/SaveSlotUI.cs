@@ -48,13 +48,12 @@ public class SaveSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         deleteButton.onClick.AddListener(OnClickDeleteButton);
     }
 
-    public void SetData(string profileId, GameData data)
+    public void SetData(GameData data)
     {
-        if (profileId != null && data != null)
+        if (data != null)
         {
             isNull = false;
 
-            this.profileId = profileId;
             mentality = data.mentality;
             lastPlayTime = data.displayedLastPlayTime;
             totalPlayTime = data.totalPlayTime;
@@ -78,9 +77,8 @@ public class SaveSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         else
         {
             textInfo.SetDynamicTextInfo(new TextInfoData($"No Data"));
-            saveSlotButton.GetComponentInChildren<TextMeshProUGUI>().text = "empty\nslot";
+            saveSlotButton.transform.Find("Slot TMP").GetComponent<TextMeshProUGUI>().text = "empty\nslot";
         }
-        Debug.Log("Set Data");
     }
 
     void OnClickDeleteButton()

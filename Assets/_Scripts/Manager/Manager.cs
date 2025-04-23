@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
@@ -34,4 +36,44 @@ public class Manager : MonoBehaviour
         uiManager = GetComponentInChildren<UIManager>();
         dataManager = GetComponentInChildren<DataManager>();
     }
+
+    #region Test
+
+    [SerializeField] private List<SceneField> scenesToInitialize;
+    public Player player { get; private set; }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (IsInitializeScene(scene.name))
+        {
+            Debug.Log($"{scene.name}");
+
+            FindPlayer();
+
+            itemManager.SetupInGameScene();
+        }
+    }
+
+    bool IsInitializeScene(string nextScene)
+    {
+        return scenesToInitialize.Any(SceneField => SceneField ==  nextScene);
+    }
+
+    public void FindPlayer()
+    {
+        player = GameObject.Find("Player").GetComponent<Player>();
+        Debug.Assert(player != null, $"can't find player on the {SceneManager.GetActiveScene().name}!");
+    }
+    #endregion
+
 }

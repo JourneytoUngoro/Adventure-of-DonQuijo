@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -39,8 +40,10 @@ public class LoadGameUI : MonoBehaviour
         {
             saveSlotUI[i] = saveSlotButtons[i].GetComponent<SaveSlotUI>();
             saveSlotUI[i].SetOutline(false);
+            saveSlotUI[i].profileId = GenerateSlotId(i);
         }
-        InitializeSlots();
+
+        AssginGameData();
 
         editing = false;
     }
@@ -57,27 +60,20 @@ public class LoadGameUI : MonoBehaviour
         popup.HideUI();
     }
 
-    public void InitializeSlots()
+    public void AssginGameData()
     {
-        // TODO : DataManager로 nowProfileId 연결하기
         allProfilesGameData = Manager.Instance.dataManager.GetAllProfilesGameData();
-
-        int index = 0;
-        foreach (var pair in allProfilesGameData)
-        {
-            Debug.Log("slot init...");
-
-            if (index >= saveSlotButtons.Length) break;
-
-            saveSlotUI[index++].SetData(pair.Key, pair.Value);
-        }
 
         for (int i = 0; i < saveSlotButtons.Length; i++)
         {
-            if (saveSlotUI[i].isNull)
+            if (allProfilesGameData.ContainsKey(GenerateSlotId(i)) && allProfilesGameData[GenerateSlotId(i)] != null)
             {
-                saveSlotUI[i].SetData(null, null);
-
+                saveSlotUI[i].SetData(allProfilesGameData[GenerateSlotId(i)]);
+            }
+            else
+            {
+                // new game data
+                saveSlotUI[i].SetData(null);
             }
         }
     }
@@ -88,7 +84,6 @@ public class LoadGameUI : MonoBehaviour
         {
             saveSlotUI[i].SetOutline(false);
         }
-        nowProfileId = saveSlotUI[index].profileId;
         saveSlotUI[index].SetOutline(true);
 
         LoadOrNewGame(index);
@@ -137,18 +132,26 @@ public class LoadGameUI : MonoBehaviour
         guidePopup.SetDynamicPopupEvent(DeleteGameWithSlot, guidePopup.HideUI);
     }
 
-    void LoadGameWithSlot()
+
+    public void LoadGameWithSlot()
     {
         if (nowProfileId != string.Empty)
         {
             Manager.Instance.dataManager.ChangeSelectedProfileId(nowProfileId);
-            guidePopup?.HideUI();
+            guidePopup.HideUI();
             guidePopup = null;
 
             nowProfileId = string.Empty;
 
-            SceneManager.LoadScene("SampleScene");
+            LoadCurrentScene();
         }
+        popup.HideUI();
+    }
+
+    void LoadCurrentScene()
+    {
+        // TODO : Save-Load 시 저장된 씬 불러와야 한다 
+        SceneManager.LoadScene("SampleScene");
     }
 
     void DeleteGameWithSlot()
@@ -156,11 +159,11 @@ public class LoadGameUI : MonoBehaviour
         if (deleteProfileId != string.Empty)
         {
             Manager.Instance.dataManager.DeleteProfileData(deleteProfileId);
-            guidePopup?.HideUI();
+            guidePopup.HideUI();
             guidePopup = null;
 
             OnDeletedSaveSlot();
-            InitializeSlots();
+            AssginGameData();
 
             deleteProfileId = string.Empty;
         }
@@ -172,10 +175,25 @@ public class LoadGameUI : MonoBehaviour
         {
             if (saveSlotUI[i].profileId == deleteProfileId)
             {
-                saveSlotUI[i].SetData(null, null);
+                saveSlotUI[i].SetData(null);
                 if (editing) saveSlotUI[i].deleteButton.gameObject.SetActive(false);
                 break;
             }
+        }
+    }
+
+    string GenerateSlotId(int index)
+    {
+        string slotId = "slot";
+        // profileId : slot1, slot2, slot3, ...
+        return string.Concat(slotId, index+1);
+    }
+
+    public void ShowLoadGamePanel()
+    {
+        if (editing)
+        {
+            OnClickEditButton();
         }
     }
 

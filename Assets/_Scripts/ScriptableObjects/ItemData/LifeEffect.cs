@@ -19,6 +19,6 @@ public class LifeEffect : ItemEffect
 
         target.stats.health.SetCurrentValue(fullAmount);
 
-        Debug.Log($"Heal Effect : + {debugging}  = {target.stats.health.currentValue} ");
+        // Debug.Log($"Heal Effect : + {debugging}  = {target.stats.health.currentValue} ");
     }
 }

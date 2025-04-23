@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -55,6 +54,8 @@ public class ObservableItemArray : IObservableArray<Item>
         if (items[index] != null) return false;
 
         items[index] = item;
+        if (items[index].quantity == 0) items[index].quantity = 1;
+
         Invoke();
 
         return true;
@@ -107,7 +108,6 @@ public class ObservableItemArray : IObservableArray<Item>
         if (items[index].quantity + plusQuantity <= item.details.maxStack)
         {
             items[index].quantity += plusQuantity;
-
             Invoke();
 
             return true;

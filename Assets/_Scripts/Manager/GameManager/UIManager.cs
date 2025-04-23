@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -30,12 +31,16 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        uiCanvas = GameObject.Find("UICanvas").transform;
-        pool = GameObject.Find("Pooled Objects").transform;
+        uiCanvas = GameObject.Find("Overlay Canvas")?.transform;
+        pool = GameObject.Find("Pooled Objects")?.transform;
+        
+        // TODO : SampleScene 삭제 시 제거
+        InCaseSampleScene();
 
         RegisterUIObjects();
         CreatePool();
     }
+
 
     private void RegisterUIObjects()
     {
@@ -110,13 +115,24 @@ public class UIManager : MonoBehaviour
     {
         if (activatedPopups.Count > 0)
         {
-            Debug.Log($"activated popup : {activatedPopups.Count}");
+            // Debug.Log($"activated popup : {activatedPopups.Count}, {activatedPopups.Peek().name}");
             activatedPopups.Peek().HideUI();
         }
         else
         {
-            // startingUIDictionary[UIType.pausePopup].ShowUI();
+            startingUIDictionary[UIType.settingPopup].ShowUI();
         }
     }
+
+    #region Test 이후 삭제
+    void InCaseSampleScene()
+    {
+        if (SceneManager.GetActiveScene().name == "SampleScene")
+        {
+            uiCanvas = GameObject.Find("Test Canvas").transform;
+        }
+    }
+    #endregion
+
 
 }

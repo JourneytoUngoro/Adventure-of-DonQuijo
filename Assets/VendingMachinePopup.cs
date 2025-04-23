@@ -37,6 +37,7 @@ public class VendingMachinePopup : MonoBehaviour
 
     void PurchaseItem(Item item)
     {
+        Debug.Assert(item != null, "vending machine item null!");
         Manager.Instance.itemManager.PurchaseItem(item);
     }
 

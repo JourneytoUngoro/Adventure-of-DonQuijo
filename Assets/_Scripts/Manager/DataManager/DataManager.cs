@@ -94,8 +94,6 @@ public class DataManager : MonoBehaviour
 
     public void SaveGame()
     {
-        Debug.Log("Try save game");
-
         if (IsExcludedScene())
         {
             Debug.Log("Excluded Scene");

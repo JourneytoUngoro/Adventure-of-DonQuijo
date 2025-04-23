@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
+using UnityEngine.SceneManagement;
 
 public class ItemManager : MonoBehaviour
 {
@@ -13,10 +11,21 @@ public class ItemManager : MonoBehaviour
     // 테스트 시 인스펙터 할당 
     [SerializeField] Player player;
 
-
     private void Awake()
     {
+        if (SceneManager.GetActiveScene().name == "SampleScene")
+        {
+            SetupInGameScene();
+        }
+    }
+
+    public void SetupInGameScene()
+    {
         inventory = GameObject.Find("Item Inventory").GetComponent<Inventory>();
+        player = GameObject.Find("Player").GetComponent<Player>();
+
+        Debug.Assert(inventory != null, "item manager inventory null");
+        Debug.Assert(player != null, "item manager player null!");
     }
 
     public void AcquireItem(Item item)

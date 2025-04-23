@@ -14,6 +14,6 @@ public class HealEffect : ItemEffect
 
         target.stats.health.IncreaseCurrentValue(healAmount);
 
-        Debug.Log($"Heal Effect : {debugging} + {healAmount}  = {target.stats.health.currentValue} ");
+        // Debug.Log($"Heal Effect : {debugging} + {healAmount}  = {target.stats.health.currentValue} ");
     }
 }

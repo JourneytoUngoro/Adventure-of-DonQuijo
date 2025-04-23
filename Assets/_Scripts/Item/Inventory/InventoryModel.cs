@@ -41,30 +41,36 @@ public class InventoryModel
         inventoryData = data;
         inventoryData.capacity = capacity;
 
-        for (int i = 0; i < capacity; i++)
-        {
-            if (inventoryData.items[i].id == 0)
-            {
-                inventoryData.items[i] = null; // JsonUtility 는 null 값을 기본 값으로 직렬화하여 저장하므로, 기본 값을 다시 null로 변경한다 
-            }
-        }
-
-
         // ============================= 코인 테스트 용 ===================================
         inventoryData.coins = inventoryData.coins == 0 ? 1000 : inventoryData.coins;
         // ===========================================================================
 
         bool isNew = inventoryData.items == null || inventoryData.items.Length == 0;
 
+/*        for (int i = 0; i < capacity; i++)
+        {
+            if (inventoryData.items[i].id == 0)
+            {
+                inventoryData.items[i] = null; // JsonUtility 는 null 값을 기본 값으로 직렬화하여 저장하므로, 기본 값을 다시 null로 변경한다 
+            }
+        }*/
+
         if (isNew)
         {
+            // new GameData
             inventoryData.items = new Item[capacity];
         }
         else
         {
             for (int i = 0; i < capacity; i++)
             {
+                if (inventoryData.items[i].id == 0)
+                {
+                    inventoryData.items[i] = null;
+                }
+
                 if (Items[i] == null) continue;
+
                 inventoryData.items[i].details = ItemDatabase.GetDetailsById(Items[i].id);
             }
         }

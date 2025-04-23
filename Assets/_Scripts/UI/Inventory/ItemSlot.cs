@@ -37,6 +37,9 @@ public class ItemSlot : Slot<Item>
         }
         else
         {
+            Debug.Assert(item.details != null, "item details null!");
+            Debug.Assert(DraggableElement.elementImage != null, "draggable element image null!");
+
             DraggableElement.element = item;
             DraggableElement.element.id = item.id;
             DraggableElement.element.details = item.details;
