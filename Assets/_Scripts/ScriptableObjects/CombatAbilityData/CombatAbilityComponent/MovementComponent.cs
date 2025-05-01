@@ -12,8 +12,8 @@ public class MovementComponent : CombatAbilityComponent
     [field: SerializeField] public bool slowDown { get; private set; }
     [field: SerializeField] public float orthogonalVelocity { get; private set; }
 
-    public override void ApplyCombatAbility(Entity target, OverlapCollider[] overlapColliders)
+    public override void ApplyCombatAbility(Collider2D target, OverlapCollider[] overlapColliders)
     {
-        throw new System.NotImplementedException();
+        pertainedCombatAbility.sourceEntity.entityCombat.GetMovement(this);
     }
 }

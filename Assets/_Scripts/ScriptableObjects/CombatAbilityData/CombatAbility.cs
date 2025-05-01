@@ -8,7 +8,7 @@ public class CombatAbility : ScriptableObject
 {
     [field: SerializeField] public Sprite combatAbilityIcon { get; private set; }
     [field: SerializeField] public string combatAbilityName { get; private set; } = "Default Combat Ability Name";
-    [field: SerializeField, Tooltip("When target gets knockback only when its stance level is lower than threat level.")] public int threatLevel { get; private set; }
+    [field: SerializeField, Tooltip("When target gets knockback only when its stance level is lower than threat level.")] public int threatLevel { get; private set; } = 1;
     [field: SerializeField, TextArea] public string combatAbilityDescription { get; private set; } = "Default Combat Ability Description";
     [field: SerializeField] public bool canBeDodged { get; private set; } = true;
     [field: SerializeField] public bool canBeBlocked { get; private set; } = true;
@@ -17,7 +17,7 @@ public class CombatAbility : ScriptableObject
     [field: SerializeField, Tooltip("stanceWhenHit will be controlled by entity's stanceLevel by script.")] public bool stanceWhenParried { get; private set; } = false;
     // TODO: Add dazed logic
     [field: SerializeField] public bool getDazed { get; private set; }
-    [field: SerializeReference] public List<CombatAbilityComponent> combatAbilityComponents { get; private set; }
+    [field: SerializeReference] public List<CombatAbilityComponent> combatAbilityComponents { get; private set; } = new List<CombatAbilityComponent>();
     public Entity sourceEntity { get; set; }
 
     public void AddComponent(CombatAbilityComponent componentData)

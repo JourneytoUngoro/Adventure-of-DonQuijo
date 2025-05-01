@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class DamageComponent : CombatAbilityComponent
 {
-    [field: SerializeField] public AnimationCurve healthDamageIncreaseByLevel { get; private set; }
-    [field: SerializeField] public AnimationCurve postureDamageIncreaseByLevel { get; private set; }
+    /*[field: SerializeField] public AnimationCurve healthDamageIncreaseByLevel { get; private set; }
+    [field: SerializeField] public AnimationCurve postureDamageIncreaseByLevel { get; private set; }*/
+    [field: SerializeField] public AnimationCurveSet healthDamage { get; private set; }
+    [field: SerializeField] public AnimationCurveSet postureDamage { get; private set; }
     [field: SerializeField] public float pauseTimeWhenHit { get; private set; }
 
     [field: SerializeField, Range(0.0f, 1.0f)] public float healthDamageShieldRate { get; private set; } = 1.0f;
@@ -18,8 +20,8 @@ public class DamageComponent : CombatAbilityComponent
     [field: SerializeField, Range(0.0f, 1.0f)] public float postureCounterDamageRate { get; private set; } = 0.8f;
     [field: SerializeField] public float pauseTimeWhenParried { get; private set; }
 
-    public override void ApplyCombatAbility(Entity target, OverlapCollider[] overlapColliders)
+    public override void ApplyCombatAbility(Collider2D target, OverlapCollider[] overlapColliders)
     {
-        target.entityCombat.GetDamage(this, overlapColliders);
+        target.GetComponentInParent<Entity>().entityCombat.GetDamage(this, overlapColliders);
     }
 }

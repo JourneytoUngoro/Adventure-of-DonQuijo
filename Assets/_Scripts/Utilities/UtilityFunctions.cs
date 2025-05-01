@@ -17,6 +17,23 @@ public static class UtilityFunctions
     public static bool IsInLayerMask(this GameObject obj, LayerMask mask) => (mask.value & (1 << obj.layer)) != 0;
     public static bool IsInLayerMask(int layer, LayerMask mask) => (mask.value & (1 << layer)) != 0;
     public static bool isEqual(float a, float b) => Mathf.Abs(a - b) < float.Epsilon;
+    public static bool RandomSuccess(float possibility) => RandomFloat(0.0f, 1.0f) < possibility;
+    public static int? RandomTrueIndex(bool[] array)
+    {
+        List<int> trueIndices = new List<int>();
+
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (array[i]) trueIndices.Add(i);
+        }
+
+        if (trueIndices.Count == 0) return null;
+
+        int randomIndex = RandomInteger(trueIndices.Count);
+
+        return trueIndices[randomIndex];
+    }
+
     public static int RandomOption(this IEnumerable<float> possibilities)
     {
         int totalOption = possibilities.Count();

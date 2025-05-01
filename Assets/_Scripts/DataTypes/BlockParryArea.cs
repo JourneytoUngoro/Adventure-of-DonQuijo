@@ -13,7 +13,6 @@ public class BlockParryArea
     [field: SerializeField] public float[] parryDurationTime { get; private set; }
     [field: SerializeField] public float parryTimeDecrementReset { get; private set; }
 
-    public float lastCalledTime;
-
-    public int currentIndex;
+    public float lastCalledTime { get; set; }
+    public int currentIndex { get; set; }
 }

@@ -8,6 +8,7 @@ public abstract class Movement : CoreComponent
 {
     public event Action synchronizeValues;
     public int facingDirection { get; private set; }
+    public bool coroutineEnabled { get; private set; }
 
     private bool onContact;
     private Coroutine velocityChangeCoroutine;
@@ -112,16 +113,16 @@ public abstract class Movement : CoreComponent
         velocityChangeCoroutine = StartCoroutine(VelocityChangeOverTime(Vector2.up * velocity, moveTime, easeFunction, slowDown, stopBeforeLedge, Vector2.one));
     }
 
-    public void SetVelocityChangeOverTime(Vector2 velocity, float moveTime, Ease easeFunction, bool slowDown, bool stopBeforeLedge, Vector2? horizontalVerticalRatio = null)
+    /*public void SetVelocityChangeOverTime(Vector2 velocity, float moveTime, Ease easeFunction, bool slowDown, bool stopBeforeLedge, Vector2? horizontalVerticalRatio = null)
     {
         horizontalVerticalRatio = horizontalVerticalRatio ?? Vector2.one;
         horizontalVerticalRatio = new Vector2(horizontalVerticalRatio.Value.x / Mathf.Max(horizontalVerticalRatio.Value.x, horizontalVerticalRatio.Value.y), horizontalVerticalRatio.Value.y / Mathf.Max(horizontalVerticalRatio.Value.x, horizontalVerticalRatio.Value.y));
 
         StopVelocityChangeOverTime();
         velocityChangeCoroutine = StartCoroutine(VelocityChangeOverTime(velocity, moveTime, easeFunction, slowDown, stopBeforeLedge, horizontalVerticalRatio.Value));
-    }
+    }*/
 
-    public void SetVelocityChangeOverTime(float speed, Vector2 direction, float moveTime, Ease easeFunction, bool slowDown, bool stopBeforeLedge, Vector2? horizontalVerticalRatio = null)
+    public void SetVelocityChangeOverTime(Vector2 direction, float speed, float moveTime, Ease easeFunction, bool slowDown, bool stopBeforeLedge, Vector2? horizontalVerticalRatio = null)
     {
         horizontalVerticalRatio = horizontalVerticalRatio ?? Vector2.one;
         horizontalVerticalRatio = new Vector2(horizontalVerticalRatio.Value.x / Mathf.Max(horizontalVerticalRatio.Value.x, horizontalVerticalRatio.Value.y), horizontalVerticalRatio.Value.y / Mathf.Max(horizontalVerticalRatio.Value.x, horizontalVerticalRatio.Value.y));
@@ -132,6 +133,7 @@ public abstract class Movement : CoreComponent
 
     private IEnumerator VelocityChangeOverTime(Vector2 velocity, float moveTime, Ease easeFunction, bool slowDown, bool stopBeforeLedge, Vector2 horizontalVerticalRatio)
     {
+        coroutineEnabled = true;
         float coroutineElapsedTime = 0.0f;
         WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
 
@@ -153,12 +155,13 @@ public abstract class Movement : CoreComponent
             }
             else
             {
-                Debug.Log(velocityMultiplierOverTime * velocity.x * horizontalVerticalRatio.x + ", " + velocityMultiplierOverTime * velocity.y * horizontalVerticalRatio.y);
+                // Debug.Log(velocityMultiplierOverTime * velocity.x * horizontalVerticalRatio.x + ", " + velocityMultiplierOverTime * velocity.y * horizontalVerticalRatio.y);
                 SetVelocity(velocityMultiplierOverTime * velocity.x * horizontalVerticalRatio.x, velocityMultiplierOverTime * velocity.y * horizontalVerticalRatio.y);
             }
 
             if (coroutineElapsedTime > moveTime)
             {
+                coroutineEnabled = false;
                 yield break;
             }
             else

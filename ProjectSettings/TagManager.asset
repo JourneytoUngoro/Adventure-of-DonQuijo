@@ -21,8 +21,8 @@ TagManager:
   - Enemy
   - EnemyHit
   - PlayerInteraction
-  - 
-  - 
+  - BlockLayer
+  - ParryLayer
   - 
   - 
   - 

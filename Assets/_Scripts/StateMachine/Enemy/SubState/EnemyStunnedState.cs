@@ -33,7 +33,7 @@ public class EnemyStunnedState : EnemyState
 
         if (!onStateExit)
         {
-            stunRecoveryTimer.Tick();
+            stunRecoveryTimer.Tick(isGrounded);
         }
     }
 }

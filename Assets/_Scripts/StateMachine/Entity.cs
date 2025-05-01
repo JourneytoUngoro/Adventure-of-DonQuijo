@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
 // TODO: Conditions
-public enum CurrentStatus { GotHit, HealthDamage, PostureDamage, Knockback, Parried, Blocked, wasParried }
+public enum CurrentStatus { gotHit, HealthDamage, PostureDamage, Knockback, Parried, Blocked, wasParried }
 
 public class Entity : MonoBehaviour
 {
@@ -32,7 +32,7 @@ public class Entity : MonoBehaviour
 
     #region Other Variables
     [field: SerializeField] public bool printStateChange { get; private set; }
-    public int entityLevel { get; protected set; }
+    [field: SerializeField] public int entityLevel { get; protected set; }
     public bool isDead { get; protected set; }
     public bool[] status { get; protected set; }
     public float currentEntityStature { get; protected set; }

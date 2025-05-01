@@ -15,16 +15,19 @@ public class PlayerStats : Stats, IDataPersistance
         player = entity as Player;
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
+
         health.OnCurrentValueMin += () => { player.playerStateMachine.ChangeState(player.deadState); };
+        posture.OnCurrentValueMax += () => { player.playerStateMachine.ChangeState(player.stunnedState); };
         experience.OnCurrentValueMax += () => { level.IncreaseCurrentValue(1); };
         level.OnCurrentValueChange += () =>
         {
-            health.IncreaseMaxValue(health.incrementPerLevel.Evaluate(level.currentValue));
-            health.IncreaseCurrentValue(health.incrementPerLevel.Evaluate(level.currentValue));
-            posture.IncreaseMaxValue(posture.incrementPerLevel.Evaluate(level.currentValue));
-            posture.IncreaseCurrentValue(posture.incrementPerLevel.Evaluate(level.currentValue));
+            health.IncreaseMaxValue(health.graph.incrementPerLevel.Evaluate(level.currentValue));
+            health.IncreaseCurrentValue(health.graph.incrementPerLevel.Evaluate(level.currentValue));
+            posture.IncreaseMaxValue(posture.graph.incrementPerLevel.Evaluate(level.currentValue));
+            posture.IncreaseCurrentValue(posture.graph.incrementPerLevel.Evaluate(level.currentValue));
         };
     }
 
