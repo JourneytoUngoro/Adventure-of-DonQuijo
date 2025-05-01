@@ -23,7 +23,7 @@ public class EnemyMeleeAttack1State : EnemyAbilityState
         base.AnimationFinishTrigger(index);
 
         isAbilityDone = true;
-        enemy.movement.SetVelocityXChangeOverTime(300.0f, 1.0f, DG.Tweening.Ease.OutCubic, true, true);
+        enemy.movement.SetVelocityXChangeOverTime(300.0f * -facingDirection, 1.0f, DG.Tweening.Ease.OutCubic, true, true);
         enemy.movement.SetVelocityZ(100.0f);
         enemy.orthogonalRigidbody.gravityScale = enemy.enemyData.gravityScale;
     }

@@ -51,6 +51,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
     {
         base.Exit();
 
+        enemy.animator.SetBool("idle", false);
         enemy.navMeshAgent.enabled = false;
     }
 
@@ -122,8 +123,23 @@ public class EnemyTargetInDetectionRangeState : EnemyState
             {
                 currentDestination = enemy.detection.currentTarget.entityDetection.currentProjectedPosition - enemy.transform.right * enemy.enemyData.adequateDistance + (Vector3)positionOffset;
 
-                enemy.animator.SetBool("move", enemy.navMeshAgent.remainingDistance > enemy.navMeshAgent.stoppingDistance);
-                enemy.animator.SetBool("idle", enemy.navMeshAgent.remainingDistance <= enemy.navMeshAgent.stoppingDistance);
+                if (enemy.navMeshAgent.enabled)
+                {
+                    if (!enemy.navMeshAgent.pathPending && enemy.navMeshAgent.remainingDistance <= enemy.navMeshAgent.stoppingDistance && !enemy.navMeshAgent.hasPath)
+                    {
+                        enemy.animator.SetBool("move", enemy.navMeshAgent.remainingDistance > enemy.navMeshAgent.stoppingDistance);
+                        enemy.animator.SetBool("idle", enemy.navMeshAgent.remainingDistance <= enemy.navMeshAgent.stoppingDistance);
+                        enemy.navMeshAgent.enabled = false;
+                    }
+                }
+                else
+                {
+                    if (Vector3.Distance(enemy.detection.currentProjectedPosition, enemy.detection.currentTarget.entityDetection.currentProjectedPosition) > enemy.enemyData.maxDistance)
+                    {
+                        positionOffset = Random.insideUnitCircle * enemy.enemyData.repositionOffsetDistance;
+                        enemy.navMeshAgent.enabled = true;
+                    }
+                }
             }
             else if (navMeshAgentState == NavMeshAgentState.TraverseAround)
             {
@@ -141,7 +157,10 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                 }
             }
 
-            enemy.navMeshAgent.SetDestination(currentDestination);
+            if (enemy.navMeshAgent.enabled)
+            {
+                enemy.navMeshAgent.SetDestination(currentDestination);
+            }
             enemy.animator.SetBool("moveBack", enemy.navMeshAgent.desiredVelocity.x * targetDirection < 0);
 
             /*if (navMeshAgentState == NavMeshAgentState.Halt)

@@ -213,7 +213,7 @@ Transform:
   m_GameObject: {fileID: 39404532}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 109.2, y: -67.2, z: -10}
+  m_LocalPosition: {x: 280, y: -67.2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -998,7 +998,7 @@ GameObject:
   - component: {fileID: 351621906}
   - component: {fileID: 351621905}
   m_Layer: 30
-  m_Name: MeleeAttack1_1
+  m_Name: MeleeAttack1_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1753,7 +1753,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 109.2, y: -67.2, z: -500}
+  m_LocalPosition: {x: 280, y: -67.2, z: -500}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2772,7 +2772,7 @@ GameObject:
   - component: {fileID: 782800779}
   - component: {fileID: 782800778}
   m_Layer: 30
-  m_Name: MeleeAttack2_1
+  m_Name: MeleeAttack2_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4007,7 +4007,7 @@ GameObject:
   - component: {fileID: 1066483419}
   - component: {fileID: 1066483420}
   m_Layer: 30
-  m_Name: MeleeAttack_3_2
+  m_Name: MeleeAttack_3_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4299,7 +4299,7 @@ Transform:
   m_GameObject: {fileID: 1077451522}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 109.2, y: -67.2, z: 0}
+  m_LocalPosition: {x: 280, y: -67.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4656,7 +4656,7 @@ GameObject:
   - component: {fileID: 1222254513}
   - component: {fileID: 1222254512}
   m_Layer: 30
-  m_Name: MeleeAttack_3_1
+  m_Name: MeleeAttack_3_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5677,7 +5677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <shadow>k__BackingField: {fileID: 1860007866}
   <entityData>k__BackingField: {fileID: 11400000, guid: 0b9bde2239662ee418e64b3ccd88ef98, type: 2}
-  <printStateChange>k__BackingField: 0
+  <printStateChange>k__BackingField: 1
   <entityLevel>k__BackingField: 0
 --- !u!61 &1588174376
 BoxCollider2D:
@@ -5760,7 +5760,7 @@ Transform:
   m_GameObject: {fileID: 1588174374}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 307, y: -63, z: 0}
+  m_LocalPosition: {x: 480, y: -63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5783,7 +5783,7 @@ NavMeshAgent:
   m_Acceleration: Infinity
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
