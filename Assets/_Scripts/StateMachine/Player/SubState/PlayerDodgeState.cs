@@ -48,7 +48,7 @@ public class PlayerDodgeState : PlayerAbilityState
         }
         else
         {
-            player.movement.SetVelocityChangeOverTime(playerData.dodgeSpeed, new Vector2(inputX, inputY), playerData.dodgeTime, Ease.InSine, true, false, playerData.moveSpeed);
+            player.movement.SetVelocityChangeOverTime(new Vector2(inputX, inputY), playerData.dodgeSpeed, playerData.dodgeTime, Ease.InSine, true, false, playerData.moveSpeed);
         }
     }
 

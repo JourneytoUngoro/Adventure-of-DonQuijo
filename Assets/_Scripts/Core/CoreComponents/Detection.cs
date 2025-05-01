@@ -27,8 +27,8 @@ public abstract class Detection : CoreComponent
     public bool isGrounded { get; protected set; }
     public pair<bool, bool> detectingHorizontalObstacle { get; protected set; } = new pair<bool, bool>(false, false);
     public pair<bool, bool> detectingVerticalObstacle { get; protected set; } = new pair<bool, bool>(false, false);
+    public Collider2D currentGroundCollider { get; protected set; }
 
-    protected Collider2D currentGroundCollider;
     protected Collider2D currentCeilingCollider;
     protected Collider2D[] projectedPositionColliders = new Collider2D[maxDetectionCount];
     protected Collider2D[] forwardObstacleColliders = new Collider2D[maxDetectionCount];

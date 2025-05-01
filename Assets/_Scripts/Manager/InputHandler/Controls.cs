@@ -107,6 +107,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BlockParry"",
+                    ""type"": ""Button"",
+                    ""id"": ""e1843002-1f64-472b-856c-e26d89ea1430"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -252,6 +261,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Map"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""69629c26-548d-4054-9cbc-c10835bc8695"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BlockParry"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -286,6 +306,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_CharacterControl_PauseMenu = m_CharacterControl.FindAction("Pause/Menu", throwIfNotFound: true);
         m_CharacterControl_Equipment = m_CharacterControl.FindAction("Equipment", throwIfNotFound: true);
         m_CharacterControl_Map = m_CharacterControl.FindAction("Map", throwIfNotFound: true);
+        m_CharacterControl_BlockParry = m_CharacterControl.FindAction("BlockParry", throwIfNotFound: true);
     }
 
     ~@Controls()
@@ -361,6 +382,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControl_PauseMenu;
     private readonly InputAction m_CharacterControl_Equipment;
     private readonly InputAction m_CharacterControl_Map;
+    private readonly InputAction m_CharacterControl_BlockParry;
     public struct CharacterControlActions
     {
         private @Controls m_Wrapper;
@@ -374,6 +396,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @PauseMenu => m_Wrapper.m_CharacterControl_PauseMenu;
         public InputAction @Equipment => m_Wrapper.m_CharacterControl_Equipment;
         public InputAction @Map => m_Wrapper.m_CharacterControl_Map;
+        public InputAction @BlockParry => m_Wrapper.m_CharacterControl_BlockParry;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -410,6 +433,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Map.started += instance.OnMap;
             @Map.performed += instance.OnMap;
             @Map.canceled += instance.OnMap;
+            @BlockParry.started += instance.OnBlockParry;
+            @BlockParry.performed += instance.OnBlockParry;
+            @BlockParry.canceled += instance.OnBlockParry;
         }
 
         private void UnregisterCallbacks(ICharacterControlActions instance)
@@ -441,6 +467,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Map.started -= instance.OnMap;
             @Map.performed -= instance.OnMap;
             @Map.canceled -= instance.OnMap;
+            @BlockParry.started -= instance.OnBlockParry;
+            @BlockParry.performed -= instance.OnBlockParry;
+            @BlockParry.canceled -= instance.OnBlockParry;
         }
 
         public void RemoveCallbacks(ICharacterControlActions instance)
@@ -478,5 +507,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnPauseMenu(InputAction.CallbackContext context);
         void OnEquipment(InputAction.CallbackContext context);
         void OnMap(InputAction.CallbackContext context);
+        void OnBlockParry(InputAction.CallbackContext context);
     }
 }

@@ -3,11 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum NavMeshAgentState { Halt, Chase, InDistance, TraverseAround }
+
 public class EnemyMovement : Movement
 {
+    [SerializeField] private float stepSize = 5.0f;
+
+    public NavMeshAgentState navMeshAgentState { get; private set; }
+
     protected Enemy enemy;
+
     private NavMeshAgent navMeshAgent;
     private Vector3 recaliberationPosition;
+    private Vector3 currentDestination;
+    private Vector3 baseDestinationPosition;
+    private Vector2 positionOffset;
+
+    private bool traverseAroundFlag;
 
     protected override void Awake()
     {
@@ -21,7 +33,7 @@ public class EnemyMovement : Movement
         base.Start();
 
         navMeshAgent = enemy.navMeshAgent;
-        navMeshAgent.autoTraverseOffMeshLink = false;
+        enemy.navMeshAgent.autoTraverseOffMeshLink = false;
         StartCoroutine(TraverseNavmeshLink());
     }
 
@@ -29,13 +41,18 @@ public class EnemyMovement : Movement
     {
         base.FixedUpdate();
 
-        if (navMeshAgent.enabled)
+        if (enemy.navMeshAgent.enabled)
         {
-            enemy.movement.CheckIfShouldFlip(enemy.detection.currentTarget.transform.position.x - navMeshAgent.transform.position.x);
-            navMeshAgent.SetDestination(enemy.detection.currentTarget.transform.position);
-            recaliberationPosition = enemy.transform.position;
-            Vector3 direction = navMeshAgent.desiredVelocity == Vector3.zero ? (enemy.detection.currentTarget.transform.position - navMeshAgent.transform.position).normalized : navMeshAgent.velocity.normalized;
-            enemy.navMeshAgent.speed = Mathf.Abs(direction.x) * enemy.enemyData.moveSpeed.x + Mathf.Abs(direction.y) * enemy.enemyData.moveSpeed.y;
+            Vector3 chaseDirection = enemy.navMeshAgent.desiredVelocity == Vector3.zero ? (enemy.navMeshAgent.destination - enemy.navMeshAgent.transform.position).normalized : enemy.navMeshAgent.velocity.normalized;
+
+            if (enemy.animator.GetBool("dash"))
+            {
+                enemy.navMeshAgent.speed = Mathf.Abs(chaseDirection.x) * enemy.enemyData.dashSpeed.x + Mathf.Abs(chaseDirection.y) * enemy.enemyData.dashSpeed.y;
+            }
+            else
+            {
+                enemy.navMeshAgent.speed = Mathf.Abs(chaseDirection.x) * enemy.enemyData.moveSpeed.x + Mathf.Abs(chaseDirection.y) * enemy.enemyData.moveSpeed.y;
+            }
         }
     }
 
@@ -90,5 +107,54 @@ public class EnemyMovement : Movement
             navMeshAgent.transform.position = Vector3.MoveTowards(navMeshAgent.transform.position, endPos, navMeshAgent.speed * Time.deltaTime);
             yield return waitForFixedUpdate;
         }
+    }
+
+    public void ChangeNavMeshState(NavMeshAgentState navMeshAgentState)
+    {
+        traverseAroundFlag = false;
+        positionOffset = Random.insideUnitCircle * enemy.enemyData.repositionOffsetDistance;
+
+        enemy.animator.SetBool("move", navMeshAgentState != NavMeshAgentState.Halt);
+        enemy.animator.SetBool("idle", navMeshAgentState == NavMeshAgentState.Halt);
+
+        if (navMeshAgentState == NavMeshAgentState.TraverseAround)
+        {
+            baseDestinationPosition = enemy.detection.currentTarget.entityDetection.currentProjectedPosition;
+
+            if (UtilityFunctions.RandomSuccess(0.5f))
+            {
+                if (enemy.detection.GetPositionGroundCollider(baseDestinationPosition + Vector3.up * enemy.enemyData.repositionOffsetDistance + (Vector3)positionOffset).Equals(enemy.detection.currentTarget.entityDetection.currentGroundCollider))
+                {
+                    currentDestination = enemy.detection.currentTarget.transform.position + Vector3.up * enemy.enemyData.repositionOffsetDistance + (Vector3)positionOffset;
+                }
+                else if (enemy.detection.GetPositionGroundCollider(baseDestinationPosition + Vector3.down * enemy.enemyData.repositionOffsetDistance + (Vector3)positionOffset).Equals(enemy.detection.currentTarget.entityDetection.currentGroundCollider))
+                {
+                    currentDestination = enemy.detection.currentTarget.transform.position + Vector3.down * enemy.enemyData.repositionOffsetDistance + (Vector3)positionOffset;
+                }
+                else
+                {
+                    navMeshAgentState = NavMeshAgentState.InDistance;
+                }
+            }
+            else
+            {
+                if (enemy.detection.GetPositionGroundCollider(baseDestinationPosition + Vector3.down * enemy.enemyData.repositionOffsetDistance + (Vector3)positionOffset).Equals(enemy.detection.currentTarget.entityDetection.currentGroundCollider))
+                {
+                    currentDestination = enemy.detection.currentTarget.transform.position + Vector3.down * enemy.enemyData.repositionOffsetDistance + (Vector3)positionOffset;
+                }
+                else if (enemy.detection.GetPositionGroundCollider(baseDestinationPosition + Vector3.up * enemy.enemyData.repositionOffsetDistance + (Vector3)positionOffset).Equals(enemy.detection.currentTarget.entityDetection.currentGroundCollider))
+                {
+                    currentDestination = enemy.detection.currentTarget.transform.position + Vector3.up * enemy.enemyData.repositionOffsetDistance + (Vector3)positionOffset;
+                }
+                else
+                {
+                    navMeshAgentState = NavMeshAgentState.InDistance;
+                }
+            }
+
+            navMeshAgent.SetDestination(currentDestination);
+        }
+
+        this.navMeshAgentState = navMeshAgentState;
     }
 }

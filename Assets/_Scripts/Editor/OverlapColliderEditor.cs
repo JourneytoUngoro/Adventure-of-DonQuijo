@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(OverlapCollider))]
+// [CustomPropertyDrawer(typeof(OverlapCollider))]
 public class OverlapColliderEditor : PropertyDrawer
 {
     private SerializedProperty centerTransform;

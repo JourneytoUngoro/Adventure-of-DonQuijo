@@ -23,8 +23,9 @@ public class StatComponent
     [field: SerializeField] public float recoveryStartTime { get; private set; }
     [field: SerializeField, Tooltip("Recovery duration of -1 means it does not recover automatically (ex. health). Recovery duration of 0 means it will recover every frame.")] public float recoveryDuration { get; private set; }
     [field: SerializeField] public float recoveryValue { get; private set; }
-    [field: SerializeField] public AnimationCurve incrementPerLevel { get; private set; }
-    [field: SerializeField] public AnimationCurve accumulationPerLevel { get; private set; }
+    /*[field: SerializeField] public AnimationCurve incrementPerLevel { get; private set; }
+    [field: SerializeField] public AnimationCurve accumulationPerLevel { get; private set; }*/
+    [field: SerializeField] public AnimationCurveSet graph { get; private set; }
 
     private Timer recoveryStartTimer;
     private Timer recoveryTimer;
@@ -61,29 +62,35 @@ public class StatComponent
 
     public void IncreaseCurrentValue(float amount, bool allowMaxValue = true)
     {
-        currentValue += amount;
-        currentValue = allowMaxValue ? Mathf.Clamp(currentValue, minValue, maxValue) : Mathf.Clamp(currentValue, minValue, maxValue - epsilon);
-        SetSliderValue();
-        OnCurrentValueChange?.Invoke();
-
-        if (currentValue == maxValue)
+        if (currentValue < maxValue)
         {
-            OnCurrentValueMax?.Invoke();
+            currentValue += amount;
+            currentValue = allowMaxValue ? Mathf.Clamp(currentValue, minValue, maxValue) : Mathf.Clamp(currentValue, minValue, maxValue - epsilon);
+            SetSliderValue();
+            OnCurrentValueChange?.Invoke();
+
+            if (currentValue == maxValue)
+            {
+                OnCurrentValueMax?.Invoke();
+            }
         }
     }
 
     public void DecreaseCurrentValue(float amount, bool allowMinValue = true)
     {
-        currentValue -= amount;
-        currentValue = allowMinValue ? Mathf.Clamp(currentValue, minValue, maxValue) : Mathf.Clamp(currentValue, minValue + epsilon, maxValue);
-        SetSliderValue();
-        OnCurrentValueChange?.Invoke();
-        onRecovery = false;
-        recoveryStartTimer.StartSingleUseTimer();
-
-        if (currentValue == minValue)
+        if (currentValue > minValue)
         {
-            OnCurrentValueMin?.Invoke();
+            currentValue -= amount;
+            currentValue = allowMinValue ? Mathf.Clamp(currentValue, minValue, maxValue) : Mathf.Clamp(currentValue, minValue + epsilon, maxValue);
+            SetSliderValue();
+            OnCurrentValueChange?.Invoke();
+            onRecovery = false;
+            recoveryStartTimer.StartSingleUseTimer();
+
+            if (currentValue == minValue)
+            {
+                OnCurrentValueMin?.Invoke();
+            }
         }
     }
 
@@ -102,6 +109,13 @@ public class StatComponent
         {
             OnCurrentValueMin?.Invoke();
         }
+    }
+
+    public void SetMaxValue(float value)
+    {
+        maxValue = value;
+        SetSliderValue();
+        OnCurrentValueChange?.Invoke();
     }
 
     public void IncreaseMaxValue(float amount)

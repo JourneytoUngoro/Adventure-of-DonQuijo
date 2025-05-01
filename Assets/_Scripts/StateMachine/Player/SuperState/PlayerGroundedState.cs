@@ -36,6 +36,14 @@ public class PlayerGroundedState : PlayerState
             {
                 stateMachine.ChangeState(player.dodgeState);
             }
+            else if (blockParryInputPressed && player.blockParryState.available)
+            {
+                stateMachine.ChangeState(player.blockParryState);
+            }
+            else if (attackInputPressed && player.attackState.available)
+            {
+                stateMachine.ChangeState(player.attackState);
+            }
         }
 
         if (!onStateExit)

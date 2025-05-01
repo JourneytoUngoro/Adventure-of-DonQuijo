@@ -12,9 +12,9 @@ public class PlayerMoveState : PlayerGroundedState
 
     public PlayerMoveState(Player player, string animBoolName) : base(player, animBoolName)
     {
-        dashInputXBufferTimer = new Timer(playerData.commandBufferTime);
+        dashInputXBufferTimer = new Timer(playerData.dashInputBufferTime);
         dashInputXBufferTimer.timerAction += () => { prevInputX = 0; };
-        dashInputYBufferTimer = new Timer(playerData.commandBufferTime);
+        dashInputYBufferTimer = new Timer(playerData.dashInputBufferTime);
         dashInputYBufferTimer.timerAction += () => { prevInputY = 0; };
     }
 

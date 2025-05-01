@@ -12,19 +12,18 @@ public class EnemyDetection : Detection
 
     #region Detection Variables
     [SerializeField] private Collider2D detectionRangeCollider;
-    [SerializeField] private Collider2D vigilanceRangeCollider;
-    [SerializeField] private Collider2D aggroRangeCollider;
+    [SerializeField] private Collider2D chaseRangeCollider;
     #endregion
 
     #region Other Variables
-    [SerializeField] private bool targetPlayerFromTheStart;
+    [SerializeField] private bool constantlyFollowPlayer;
     #endregion
 
     private Enemy enemy;
     private ContactFilter2D contactFilter;
     private Collider2D[] detectionRangeColliders = new Collider2D[maxDetectionCount];
-    private Collider2D[] vigilanceRangeColliders = new Collider2D[maxDetectionCount];
-    private Collider2D[] aggroRangeColliders = new Collider2D[maxDetectionCount];
+    private Collider2D[] chaseRangeColliders = new Collider2D[maxDetectionCount];
+    private Collider2D[] designatedPositionColliders = new Collider2D[maxDetectionCount];
 
     protected override void Awake()
     {
@@ -39,7 +38,7 @@ public class EnemyDetection : Detection
     {
         base.OnEnable();
 
-        if (targetPlayerFromTheStart)
+        if (constantlyFollowPlayer)
         {
             currentTarget = Manager.Instance.gameManager.player;
         }
@@ -50,6 +49,13 @@ public class EnemyDetection : Detection
         base.FixedUpdate();
 
         currentTargetLastPosition = currentTarget ? currentTarget.transform.position : null;
+    }
+
+    public Collider2D GetPositionGroundCollider(Vector2 groundCheckPosition)
+    {
+        Array.Clear(designatedPositionColliders, 0, maxDetectionCount);
+        Physics2D.OverlapBoxNonAlloc(groundCheckPosition, entity.collider.size, 0.0f, designatedPositionColliders, whatIsGround);
+        return projectedPositionColliders.Where(groundCollider => groundCollider != null && groundCollider.transform.position.z + groundCollider.GetComponent<HeightData>().height <= currentEntityHeight).OrderByDescending(groundCollider => groundCollider.transform.position.z + groundCollider.GetComponent<HeightData>().height).FirstOrDefault();
     }
 
     /*public bool isTargetInAggroRange(bool exclusive)
@@ -64,18 +70,60 @@ public class EnemyDetection : Detection
 
     public bool isTargetInDetectionRange()
     {
-        Array.Clear(detectionRangeColliders, 0, maxDetectionCount);
-        detectionRangeCollider.OverlapCollider(contactFilter, detectionRangeColliders);
+        if (constantlyFollowPlayer)
+        {
+            return true;
+        }
+        else
+        {
+            Array.Clear(detectionRangeColliders, 0, maxDetectionCount);
+            detectionRangeCollider.OverlapCollider(contactFilter, detectionRangeColliders);
+
+            if (currentTarget == null)
+            {
+                currentTarget = detectionRangeColliders.Where(collider => collider != null).Select(collider => collider.gameObject.GetComponent<Entity>()).OrderBy(collider => Vector3.SqrMagnitude(collider.transform.position - entity.transform.position)).FirstOrDefault();
+                currentTarget?.entityCombat.targetedBy.Add(enemy);
+
+                return currentTarget != null;
+            }
+            else
+            {
+                if (detectionRangeColliders.Contains(currentTarget.collider))
+                {
+                    return true;
+                }
+                else
+                {
+                    currentTarget = null;
+                    return false;
+                }
+            }
+        }
+    }
+
+    public bool isTargetInDetectionRange(bool exclusive = false)
+    {
+        Array.Clear(chaseRangeColliders, 0, maxDetectionCount);
+        chaseRangeCollider.OverlapCollider(contactFilter, chaseRangeColliders);
 
         if (currentTarget == null)
         {
-            currentTarget = detectionRangeColliders.Where(collider => collider != null).Select(collider => collider.gameObject.GetComponent<Entity>()).OrderBy(collider => Vector3.SqrMagnitude(collider.transform.position - entity.transform.position)).FirstOrDefault();
+            currentTarget = chaseRangeColliders.Where(collider => collider != null).Select(collider => collider.gameObject.GetComponent<Entity>()).OrderBy(collider => Vector3.SqrMagnitude(collider.transform.position - entity.transform.position)).FirstOrDefault();
+            currentTarget?.entityCombat.targetedBy.Add(enemy);
 
             return currentTarget != null;
         }
         else
         {
-            return detectionRangeColliders.Contains(currentTarget.collider);
+            if (chaseRangeColliders.Contains(currentTarget.collider))
+            {
+                return true;
+            }
+            else
+            {
+                currentTarget = null;
+                return false;
+            }
         }
     }
 }

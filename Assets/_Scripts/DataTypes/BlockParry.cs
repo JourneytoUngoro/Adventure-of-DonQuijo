@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockParry : PooledObject
+public class BlockParry : MonoBehaviour
 {
     public OverlapCollider overlapCollider { get; private set; }
     public CombatAbility pertainedCombatAbility { get; private set; }
@@ -35,11 +35,11 @@ public class BlockParry : PooledObject
             {
                 if (changeToBlock)
                 {
-                    gameObject.layer = LayerMask.GetMask("BlockLayer");
+                    gameObject.layer = LayerMask.NameToLayer("BlockLayer");
                 }
                 else
                 {
-                    ReleaseObject();
+                    gameObject.SetActive(false);
                 }
             }
         }
@@ -47,23 +47,9 @@ public class BlockParry : PooledObject
         {
             if (Time.time > parryStartTime + parryDurationTime)
             {
-                if (changeToBlock)
-                {
-                    gameObject.layer = LayerMask.GetMask("BlockLayer");
-                }
-                else
-                {
-                    ReleaseObject();
-                }
+                gameObject.SetActive(false);
             }
         }
-    }
-
-    public override void ReleaseObject()
-    {
-        base.ReleaseObject();
-
-        Destroy(GetComponent<Collider2D>());
     }
 
     public void SetParryData(CombatAbility pertainedCombatAbility, float parryTime, float parryDurationTime, bool changeToBlock, OverlapCollider overlapCollider)
@@ -73,20 +59,16 @@ public class BlockParry : PooledObject
         this.parryDurationTime = parryDurationTime;
         this.changeToBlock = changeToBlock;
         this.overlapCollider = overlapCollider;
-        gameObject.layer = LayerMask.GetMask("ParryLayer");
-
-        Collider2D collider2D = gameObject.AddComponent<Collider2D>();
-        collider2D = overlapCollider.overlapCollider;
+        gameObject.layer = LayerMask.NameToLayer("ParryLayer");
+        gameObject.SetActive(true);
     }
 
     public void SetBlockData(CombatAbility pertainedCombatAbility, OverlapCollider overlapCollider)
     {
         this.pertainedCombatAbility = pertainedCombatAbility;
         this.overlapCollider = overlapCollider;
-        gameObject.layer = LayerMask.GetMask("BlockLayer");
-
-        Collider2D collider2D = gameObject.AddComponent<Collider2D>();
-        collider2D = overlapCollider.overlapCollider;
+        gameObject.layer = LayerMask.NameToLayer("BlockLayer");
+        gameObject.SetActive(true);
     }
 
     public void Parried()

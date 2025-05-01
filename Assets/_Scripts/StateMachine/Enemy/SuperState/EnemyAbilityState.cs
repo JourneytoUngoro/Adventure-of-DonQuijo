@@ -20,6 +20,14 @@ public class EnemyAbilityState : EnemyState
         base.Enter();
 
         isAbilityDone = false;
+        entity.stateMachineToAnimator.state = this;
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        isAbilityDone = true;
     }
 
     public override void PhysicsUpdate()

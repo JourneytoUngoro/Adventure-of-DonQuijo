@@ -14,5 +14,5 @@ public abstract class CombatAbilityComponent: ICombatAbility
         name = GetType().Name;
     }
 
-    public abstract void ApplyCombatAbility(Entity target, OverlapCollider[] overlapColliders);
+    public abstract void ApplyCombatAbility(Collider2D target, OverlapCollider[] overlapColliders);
 }

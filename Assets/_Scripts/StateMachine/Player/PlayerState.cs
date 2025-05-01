@@ -14,7 +14,9 @@ public class PlayerState : EntityState
 
     protected bool jumpInputHolding;
     protected bool jumpInputPressed;
-
+    protected bool blockParryInputHolding;
+    protected bool blockParryInputPressed;
+    protected bool attackInputPressed;
     protected bool dodgeInputPressed;
     #endregion
 
@@ -38,13 +40,13 @@ public class PlayerState : EntityState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-        SetInputVariables();
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+
+        SetInputVariables();
     }
 
     protected void SetInputVariables()
@@ -53,6 +55,9 @@ public class PlayerState : EntityState
         inputY = Manager.Instance.inputHandler.normInputY;
         jumpInputHolding = Manager.Instance.inputHandler.jumpInputHolding;
         jumpInputPressed = Manager.Instance.inputHandler.jumpInputPressed;
+        blockParryInputHolding = Manager.Instance.inputHandler.blockParryInputHolding;
+        blockParryInputPressed = Manager.Instance.inputHandler.blockParryInputPressed;
+        attackInputPressed = Manager.Instance.inputHandler.attackInputPressed;
         dodgeInputPressed = Manager.Instance.inputHandler.dodgeInputPressed;
     }
 
@@ -66,10 +71,6 @@ public class PlayerState : EntityState
         }
         player.moveState.dashInputXBufferTimer.Tick();
         player.moveState.dashInputYBufferTimer.Tick();
-    }
-
-    protected virtual void FixColliderPositionY()
-    {
-
+        player.attackState.attackComboTimer.Tick();
     }
 }

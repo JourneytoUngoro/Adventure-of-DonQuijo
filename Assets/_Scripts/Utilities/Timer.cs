@@ -10,10 +10,10 @@ using UnityEngine;
 /// </summary>
 public class Timer
 {
-    public bool timerActive { get; private set; }
     public event Action timerAction;
+    public bool timerActive { get; private set; }
+    public float duration { get; private set; }
 
-    private float duration;
     private float startTime;
     private float timeOffset;
 

@@ -11,8 +11,10 @@ public class PlayerInputHandler : MonoBehaviour
     public Vector2 movementInput { get; private set; }
     public bool jumpInputHolding { get; private set; }
     public bool jumpInputPressed { get; private set; }
-    public bool dodgeInputPressed { get; private set; }
+    public bool blockParryInputHolding { get; private set; }
+    public bool blockParryInputPressed { get; private set; }
     public bool attackInputPressed { get; private set; }
+    public bool dodgeInputPressed { get; private set; }
     public bool interactInputPressed { get; private set; }
     public int normInputX { get; private set; }
     public int normInputY { get; private set; }
@@ -42,6 +44,7 @@ public class PlayerInputHandler : MonoBehaviour
         dodgeInputPressed = controls.CharacterControl.Dodge.WasPressedThisFrame();
         attackInputPressed = controls.CharacterControl.Attack.WasPressedThisFrame();
         interactInputPressed = controls.CharacterControl.InteractSelect.WasPressedThisFrame();
+        blockParryInputPressed = controls.CharacterControl.BlockParry.WasPressedThisFrame();
     }
 
     public void OnMoveInput(InputAction.CallbackContext context)
@@ -67,6 +70,19 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.canceled)
         {
             jumpInputHolding = false;
+        }
+    }
+
+    public void OnBlockParryInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            blockParryInputHolding = true;
+        }
+
+        if (context.canceled)
+        {
+            blockParryInputHolding = false;
         }
     }
 

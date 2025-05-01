@@ -19,6 +19,8 @@ public class Player : Entity
     public PlayerStunnedState stunnedState { get; private set; }
     public PlayerLandingState landingState { get; private set; }
     public PlayerKnockbackState knockbackState { get; private set; }
+    public PlayerAttackState attackState { get; private set; }
+    public PlayerBlockParryState blockParryState { get; private set; }
     public PlayerDeadState deadState { get; private set; }
 
     public List<PlayerAbilityState> abilityStates { get; private set; }
@@ -28,6 +30,7 @@ public class Player : Entity
     public PlayerMovement movement { get; private set; }
     public PlayerDetection detection { get; private set; }
     public PlayerStats stats { get; private set; }
+    public PlayerCombat combat { get; private set; }
     public PlayerData playerData { get; private set; }
     #endregion
 
@@ -42,6 +45,7 @@ public class Player : Entity
         movement = entityMovement as PlayerMovement;
         detection = entityDetection as PlayerDetection;
         stats = entityStats as PlayerStats;
+        combat = entityCombat as PlayerCombat;
         playerData = entityData as PlayerData;
 
         playerStateMachine = new PlayerStateMachine();
@@ -56,6 +60,8 @@ public class Player : Entity
         stunnedState = new PlayerStunnedState(this, "stunned");
         landingState = new PlayerLandingState(this, "landing");
         knockbackState = new PlayerKnockbackState(this, "knockback");
+        attackState = new PlayerAttackState(this, "meleeAttack");
+        blockParryState = new PlayerBlockParryState(this, "blockParry");
         deadState = new PlayerDeadState(this, "dead");
 
         abilityStates = new List<PlayerAbilityState>();

@@ -33,4 +33,4 @@ MonoBehaviour:
   <dodgeCoolDownTime>k__BackingField: 1
   <dodgeTime>k__BackingField: 0.4
   <backstepTime>k__BackingField: 0.2
-  <shieldParryCoolDownTime>k__BackingField: 1
+  <shieldParryCoolDownTime>k__BackingField: 0.1

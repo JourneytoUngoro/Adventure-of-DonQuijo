@@ -15,8 +15,9 @@ public class EnemyStats : Stats
         enemy = entity as Enemy;
     }
 
-    protected virtual void Start()
+    protected override void Start()
     {
+        base.Start();
         // health.OnCurrentValueMin += () => { enemy.enemyStateMachine.ChangeState(enemy.deadState); };
         // detectionRatio.OnCurrentValueMax += () => { enemy.enemyStateMachine.ChangeState(enemy.targetInDetectionRangeState); };
     }

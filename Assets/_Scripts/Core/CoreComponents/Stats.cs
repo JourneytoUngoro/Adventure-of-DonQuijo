@@ -67,6 +67,14 @@ public abstract class Stats : CoreComponent
         #endregion
     }
 
+    protected virtual void Start()
+    {
+        health.SetMaxValue(health.graph.accumulationPerLevel.Evaluate(level.currentValue));
+        health.SetCurrentValue(health.graph.accumulationPerLevel.Evaluate(level.currentValue));
+        
+        posture.SetMaxValue(posture.graph.accumulationPerLevel.Evaluate(level.currentValue));
+    }
+
     protected virtual void Update()
     {
         foreach (PropertyInfo property in statComponentProperties)

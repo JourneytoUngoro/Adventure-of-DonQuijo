@@ -14,11 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <entityHeight>k__BackingField: 80
   <gravityScale>k__BackingField: 100
-  <moveSpeed>k__BackingField: {x: 100, y: 50}
-  <dashSpeed>k__BackingField: {x: 200, y: 100}
-  <jumpSpeed>k__BackingField: 400
+  <moveSpeed>k__BackingField: {x: 150, y: 75}
+  <dashSpeed>k__BackingField: {x: 300, y: 150}
+  <jumpSpeed>k__BackingField: 500
   <gotoLandingStateTime>k__BackingField: 3
   <stunRecoveryTime>k__BackingField: 3
   <landingRecoveryTime>k__BackingField: 1
-  dazedTime: 2
-  canvasDisableTime: 5
+  <dazedTime>k__BackingField: 2
+  <adequateDistance>k__BackingField: 80
+  <repositioningTime>k__BackingField: 8
+  <meleeAttack0CoolDown>k__BackingField: 4
+  <meleeAttack1CoolDown>k__BackingField: 10
+  <meleeAttack2CoolDown>k__BackingField: 4
+  <meleeAttack3CoolDown>k__BackingField: 7
+  <meleeAttack4CoolDown>k__BackingField: 15
+  <canvasDisableTime>k__BackingField: 5

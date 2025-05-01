@@ -13,8 +13,7 @@ public class StatComponentEditor : PropertyDrawer
     private SerializedProperty recoveryStartTime;
     private SerializedProperty recoveryDuration;
     private SerializedProperty recoveryValue;
-    private SerializedProperty incrementPerLevel;
-    private SerializedProperty accumulationPerLevel;
+    private SerializedProperty graph;
 
     private Vector2 scroll;
 
@@ -30,8 +29,7 @@ public class StatComponentEditor : PropertyDrawer
         recoveryStartTime = property.FindPropertyRelative("<recoveryStartTime>k__BackingField");
         recoveryDuration = property.FindPropertyRelative("<recoveryDuration>k__BackingField");
         recoveryValue = property.FindPropertyRelative("<recoveryValue>k__BackingField");
-        incrementPerLevel = property.FindPropertyRelative("<incrementPerLevel>k__BackingField");
-        accumulationPerLevel = property.FindPropertyRelative("<accumulationPerLevel>k__BackingField");
+        graph = property.FindPropertyRelative("<graph>k__BackingField");
 
         EditorGUI.BeginProperty(position, label, property);
 
@@ -63,81 +61,26 @@ public class StatComponentEditor : PropertyDrawer
 
             if (property.displayName != "Level")
             {
-                EditorGUI.BeginChangeCheck();
-                
                 position.y += newLineHeight;
-                EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, singleLineHeight), incrementPerLevel, new GUIContent("Increment Per Level"));
-                position.y += newLineHeight;
-                EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, singleLineHeight), accumulationPerLevel, new GUIContent("Accumulation Per Level"));
-
-                if (EditorGUI.EndChangeCheck())
-                {
-                    AnimationCurve incrementCurve = incrementPerLevel.animationCurveValue;
-                    AnimationCurve accumulationCurve = accumulationPerLevel.animationCurveValue;
-
-                    if (incrementPerLevel.serializedObject.hasModifiedProperties)
-                    {
-                        AnimationCurve modifiedAccumulationCurve = IncrementToAccumulation(incrementCurve);
-                        accumulationPerLevel.animationCurveValue = modifiedAccumulationCurve;
-                    }
-                    
-                    if (accumulationPerLevel.serializedObject.hasModifiedProperties)
-                    {
-                        AnimationCurve modifiedIncrementCurve = AccumulationToIncrement(accumulationCurve);
-                        incrementPerLevel.animationCurveValue = modifiedIncrementCurve;
-                    }
-                }
-
-                /*EditorGUILayout.Space();
-
-                scroll = EditorGUILayout.BeginScrollView(scroll, GUILayout.MaxHeight(300.0f));
-
-                for (int level = 1; level < 100; level++)
-                {
-                    EditorGUILayout.BeginHorizontal("box");
-                    EditorGUILayout.LabelField("Level " + level);
-                    EditorGUILayout.LabelField(((int)accumulationPerLevel.animationCurveValue.Evaluate(level)).ToString());
-                    EditorGUILayout.EndHorizontal();
-                }
-
-                EditorGUILayout.EndScrollView();*/
+                EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, singleLineHeight), graph, new GUIContent("Increment/Accumulation Graph"));
             }
+
+            /*EditorGUILayout.Space();
+
+            scroll = EditorGUILayout.BeginScrollView(scroll, GUILayout.MaxHeight(300.0f));
+
+            for (int level = 1; level < 100; level++)
+            {
+                EditorGUILayout.BeginHorizontal("box");
+                EditorGUILayout.LabelField("Level " + level);
+                EditorGUILayout.LabelField(((int)accumulationPerLevel.animationCurveValue.Evaluate(level)).ToString());
+                EditorGUILayout.EndHorizontal();
+            }
+
+            EditorGUILayout.EndScrollView();*/
         }
         
         EditorGUI.EndProperty();
-    }
-
-    private AnimationCurve IncrementToAccumulation(AnimationCurve incrementCurve)
-    {
-        AnimationCurve accumulationCurve = new AnimationCurve();
-        float accumulatedValue = 0.0f;
-
-        for (int keyIndex = 0; keyIndex < incrementCurve.keys.Length; keyIndex++)
-        {
-            Keyframe currentKey = incrementCurve.keys[keyIndex];
-            accumulatedValue += currentKey.value;
-
-            Keyframe accumulationKey = new Keyframe(currentKey.time, accumulatedValue);
-            accumulationCurve.AddKey(accumulationKey);
-        }
-
-        return accumulationCurve;
-    }
-
-    private AnimationCurve AccumulationToIncrement(AnimationCurve accumulationCurve)
-    {
-        AnimationCurve incrementCurve = new AnimationCurve();
-        
-        for (int keyIndex = 0; keyIndex < accumulationCurve.keys.Length; keyIndex++)
-        {
-            Keyframe currentKey = accumulationCurve.keys[keyIndex];
-            float incrementValue = keyIndex == 0 ? currentKey.value : currentKey.value - accumulationCurve.keys[keyIndex - 1].value;
-
-            Keyframe incrementKey = new Keyframe(currentKey.time, incrementValue);
-            incrementCurve.AddKey(incrementKey);
-        }
-
-        return incrementCurve;
     }
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
@@ -146,6 +89,7 @@ public class StatComponentEditor : PropertyDrawer
         float multiplier = 1.0f;
 
         enableRecovery = property.FindPropertyRelative("<enableRecovery>k__BackingField");
+        graph = property.FindPropertyRelative("<graph>k__BackingField");
 
         if (property.isExpanded)
         {
@@ -155,12 +99,17 @@ public class StatComponentEditor : PropertyDrawer
             }
             else
             {
-                multiplier += 3.0f;
+                multiplier += 4.0f;
             }
 
             if (enableRecovery.boolValue)
             {
                 multiplier += 3.0f;
+            }
+
+            if (graph.isExpanded)
+            {
+                multiplier += 2.0f;
             }
         }
 

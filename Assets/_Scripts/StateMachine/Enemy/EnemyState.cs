@@ -26,10 +26,29 @@ public class EnemyState : EntityState
         isTargetInDetectionRange = enemy.detection.isTargetInDetectionRange();
     }
 
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+
+        if (isGrounded)
+        {
+            enemy.orthogonalRigidbody.gravityScale = 0.0f;
+        }
+    }
+
     protected override void TickPublicTimers()
     {
         base.TickPublicTimers();
 
+        enemy.knockbackState.knockbackTimer.Tick();
 
+        /*foreach (EnemyAbilityState enemyAbilityState in enemy.abilityStates)
+        {
+            enemyAbilityState.abilityCoolDownTimer.Tick();
+        }*/
+        enemy.meleeAttack0State.abilityCoolDownTimer.Tick();
+        enemy.meleeAttack1State.abilityCoolDownTimer.Tick();
+        enemy.meleeAttack2State.abilityCoolDownTimer.Tick();
+        enemy.meleeAttack3State.abilityCoolDownTimer.Tick();
     }
 }

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ICombatAbility
 {
-    public void ApplyCombatAbility(Entity target, OverlapCollider[] overlapColliders);
+    public void ApplyCombatAbility(Collider2D target, OverlapCollider[] overlapColliders);
 }

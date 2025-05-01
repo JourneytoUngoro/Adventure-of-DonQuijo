@@ -6,9 +6,10 @@ using UnityEngine;
 public class PlayerData : EntityData
 {
     [field: Header("Control Data")]
-    [field: SerializeField] public float commandBufferTime { get; private set; } = 1.0f;
+    [field: SerializeField] public float dashInputBufferTime { get; private set; } = 0.5f;
     [field: SerializeField] public float dashMaintainTime { get; private set; } = 0.1f;
     [field: SerializeField] public float jumpInputBufferTime { get; private set; } = 0.2f;
+    [field: SerializeField] public float attackInputBufferTime { get; private set; } = 0.2f;
     [field: SerializeField] public float variableJumpHeightMultiplier { get; private set; } = 0.5f;
     [field: SerializeField] public float coyoteTime { get; private set; } = 0.2f;
 
@@ -26,4 +27,7 @@ public class PlayerData : EntityData
 
     [field: Header("ShieldParry State")]
     [field: SerializeField] public float shieldParryCoolDownTime { get; private set; } = 1.0f;
+
+    [field: Header("Attack State")]
+    [field: SerializeField] public float attackStrokeTime { get; private set; } = 2.0f;
 }
