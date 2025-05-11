@@ -1,0 +1,7 @@
+﻿ID,Speaker,Text,Portrait,Method,NextID,Choice1,Choice1Next,Choice2,Choice2Next,Choice3,Choice3Next
+1,Jiyon,"Hi, I am Jiyon",default,,2,,,,,,
+2,Namju,"Hi, I am Namju. Guess who our team leader is!?",default,,,Kyungjun,3,Haejun,4,DonQuijo,5
+3,Namju,Correct!!,surprise,,6,,,,,,
+4,Namju,Wrong~,angry,,6,,,,,,
+5,Namju,Hmm….,default,,6,,,,,,
+6,Jiyon,"Then, bye bye",default,,,,,,,,
