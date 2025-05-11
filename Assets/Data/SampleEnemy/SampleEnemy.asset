@@ -21,11 +21,23 @@ MonoBehaviour:
   <stunRecoveryTime>k__BackingField: 3
   <landingRecoveryTime>k__BackingField: 1
   <dazedTime>k__BackingField: 2
+  <stepSize>k__BackingField: 5
+  <maxDistance>k__BackingField: 90
   <adequateDistance>k__BackingField: 80
-  <repositioningTime>k__BackingField: 8
-  <meleeAttack0CoolDown>k__BackingField: 4
-  <meleeAttack1CoolDown>k__BackingField: 10
-  <meleeAttack2CoolDown>k__BackingField: 4
-  <meleeAttack3CoolDown>k__BackingField: 7
-  <meleeAttack4CoolDown>k__BackingField: 15
+  <walkAroundDistance>k__BackingField: 20
+  <repositioningPossibility>k__BackingField: 1
+  <repositionOffsetDistance>k__BackingField: 10
+  <repositioningTime>k__BackingField: 4
+  <maxBlockableCount>k__BackingField: 2
+  <blockCoolDownTime>k__BackingField: 3
+  <blockPossibility>k__BackingField: 0.7
+  <parryGaugeWhenBlocked>k__BackingField: 0.6
+  <maxParryableCount>k__BackingField: 1
+  <meleeAttack0CoolDown>k__BackingField: 3
+  <meleeAttack1CoolDown>k__BackingField: 4
+  <meleeAttack2CoolDown>k__BackingField: 7
+  <meleeAttack2DashDistance>k__BackingField: 200
+  <meleeAttack2MakeDistanceTime>k__BackingField: 2
+  <meleeAttack3CoolDown>k__BackingField: 4
+  <meleeAttack4CoolDown>k__BackingField: 1000
   <canvasDisableTime>k__BackingField: 5

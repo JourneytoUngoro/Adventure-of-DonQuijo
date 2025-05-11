@@ -91,7 +91,7 @@ public abstract class Combat : CoreComponent
                 })).ToList();
         }
 
-        damageTargets.Remove(entity.collider);
+        damageTargets.Remove(entity.entityCollider);
         damageTargets.Remove(null);
 
         foreach (CombatAbilityComponent combatAbilityComponent in combatAbilityWithColliders.combatAbilityData.combatAbilityComponents)
@@ -119,7 +119,8 @@ public abstract class Combat : CoreComponent
             if (combatAbilityWithColliders.combatAbilityData.canBeDodged && damageTarget.CompareTag("Dodge")) continue;
 
             foundTarget = true;
-            damageTarget.GetComponent<Entity>().SetStatusValues(CurrentStatus.gotHit);
+            Entity damageTargetEntity = damageTarget.GetComponent<Entity>();
+            damageTargetEntity.SetStatusValues(CurrentStatus.gotHit);
 
             foreach (CombatAbilityComponent combatAbilityComponent in combatAbilityWithColliders.combatAbilityData.combatAbilityComponents)
             {
@@ -141,6 +142,11 @@ public abstract class Combat : CoreComponent
             }
 
             damagedTargets.Add(damageTarget);
+
+            if (damageTargetEntity.GetType().IsSubclassOf(typeof(Enemy)) {
+                Enemy damageTargetEnemy = damageTargetEntity as Enemy;
+                damageTargetEnemy.detection.ChangeCurrentTarget(entity);
+            }
         }
 
         return new pair<bool, bool>(foundTarget, hitTarget);
@@ -417,7 +423,7 @@ public abstract class Combat : CoreComponent
 
     protected void Parried()
     {
-        BlockParry[] blockParryPrefabs = entity.entityCombat.GetComponentsInChildren<BlockParry>();
+        BlockParry[] blockParryPrefabs = entity.orthogonalRigidbody.GetComponentsInChildren<BlockParry>();
 
         foreach (BlockParry blockParryPrefab in blockParryPrefabs)
         {
@@ -427,7 +433,7 @@ public abstract class Combat : CoreComponent
 
     public void DisableBlockParryPrefabs()
     {
-        BlockParry[] blockParryPrefabs = entity.entityCombat.GetComponentsInChildren<BlockParry>();
+        BlockParry[] blockParryPrefabs = entity.orthogonalRigidbody.GetComponentsInChildren<BlockParry>();
 
         foreach (BlockParry blockParryPrefab in blockParryPrefabs)
         {

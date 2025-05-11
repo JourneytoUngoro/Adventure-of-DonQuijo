@@ -2,33 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttackState : PlayerAbilityState
+public class PlayerMeleeAttack1State : PlayerAbilityState
 {
-    public Timer attackComboTimer { get; private set; }
     private Timer attackInputHoldTimer;
     private bool transitToNextAttack;
-    private int attackStroke;
 
-    public PlayerAttackState(Player player, string animBoolName) : base(player, animBoolName)
+    public PlayerMeleeAttack1State(Player player, string animBoolName) : base(player, animBoolName)
     {
-        attackComboTimer = new Timer(playerData.attackStrokeTime);
-        attackComboTimer.timerAction += () => { attackStroke = 0; };
+        available = true;
         attackInputHoldTimer = new Timer(playerData.attackInputBufferTime);
         attackInputHoldTimer.timerAction += () => { transitToNextAttack = false; };
-    }
-
-    public override void AnimationStartTrigger(int index)
-    {
-        base.AnimationStartTrigger(index);
-
-        transitToNextAttack = false;
     }
 
     public override void AnimationActionTrigger(int index)
     {
         base.AnimationActionTrigger(index);
 
-        player.combat.DoAttack(player.combat.meleeAttack[attackStroke]);
+        player.combat.DoAttack(player.combat.meleeAttack[1]);
     }
 
     public override void AnimationFinishTrigger(int index)
@@ -36,8 +26,7 @@ public class PlayerAttackState : PlayerAbilityState
         base.AnimationFinishTrigger(index);
 
         isAbilityDone = true;
-        attackComboTimer.StartSingleUseTimer();
-        player.animator.SetInteger("typeIndex", (attackStroke + 1) % player.combat.meleeAttack.Count); ;
+        player.meleeAttack0State.attackComboTimer.StartSingleUseTimer();
     }
 
     public override void Enter()
@@ -46,6 +35,8 @@ public class PlayerAttackState : PlayerAbilityState
 
         isAbilityDone = false;
         transitToNextAttack = false;
+        attackInputPressed = false;
+        player.stateMachineToAnimator.state = this;
     }
 
     public override void Exit()
@@ -55,9 +46,9 @@ public class PlayerAttackState : PlayerAbilityState
         transitToNextAttack = false;
     }
 
-    public override void LateLogicUpdate()
+    public override void LogicUpdate()
     {
-        base.LateLogicUpdate();
+        base.LogicUpdate();
 
         if (!onStateExit)
         {
@@ -73,18 +64,13 @@ public class PlayerAttackState : PlayerAbilityState
         {
             transitToNextAttack = attackInputPressed ? true : transitToNextAttack;
 
-            if (attackInputPressed)
-            {
-                attackInputHoldTimer.StartSingleUseTimer();
-            }
-
             if (isAbilityDone)
             {
                 if (isGrounded)
                 {
                     if (transitToNextAttack)
                     {
-                        stateMachine.ChangeState(player.attackState);
+                        stateMachine.ChangeState(player.meleeAttack2State);
                     }
                     else
                     {

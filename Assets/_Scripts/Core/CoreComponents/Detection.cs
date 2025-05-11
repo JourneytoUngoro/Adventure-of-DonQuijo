@@ -56,11 +56,11 @@ public abstract class Detection : CoreComponent
         workSpace.Set(entity.transform.position.x, entity.transform.position.y, currentEntityHeight);
         currentSpacePosition = workSpace;
 
-        workSpace.Set(entity.collider.offset.x * entity.entityMovement.facingDirection, entity.collider.offset.y, 0.0f);
+        workSpace.Set(entity.entityCollider.offset.x * entity.entityMovement.facingDirection, entity.entityCollider.offset.y, 0.0f);
         Vector3 groundCheckPosition = entity.transform.position + workSpace;
 
         Array.Clear(projectedPositionColliders, 0, maxDetectionCount);
-        Physics2D.OverlapBoxNonAlloc(groundCheckPosition, entity.collider.size, 0.0f, projectedPositionColliders, whatIsGround);
+        Physics2D.OverlapBoxNonAlloc(groundCheckPosition, entity.entityCollider.size, 0.0f, projectedPositionColliders, whatIsGround);
         currentGroundHeight = GetCurrentGroundHeight();
         currentCeilingHeight = GetCurrentCeilingHeight();
         isGrounded = IsGrounded();
@@ -69,13 +69,13 @@ public abstract class Detection : CoreComponent
         currentProjectedPosition = workSpace;
 
         Array.Clear(forwardObstacleColliders, 0, maxDetectionCount);
-        Physics2D.OverlapBoxNonAlloc(groundCheckPosition + entity.orthogonalRigidbody.transform.right * (entity.collider.bounds.extents.x + entity.collider.bounds.extents.y), Vector2.one * entity.collider.bounds.size.y, 0.0f, forwardObstacleColliders, whatIsGround);
+        Physics2D.OverlapBoxNonAlloc(groundCheckPosition + entity.orthogonalRigidbody.transform.right * (entity.entityCollider.bounds.extents.x + entity.entityCollider.bounds.extents.y), Vector2.one * entity.entityCollider.bounds.size.y, 0.0f, forwardObstacleColliders, whatIsGround);
         Array.Clear(backwardObstacleColliders, 0, maxDetectionCount);
-        Physics2D.OverlapBoxNonAlloc(groundCheckPosition - entity.orthogonalRigidbody.transform.right * (entity.collider.bounds.extents.x + entity.collider.bounds.extents.y), Vector2.one * entity.collider.bounds.size.y, 0.0f, backwardObstacleColliders, whatIsGround);
+        Physics2D.OverlapBoxNonAlloc(groundCheckPosition - entity.orthogonalRigidbody.transform.right * (entity.entityCollider.bounds.extents.x + entity.entityCollider.bounds.extents.y), Vector2.one * entity.entityCollider.bounds.size.y, 0.0f, backwardObstacleColliders, whatIsGround);
         Array.Clear(upwardObstacleColliders, 0, maxDetectionCount);
-        Physics2D.OverlapBoxNonAlloc(groundCheckPosition + entity.orthogonalRigidbody.transform.up * entity.collider.bounds.size.y, entity.collider.bounds.size, 0.0f, upwardObstacleColliders, whatIsGround);
+        Physics2D.OverlapBoxNonAlloc(groundCheckPosition + entity.orthogonalRigidbody.transform.up * entity.entityCollider.bounds.size.y, entity.entityCollider.bounds.size, 0.0f, upwardObstacleColliders, whatIsGround);
         Array.Clear(downwardObstacleColliders, 0, maxDetectionCount);
-        Physics2D.OverlapBoxNonAlloc(groundCheckPosition - entity.orthogonalRigidbody.transform.up * entity.collider.bounds.size.y, entity.collider.bounds.size, 0.0f, downwardObstacleColliders, whatIsGround);
+        Physics2D.OverlapBoxNonAlloc(groundCheckPosition - entity.orthogonalRigidbody.transform.up * entity.entityCollider.bounds.size.y, entity.entityCollider.bounds.size, 0.0f, downwardObstacleColliders, whatIsGround);
         detectingHorizontalObstacle.first = IsDetectingObstacle(CheckPositionAxis.Horizontal, CheckPositionDirection.Front);
         detectingHorizontalObstacle.second = IsDetectingObstacle(CheckPositionAxis.Horizontal, CheckPositionDirection.Back);
         detectingVerticalObstacle.first = IsDetectingObstacle(CheckPositionAxis.Vertical, CheckPositionDirection.Front);
@@ -85,7 +85,7 @@ public abstract class Detection : CoreComponent
         {
             if (groundCollider != null)
             {
-                Physics2D.IgnoreCollision(groundCollider, entity.collider, currentEntityHeight >= groundCollider.transform.position.z + groundCollider.GetComponent<HeightData>().height);
+                Physics2D.IgnoreCollision(groundCollider, entity.entityCollider, currentEntityHeight >= groundCollider.transform.position.z + groundCollider.GetComponent<HeightData>().height);
             }
         }
 
@@ -134,7 +134,7 @@ public abstract class Detection : CoreComponent
             }
             else if (checkPositionDirection == CheckPositionDirection.Heading)
             {
-                if (entity.rigidbody.velocity.x * entity.entityMovement.facingDirection < 0)
+                if (entity.entityRigidbody.velocity.x * entity.entityMovement.facingDirection < 0)
                 {
                     return IsDetectingObstacle(checkPositionAxis, CheckPositionDirection.Back);
                 }
@@ -160,7 +160,7 @@ public abstract class Detection : CoreComponent
             }
             else if (checkPositionDirection == CheckPositionDirection.Heading)
             {
-                if (entity.rigidbody.velocity.x * entity.entityMovement.facingDirection < 0)
+                if (entity.entityRigidbody.velocity.x * entity.entityMovement.facingDirection < 0)
                 {
                     return IsDetectingObstacle(checkPositionAxis, CheckPositionDirection.Back);
                 }
@@ -194,7 +194,7 @@ public abstract class Detection : CoreComponent
             }
             else if (checkPositionDirection == CheckPositionDirection.Heading)
             {
-                if (entity.rigidbody.velocity.x * entity.entityMovement.facingDirection < 0)
+                if (entity.entityRigidbody.velocity.x * entity.entityMovement.facingDirection < 0)
                 {
                     return IsDetectingLedge(checkPositionAxis, CheckPositionDirection.Front);
                 }
@@ -220,7 +220,7 @@ public abstract class Detection : CoreComponent
             }
             else if (checkPositionDirection == CheckPositionDirection.Heading)
             {
-                if (entity.rigidbody.velocity.x * entity.entityMovement.facingDirection < 0)
+                if (entity.entityRigidbody.velocity.x * entity.entityMovement.facingDirection < 0)
                 {
                     return IsDetectingLedge(checkPositionAxis, CheckPositionDirection.Back);
                 }
@@ -250,17 +250,17 @@ public abstract class Detection : CoreComponent
         if (Application.isPlaying)
         {
             // TODO: Detection range a bit wrong. Should flip collider offset when flips the character.
-            workSpace.Set(entity.collider.offset.x * entity.entityMovement.facingDirection, entity.collider.offset.y, 0.0f);
+            workSpace.Set(entity.entityCollider.offset.x * entity.entityMovement.facingDirection, entity.entityCollider.offset.y, 0.0f);
             Vector2 groundCheckPosition = currentProjectedPosition + workSpace;
 
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireCube(groundCheckPosition + (Vector2)entity.orthogonalRigidbody.transform.right * (entity.collider.bounds.extents.x + entity.collider.bounds.extents.y), Vector2.one * entity.collider.bounds.size.y);
-            Gizmos.DrawWireCube(groundCheckPosition - (Vector2)entity.orthogonalRigidbody.transform.right * (entity.collider.bounds.extents.x + entity.collider.bounds.extents.y), Vector2.one * entity.collider.bounds.size.y);
-            Gizmos.DrawWireCube(groundCheckPosition + (Vector2)entity.orthogonalRigidbody.transform.up * entity.collider.bounds.size.y, entity.collider.bounds.size);
-            Gizmos.DrawWireCube(groundCheckPosition - (Vector2)entity.orthogonalRigidbody.transform.up * entity.collider.bounds.size.y, entity.collider.bounds.size);
+            Gizmos.DrawWireCube(groundCheckPosition + (Vector2)entity.orthogonalRigidbody.transform.right * (entity.entityCollider.bounds.extents.x + entity.entityCollider.bounds.extents.y), Vector2.one * entity.entityCollider.bounds.size.y);
+            Gizmos.DrawWireCube(groundCheckPosition - (Vector2)entity.orthogonalRigidbody.transform.right * (entity.entityCollider.bounds.extents.x + entity.entityCollider.bounds.extents.y), Vector2.one * entity.entityCollider.bounds.size.y);
+            Gizmos.DrawWireCube(groundCheckPosition + (Vector2)entity.orthogonalRigidbody.transform.up * entity.entityCollider.bounds.size.y, entity.entityCollider.bounds.size);
+            Gizmos.DrawWireCube(groundCheckPosition - (Vector2)entity.orthogonalRigidbody.transform.up * entity.entityCollider.bounds.size.y, entity.entityCollider.bounds.size);
 
             Gizmos.color = Color.green;
-            Gizmos.DrawWireCube(groundCheckPosition, entity.collider.size);
+            Gizmos.DrawWireCube(groundCheckPosition, entity.entityCollider.size);
         }
         else
         {

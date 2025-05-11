@@ -60,4 +60,21 @@ public class PlayerDodgeState : PlayerAbilityState
         player.animator.SetBool("backstep", false);
         abilityCoolDownTimer.StartSingleUseTimer();
     }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+
+        if (isAbilityDone)
+        {
+            if (isGrounded)
+            {
+                stateMachine.ChangeState(player.idleState);
+            }
+            else
+            {
+                stateMachine.ChangeState(player.inAirState);
+            }
+        }
+    }
 }

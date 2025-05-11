@@ -22,22 +22,5 @@ public class PlayerAbilityState : PlayerState
         isAbilityDone = false;
     }
 
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-
-        if (isAbilityDone)
-        {
-            if (isGrounded)
-            {
-                stateMachine.ChangeState(player.idleState);
-            }
-            else
-            {
-                stateMachine.ChangeState(player.inAirState);
-            }
-        }
-    }
-
     public void SetAvailable(bool available) => this.available = available;
 }
