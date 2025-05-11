@@ -40,6 +40,8 @@ public class EnemyMeleeAttack1State : EnemyAbilityState
     public override void Exit()
     {
         base.Exit();
+
+        abilityCoolDownTimer.StartSingleUseTimer();
     }
 
     public override void PhysicsUpdate()

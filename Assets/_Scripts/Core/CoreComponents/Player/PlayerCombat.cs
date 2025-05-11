@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +46,7 @@ public class PlayerCombat : Combat
 
                 if (parry != null)
                 {
-                    isParrying = parry.overlapCollider.limitAngle ? CheckWithinAngle(entity.transform.right, sourceEntity.transform.position - entity.transform.position, parry.overlapCollider.counterClockwiseAngle, parry.overlapCollider.clockwiseAngle) : true;
+                    isParrying = parry.overlapCollider.limitAngle ? CheckWithinAngle(entity.orthogonalRigidbody.transform.right, sourceEntity.entityDetection.currentProjectedPosition - entity.entityDetection.currentProjectedPosition, parry.overlapCollider.counterClockwiseAngle, parry.overlapCollider.clockwiseAngle) : true;
                 }
 
                 if (isParrying) break;
@@ -71,9 +72,8 @@ public class PlayerCombat : Combat
 
                 if (block != null)
                 {
-                    isBlocking = block.overlapCollider.limitAngle ? CheckWithinAngle(entity.transform.right, sourceEntity.transform.position - entity.transform.position, block.overlapCollider.counterClockwiseAngle, block.overlapCollider.clockwiseAngle) : true;
+                    isBlocking = block.overlapCollider.limitAngle ? CheckWithinAngle(entity.orthogonalRigidbody.transform.right, sourceEntity.entityDetection.currentProjectedPosition - entity.entityDetection.currentProjectedPosition, block.overlapCollider.counterClockwiseAngle, block.overlapCollider.clockwiseAngle) : true;
                 }
-
                 if (isBlocking) break;
             }
         }

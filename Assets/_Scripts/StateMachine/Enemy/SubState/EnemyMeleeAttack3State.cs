@@ -34,6 +34,13 @@ public class EnemyMeleeAttack3State : EnemyAbilityState
         enemy.animator.SetInteger("typeIndex", 3);
     }
 
+    public override void Exit()
+    {
+        base.Exit();
+
+        abilityCoolDownTimer.StartSingleUseTimer();
+    }
+
     public override void LogicUpdate()
     {
         base.LogicUpdate();

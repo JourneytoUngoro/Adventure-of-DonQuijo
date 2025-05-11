@@ -77,6 +77,7 @@ public class EnemyMeleeAttack2State : EnemyAbilityState
         base.Exit();
 
         enemy.navMeshAgent.enabled = false;
+        abilityCoolDownTimer.StartSingleUseTimer();
     }
 
     public override void PhysicsUpdate()

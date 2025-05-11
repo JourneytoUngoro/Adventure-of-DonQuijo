@@ -74,6 +74,6 @@ public class PlayerState : EntityState
         }
         player.moveState.dashInputXBufferTimer.Tick();
         player.moveState.dashInputYBufferTimer.Tick();
-        player.attackState.attackComboTimer.Tick();
+        player.meleeAttack0State.attackComboTimer.Tick();
     }
 }

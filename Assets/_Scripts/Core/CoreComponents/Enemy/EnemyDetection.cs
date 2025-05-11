@@ -54,7 +54,7 @@ public class EnemyDetection : Detection
     public Collider2D GetPositionGroundCollider(Vector2 groundCheckPosition)
     {
         Array.Clear(designatedPositionColliders, 0, maxDetectionCount);
-        Physics2D.OverlapBoxNonAlloc(groundCheckPosition, entity.collider.size, 0.0f, designatedPositionColliders, whatIsGround);
+        Physics2D.OverlapBoxNonAlloc(groundCheckPosition, entity.entityCollider.size, 0.0f, designatedPositionColliders, whatIsGround);
         return projectedPositionColliders.Where(groundCollider => groundCollider != null && groundCollider.transform.position.z + groundCollider.GetComponent<HeightData>().height <= currentEntityHeight).OrderByDescending(groundCollider => groundCollider.transform.position.z + groundCollider.GetComponent<HeightData>().height).FirstOrDefault();
     }
 
@@ -88,7 +88,7 @@ public class EnemyDetection : Detection
             }
             else
             {
-                if (detectionRangeColliders.Contains(currentTarget.collider))
+                if (detectionRangeColliders.Contains(currentTarget.entityCollider))
                 {
                     return true;
                 }
@@ -115,7 +115,7 @@ public class EnemyDetection : Detection
         }
         else
         {
-            if (chaseRangeColliders.Contains(currentTarget.collider))
+            if (chaseRangeColliders.Contains(currentTarget.entityCollider))
             {
                 return true;
             }
@@ -125,5 +125,10 @@ public class EnemyDetection : Detection
                 return false;
             }
         }
+    }
+
+    public void ChangeCurrentTarget(Entity currentTarget)
+    {
+        this.currentTarget = currentTarget;
     }
 }

@@ -19,7 +19,9 @@ public class Player : Entity
     public PlayerStunnedState stunnedState { get; private set; }
     public PlayerLandingState landingState { get; private set; }
     public PlayerKnockbackState knockbackState { get; private set; }
-    public PlayerAttackState attackState { get; private set; }
+    public PlayerMeleeAttack0State meleeAttack0State { get; private set; }
+    public PlayerMeleeAttack1State meleeAttack1State { get; private set; }
+    public PlayerMeleeAttack2State meleeAttack2State { get; private set; }
     public PlayerBlockParryState blockParryState { get; private set; }
     public PlayerDeadState deadState { get; private set; }
     public PlayerCureState cureState { get; private set; }
@@ -61,7 +63,9 @@ public class Player : Entity
         stunnedState = new PlayerStunnedState(this, "stunned");
         landingState = new PlayerLandingState(this, "landing");
         knockbackState = new PlayerKnockbackState(this, "knockback");
-        attackState = new PlayerAttackState(this, "meleeAttack");
+        meleeAttack0State = new PlayerMeleeAttack0State(this, "meleeAttack0");
+        meleeAttack1State = new PlayerMeleeAttack1State(this, "meleeAttack1");
+        meleeAttack2State = new PlayerMeleeAttack2State(this, "meleeAttack2");
         blockParryState = new PlayerBlockParryState(this, "blockParry");
         deadState = new PlayerDeadState(this, "dead");
         cureState = new PlayerCureState(this, "cure");

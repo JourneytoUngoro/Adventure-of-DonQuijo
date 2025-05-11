@@ -13,6 +13,7 @@ public class Manager : MonoBehaviour
     public ItemManager itemManager { get; private set; }
     public UIManager uiManager { get; private set; }
     public DataManager dataManager { get; private set; }
+    public SoundFXManager soundFXManager { get; private set; }
 
     private void Awake()
     {
@@ -35,6 +36,7 @@ public class Manager : MonoBehaviour
         itemManager = GetComponentInChildren<ItemManager>();
         uiManager = GetComponentInChildren<UIManager>();
         dataManager = GetComponentInChildren<DataManager>();
+        soundFXManager = GetComponentInChildren<SoundFXManager>();
     }
 
     #region Test

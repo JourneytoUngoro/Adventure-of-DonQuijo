@@ -38,7 +38,23 @@ public class PlayerGroundedState : PlayerState
             }
             else if (itemInputPressed && player.cureState.available)
             {
-                stateMachine.ChangeState(player.cureState);
+                // stateMachine.ChangeState(player.cureState);
+                stateMachine.ChangeState(player.blockParryState);
+            }
+            else if (attackInputPressed)
+            {
+                if (player.meleeAttack0State.attackStroke == 0)
+                {
+                    stateMachine.ChangeState(player.meleeAttack0State);
+                }
+                else if (player.meleeAttack0State.attackStroke == 1)
+                {
+                    stateMachine.ChangeState(player.meleeAttack1State);
+                }
+                else if (player.meleeAttack0State.attackStroke == 2)
+                {
+                    stateMachine.ChangeState(player.meleeAttack2State);
+                }
             }
         }
 

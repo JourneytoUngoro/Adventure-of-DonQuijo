@@ -113,7 +113,7 @@ public abstract class EntityState
 
     protected virtual void SetMovementVariables()
     {
-        workSpace.Set(entity.rigidbody.velocity.x, entity.rigidbody.velocity.y, entity.orthogonalRigidbody.velocity);
+        workSpace.Set(entity.entityRigidbody.velocity.x, entity.entityRigidbody.velocity.y, entity.orthogonalRigidbody.velocity);
         currentVelocity = workSpace;
         currentScreenPosition = entity.entityDetection.currentScreenPosition;
         currentProjectedPosition = entity.entityDetection.currentProjectedPosition;

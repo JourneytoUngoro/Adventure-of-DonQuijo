@@ -13,8 +13,8 @@ public class Entity : MonoBehaviour
     #region Base Components
     public Animator animator { get; protected set; }
     public SpriteRenderer spriteRenderer { get; protected set; }
-    new public BoxCollider2D collider { get; protected set; }
-    new public Rigidbody2D rigidbody { get; protected set; }
+    public BoxCollider2D entityCollider { get; protected set; }
+    public Rigidbody2D entityRigidbody { get; protected set; }
     public OrthogonalRigidbody orthogonalRigidbody { get; protected set; }
     public EntityStateMachine entityStateMachine { get; protected set; }
     public Core core { get; protected set; }
@@ -42,8 +42,8 @@ public class Entity : MonoBehaviour
 
     protected virtual void Awake()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
-        collider = GetComponent<BoxCollider2D>();
+        entityRigidbody = GetComponent<Rigidbody2D>();
+        entityCollider = GetComponent<BoxCollider2D>();
         animator = GetComponentInChildren<Animator>();
         stateMachineToAnimator = GetComponentInChildren<StateMachineToAnimator>();
         orthogonalRigidbody = GetComponentInChildren<OrthogonalRigidbody>();
@@ -82,6 +82,8 @@ public class Entity : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("collision.gameObject.name: " + collision.gameObject.name);
+        Debug.Log("collision.gameObject.layer: " + collision.gameObject.layer);
         if (collision.gameObject.IsInLayerMask(entityDetection.whatIsGround))
         {
             entityMovement.OnContact(true);
