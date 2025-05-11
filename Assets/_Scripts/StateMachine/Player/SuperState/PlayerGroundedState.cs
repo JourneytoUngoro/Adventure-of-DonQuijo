@@ -40,9 +40,20 @@ public class PlayerGroundedState : PlayerState
             {
                 stateMachine.ChangeState(player.blockParryState);
             }
-            else if (attackInputPressed && player.attackState.available)
+            else if (attackInputPressed)
             {
-                stateMachine.ChangeState(player.attackState);
+                if (player.meleeAttack0State.attackStroke == 0)
+                {
+                    stateMachine.ChangeState(player.meleeAttack0State);
+                }
+                else if (player.meleeAttack0State.attackStroke == 1)
+                {
+                    stateMachine.ChangeState(player.meleeAttack1State);
+                }
+                else if (player.meleeAttack0State.attackStroke == 2)
+                {
+                    stateMachine.ChangeState(player.meleeAttack2State);
+                }
             }
         }
 

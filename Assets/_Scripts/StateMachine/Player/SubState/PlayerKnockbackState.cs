@@ -36,6 +36,7 @@ public class PlayerKnockbackState : PlayerState
         }
 
         shouldTransitToStunnedState = player.stats.posture.currentValue == player.stats.posture.maxValue;
+        Manager.Instance.soundFXManager.PlaySoundFXClip(Manager.Instance.soundFXManager.playerHitSoundFX, player.transform);
     }
 
     public override void Exit()

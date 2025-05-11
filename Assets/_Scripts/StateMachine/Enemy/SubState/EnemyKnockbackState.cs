@@ -29,6 +29,7 @@ public class EnemyKnockbackState : EnemyState
         canTransit = false;
         knockbackTimer.StartSingleUseTimer();
         enemy.stateMachineToAnimator.state = this;
+        Manager.Instance.soundFXManager.PlaySoundFXClip(Manager.Instance.soundFXManager.enemyHitSoundFX, enemy.transform);
     }
 
     public override void Exit()

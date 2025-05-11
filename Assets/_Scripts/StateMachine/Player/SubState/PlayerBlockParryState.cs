@@ -85,6 +85,18 @@ public class PlayerBlockParryState : PlayerAbilityState
             {
                 isAbilityDone = canTransit;
             }
+
+            if (isAbilityDone)
+            {
+                if (isGrounded)
+                {
+                    stateMachine.ChangeState(player.idleState);
+                }
+                else
+                {
+                    stateMachine.ChangeState(player.inAirState);
+                }
+            }
         }
 
         if (!onStateExit)

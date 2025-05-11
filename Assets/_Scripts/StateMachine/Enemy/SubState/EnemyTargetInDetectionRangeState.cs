@@ -15,6 +15,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
     private Vector3 currentDestination;
     private Vector3 baseDestinationPosition;
     private Vector2 positionOffset;
+    private float traverseDirection;
 
     private bool traverseAroundFlag;
 
@@ -25,15 +26,18 @@ public class EnemyTargetInDetectionRangeState : EnemyState
         repositioningTimer = new Timer(enemyData.repositioningTime);
         repositioningTimer.timerAction += () =>
         {
-            Debug.Log("RepositionTimer Action!");
             if (UtilityFunctions.RandomSuccess(enemy.enemyData.repositioningPossibility))
             {
-                Debug.Log("Change to TraverseAround!");
                 traverseAroundFlag = false;
+                enemy.navMeshAgent.enabled = true;
                 navMeshAgentState = NavMeshAgentState.TraverseAround;
                 positionOffset = Random.insideUnitCircle * enemy.enemyData.repositionOffsetDistance;
                 baseDestinationPosition = enemy.detection.currentTarget.entityDetection.currentProjectedPosition;
-                // enemy.movement.ChangeNavMeshState(NavMeshAgentState.TraverseAround);
+
+                traverseDirection = baseDestinationPosition.x > enemy.detection.currentProjectedPosition.x ? 1 : -1;
+                currentDestination = baseDestinationPosition + (Vector3)positionOffset;
+                currentDestination += UtilityFunctions.RandomSuccess(0.5f) ? Vector3.up * enemy.enemyData.repositionOffsetDistance : Vector3.down * enemy.enemyData.repositionOffsetDistance;
+                enemy.navMeshAgent.SetDestination(currentDestination);
             }
         };
     }
@@ -43,6 +47,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
         base.Enter();
 
         enemy.navMeshAgent.enabled = true;
+        repositioningTimer.StartMultiUseTimer();
         navMeshAgentState = NavMeshAgentState.Chase;
         positionOffset = Random.insideUnitCircle * enemy.enemyData.repositionOffsetDistance;
     }
@@ -121,14 +126,16 @@ public class EnemyTargetInDetectionRangeState : EnemyState
 
             if (navMeshAgentState == NavMeshAgentState.Chase)
             {
-                currentDestination = enemy.detection.currentTarget.entityDetection.currentProjectedPosition - enemy.transform.right * enemy.enemyData.adequateDistance + (Vector3)positionOffset;
+                currentDestination = enemy.detection.currentTarget.entityDetection.currentProjectedPosition - enemy.orthogonalRigidbody.transform.right * enemy.enemyData.adequateDistance + (Vector3)positionOffset;
 
                 if (enemy.navMeshAgent.enabled)
                 {
+                    enemy.navMeshAgent.SetDestination(currentDestination);
+                    enemy.animator.SetBool("move", enemy.navMeshAgent.remainingDistance > enemy.navMeshAgent.stoppingDistance);
+                    enemy.animator.SetBool("idle", enemy.navMeshAgent.remainingDistance <= enemy.navMeshAgent.stoppingDistance);
+
                     if (!enemy.navMeshAgent.pathPending && enemy.navMeshAgent.remainingDistance <= enemy.navMeshAgent.stoppingDistance && !enemy.navMeshAgent.hasPath)
                     {
-                        enemy.animator.SetBool("move", enemy.navMeshAgent.remainingDistance > enemy.navMeshAgent.stoppingDistance);
-                        enemy.animator.SetBool("idle", enemy.navMeshAgent.remainingDistance <= enemy.navMeshAgent.stoppingDistance);
                         enemy.navMeshAgent.enabled = false;
                     }
                 }
@@ -143,12 +150,10 @@ public class EnemyTargetInDetectionRangeState : EnemyState
             }
             else if (navMeshAgentState == NavMeshAgentState.TraverseAround)
             {
-                currentDestination = baseDestinationPosition + (Vector3)positionOffset;
-                currentDestination += UtilityFunctions.RandomSuccess(0.5f) ? Vector3.up * enemy.enemyData.repositionOffsetDistance : Vector3.down * enemy.enemyData.repositionOffsetDistance;
-
                 if (!traverseAroundFlag && !enemy.navMeshAgent.pathPending && enemy.navMeshAgent.remainingDistance <= enemy.navMeshAgent.stoppingDistance && !enemy.navMeshAgent.hasPath)
                 {
-                    currentDestination = baseDestinationPosition + enemy.transform.right * enemy.enemyData.adequateDistance + (Vector3)positionOffset;
+                    currentDestination = traverseDirection == 1 ? baseDestinationPosition + Vector3.right * enemy.enemyData.adequateDistance + (Vector3)positionOffset : baseDestinationPosition - Vector3.right * enemy.enemyData.adequateDistance;
+                    enemy.navMeshAgent.SetDestination(currentDestination);
                     traverseAroundFlag = true;
                 }
                 else if (traverseAroundFlag && !enemy.navMeshAgent.pathPending && enemy.navMeshAgent.remainingDistance <= enemy.navMeshAgent.stoppingDistance && !enemy.navMeshAgent.hasPath)
@@ -157,12 +162,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                 }
             }
 
-            if (enemy.navMeshAgent.enabled)
-            {
-                enemy.navMeshAgent.SetDestination(currentDestination);
-            }
             enemy.animator.SetBool("moveBack", enemy.navMeshAgent.desiredVelocity.x * targetDirection < 0);
-
             /*if (navMeshAgentState == NavMeshAgentState.Halt)
             {
 

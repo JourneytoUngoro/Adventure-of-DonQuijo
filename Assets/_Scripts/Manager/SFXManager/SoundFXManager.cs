@@ -9,11 +9,18 @@ public class SoundFXManager : MonoBehaviour
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private AudioSource soundFXObject;
 
+    [field: SerializeField] public AudioClip playerHitSoundFX { get; private set; }
+    [field: SerializeField] public AudioClip playerBlockSoundFX { get; private set; }
+    [field: SerializeField] public AudioClip playerParrySoundFX { get; private set; }
+    [field: SerializeField] public AudioClip playerAttackSoundFX { get; private set; }
+    [field: SerializeField] public AudioClip backGroundMusic { get; private set; }
+    [field: SerializeField] public AudioClip enemyHitSoundFX { get; private set; }
+
     public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float pitchDeviation = 0.0f, float volume = 1.0f)
     {
         if (audioClip == null)
         {
-            Debug.LogWarning($"{audioClip.name} is null. Cannot play sound.");
+            Debug.LogWarning($"AudioClip is null. Cannot play sound.");
             return;
         }
 

@@ -20,7 +20,7 @@ public abstract class Movement : CoreComponent
 
     protected virtual void FixedUpdate()
     {
-
+        
     }
 
     public void SetVelocityX(float velocity)
@@ -29,33 +29,33 @@ public abstract class Movement : CoreComponent
         {
             if (onContact && entity.entityDetection.detectingHorizontalObstacle.second)
             {
-                workSpace.Set(0.0f, entity.rigidbody.velocity.y, 0.0f);
+                workSpace.Set(0.0f, entity.entityRigidbody.velocity.y, 0.0f);
             }
             else
             {
-                workSpace.Set(velocity, entity.rigidbody.velocity.y, 0.0f);
+                workSpace.Set(velocity, entity.entityRigidbody.velocity.y, 0.0f);
             }
         }
         else
         {
-            if (onContact && Mathf.Abs(entity.rigidbody.velocity.y) < epsilon && entity.entityDetection.detectingHorizontalObstacle.first)
+            if (onContact && Mathf.Abs(entity.entityRigidbody.velocity.y) < epsilon && entity.entityDetection.detectingHorizontalObstacle.first)
             {
-                workSpace.Set(0.0f, entity.rigidbody.velocity.y, 0.0f);
+                workSpace.Set(0.0f, entity.entityRigidbody.velocity.y, 0.0f);
             }
             else
             {
-                workSpace.Set(velocity, entity.rigidbody.velocity.y, 0.0f);
+                workSpace.Set(velocity, entity.entityRigidbody.velocity.y, 0.0f);
             }
         }
         
-        entity.rigidbody.velocity = workSpace;
+        entity.entityRigidbody.velocity = workSpace;
         synchronizeValues?.Invoke();
     }
 
     public void SetVelocityY(float velocity)
     {
-        workSpace.Set(entity.rigidbody.velocity.x, velocity, 0.0f);
-        entity.rigidbody.velocity = workSpace;
+        workSpace.Set(entity.entityRigidbody.velocity.x, velocity, 0.0f);
+        entity.entityRigidbody.velocity = workSpace;
         synchronizeValues?.Invoke();
     }
 
@@ -69,7 +69,7 @@ public abstract class Movement : CoreComponent
 
     public void SetVelocityZero()
     {
-        entity.rigidbody.velocity = Vector2.zero;
+        entity.entityRigidbody.velocity = Vector2.zero;
         synchronizeValues?.Invoke();
     }
 

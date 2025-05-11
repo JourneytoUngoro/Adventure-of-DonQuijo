@@ -14,6 +14,10 @@ public class KnockbackComponent : CombatAbilityComponent
     [field: SerializeField, Tooltip("KnockbackTime of 0 means that the entity will transit from knockbackState when it hits the ground.")] public float knockbackTime { get; private set; }
     [field: SerializeField] public Ease easeFunction { get; private set; }
     [field: SerializeField] public float orthogonalVelocity { get; private set; }
+    [field: SerializeField] public bool bounceWhenGrounded { get; private set; }
+    [field: SerializeField] public Vector2 bounceDirection { get; private set; }
+    [field: SerializeField] public float bounceSpeed { get; private set; }
+    [field: SerializeField] public bool bounceWhenWall { get; private set; }
 
     [field: SerializeField] public Vector2 knockbackDirectionWhenBlocked { get; private set; }
     [field: SerializeField] public float knockbackSpeedWhenBlocked { get; private set; }
