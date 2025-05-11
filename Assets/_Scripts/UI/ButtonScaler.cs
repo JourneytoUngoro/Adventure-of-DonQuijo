@@ -29,6 +29,7 @@ public class ButtonScaler : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void OnPointerDown(PointerEventData eventData)
     {
         AnimateScale(originalScale * clickScale);
+        Manager.Instance.soundManager.PlayUI("buttonSFX");
     }
 
     public void OnPointerUp(PointerEventData eventData)

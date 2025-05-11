@@ -35,6 +35,11 @@ public class MainMenuUI : MonoBehaviour
         InitalizeMainMenu();
     }
 
+    private void Start()
+    {
+        Manager.Instance.soundManager.PlayBGM("mainBGM");
+    }
+
     void InitalizeMainMenu()
     {
         // Popup 스크립트 할당

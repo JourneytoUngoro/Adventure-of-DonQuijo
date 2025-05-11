@@ -152,6 +152,7 @@ public class LoadGameUI : MonoBehaviour
     {
         // TODO : Save-Load 시 저장된 씬 불러와야 한다 
         SceneManager.LoadScene("SampleScene");
+        Manager.Instance.soundManager.PlayBGM("battleBGM");
     }
 
     void DeleteGameWithSlot()
