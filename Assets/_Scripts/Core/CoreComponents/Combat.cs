@@ -143,7 +143,7 @@ public abstract class Combat : CoreComponent
 
             damagedTargets.Add(damageTarget);
 
-            if (damageTargetEntity.GetType().IsSubclassOf(typeof(Enemy)) {
+            if (damageTargetEntity.GetType().IsSubclassOf(typeof(Enemy))) {
                 Enemy damageTargetEnemy = damageTargetEntity as Enemy;
                 damageTargetEnemy.detection.ChangeCurrentTarget(entity);
             }

@@ -1,9 +1,5 @@
-using JetBrains.Annotations;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.UIElements;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
