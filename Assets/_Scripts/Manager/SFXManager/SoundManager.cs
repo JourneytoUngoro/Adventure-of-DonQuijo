@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -20,12 +21,15 @@ public class SoundManager : MonoBehaviour
     // TODO : Magnager에 통합
     public static SoundManager Instance { get; private set; }
 
-    [TabGroup("Tab/Audio Mixer")][SerializeField] private AudioMixer audioMixer;
-    [TabGroup("Tab/Audio Mixer")][SerializeField] private AudioMixerGroup bgmGroup;
-    [TabGroup("Tab/Audio Mixer")][SerializeField] private AudioMixerGroup sfxGroup;
-    [TabGroup("Tab/Audio Mixer")][SerializeField] private AudioMixerGroup uiGroup;
+    [TabGroup("Tab", "Audio Mixer")][SerializeField] private AudioMixer audioMixer;
+    [TabGroup("Tab", "Audio Mixer")][SerializeField] private AudioMixerGroup bgmGroup;
+    [TabGroup("Tab", "Audio Mixer")][SerializeField] private AudioMixerGroup sfxGroup;
+    [TabGroup("Tab", "Audio Mixer")][SerializeField] private AudioMixerGroup uiGroup;
 
-    [TabGroup("Tab/BGM")][SerializeField] private AudioSource bgmSource;
+    [TabGroup("Tab", "BGM")][SerializeField] private AudioSource bgmSource;
+
+    [Title("Clip Database")] [SerializeField] private AudioClipDatabase clipDatabase;
+    [ShowInInspector] private Dictionary<string, AudioClip> clipDictionary;
 
     [Title("Sound Player Pool")][SerializeField] private GameObject soundPlayerPrefab;
     [SerializeField] private int poolSize = 30;
@@ -41,8 +45,21 @@ public class SoundManager : MonoBehaviour
         if (Instance == null) Instance = this;
         else Destroy(this);
 
+        InitSoundClips();
         InitPool();
         LoadVolume();
+    }
+    private void InitSoundClips()
+    {
+        clipDictionary = new Dictionary<string, AudioClip>();
+
+        foreach (var entry in clipDatabase.soundClips)
+        {
+            if (!clipDictionary.ContainsKey(entry.key))
+                clipDictionary.Add(entry.key, entry.clip);
+            else
+                Debug.LogWarning($"Duplicate sound key detected: {entry.key}");
+        }
     }
 
     private void InitPool()
@@ -50,9 +67,107 @@ public class SoundManager : MonoBehaviour
         for (int i = 0; i < poolSize; i++)
         {
             SoundPlayer sp = Instantiate(soundPlayerPrefab, transform).GetComponent<SoundPlayer>();
+            sp.gameObject.SetActive(false);
             pool.Enqueue(sp);
         }
     }
+
+
+    private void Play(string key, AudioMixerGroup group, float volume)
+    {
+        AudioClip clip = GetClip(key);
+
+        if (clip == null)
+        {
+            Debug.LogWarning("clip is null!");
+            return;
+        }
+
+        SoundPlayer sp = GetSoundPlayer();
+        sp.gameObject.SetActive(true);
+        sp.Play(clip, group, volume, ReturnSoundPlayer);
+    }
+
+    // sfx player 
+    private void Play(string key, AudioMixerGroup group, Transform spawnTransform, float pitchDeviation = 0.0f, float volume = 1.0f)
+    {
+        AudioClip clip = GetClip(key);
+
+        if (clip == null)
+        {
+            Debug.LogWarning("clip is null!");
+            return;
+        }
+
+        SoundPlayer sp = GetSoundPlayer();
+        sp.gameObject.SetActive(true);
+        sp.Play(clip, group, volume, ReturnSoundPlayer, spawnTransform, pitchDeviation);
+    }
+
+    public void PlaySoundFXClip(string key, Transform spawnTransform, float pitchDeviation = 0.0f, float volume = 1.0f)
+    {
+        float pitch = 1.0f + UtilityFunctions.RandomFloat(-pitchDeviation, pitchDeviation);
+
+        Play(key, sfxGroup, spawnTransform, pitch, volume);
+    }
+
+    // TODO 함수 추가하기
+/*    public void PlaySoundFXClip(IEnumerable<AudioClip> audioClips, Transform spawnTransform, float pitchDeviation = 0.0f, float volume = 1.0f)
+    {
+        if (audioClips == null)
+        {
+            Debug.LogWarning($"{audioClips} is null. Cannot play sound.");
+            return;
+        }
+
+        foreach (AudioClip audioClip in audioClips)
+        {
+            if (audioClip == null)
+            {
+                Debug.LogWarning($"{audioClip.name} is null. Cannot play sound.");
+                return;
+            }
+        }
+
+        int index = UtilityFunctions.RandomInteger(audioClips.Count());
+
+        AudioClip clip = audioClips.ElementAt(index);
+
+       float pitch = 1.0f + UtilityFunctions.RandomFloat(-pitchDeviation, pitchDeviation);
+
+    }*/
+
+
+    public void PlayUI(string key, float volume = 1f) => Play(key, uiGroup, volume);
+
+    public void PlayBGM(string key)
+    {
+        if ( bgmSource.isPlaying) 
+        {
+            bgmSource.Stop();
+        }
+
+        AudioClip clip = GetClip(key);
+
+        bgmSource.clip = clip;
+        bgmSource.outputAudioMixerGroup = bgmGroup;
+        bgmSource.loop = true;
+        bgmSource.Play();
+    }
+
+    public AudioClip GetClip(string key)
+    {
+        if (clipDictionary.TryGetValue(key, out var clip))
+        {
+            return clip;
+        }
+        else
+        {
+            Debug.LogWarning($"[SoundManager] Clip not found for key: {key}");
+            return null;
+        }
+    }
+
 
     private SoundPlayer GetSoundPlayer()
     {
@@ -63,36 +178,8 @@ public class SoundManager : MonoBehaviour
 
     private void ReturnSoundPlayer(SoundPlayer sp)
     {
+        sp.gameObject.SetActive(false);
         pool.Enqueue(sp);
-    }
-
-    private void Play(AudioClip clip, AudioMixerGroup group, float volume)
-    {
-        if (clip == null)
-        {
-            Debug.LogWarning("clip is null!");
-            return;
-        }
-
-        SoundPlayer sp = GetSoundPlayer();
-        sp.Play(clip, group, volume, ReturnSoundPlayer);
-    }
-
-    public void PlaySFX(AudioClip clip, float volume = 1f) => Play(clip, sfxGroup, volume);
-
-    public void PlayUI(AudioClip clip, float volume = 1f) => Play(clip, uiGroup, volume);
-
-    public void PlayBGM(AudioClip clip)
-    {
-        if ( bgmSource.isPlaying) 
-        {
-            bgmSource.Stop();
-        }
-
-        bgmSource.clip = clip;
-        bgmSource.outputAudioMixerGroup = bgmGroup;
-        bgmSource.loop = true;
-        bgmSource.Play();
     }
 
     public void SetVolume(SoundCategory category, float inputVolume)

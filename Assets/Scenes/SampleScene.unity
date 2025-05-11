@@ -754,6 +754,11 @@ MonoBehaviour:
       <clockwiseAngle>k__BackingField: 0
       <counterClockwiseAngle>k__BackingField: 0
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: 35843011b2072d84887bbe5dff588288, type: 2}
+--- !u!4 &244669609 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2597764160466036882, guid: f77c0ef05370aa34cb3a3f52c942f4c7, type: 3}
+  m_PrefabInstance: {fileID: 818282132}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &306674428
 GameObject:
   m_ObjectHideFlags: 0
@@ -1754,7 +1759,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 540
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3063,6 +3068,63 @@ MonoBehaviour:
   m_MinRegionArea: 0
   m_HideEditorLogs: 0
   m_NavMeshData: {fileID: 23800000, guid: 9b01194e2498c43429e2f483aba23af4, type: 2}
+--- !u!1001 &818282132
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1348135039}
+    m_Modifications:
+    - target: {fileID: 2597764160466036882, guid: f77c0ef05370aa34cb3a3f52c942f4c7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1075.9519
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597764160466036882, guid: f77c0ef05370aa34cb3a3f52c942f4c7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 465.6712
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597764160466036882, guid: f77c0ef05370aa34cb3a3f52c942f4c7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.058372
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597764160466036882, guid: f77c0ef05370aa34cb3a3f52c942f4c7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597764160466036882, guid: f77c0ef05370aa34cb3a3f52c942f4c7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597764160466036882, guid: f77c0ef05370aa34cb3a3f52c942f4c7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597764160466036882, guid: f77c0ef05370aa34cb3a3f52c942f4c7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597764160466036882, guid: f77c0ef05370aa34cb3a3f52c942f4c7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597764160466036882, guid: f77c0ef05370aa34cb3a3f52c942f4c7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597764160466036882, guid: f77c0ef05370aa34cb3a3f52c942f4c7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703732069612243023, guid: f77c0ef05370aa34cb3a3f52c942f4c7, type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f77c0ef05370aa34cb3a3f52c942f4c7, type: 3}
 --- !u!1 &826068269
 GameObject:
   m_ObjectHideFlags: 0
@@ -3565,6 +3627,50 @@ MonoBehaviour:
           weightedMode: 0
           inWeight: 0
           outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  <speed>k__BackingField:
+    slider: {fileID: 0}
+    <maxValue>k__BackingField: 0
+    <minValue>k__BackingField: 0
+    <currentValue>k__BackingField: 0
+    <enableRecovery>k__BackingField: 0
+    <recoveryStartTime>k__BackingField: 0
+    <recoveryDuration>k__BackingField: 0
+    <recoveryValue>k__BackingField: 0
+    <graph>k__BackingField:
+      <incrementPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <accumulationPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  <power>k__BackingField:
+    slider: {fileID: 0}
+    <maxValue>k__BackingField: 0
+    <minValue>k__BackingField: 0
+    <currentValue>k__BackingField: 0
+    <enableRecovery>k__BackingField: 0
+    <recoveryStartTime>k__BackingField: 0
+    <recoveryDuration>k__BackingField: 0
+    <recoveryValue>k__BackingField: 0
+    <graph>k__BackingField:
+      <incrementPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <accumulationPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -5047,6 +5153,7 @@ Transform:
   - {fileID: 882488412}
   - {fileID: 387047396}
   - {fileID: 1434702728}
+  - {fileID: 244669609}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1348135040
@@ -5061,6 +5168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91fa7cc8fcdef5a449b219828c52aad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scenesToInitialize: []
 --- !u!1 &1349319617
 GameObject:
   m_ObjectHideFlags: 0
@@ -6182,6 +6290,50 @@ MonoBehaviour:
           weightedMode: 0
           inWeight: 0
           outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  <speed>k__BackingField:
+    slider: {fileID: 0}
+    <maxValue>k__BackingField: 0
+    <minValue>k__BackingField: 0
+    <currentValue>k__BackingField: 0
+    <enableRecovery>k__BackingField: 0
+    <recoveryStartTime>k__BackingField: 0
+    <recoveryDuration>k__BackingField: 0
+    <recoveryValue>k__BackingField: 0
+    <graph>k__BackingField:
+      <incrementPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <accumulationPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  <power>k__BackingField:
+    slider: {fileID: 0}
+    <maxValue>k__BackingField: 0
+    <minValue>k__BackingField: 0
+    <currentValue>k__BackingField: 0
+    <enableRecovery>k__BackingField: 0
+    <recoveryStartTime>k__BackingField: 0
+    <recoveryDuration>k__BackingField: 0
+    <recoveryValue>k__BackingField: 0
+    <graph>k__BackingField:
+      <incrementPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <accumulationPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4

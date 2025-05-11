@@ -13,7 +13,8 @@ public class Manager : MonoBehaviour
     public ItemManager itemManager { get; private set; }
     public UIManager uiManager { get; private set; }
     public DataManager dataManager { get; private set; }
-    public SoundFXManager soundFXManager { get; private set; }
+/*    public SoundFXManager soundFXManager { get; private set; }
+*/    public SoundManager soundManager { get; private set; }
 
     private void Awake()
     {
@@ -33,10 +34,11 @@ public class Manager : MonoBehaviour
         inputHandler = GetComponentInChildren<PlayerInputHandler>();
         gameManager = GetComponentInChildren<GameManager>();
         objectPoolingManager = GetComponentInChildren<ObjectPoolingManager>();
-        itemManager = GetComponentInChildren<ItemManager>();
+/*        itemManager = GetComponentInChildren<ItemManager>();
         uiManager = GetComponentInChildren<UIManager>();
         dataManager = GetComponentInChildren<DataManager>();
-        soundFXManager = GetComponentInChildren<SoundFXManager>();
+        soundFXManager = GetComponentInChildren<SoundFXManager>();*/
+        soundManager = GetComponentInChildren<SoundManager>();
     }
 
     #region Test

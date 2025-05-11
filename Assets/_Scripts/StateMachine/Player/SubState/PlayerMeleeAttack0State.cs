@@ -42,7 +42,7 @@ public class PlayerMeleeAttack0State : PlayerAbilityState
         transitToNextAttack = false;
         attackInputPressed = false;
         player.stateMachineToAnimator.state = this;
-        Manager.Instance.soundFXManager.PlaySoundFXClip(Manager.Instance.soundFXManager.playerAttackSoundFX, player.transform);
+        Manager.Instance.soundManager.PlaySoundFXClip("lightAttack1SFX", player.transform);
     }
 
     public override void Exit()

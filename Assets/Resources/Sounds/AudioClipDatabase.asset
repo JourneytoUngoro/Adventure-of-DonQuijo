@@ -12,10 +12,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7facd02d584a6e441828f324b9288244, type: 3}
   m_Name: AudioClipDatabase
   m_EditorClassIdentifier: 
-  clips:
-  - {fileID: 8300000, guid: 9ff7f848999c486489dfa87fc6413ee5, type: 3}
-  - {fileID: 8300000, guid: ad8a32fe008e1c9408bb8d1b99362881, type: 3}
-  - {fileID: 8300000, guid: 2737d4b4cad4c224680104e1956483a6, type: 3}
-  - {fileID: 8300000, guid: 5403d6dd7f799de44b1ce6abfa80f2a2, type: 3}
-  - {fileID: 8300000, guid: 58e7827fc0a3bd345a345c35be6c0c71, type: 3}
-  - {fileID: 8300000, guid: 58e7827fc0a3bd345a345c35be6c0c71, type: 3}
+  soundClips:
+  - key: battleBGM
+    clip: {fileID: 8300000, guid: 9ff7f848999c486489dfa87fc6413ee5, type: 3}
+  - key: cutscene01BGM
+    clip: {fileID: 8300000, guid: ad8a32fe008e1c9408bb8d1b99362881, type: 3}
+  - key: mainBGM
+    clip: {fileID: 8300000, guid: 2737d4b4cad4c224680104e1956483a6, type: 3}
+  - key: startButtonSFX
+    clip: {fileID: 8300000, guid: 5403d6dd7f799de44b1ce6abfa80f2a2, type: 3}
+  - key: buttonSFX
+    clip: {fileID: 8300000, guid: 58e7827fc0a3bd345a345c35be6c0c71, type: 3}
+  - key: heavyAttackSFX
+    clip: {fileID: 8300000, guid: 9e28cfae91511c1479a61078c3d3e3b9, type: 3}
+  - key: dashAttackSFX
+    clip: {fileID: 8300000, guid: 6af8084f691be4c4699fdb72b5cb2888, type: 3}
+  - key: lightAttack1SFX
+    clip: {fileID: 8300000, guid: a48ac912634804e42a419a22ca5499a2, type: 3}
+  - key: lightAttack2SFX
+    clip: {fileID: 8300000, guid: 5d450ca1575ea0f43b27ae603f92e035, type: 3}
+  - key: lightAttack3SFX
+    clip: {fileID: 8300000, guid: 5727e8398cc5d6b4593eb3d20848f728, type: 3}
+  - key: playerWalkSFX
+    clip: {fileID: 8300000, guid: 407a2e05c8d27854ea80d0320cc0ce63, type: 3}
+  - key: playerStaggerSFX
+    clip: {fileID: 8300000, guid: 2aa605c4d48359146baa3d622300d96c, type: 3}
+  - key: playerMissAttackSFX
+    clip: {fileID: 8300000, guid: c6f928982333c75469dd41a3c762aa61, type: 3}
+  - key: playerDashSFX
+    clip: {fileID: 8300000, guid: 23516d1af3f0ed144a6899d34d2747bd, type: 3}
+  - key: playerHitSFX
+    clip: {fileID: 8300000, guid: 8160e987beff83945a93e757721a4a39, type: 3}
+  - key: playerParrySuccessSFX
+    clip: {fileID: 8300000, guid: 84fda23d32834a447820805d63977b85, type: 3}
+  - key: healthRecorverSFX
+    clip: {fileID: 8300000, guid: 33a4798d4f748024982b59c37fccf1a1, type: 3}

@@ -19,6 +19,22 @@ public class SoundPlayer : MonoBehaviour
         this.onFinished = onFinished;
         audioSource.clip = clip;
         audioSource.volume = volume;
+        audioSource.outputAudioMixerGroup = mixer;
+
+        audioSource.Play();
+
+        Invoke(nameof(ReturnToPool), clip.length);
+    }
+
+    public void Play(AudioClip clip, AudioMixerGroup mixer, float volume, System.Action<SoundPlayer> onFinished, Transform spawnsTransform, float pitch)
+    {
+        this.onFinished = onFinished;
+        audioSource.clip = clip;
+        audioSource.volume = volume;
+        audioSource.transform.position = spawnsTransform.position;
+        audioSource.pitch = pitch;
+        audioSource.outputAudioMixerGroup = mixer;
+
         audioSource.Play();
 
         Invoke(nameof(ReturnToPool), clip.length);
