@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d9cac75bd0b07643a9b618c5538d279, type: 3}
+  m_Name: Test_NPC1
+  m_EditorClassIdentifier: 
+  npcName: Namju
+  npcAudioClip: {fileID: 8300000, guid: d762a90e47077564191455bb55443be0, type: 3}
+  portraitEntries:
+  - key: default
+    sprite: {fileID: 21300000, guid: a049bb9fc43c9be47ae0d5dc181d140c, type: 3}
+  - key: surprise
+    sprite: {fileID: 21300000, guid: 16f5b7a2f5a8dc04ab6340e3e5875923, type: 3}
+  - key: angry
+    sprite: {fileID: 21300000, guid: c64141d556398754dbee0d72f17a1454, type: 3}
