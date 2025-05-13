@@ -41,6 +41,7 @@ public class DialogueManager : MonoBehaviour
 
     private string speaker;
     private bool canContinueToNextLine = false;
+    private bool canSkipToNextLine = false;
     private Coroutine displayLineCoroutine;
 
     public bool isDialoguePlaying { get; private set; }
@@ -57,6 +58,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Awake()
     {
+        // 대화 별로 없으면 굳이 살려둬야 하나 싶음 
         #region Singleton
         if (Instance != null)
         {
@@ -90,12 +92,35 @@ public class DialogueManager : MonoBehaviour
         {
             choicesTMP[index++] = choice.GetComponentInChildren<TextMeshProUGUI>();
         }
+    }
+
+    private void Update()
+    {
+        if (!isDialoguePlaying) return;
+
+        if (PressedNextLineKey())
+        {
+            if (canContinueToNextLine && currentStory.currentChoices.Count == 0)
+            {
+                canSkipToNextLine = false;
+                ContinueStory();
+            }
+            else
+            {
+                canSkipToNextLine = true;
+            }
+        }
 
     }
 
     private bool PressedNextLineKey()
     {
-        return Input.GetKeyDown(KeyCode.Space);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("space down");
+            return true;
+        }
+        return false;
     }
 
     private void SetCurrentAudioClip(AudioClip clip)
@@ -113,22 +138,9 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (!isDialoguePlaying) return;
-
-        if (canContinueToNextLine
-            && currentStory.currentChoices.Count == 0
-            && PressedNextLineKey())
-        {
-            ContinueStory();
-        }
-    }
 
     public void EnterDialogue(TextAsset inkJSON, Animator anim, NPCDialogueSO npcSO)
     {
-        Debug.Log("updated version executing...");
-
         currentStory = new Story(inkJSON.text);
         this.npcSO = npcSO;
 
@@ -143,6 +155,8 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator ExitDialogue()
     {
+        Debug.Log("DialogueManage excutes ContinueStory");
+
         // prevent duplicate key input over multiple frames
         yield return new WaitForSeconds(0.2f);
 
@@ -160,6 +174,8 @@ public class DialogueManager : MonoBehaviour
 
     private void ContinueStory()
     {
+        Debug.Log("DialogueManage excutes ContinueStory");
+
         // no more prepared dialogues
         if (!currentStory.canContinue)
         {
@@ -187,6 +203,8 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator DisplayLine(string line)
     {
+        line = line.Replace("\\n", "\n");
+
         dialogueTMP.text = line;
         dialogueTMP.maxVisibleCharacters = 0;
 
@@ -198,12 +216,11 @@ public class DialogueManager : MonoBehaviour
 
         foreach (char c in line.ToCharArray())
         {
-/*            if (PressedNextLineKey())
+            if (canSkipToNextLine)
             {
-                Debug.Log("skip display chars...");
                 dialogueTMP.maxVisibleCharacters = line.Length;
                 break;
-            }*/
+            }
 
             if (c == '<' || hasRichText)
             {
@@ -226,6 +243,7 @@ public class DialogueManager : MonoBehaviour
 
         canContinueToNextLine = true;
         if (audioSource.isPlaying) audioSource.Stop();
+
     }
 
     private void PlayDialogueSound()

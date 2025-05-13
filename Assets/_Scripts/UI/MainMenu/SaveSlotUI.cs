@@ -71,13 +71,14 @@ public class SaveSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         if (!isNull)
         {
+            saveSlotButton.enabled = true;
             textInfo.SetDynamicTextInfo(new TextInfoData(
-                $"Mentality : {mentality}\nLast Play Time : {lastPlayTime}\nTotal Play Time : {totalPlayTime}\nstage : {stage}"));
+                $"정신력 : {mentality}\n마지막 플레이 시간 : {lastPlayTime}\n총 플레이 시간 : {totalPlayTime}\n현재 스테이지 : {stage}"));
         }
         else
         {
-            textInfo.SetDynamicTextInfo(new TextInfoData($"No Data"));
-            saveSlotButton.transform.Find("Slot TMP").GetComponent<TextMeshProUGUI>().text = "empty\nslot";
+            textInfo.SetDynamicTextInfo(new TextInfoData($"데이터 없음"));
+            saveSlotButton.transform.Find("Slot TMP").GetComponent<TextMeshProUGUI>().text = "빈 슬롯";
         }
     }
 

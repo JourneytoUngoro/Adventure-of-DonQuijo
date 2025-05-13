@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class LoadGameUI : MonoBehaviour
 {
+    [Header("Show Cutscene")] [SerializeField] private bool showCutScene;
+
     [Tooltip("must be assigned in Inspector")]
     public Button[] saveSlotButtons;
     public Button editButton;
@@ -22,10 +24,12 @@ public class LoadGameUI : MonoBehaviour
     Dictionary<string, GameData> allProfilesGameData;
 
     bool editing;
+    bool isFirstPlay;
 
     private void Awake()
     {
         popup = GetComponent<PopupUI>();
+        isFirstPlay = false;
     }
 
     private void Start()
@@ -46,6 +50,7 @@ public class LoadGameUI : MonoBehaviour
         AssginGameData();
 
         editing = false;
+        isFirstPlay = CheckFirstPlay();
     }
 
     void SetEvents()
@@ -53,6 +58,11 @@ public class LoadGameUI : MonoBehaviour
         popup.SetDynamicPopupEvent(null, OnClickCancelButton);
 
         editButton.onClick.AddListener(OnClickEditButton);
+    }
+
+    private bool CheckFirstPlay()
+    {
+        return Manager.Instance.dataManager.AllProfilesCount() > 0 ? false : true;
     }
 
     void OnClickCancelButton()
@@ -95,12 +105,12 @@ public class LoadGameUI : MonoBehaviour
         if (saveSlotUI[index].isNull)
         {
             guidePopup = Manager.Instance.uiManager.ShowDynamicPopup(new PopupData(
-                                "=== New Game ===", $"New Game with Slot {index + 1}?", "Yes", "No"));
+                                "새 게임 시작하기", $"슬롯 {index + 1}에서\n새 게임을 시작하겠습니까?", "확인", "취소"));
         }
         else
         {
             guidePopup = Manager.Instance.uiManager.ShowDynamicPopup(new PopupData(
-                                    "=== Load Game ===", $"Load Game with Slot {index + 1}?", "Yes", "No"));
+                                    "저장된 슬롯 불러오기", $"슬롯 {index + 1}에서\n게임을 불러오겠습니까?", "확인", "취소"));
         }
 
         nowProfileId = saveSlotUI[index].profileId;
@@ -118,7 +128,7 @@ public class LoadGameUI : MonoBehaviour
             if (saveSlotUI[i].isNull) continue;
             saveSlotUI[i].deleteButton.gameObject.SetActive(editing);
         }
-        editButton.GetComponentInChildren<TextMeshProUGUI>().text = editing ? "Editing..." : "Edit";
+        editButton.GetComponentInChildren<TextMeshProUGUI>().text = editing ? "편집 중..." : "편집하기";
     }
 
     public void OnClickDeleteButton(int index)
@@ -126,7 +136,7 @@ public class LoadGameUI : MonoBehaviour
         deleteProfileId = saveSlotUI[index].profileId;
 
         guidePopup = Manager.Instance.uiManager.ShowDynamicPopup(new PopupData(
-                            "=== Delete Slot ===", $"Delete Slot {index + 1}?", "Yes", "No"));
+                            "저장된 슬롯 삭제하기", $"슬롯 {index + 1}에 저장된\n데이터를 삭제하겠습니까?", "확인", "취소"));
         guidePopup.ShowUI();
 
         guidePopup.SetDynamicPopupEvent(DeleteGameWithSlot, guidePopup.HideUI);
@@ -143,16 +153,29 @@ public class LoadGameUI : MonoBehaviour
 
             nowProfileId = string.Empty;
 
-            LoadCurrentScene();
+            StartCoroutine(LoadCurrentScene());
         }
         popup.HideUI();
     }
 
-    void LoadCurrentScene()
+    IEnumerator LoadCurrentScene()
     {
+        ImageUI fadeUI = Manager.Instance.uiManager.GetUI(UIType.FadeImage).GetComponent<ImageUI>();
+        Debug.Assert(fadeUI != null, "fade image is null! ");
+        fadeUI.ShowUI();
+
+        yield return new WaitForSeconds(fadeUI.fadeTime);
+
         // TODO : Save-Load 시 저장된 씬 불러와야 한다 
-        SceneManager.LoadScene("SampleScene");
-        Manager.Instance.soundManager.PlayBGM("battleBGM");
+        if (showCutScene /*isFirstPlay*/)
+        {
+            gameObject.GetComponent<CutsceneController>().PlayCutScene();
+        }
+        else
+        {
+            SceneManager.LoadScene("SampleScene");
+            Manager.Instance.soundManager.PlayBGM("battleBGM");
+        }
     }
 
     void DeleteGameWithSlot()

@@ -178,6 +178,7 @@ public class FileDataHandler
     public int AllProfilesCount()
     {
         int profileCount = new DirectoryInfo(dataDirPath).EnumerateDirectories().Count();
+        Debug.Log("All Profiles count is " + profileCount);
         return profileCount;
     }
 
