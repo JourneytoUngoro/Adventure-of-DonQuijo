@@ -1,5 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class SettingUI : MonoBehaviour
 
     public Button confirmButton;
     public Button cancelButton;
+    public Button temp_exitButton;
 
     PopupUI popup;
 
@@ -32,6 +34,15 @@ public class SettingUI : MonoBehaviour
     public void OnClickCancelButton()
     {
         popup.HideUI();
+    }
+
+    public void OnClickExitButton()
+    {
+# if UNITY_EDITOR
+        EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
 }

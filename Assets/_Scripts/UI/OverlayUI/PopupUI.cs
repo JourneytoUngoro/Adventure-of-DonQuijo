@@ -66,7 +66,7 @@ public class PopupUI : UIBase
         cancelButton?.onClick.RemoveAllListeners();
 
         // 확인 버튼
-        if (confirmButton != null)
+        if (confirmButton != null && !string.IsNullOrEmpty(data.confirmText))
         {
             confirmButton.GetComponentInChildren<TextMeshProUGUI>().text = data.confirmText;
         }
@@ -76,7 +76,7 @@ public class PopupUI : UIBase
         }
 
         // 취소 버튼 
-        if (cancelButton != null)
+        if (cancelButton != null && !string.IsNullOrEmpty(data.cancelText))
         {
             cancelButton.GetComponentInChildren<TextMeshProUGUI>().text = data.cancelText;
 
@@ -95,7 +95,7 @@ public class PopupUI : UIBase
         }
         else
         {
-            Debug.Log("cannot find cancel  button");
+            // Debug.Log("cannot find cancel  button");
         }
 
         rectTransform.anchoredPosition = position;

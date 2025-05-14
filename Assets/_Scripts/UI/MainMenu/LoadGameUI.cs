@@ -43,8 +43,8 @@ public class LoadGameUI : MonoBehaviour
         for (int i = 0; i < saveSlotButtons.Length; i++)
         {
             saveSlotUI[i] = saveSlotButtons[i].GetComponent<SaveSlotUI>();
-            saveSlotUI[i].SetOutline(false);
-            saveSlotUI[i].profileId = GenerateSlotId(i);
+/*            saveSlotUI[i].SetOutline(false);
+*/            saveSlotUI[i].profileId = GenerateSlotId(i);
         }
 
         AssginGameData();
@@ -90,11 +90,11 @@ public class LoadGameUI : MonoBehaviour
 
     public void OnClickSlotButton(int index)
     {
-        for (int i = 0; i < saveSlotUI.Length; i++)
+/*        for (int i = 0; i < saveSlotUI.Length; i++)
         {
             saveSlotUI[i].SetOutline(false);
         }
-        saveSlotUI[index].SetOutline(true);
+        saveSlotUI[index].SetOutline(true);*/
 
         LoadOrNewGame(index);
     }
@@ -105,12 +105,12 @@ public class LoadGameUI : MonoBehaviour
         if (saveSlotUI[index].isNull)
         {
             guidePopup = Manager.Instance.uiManager.ShowDynamicPopup(new PopupData(
-                                "새 게임 시작하기", $"슬롯 {index + 1}에서\n새 게임을 시작하겠습니까?", "확인", "취소"));
+                                "", $"슬롯 {index + 1}에서 새 게임을 시작하겠습니까?", "확인", ""));
         }
         else
         {
             guidePopup = Manager.Instance.uiManager.ShowDynamicPopup(new PopupData(
-                                    "저장된 슬롯 불러오기", $"슬롯 {index + 1}에서\n게임을 불러오겠습니까?", "확인", "취소"));
+                                    "", $"슬롯 {index + 1}에서 게임을 불러오겠습니까?", "확인", ""));
         }
 
         nowProfileId = saveSlotUI[index].profileId;
@@ -128,7 +128,7 @@ public class LoadGameUI : MonoBehaviour
             if (saveSlotUI[i].isNull) continue;
             saveSlotUI[i].deleteButton.gameObject.SetActive(editing);
         }
-        editButton.GetComponentInChildren<TextMeshProUGUI>().text = editing ? "편집 중..." : "편집하기";
+        editButton.GetComponentInChildren<TextMeshProUGUI>().text = editing ? "저장하기" : "편집하기";
     }
 
     public void OnClickDeleteButton(int index)
@@ -136,7 +136,7 @@ public class LoadGameUI : MonoBehaviour
         deleteProfileId = saveSlotUI[index].profileId;
 
         guidePopup = Manager.Instance.uiManager.ShowDynamicPopup(new PopupData(
-                            "저장된 슬롯 삭제하기", $"슬롯 {index + 1}에 저장된\n데이터를 삭제하겠습니까?", "확인", "취소"));
+                            "", $"슬롯 {index + 1}에 저장된 데이터를 삭제하겠습니까?", "확인", ""));
         guidePopup.ShowUI();
 
         guidePopup.SetDynamicPopupEvent(DeleteGameWithSlot, guidePopup.HideUI);

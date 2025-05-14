@@ -6,7 +6,9 @@ using TMPro;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-
+/// <summary>
+/// 한 방에 폰트를 바꿔준다
+/// </summary>
 public class FontChanger : MonoBehaviour
 {
     [SerializeField] public TMP_FontAsset FontAsset;

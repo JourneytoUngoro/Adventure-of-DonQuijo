@@ -23,8 +23,8 @@ public class SaveSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     LoadGameUI loadGameUI;
     TextInfoUI textInfo;
-    Outline outline;
-
+/*    Outline outline;
+*/
 
     private void Start()
     {
@@ -33,8 +33,8 @@ public class SaveSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         saveSlotButton = GetComponent<Button>();
         deleteButton = transform.Find("Delete Button").GetComponent<Button>();
         textInfo = GetComponentInChildren<TextInfoUI>();
-        outline = GetComponent<Outline>();
-
+/*        outline = GetComponent<Outline>();
+*/
         deleteButton.gameObject.SetActive(false);
 
         SetEvents();
@@ -74,11 +74,11 @@ public class SaveSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         {
             saveSlotButton.enabled = true;
             textInfo.SetDynamicTextInfo(new TextInfoData(
-                $"정신력 : {mentality}\n마지막 플레이 시간 : {lastPlayTime}\n총 플레이 시간 : {totalPlayTime}\n현재 스테이지 : {stage}"));
+                $"정신력 : {mentality}\n마지막 플레이 시간 : {lastPlayTime}\n총 플레이 시간 : {totalPlayTime}\n현재 스테이지 : {stage}\n  "));
         }
         else
         {
-            textInfo.SetDynamicTextInfo(new TextInfoData($"데이터 없음"));
+            // textInfo.SetDynamicTextInfo(new TextInfoData($"              데이터 없음            \n "));
             saveSlotButton.transform.Find("Slot TMP").GetComponent<TextMeshProUGUI>().text = "빈 슬롯";
         }
     }
@@ -105,16 +105,18 @@ public class SaveSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        OnHorverEnter();
+        if(!isNull)
+            OnHorverEnter();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        OnHorverExit();
+        if (!isNull)
+            OnHorverExit();
     }
 
-    public void SetOutline(bool visibility)
+/*    public void SetOutline(bool visibility)
     {
         outline.enabled = visibility;
-    }
+    }*/
 }

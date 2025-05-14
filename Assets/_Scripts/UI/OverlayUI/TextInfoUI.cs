@@ -47,8 +47,6 @@ public class TextInfoUI : UIBase
         if (data.info != null && infoTMP) infoTMP.text = data.info;
         if (data.background != null && backgroundImage != null) backgroundImage.sprite = data.background;
 
-        rectTransform.anchoredPosition = position;
-
         return this;
     }
 

@@ -39,7 +39,7 @@ public class MainMenuEffect : MonoBehaviour
         movingImage.DOAnchorPos(targetAnchoredPosition, moveDuration)
             .SetEase(Ease.OutCubic);
 
-        DOVirtual.DelayedCall(moveDuration * 2f, () =>
+        DOVirtual.DelayedCall(moveDuration + 0.5f, () =>
         {
             StartCoroutine(ActivateButtonsSequentially());
         });
