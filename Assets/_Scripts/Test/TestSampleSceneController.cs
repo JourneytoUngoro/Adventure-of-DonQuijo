@@ -24,8 +24,9 @@ public class TestSampleSceneController : MonoBehaviour
     private IEnumerator DelayedDialogueStart()
     {
         fadeUI.HideUI();
-        yield return new WaitForSeconds(fadeUI.fadeTime);
+        yield return new WaitForSeconds(0.5f/*fadeUI.fadeTime*/);
 
+        Debug.Log(DialogueManager.Instance == null ? "대화 매니저 사라잇어" : "디졋어");
         DialogueManager.Instance.EnterDialogue(guideTextAsset, null, guideNPC);
     }
 }

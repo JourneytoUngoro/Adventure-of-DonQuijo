@@ -34,8 +34,8 @@ public class Manager : MonoBehaviour
         inputHandler = GetComponentInChildren<PlayerInputHandler>();
         gameManager = GetComponentInChildren<GameManager>();
         objectPoolingManager = GetComponentInChildren<ObjectPoolingManager>();
-        itemManager = GetComponentInChildren<ItemManager>();
-        uiManager = GetComponentInChildren<UIManager>();
+/*        itemManager = GetComponentInChildren<ItemManager>();
+*/        uiManager = GetComponentInChildren<UIManager>();
         dataManager = GetComponentInChildren<DataManager>();
 
         // soundFXManager = GetComponentInChildren<SoundFXManager>();
