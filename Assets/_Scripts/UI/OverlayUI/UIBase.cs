@@ -106,5 +106,7 @@ public abstract class UIBase : MonoBehaviour
 
     protected virtual void ReturnToPool() { }
 
+    public RectTransform GetRectTransform() { return rectTransform; }
+
 
 }

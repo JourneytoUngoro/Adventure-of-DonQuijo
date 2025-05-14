@@ -25,6 +25,7 @@ public class SaveSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     TextInfoUI textInfo;
     Outline outline;
 
+
     private void Start()
     {
         loadGameUI = GetComponentInParent<LoadGameUI>();

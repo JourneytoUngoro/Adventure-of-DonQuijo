@@ -4,7 +4,7 @@ using DG.Tweening;
 
 public class ButtonScaler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
-    [SerializeField] private float hoverScale = 1.1f;
+    [SerializeField] private float hoverScale = 1.07f;
     [SerializeField] private float clickScale = 0.9f;
     [SerializeField] private float duration = 0.2f;
 

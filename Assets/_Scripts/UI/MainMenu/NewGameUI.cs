@@ -24,11 +24,15 @@ public class NewGameUI : MonoBehaviour
         loadGamePanel.GetComponent<PopupUI>().ShowUI();
         if (Manager.Instance.dataManager.AllProfilesCount() < 3)
         {
-            Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData("Choose New Slot")).ShowAndHideUI(5f);
+            TextInfoUI text =  Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData("새 슬롯을 선택해주세요")).GetComponent<TextInfoUI>();
+            text.SetAnchoredPositioin(0, -200);
+            text.ShowAndHideUI(2.5f);
         }
         else
         {
-            Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData("Slots Full. Delete Slot")).ShowAndHideUI(3f);
+            TextInfoUI text = Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData("슬롯이 가득 찼습니다.")).GetComponent<TextInfoUI>();
+            text.SetAnchoredPositioin(0, -200);
+            text.ShowAndHideUI(2.5f);
             loadGamePanel.GetComponent<LoadGameUI>().OnClickEditButton();
         }
 

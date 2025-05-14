@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6900516787632659342
@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 774624435655638084}
   - component: {fileID: 8397104400056502976}
   - component: {fileID: 4742477299028297944}
+  - component: {fileID: 6239636122225909751}
   m_Layer: 5
   m_Name: TextInfoPrefab
   m_TagString: Untagged
@@ -162,7 +163,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4552327766814014558}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -171,7 +172,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000015259, y: -414}
+  m_AnchoredPosition: {x: 0, y: -400}
   m_SizeDelta: {x: 605.1002, y: 65.2581}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &905559397378070265
@@ -228,7 +229,7 @@ MonoBehaviour:
   fadeTime: 0
   delayTime: 0
   <BlockClick>k__BackingField: 0
-  position: {x: 0, y: 0}
+  position: {x: 200, y: -130}
 --- !u!225 &4742477299028297944
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -237,7 +238,22 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4552327766814014558}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &6239636122225909751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4552327766814014558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a13c9dc5f3321f449d79754c31bfdd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  background: {fileID: 453435210240103704}
+  tmpText: {fileID: 4945250941377379927}
+  padding: {x: 30, y: 30}

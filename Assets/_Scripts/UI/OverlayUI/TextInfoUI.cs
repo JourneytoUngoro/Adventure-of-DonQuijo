@@ -52,6 +52,12 @@ public class TextInfoUI : UIBase
         return this;
     }
 
+    public void SetAnchoredPositioin(int x, int y)
+    {
+        rectTransform.anchoredPosition = new Vector2(x, y);
+
+    }
+
     protected override void ReturnToPool()
     {
         if (type == UIType.DynamicTextInfo) 
