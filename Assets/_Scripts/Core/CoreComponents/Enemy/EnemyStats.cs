@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyStats : Stats
 {
+    [field: SerializeField] public Canvas statsCanvas { get; protected set; }
     [field: SerializeField] public StatComponent detectionRatio { get; protected set; }
 
     private Enemy enemy;
@@ -18,7 +19,8 @@ public class EnemyStats : Stats
     protected override void Start()
     {
         base.Start();
-        // health.OnCurrentValueMin += () => { enemy.enemyStateMachine.ChangeState(enemy.deadState); };
+
+        health.OnCurrentValueMin += () => { enemy.enemyStateMachine.ChangeState(enemy.deadState); };
         // detectionRatio.OnCurrentValueMax += () => { enemy.enemyStateMachine.ChangeState(enemy.targetInDetectionRangeState); };
     }
 }

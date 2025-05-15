@@ -5,7 +5,7 @@ using UnityEngine;
 public class EntityData : ScriptableObject
 {
     [field: Header("Entity Data")]
-    [field: SerializeField] public float entityHeight { get; private set; } = 80.0f;
+    [field: SerializeField] public float entityStature { get; private set; } = 80.0f;
     [field: SerializeField] public float gravityScale { get; private set; } = 100.0f;
 
     [field: Header("Move State")]
@@ -23,4 +23,9 @@ public class EntityData : ScriptableObject
 
     [field: Header("Landing State")]
     [field: SerializeField] public float landingRecoveryTime { get; private set; } = 1.0f;
+
+    [field: Header("Knockback State")]
+    [field: SerializeField] public float knockbackReboundThresholdSpeed { get; private set; } = 300.0f;
+    [field: SerializeField] public float wallKnockbackReboundThresholdAngle { get; private set; } = 30.0f;
+    [field: SerializeField] public float decelerationRatio { get; private set; } = 0.7f;
 }

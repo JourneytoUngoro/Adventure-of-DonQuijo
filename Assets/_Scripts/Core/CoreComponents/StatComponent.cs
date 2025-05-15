@@ -14,6 +14,7 @@ public class StatComponent
     public event Action OnCurrentValueMax;
     public event Action OnCurrentValueChange;
 
+    [SerializeField] private bool reverseSlider;
     [SerializeField] private Slider slider;
 
     [field: SerializeField] public float maxValue { get; private set; }
@@ -135,7 +136,7 @@ public class StatComponent
     {
         if (slider != null)
         {
-            slider.value = currentValue / maxValue;
+            slider.value = reverseSlider ? 1.0f - currentValue / maxValue : currentValue / maxValue;
         }
     }
 }

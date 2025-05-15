@@ -19,7 +19,7 @@ MonoBehaviour:
   <canBeDodged>k__BackingField: 1
   <canBeBlocked>k__BackingField: 1
   <canBeParried>k__BackingField: 1
-  <stanceWhenParried>k__BackingField: 1
+  <stanceWhenParried>k__BackingField: 0
   <getDazed>k__BackingField: 0
   <combatAbilityComponents>k__BackingField:
   - rid: 2124230314328064000

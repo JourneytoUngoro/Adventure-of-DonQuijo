@@ -19,7 +19,7 @@ MonoBehaviour:
   <canBeDodged>k__BackingField: 1
   <canBeBlocked>k__BackingField: 1
   <canBeParried>k__BackingField: 1
-  <stanceWhenParried>k__BackingField: 0
+  <stanceWhenParried>k__BackingField: 1
   <getDazed>k__BackingField: 0
   <combatAbilityComponents>k__BackingField:
   - rid: 843630676115718144
@@ -72,21 +72,25 @@ MonoBehaviour:
       data:
         name: KnockbackComponent
         <pertainedCombatAbility>k__BackingField: {fileID: 11400000}
-        <airborne>k__BackingField: 1
+        <airborne>k__BackingField: 0
         <directionBase>k__BackingField: 0
         <knockbackDirection>k__BackingField: {x: 1, y: 0}
-        <knockbackSpeed>k__BackingField: 300
+        <knockbackSpeed>k__BackingField: 0
         <knockbackTime>k__BackingField: 0.3
         <easeFunction>k__BackingField: 0
         <orthogonalVelocity>k__BackingField: 100
+        <bounceWhenGrounded>k__BackingField: 0
+        <bounceDirection>k__BackingField: {x: 0, y: 0}
+        <bounceSpeed>k__BackingField: 0
+        <bounceWhenWall>k__BackingField: 0
         <knockbackDirectionWhenBlocked>k__BackingField: {x: 1, y: 0}
-        <knockbackSpeedWhenBlocked>k__BackingField: 50
-        <knockbackTimeWhenBlocked>k__BackingField: 0.3
-        <easeFunctionWhenBlocked>k__BackingField: 9
+        <knockbackSpeedWhenBlocked>k__BackingField: 0
+        <knockbackTimeWhenBlocked>k__BackingField: 0.2
+        <easeFunctionWhenBlocked>k__BackingField: 0
         <knockbackDirectionWhenParried>k__BackingField: {x: 1, y: 0}
-        <knockbackSpeedWhenParried>k__BackingField: 50
-        <knockbackTimeWhenParried>k__BackingField: 0.3
-        <easeFunctionWhenParried>k__BackingField: 9
+        <knockbackSpeedWhenParried>k__BackingField: 0
+        <knockbackTimeWhenParried>k__BackingField: 0.2
+        <easeFunctionWhenParried>k__BackingField: 0
         <counterProtrudedWhenParried>k__BackingField: 0
         <counterKnockbackDirectionWhenParried>k__BackingField: {x: -1, y: 0}
         <counterKnockbackSpeedWhenParried>k__BackingField: 100

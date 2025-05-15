@@ -59,16 +59,26 @@ public class PlayerMoveState : PlayerGroundedState
             {
                 stateMachine.ChangeState(player.idleState);
             }
+            else if (attackInputPressed && isDashing)
+            {
+                stateMachine.ChangeState(player.dashAttackState);
+            }
+            else if (strongAttackInputPressed && isDashing)
+            {
+                stateMachine.ChangeState(player.strongDashAttackState);
+            }
         }
 
         if (!onStateExit)
         {
             if (isDashing)
             {
+                player.animator.SetBool("dash", true);
                 player.movement.SetVelocity(inputX * playerData.dashSpeed.x, inputY * playerData.dashSpeed.y);
             }
             else
             {
+                player.animator.SetBool("dash", false);
                 player.movement.SetVelocity(inputX * playerData.moveSpeed.x, inputY * playerData.moveSpeed.y);
             }
         }

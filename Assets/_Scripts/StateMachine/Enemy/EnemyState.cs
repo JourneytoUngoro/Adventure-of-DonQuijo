@@ -42,13 +42,13 @@ public class EnemyState : EntityState
 
         enemy.knockbackState.knockbackTimer.Tick();
 
-        /*foreach (EnemyAbilityState enemyAbilityState in enemy.abilityStates)
+        foreach (EnemyAbilityState enemyAbilityState in enemy.abilityStates)
         {
             enemyAbilityState.abilityCoolDownTimer.Tick();
-        }*/
-        enemy.meleeAttack0State.abilityCoolDownTimer.Tick();
+        }
+        /*enemy.meleeAttack0State.abilityCoolDownTimer.Tick();
         enemy.meleeAttack1State.abilityCoolDownTimer.Tick();
         enemy.meleeAttack2State.abilityCoolDownTimer.Tick();
-        enemy.meleeAttack3State.abilityCoolDownTimer.Tick();
+        enemy.dodgeAttackState.abilityCoolDownTimer.Tick();*/
     }
 }

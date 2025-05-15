@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,11 +12,12 @@ public abstract class Combat : CoreComponent
     public List<Collider2D> damagedTargets { get; private set; }
     public List<Entity> surroundedBy { get; private set; } = new List<Entity>();
     public List<Entity> targetedBy { get; private set; } = new List<Entity>();
+    public Coroutine dashAttackCoroutine { get; protected set; }
     public int stanceLevel { get; protected set; }
 
     protected const int maxDetectionCount = 10;
 
-    private Collider2D[] detectedDamageTargets = new Collider2D[maxDetectionCount];
+    protected Collider2D[] detectedDamageTargets = new Collider2D[maxDetectionCount];
 
     protected override void Awake()
     {
@@ -61,11 +63,17 @@ public abstract class Combat : CoreComponent
             foreach (CombatAbilityComponent combatAbilityComponent in combatAbilityWithTransforms.combatAbilityData.combatAbilityComponents)
             {
                 combatAbilityComponent.pertainedCombatAbility = combatAbilityWithTransforms.combatAbilityData;
+
+                if (combatAbilityComponent.GetType().Equals(typeof(KnockbackComponent)))
+                {
+                    KnockbackComponent knockbackComponent = combatAbilityComponent as KnockbackComponent;
+                    knockbackComponent.knockbackSourceTransform = entity.transform;
+                }
             }
         }
     }
 
-    public virtual pair<bool, bool> DoAttack(CombatAbilityWithColliders combatAbilityWithColliders)
+    public virtual pair<bool, bool> DoAttack(CombatAbilityWithColliders combatAbilityWithColliders, bool includeMovement = true)
     {
         bool foundTarget = false;
         bool hitTarget = false;
@@ -75,31 +83,12 @@ public abstract class Combat : CoreComponent
         contactFilter.SetLayerMask(whatIsDamageable);
         contactFilter.useLayerMask = true;
 
-        foreach (OverlapCollider overlapCollider in combatAbilityWithColliders.overlapColliders)
-        {
-            Array.Clear(detectedDamageTargets, 0, maxDetectionCount);
-            overlapCollider.overlapCollider.OverlapCollider(contactFilter, detectedDamageTargets);
-            damageTargets = damageTargets
-                .Union(detectedDamageTargets.Where(target => {
-                    if (target == null) return false;
-                    Entity targetEntity = target.GetComponentInParent<Entity>();
-                    float targetEntityFeetHeight = targetEntity.entityDetection.currentEntityHeight;
-                    float targetEntityHeadHeight = targetEntityFeetHeight + targetEntity.GetComponent<Entity>().entityData.entityHeight;
-                    float colliderBottomHeight = overlapCollider.overlapCollider.gameObject.transform.position.z + entity.entityDetection.currentEntityHeight;
-                    float colliderTopHeight = colliderBottomHeight + overlapCollider.height;
-                    return colliderBottomHeight < targetEntityHeadHeight || colliderTopHeight > targetEntityFeetHeight;
-                })).ToList();
-        }
-
-        damageTargets.Remove(entity.entityCollider);
-        damageTargets.Remove(null);
-
         foreach (CombatAbilityComponent combatAbilityComponent in combatAbilityWithColliders.combatAbilityData.combatAbilityComponents)
         {
             switch (combatAbilityComponent)
             {
                 case MovementComponent movementComponent:
-                    movementComponent.ApplyCombatAbility(null, null);
+                    if (includeMovement) movementComponent.ApplyCombatAbility(null, combatAbilityWithColliders.overlapColliders);
                     break;
                 case BlockParryComponent blockParryComponent:
                     blockParryComponent.ApplyCombatAbility(null, combatAbilityWithColliders.overlapColliders);
@@ -112,53 +101,146 @@ public abstract class Combat : CoreComponent
             }
         }
 
-        foreach (Collider2D damageTarget in damageTargets)
+        if (combatAbilityWithColliders.overlapColliders != null && combatAbilityWithColliders.overlapColliders.Count() > 0)
         {
-            if (damagedTargets.Contains(damageTarget)) continue;
-            if (damageTarget.CompareTag("Invinsible")) continue;
-            if (combatAbilityWithColliders.combatAbilityData.canBeDodged && damageTarget.CompareTag("Dodge")) continue;
-
-            foundTarget = true;
-            Entity damageTargetEntity = damageTarget.GetComponent<Entity>();
-            damageTargetEntity.SetStatusValues(CurrentStatus.gotHit);
-
-            foreach (CombatAbilityComponent combatAbilityComponent in combatAbilityWithColliders.combatAbilityData.combatAbilityComponents)
+            foreach (OverlapCollider overlapCollider in combatAbilityWithColliders.overlapColliders)
             {
-                switch (combatAbilityComponent)
-                {
-                    case DamageComponent damageComponent:
-                        hitTarget = true;
-                        damageComponent.ApplyCombatAbility(damageTarget, combatAbilityWithColliders.overlapColliders);
-                        break;
-                    case KnockbackComponent knockbackComponent:
-                        hitTarget = true;
-                        knockbackComponent.ApplyCombatAbility(damageTarget, combatAbilityWithColliders.overlapColliders);
-                        break;
-                    /*case StatusEffectComponent statusEffectComponent:
-                        statusEffectComponent.ApplyCombatAbility(damageTarget, combatAbilityWithTransforms.overlapColliders);
-                        break;*/
-                    default: break;
-                }
+                Array.Clear(detectedDamageTargets, 0, maxDetectionCount);
+                overlapCollider.overlapCollider.OverlapCollider(contactFilter, detectedDamageTargets);
+                damageTargets = damageTargets
+                    .Union(detectedDamageTargets.Where(target => {
+                        if (target == null) return false;
+                        Entity targetEntity = target.GetComponentInParent<Entity>();
+                        float targetEntityFeetHeight = targetEntity.entityDetection.currentEntityHeight;
+                        float targetEntityHeadHeight = targetEntityFeetHeight + targetEntity.currentEntityStature;
+                        float colliderBottomHeight = overlapCollider.overlapCollider.gameObject.transform.position.z + entity.entityDetection.currentEntityHeight;
+                        float colliderTopHeight = colliderBottomHeight + overlapCollider.height;
+                        return !(targetEntityHeadHeight <= colliderBottomHeight || colliderTopHeight <= targetEntityFeetHeight);
+                    })).ToList();
             }
 
-            damagedTargets.Add(damageTarget);
+            damageTargets.Remove(entity.entityCollider);
+            damageTargets.Remove(null);
 
-            if (damageTargetEntity.GetType().IsSubclassOf(typeof(Enemy)) {
-                Enemy damageTargetEnemy = damageTargetEntity as Enemy;
-                damageTargetEnemy.detection.ChangeCurrentTarget(entity);
+            foreach (Collider2D damageTarget in damageTargets)
+            {
+                Entity damageTargetEntity = damageTarget.GetComponent<Entity>();
+
+                if (damageTargetEntity.GetType().IsSubclassOf(typeof(Enemy)))
+                {
+                    Enemy damageTargetEnemy = damageTargetEntity as Enemy;
+                    damageTargetEnemy.detection.ChangeCurrentTarget(entity);
+                }
+
+                if (damagedTargets.Contains(damageTarget)) continue;
+                if (damageTarget.CompareTag("Invinsible")) continue;
+                if (combatAbilityWithColliders.combatAbilityData.canBeDodged && damageTarget.CompareTag("Dodge")) continue;
+
+                foundTarget = true;
+                damageTargetEntity.SetStatusValues(CurrentStatus.gotHit);
+
+                foreach (CombatAbilityComponent combatAbilityComponent in combatAbilityWithColliders.combatAbilityData.combatAbilityComponents)
+                {
+                    switch (combatAbilityComponent)
+                    {
+                        case DamageComponent damageComponent:
+                            hitTarget = true;
+                            damageComponent.ApplyCombatAbility(damageTarget, combatAbilityWithColliders.overlapColliders);
+                            break;
+                        case KnockbackComponent knockbackComponent:
+                            hitTarget = true;
+                            knockbackComponent.ApplyCombatAbility(damageTarget, combatAbilityWithColliders.overlapColliders);
+                            break;
+                        /*case StatusEffectComponent statusEffectComponent:
+                            statusEffectComponent.ApplyCombatAbility(damageTarget, combatAbilityWithTransforms.overlapColliders);
+                            break;*/
+                        default: break;
+                    }
+                }
+
+                damagedTargets.Add(damageTarget);
             }
         }
 
         return new pair<bool, bool>(foundTarget, hitTarget);
     }
 
-    public void GetMovement(MovementComponent movementComponent)
+    public void GetMovement(MovementComponent movementComponent, OverlapCollider[] overlapColliders)
     {
         Vector2 direction = Vector2.one;
-        direction.x = entity.entityMovement.facingDirection;
 
-        entity.entityMovement.SetVelocityChangeOverTime(movementComponent.planeDirection.normalized * direction, movementComponent.planeVelocity, movementComponent.moveTime, movementComponent.easeFunction, movementComponent.slowDown, false);
+        switch (movementComponent.dashDirection)
+        {
+            case DashDirection.TowardTarget:
+                if (entity.entityDetection.currentTarget != null)
+                {
+                    direction = (entity.entityDetection.currentTarget.entityDetection.currentProjectedPosition - entity.entityDetection.currentProjectedPosition).normalized;
+                }
+                else
+                {
+                    direction.x = entity.entityMovement.facingDirection;
+                }
+                break;
+            case DashDirection.Facing:
+                direction.x = entity.entityMovement.facingDirection;
+                break;
+            case DashDirection.Absolute:
+                break;
+            default:
+                break;
+        }
+
+        if (movementComponent.easeFunction == Ease.INTERNAL_Custom)
+        {
+            if (movementComponent.dashDirection == DashDirection.TowardTarget)
+            {
+                entity.entityMovement.SetVelocityChangeOverTime(direction, movementComponent.planeVelocity, movementComponent.moveTime, movementComponent.easeCurve, movementComponent.reverseTime, false);
+            }
+            else
+            {
+                entity.entityMovement.SetVelocityChangeOverTime(movementComponent.planeDirection.normalized * direction, movementComponent.planeVelocity, movementComponent.moveTime, movementComponent.easeCurve, movementComponent.reverseTime, false);
+            }
+        }
+        else
+        {
+            if (movementComponent.dashDirection == DashDirection.TowardTarget)
+            {
+                entity.entityMovement.SetVelocityChangeOverTime(direction, movementComponent.planeVelocity, movementComponent.moveTime, movementComponent.easeFunction, movementComponent.reverseTime, false);
+            }
+            else
+            {
+                entity.entityMovement.SetVelocityChangeOverTime(movementComponent.planeDirection.normalized * direction, movementComponent.planeVelocity, movementComponent.moveTime, movementComponent.easeFunction, movementComponent.reverseTime, false);
+            }
+        }
         entity.entityMovement.SetVelocityZ(movementComponent.orthogonalVelocity);
+
+        /*if (movementComponent.isDashAttack && overlapColliders != null)
+        {
+            CombatAbilityWithColliders combatAbilityWithColliders = new CombatAbilityWithColliders(false, overlapColliders, movementComponent.pertainedCombatAbility);
+            dashAttackCoroutine = StartCoroutine(DashAttack(combatAbilityWithColliders, movementComponent.attackStartTime));
+        }*/
+    }
+
+    private IEnumerator DashAttack(CombatAbilityWithColliders combatAbility, float attackTime)
+    {
+        float coroutineElapsedTime = 0.0f;
+        WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
+
+        while (true)
+        {
+            DoAttack(combatAbility, false);
+
+            if (coroutineElapsedTime > attackTime)
+            {
+                yield break;
+            }
+            else
+            {
+                yield return waitForFixedUpdate;
+            }
+
+            coroutineElapsedTime += Time.fixedDeltaTime;
+        }
     }
 
     public virtual void GetDamage(DamageComponent damageComponent, OverlapCollider[] overlapColliders)
@@ -166,6 +248,8 @@ public abstract class Combat : CoreComponent
         Entity sourceEntity = damageComponent.pertainedCombatAbility.sourceEntity;
         bool isParrying = damageComponent.pertainedCombatAbility.canBeParried ? IsParrying(sourceEntity, overlapColliders) : false;
         bool isBlocking = damageComponent.pertainedCombatAbility.canBeBlocked ? IsBlocking(sourceEntity, overlapColliders) : false;
+
+        Debug.Log("isParrying: " + isParrying + ", isBlocking: " + isBlocking);
 
         GetHealthDamage(damageComponent, isParrying, isBlocking);
         GetPostureDamage(damageComponent, isParrying, isBlocking);
@@ -197,6 +281,7 @@ public abstract class Combat : CoreComponent
                         entity.SetStatusValues(CurrentStatus.Blocked);
                         entity.animator.SetTrigger("blocked");
                         entity.entityStats.health.DecreaseCurrentValue(healthDamage * (1.0f - damageComponent.healthDamageShieldRate));
+                        sourceEntity.SetStatusValues(CurrentStatus.wasBlocked);
                     }
                     else
                     {
@@ -220,6 +305,7 @@ public abstract class Combat : CoreComponent
                 entity.SetStatusValues(CurrentStatus.Blocked);
                 entity.animator.SetTrigger("blocked");
                 entity.entityStats.health.DecreaseCurrentValue(healthDamage * (1.0f - damageComponent.healthDamageShieldRate));
+                sourceEntity.SetStatusValues(CurrentStatus.wasBlocked);
             }
             else
             {
@@ -245,8 +331,8 @@ public abstract class Combat : CoreComponent
         {
             if (isParrying)
             {
-                entity.entityStats.posture.IncreaseCurrentValue(postureDamage * (1.0f - damageComponent.postureDamageParryRate), false);
-                sourceEntity.entityStats.posture.IncreaseCurrentValue(postureDamage * damageComponent.postureCounterDamageRate, !sourceEntity.GetType().Equals(typeof(Player)));
+                entity.entityStats.posture.DecreaseCurrentValue(postureDamage * (1.0f - damageComponent.postureDamageParryRate), false);
+                sourceEntity.entityStats.posture.DecreaseCurrentValue(postureDamage * damageComponent.postureCounterDamageRate, !sourceEntity.GetType().Equals(typeof(Player)));
             }
             else
             {
@@ -254,16 +340,16 @@ public abstract class Combat : CoreComponent
                 {
                     if (isParrying || isShielding)
                     {
-                        entity.entityStats.posture.IncreaseCurrentValue(postureDamage * (1.0f - damageComponent.postureDamageShieldRate));
+                        entity.entityStats.posture.DecreaseCurrentValue(postureDamage * (1.0f - damageComponent.postureDamageShieldRate));
                     }
                     else
                     {
-                        entity.entityStats.posture.IncreaseCurrentValue(postureDamage);
+                        entity.entityStats.posture.DecreaseCurrentValue(postureDamage);
                     }
                 }
                 else
                 {
-                    entity.entityStats.posture.IncreaseCurrentValue(postureDamage);
+                    entity.entityStats.posture.DecreaseCurrentValue(postureDamage);
                 }
             }
         }
@@ -271,16 +357,16 @@ public abstract class Combat : CoreComponent
         {
             if (isParrying || isShielding)
             {
-                entity.entityStats.posture.IncreaseCurrentValue(postureDamage * (1.0f - damageComponent.postureDamageShieldRate));
+                entity.entityStats.posture.DecreaseCurrentValue(postureDamage * (1.0f - damageComponent.postureDamageShieldRate));
             }
             else
             {
-                entity.entityStats.posture.IncreaseCurrentValue(postureDamage);
+                entity.entityStats.posture.DecreaseCurrentValue(postureDamage);
             }
         }
         else
         {
-            entity.entityStats.posture.IncreaseCurrentValue(postureDamage);
+            entity.entityStats.posture.DecreaseCurrentValue(postureDamage);
         }
     }
 
@@ -356,13 +442,14 @@ public abstract class Combat : CoreComponent
                         entity.SetStatusValues(CurrentStatus.Blocked);
                         entity.animator.SetTrigger("blocked");
                         entity.entityMovement.SetVelocityChangeOverTime(knockbackComponent.knockbackDirectionWhenBlocked.normalized * directionMultiplier, knockbackComponent.knockbackSpeedWhenBlocked, knockbackComponent.knockbackTimeWhenBlocked, knockbackComponent.easeFunctionWhenBlocked, true, false);
+                        sourceEntity.SetStatusValues(CurrentStatus.wasBlocked);
                     }
                     else if (stanceLevel < knockbackComponent.pertainedCombatAbility.threatLevel)
                     {
                         entity.SetStatusValues(CurrentStatus.Knockback);
                         entity.animator.SetBool("airborne", knockbackComponent.airborne || !entity.entityDetection.isGrounded);
 
-                        entity.entityMovement.SetVelocity(knockbackComponent.knockbackDirection.normalized * directionMultiplier * knockbackComponent.knockbackSpeed);
+                        entity.entityMovement.SetVelocityChangeOverTime(knockbackComponent.knockbackDirection.normalized * directionMultiplier, knockbackComponent.knockbackSpeed, knockbackComponent.knockbackTime, knockbackComponent.easeFunction, true, false);
                         entity.entityMovement.SetVelocityZ(knockbackComponent.orthogonalVelocity);
 
                         entity.entityCombat.ChangeToKnockbackState(knockbackComponent.knockbackTime);
@@ -373,7 +460,7 @@ public abstract class Combat : CoreComponent
                     entity.SetStatusValues(CurrentStatus.Knockback);
                     entity.animator.SetBool("airborne", knockbackComponent.airborne || !entity.entityDetection.isGrounded);
 
-                    entity.entityMovement.SetVelocity(knockbackComponent.knockbackDirection.normalized * directionMultiplier * knockbackComponent.knockbackSpeed);
+                    entity.entityMovement.SetVelocityChangeOverTime(knockbackComponent.knockbackDirection.normalized * directionMultiplier, knockbackComponent.knockbackSpeed, knockbackComponent.knockbackTime, knockbackComponent.easeFunction, true, false);
                     entity.entityMovement.SetVelocityZ(knockbackComponent.orthogonalVelocity);
 
                     entity.entityCombat.ChangeToKnockbackState(knockbackComponent.knockbackTime);
@@ -387,13 +474,14 @@ public abstract class Combat : CoreComponent
                 entity.SetStatusValues(CurrentStatus.Blocked);
                 entity.animator.SetTrigger("blocked");
                 entity.entityMovement.SetVelocityChangeOverTime(knockbackComponent.knockbackDirectionWhenBlocked.normalized * directionMultiplier, knockbackComponent.knockbackSpeedWhenBlocked, knockbackComponent.knockbackTimeWhenBlocked, knockbackComponent.easeFunctionWhenBlocked, true, false);
+                sourceEntity.SetStatusValues(CurrentStatus.wasBlocked);
             }
             else if (stanceLevel < knockbackComponent.pertainedCombatAbility.threatLevel)
             {
                 entity.SetStatusValues(CurrentStatus.Knockback);
                 entity.animator.SetBool("airborne", knockbackComponent.airborne || !entity.entityDetection.isGrounded);
 
-                entity.entityMovement.SetVelocity(knockbackComponent.knockbackDirection.normalized * directionMultiplier * knockbackComponent.knockbackSpeed);
+                entity.entityMovement.SetVelocityChangeOverTime(knockbackComponent.knockbackDirection.normalized * directionMultiplier, knockbackComponent.knockbackSpeed, knockbackComponent.knockbackTime, knockbackComponent.easeFunction, true, false);
                 entity.entityMovement.SetVelocityZ(knockbackComponent.orthogonalVelocity);
 
                 entity.entityCombat.ChangeToKnockbackState(knockbackComponent.knockbackTime);
@@ -404,7 +492,7 @@ public abstract class Combat : CoreComponent
             entity.SetStatusValues(CurrentStatus.Knockback);
             entity.animator.SetBool("airborne", knockbackComponent.airborne || !entity.entityDetection.isGrounded);
 
-            entity.entityMovement.SetVelocity(knockbackComponent.knockbackDirection.normalized * directionMultiplier * knockbackComponent.knockbackSpeed);
+            entity.entityMovement.SetVelocityChangeOverTime(knockbackComponent.knockbackDirection.normalized * directionMultiplier, knockbackComponent.knockbackSpeed, knockbackComponent.knockbackTime, knockbackComponent.easeFunction, true, false);
             entity.entityMovement.SetVelocityZ(knockbackComponent.orthogonalVelocity);
 
             entity.entityCombat.ChangeToKnockbackState(knockbackComponent.knockbackTime);
@@ -440,4 +528,6 @@ public abstract class Combat : CoreComponent
             blockParryPrefab.gameObject.SetActive(false);
         }
     }
+
+    public void SetStanceLevel(int stanceLevel) => this.stanceLevel = stanceLevel;
 }

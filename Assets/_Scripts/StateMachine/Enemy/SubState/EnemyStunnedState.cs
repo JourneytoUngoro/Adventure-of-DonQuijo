@@ -24,7 +24,7 @@ public class EnemyStunnedState : EnemyState
     {
         base.Exit();
 
-        enemy.stats.posture.SetCurrentValue(enemy.stats.posture.minValue);
+        enemy.stats.posture.SetCurrentValue(enemy.stats.posture.maxValue);
     }
 
     public override void LogicUpdate()
@@ -34,6 +34,21 @@ public class EnemyStunnedState : EnemyState
         if (!onStateExit)
         {
             stunRecoveryTimer.Tick(isGrounded);
+
+            if (canTransit)
+            {
+                if (isGrounded)
+                {
+                    if (isTargetInDetectionRange)
+                    {
+                        stateMachine.ChangeState(enemy.targetInDetectionRangeState);
+                    }
+                    else
+                    {
+                        stateMachine.ChangeState(enemy.idleState);
+                    }
+                }
+            }
         }
     }
 }

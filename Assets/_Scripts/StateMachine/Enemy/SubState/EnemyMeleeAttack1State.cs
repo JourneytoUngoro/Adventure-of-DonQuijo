@@ -23,9 +23,6 @@ public class EnemyMeleeAttack1State : EnemyAbilityState
         base.AnimationFinishTrigger(index);
 
         isAbilityDone = true;
-        enemy.movement.SetVelocityXChangeOverTime(300.0f * -facingDirection, 1.0f, DG.Tweening.Ease.OutCubic, true, true);
-        enemy.movement.SetVelocityZ(100.0f);
-        enemy.orthogonalRigidbody.gravityScale = enemy.enemyData.gravityScale;
     }
 
     public override void Enter()
@@ -42,16 +39,7 @@ public class EnemyMeleeAttack1State : EnemyAbilityState
         base.Exit();
 
         abilityCoolDownTimer.StartSingleUseTimer();
-    }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-
-        if (!onStateExit)
-        {
-            canTransit = !enemy.movement.coroutineEnabled;
-        }
+        enemy.combat.damagedTargets.Clear();
     }
 
     public override void LogicUpdate()
@@ -62,23 +50,24 @@ public class EnemyMeleeAttack1State : EnemyAbilityState
         {
             if (isAbilityDone)
             {
-                if (canTransit)
+                if (isGrounded)
                 {
-                    if (isGrounded)
+                    if (isTargetInDetectionRange)
                     {
-                        if (isTargetInDetectionRange)
-                        {
-                            stateMachine.ChangeState(enemy.targetInDetectionRangeState);
-                        }
-                        else
-                        {
-                            stateMachine.ChangeState(enemy.idleState);
-                        }
+                        stateMachine.ChangeState(enemy.targetInDetectionRangeState);
                     }
                     else
                     {
-                        // stateMachine.ChangeState(enemy.inAirState);
+                        if (enemy.detection.currentTargetLastVelocity.x * facingDirection < 0)
+                        {
+                            enemy.movement.Flip();
+                        }
+                        stateMachine.ChangeState(enemy.idleState);
                     }
+                }
+                else
+                {
+                    // stateMachine.ChangeState(enemy.inAirState);
                 }
             }
         }

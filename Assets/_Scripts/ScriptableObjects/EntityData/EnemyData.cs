@@ -28,10 +28,9 @@ public class EnemyData : EntityData
     [field: SerializeField] public float meleeAttack0CoolDown { get; private set; } = 4.0f;
     [field: SerializeField] public float meleeAttack1CoolDown { get; private set; } = 10.0f;
     [field: SerializeField] public float meleeAttack2CoolDown { get; private set; } = 4.0f;
-    [field: SerializeField] public float meleeAttack2DashDistance { get; private set; } = 200.0f;
-    [field: SerializeField] public float meleeAttack2MakeDistanceTime { get; private set; } = 2.0f;
-    [field: SerializeField] public float meleeAttack3CoolDown { get; private set; } = 7.0f;
-    [field: SerializeField] public float meleeAttack4CoolDown { get; private set; } = 15.0f;
+    [field: SerializeField] public float dashAttackCoolDown { get; private set; } = 15.0f;
+    [field: SerializeField] public float dodgeAttackCoolDown { get; private set; } = 15.0f;
+    [field: SerializeField] public float wideAttackCoolDown { get; private set; } = 10.0f;
 
     [field: Header("Canvas Settings")]
     [field: SerializeField] public float canvasDisableTime { get; private set; } = 5.0f;

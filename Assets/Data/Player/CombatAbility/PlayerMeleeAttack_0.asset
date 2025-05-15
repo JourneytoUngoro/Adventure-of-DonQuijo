@@ -19,7 +19,7 @@ MonoBehaviour:
   <canBeDodged>k__BackingField: 1
   <canBeBlocked>k__BackingField: 1
   <canBeParried>k__BackingField: 1
-  <stanceWhenParried>k__BackingField: 1
+  <stanceWhenParried>k__BackingField: 0
   <getDazed>k__BackingField: 0
   <combatAbilityComponents>k__BackingField:
   - rid: 2124230314328064000
@@ -37,19 +37,19 @@ MonoBehaviour:
             serializedVersion: 2
             m_Curve:
             - serializedVersion: 3
-              time: 0
-              value: 1
-              inSlope: 9
-              outSlope: 9
+              time: 1
+              value: 10
+              inSlope: 0
+              outSlope: 0
               tangentMode: 34
               weightedMode: 0
               inWeight: 0
               outWeight: 0.33333334
             - serializedVersion: 3
-              time: 1
+              time: 10
               value: 10
-              inSlope: 9
-              outSlope: 9
+              inSlope: 0
+              outSlope: 0
               tangentMode: 34
               weightedMode: 0
               inWeight: 0.33333334
@@ -61,8 +61,8 @@ MonoBehaviour:
             serializedVersion: 2
             m_Curve:
             - serializedVersion: 3
-              time: 0
-              value: 1
+              time: 1
+              value: 10
               inSlope: 0
               outSlope: 0
               tangentMode: 0
@@ -70,8 +70,8 @@ MonoBehaviour:
               inWeight: 0
               outWeight: 0
             - serializedVersion: 3
-              time: 1
-              value: 11
+              time: 10
+              value: 20
               inSlope: 0
               outSlope: 0
               tangentMode: 0
@@ -146,26 +146,26 @@ MonoBehaviour:
         <pertainedCombatAbility>k__BackingField: {fileID: 11400000}
         <airborne>k__BackingField: 0
         <directionBase>k__BackingField: 0
-        <knockbackDirection>k__BackingField: {x: 0, y: 0}
-        <knockbackSpeed>k__BackingField: 0
-        <knockbackTime>k__BackingField: 0
-        <easeFunction>k__BackingField: 0
+        <knockbackDirection>k__BackingField: {x: 1, y: 0}
+        <knockbackSpeed>k__BackingField: 100
+        <knockbackTime>k__BackingField: 0.3
+        <easeFunction>k__BackingField: 3
         <orthogonalVelocity>k__BackingField: 0
         <bounceWhenGrounded>k__BackingField: 0
         <bounceDirection>k__BackingField: {x: 0, y: 0}
         <bounceSpeed>k__BackingField: 0
         <bounceWhenWall>k__BackingField: 0
-        <knockbackDirectionWhenBlocked>k__BackingField: {x: 0, y: 0}
-        <knockbackSpeedWhenBlocked>k__BackingField: 0
-        <knockbackTimeWhenBlocked>k__BackingField: 0
-        <easeFunctionWhenBlocked>k__BackingField: 0
-        <knockbackDirectionWhenParried>k__BackingField: {x: 0, y: 0}
-        <knockbackSpeedWhenParried>k__BackingField: 0
-        <knockbackTimeWhenParried>k__BackingField: 0
-        <easeFunctionWhenParried>k__BackingField: 0
+        <knockbackDirectionWhenBlocked>k__BackingField: {x: 1, y: 0}
+        <knockbackSpeedWhenBlocked>k__BackingField: 50
+        <knockbackTimeWhenBlocked>k__BackingField: 0.3
+        <easeFunctionWhenBlocked>k__BackingField: 3
+        <knockbackDirectionWhenParried>k__BackingField: {x: 1, y: 0}
+        <knockbackSpeedWhenParried>k__BackingField: 50
+        <knockbackTimeWhenParried>k__BackingField: 0.3
+        <easeFunctionWhenParried>k__BackingField: 3
         <counterProtrudedWhenParried>k__BackingField: 0
-        <counterKnockbackDirectionWhenParried>k__BackingField: {x: 0, y: 0}
-        <counterKnockbackSpeedWhenParried>k__BackingField: 0
-        <counterKnockbackTimeWhenParried>k__BackingField: 0
-        <counterEaseFunctionWhenParried>k__BackingField: 0
+        <counterKnockbackDirectionWhenParried>k__BackingField: {x: -1, y: 0}
+        <counterKnockbackSpeedWhenParried>k__BackingField: 50
+        <counterKnockbackTimeWhenParried>k__BackingField: 0.5
+        <counterEaseFunctionWhenParried>k__BackingField: 3
         <counterOrthogonalVelocityWhenParried>k__BackingField: 0

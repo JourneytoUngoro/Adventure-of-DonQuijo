@@ -6,37 +6,64 @@ public class PlayerMeleeAttack2State : PlayerAbilityState
 {
     private Timer attackInputHoldTimer;
     private bool transitToNextAttack;
+    private bool canCancel;
 
     public PlayerMeleeAttack2State(Player player, string animBoolName) : base(player, animBoolName)
     {
         available = true;
-        attackInputHoldTimer = new Timer(playerData.attackInputBufferTime);
+        attackInputHoldTimer = new Timer(player.playerData.attackInputBufferTime);
         attackInputHoldTimer.timerAction += () => { transitToNextAttack = false; };
+    }
+
+    public override void AnimationStartTrigger(int index)
+    {
+        base.AnimationStartTrigger(index);
+
+        canCancel = false;
+    }
+
+    public override void AnimationAlertTrigger(int index)
+    {
+        base.AnimationAlertTrigger(index);
+
+        player.combat.DoAlert(player.combat.meleeAttack[2]);
     }
 
     public override void AnimationActionTrigger(int index)
     {
         base.AnimationActionTrigger(index);
 
+
         player.combat.DoAttack(player.combat.meleeAttack[2]);
+        player.combat.damagedTargets.Clear();
     }
 
     public override void AnimationFinishTrigger(int index)
     {
         base.AnimationFinishTrigger(index);
 
-        isAbilityDone = true;
-        player.meleeAttack0State.attackComboTimer.StartSingleUseTimer();
+        if (index == 0)
+        {
+            canCancel = true;
+            canTransit = true;
+        }
+        else if (index == 1)
+        {
+            isAbilityDone = true;
+        }
     }
 
     public override void Enter()
     {
         base.Enter();
 
+        canCancel = true;
         isAbilityDone = false;
         transitToNextAttack = false;
         attackInputPressed = false;
         player.stateMachineToAnimator.state = this;
+        player.animator.SetInteger("typeIndex", 2);
+        player.movement.SetVelocityZero();
     }
 
     public override void Exit()
@@ -44,6 +71,9 @@ public class PlayerMeleeAttack2State : PlayerAbilityState
         base.Exit();
 
         transitToNextAttack = false;
+        player.meleeAttack0State.attackStroke = 0;
+        player.meleeAttack0State.attackComboTimer.StartSingleUseTimer();
+        // player.animator.ResetTrigger("transitToNextAttack");
     }
 
     public override void LogicUpdate()
@@ -68,18 +98,34 @@ public class PlayerMeleeAttack2State : PlayerAbilityState
             {
                 if (isGrounded)
                 {
-                    if (transitToNextAttack)
-                    {
-                        stateMachine.ChangeState(player.meleeAttack0State);
-                    }
-                    else
-                    {
-                        stateMachine.ChangeState(player.idleState);
-                    }
+                    stateMachine.ChangeState(player.idleState);
                 }
                 else
                 {
                     stateMachine.ChangeState(player.inAirState);
+                }
+            }
+            else
+            {
+                if (canCancel)
+                {
+                    if (dodgeInputPressed && player.dodgeState.available)
+                    {
+                        stateMachine.ChangeState(player.dodgeState);
+                    }
+                    else if (blockParryInputPressed && player.blockParryState.available)
+                    {
+                        stateMachine.ChangeState(player.blockParryState);
+                    }
+                }
+                
+                if (canTransit)
+                {
+                    if (transitToNextAttack)
+                    {
+                        player.animator.SetTrigger("transitToNextAttack");
+                        stateMachine.ChangeState(player.meleeAttack0State);
+                    }
                 }
             }
         }

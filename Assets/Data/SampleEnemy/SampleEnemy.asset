@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1ae404565639748975a1496320ed46, type: 3}
   m_Name: SampleEnemy
   m_EditorClassIdentifier: 
-  <entityHeight>k__BackingField: 80
+  <entityStature>k__BackingField: 80
   <gravityScale>k__BackingField: 100
   <moveSpeed>k__BackingField: {x: 150, y: 75}
   <dashSpeed>k__BackingField: {x: 300, y: 150}
@@ -20,12 +20,15 @@ MonoBehaviour:
   <gotoLandingStateTime>k__BackingField: 3
   <stunRecoveryTime>k__BackingField: 3
   <landingRecoveryTime>k__BackingField: 1
+  <knockbackReboundThresholdSpeed>k__BackingField: 300
+  <wallKnockbackReboundThresholdAngle>k__BackingField: 30
+  <decelerationRatio>k__BackingField: 0.7
   <dazedTime>k__BackingField: 2
   <stepSize>k__BackingField: 5
   <maxDistance>k__BackingField: 90
   <adequateDistance>k__BackingField: 80
   <walkAroundDistance>k__BackingField: 20
-  <repositioningPossibility>k__BackingField: 1
+  <repositioningPossibility>k__BackingField: 0.6
   <repositionOffsetDistance>k__BackingField: 10
   <repositioningTime>k__BackingField: 4
   <maxBlockableCount>k__BackingField: 2
@@ -33,11 +36,10 @@ MonoBehaviour:
   <blockPossibility>k__BackingField: 0.7
   <parryGaugeWhenBlocked>k__BackingField: 0.6
   <maxParryableCount>k__BackingField: 1
-  <meleeAttack0CoolDown>k__BackingField: 3
-  <meleeAttack1CoolDown>k__BackingField: 4
-  <meleeAttack2CoolDown>k__BackingField: 7
-  <meleeAttack2DashDistance>k__BackingField: 200
-  <meleeAttack2MakeDistanceTime>k__BackingField: 2
-  <meleeAttack3CoolDown>k__BackingField: 4
-  <meleeAttack4CoolDown>k__BackingField: 1000
+  <meleeAttack0CoolDown>k__BackingField: 4
+  <meleeAttack1CoolDown>k__BackingField: 10
+  <meleeAttack2CoolDown>k__BackingField: 4
+  <dashAttackCoolDown>k__BackingField: 15
+  <dodgeAttackCoolDown>k__BackingField: 3
+  <wideAttackCoolDown>k__BackingField: 10
   <canvasDisableTime>k__BackingField: 5

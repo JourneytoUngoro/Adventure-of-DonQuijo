@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
 // TODO: Conditions
-public enum CurrentStatus { gotHit, HealthDamage, PostureDamage, Knockback, Parried, Blocked, wasParried }
+public enum CurrentStatus { gotHit, HealthDamage, PostureDamage, Knockback, Parried, Blocked, wasParried, wasBlocked, Alerted }
 
 public class Entity : MonoBehaviour
 {
@@ -68,9 +68,6 @@ public class Entity : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        // prevPosition = currentPosition;
-        // currentPosition = planeMovementRigidbody.position;
-        // verticalMovementRigidbody.position += currentPosition - prevPosition;
         entityStateMachine.entityCurrentState.PhysicsUpdate();
     }
 
@@ -82,8 +79,6 @@ public class Entity : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("collision.gameObject.name: " + collision.gameObject.name);
-        Debug.Log("collision.gameObject.layer: " + collision.gameObject.layer);
         if (collision.gameObject.IsInLayerMask(entityDetection.whatIsGround))
         {
             entityMovement.OnContact(true);

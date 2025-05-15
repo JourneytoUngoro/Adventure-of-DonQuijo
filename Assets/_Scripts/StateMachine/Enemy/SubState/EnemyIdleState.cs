@@ -13,6 +13,7 @@ public class EnemyIdleState : EnemyState
         base.Enter();
 
         enemy.navMeshAgent.enabled = false;
+        enemy.SetCurrentEntityStature(enemy.enemyData.entityStature);
     }
 
     public override void LogicUpdate()

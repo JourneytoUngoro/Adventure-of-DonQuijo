@@ -22,6 +22,9 @@ public class Player : Entity
     public PlayerMeleeAttack0State meleeAttack0State { get; private set; }
     public PlayerMeleeAttack1State meleeAttack1State { get; private set; }
     public PlayerMeleeAttack2State meleeAttack2State { get; private set; }
+    public PlayerStrongAttackState strongAttackState { get; private set; }
+    public PlayerDashAttackState dashAttackState { get; private set; }
+    public PlayerStrongDashAttackState strongDashAttackState { get; private set; }
     public PlayerBlockParryState blockParryState { get; private set; }
     public PlayerDeadState deadState { get; private set; }
     public PlayerCureState cureState { get; private set; }
@@ -63,9 +66,12 @@ public class Player : Entity
         stunnedState = new PlayerStunnedState(this, "stunned");
         landingState = new PlayerLandingState(this, "landing");
         knockbackState = new PlayerKnockbackState(this, "knockback");
-        meleeAttack0State = new PlayerMeleeAttack0State(this, "meleeAttack0");
-        meleeAttack1State = new PlayerMeleeAttack1State(this, "meleeAttack1");
-        meleeAttack2State = new PlayerMeleeAttack2State(this, "meleeAttack2");
+        meleeAttack0State = new PlayerMeleeAttack0State(this, "meleeAttack");
+        meleeAttack1State = new PlayerMeleeAttack1State(this, "meleeAttack");
+        meleeAttack2State = new PlayerMeleeAttack2State(this, "meleeAttack");
+        strongAttackState = new PlayerStrongAttackState(this, "strongAttack");
+        dashAttackState = new PlayerDashAttackState(this, "dashAttack");
+        strongDashAttackState = new PlayerStrongDashAttackState(this, "strongDashAttack");
         blockParryState = new PlayerBlockParryState(this, "blockParry");
         deadState = new PlayerDeadState(this, "dead");
         cureState = new PlayerCureState(this, "cure");

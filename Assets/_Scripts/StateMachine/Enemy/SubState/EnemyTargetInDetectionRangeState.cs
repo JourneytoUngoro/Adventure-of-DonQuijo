@@ -5,11 +5,12 @@ using UnityEngine.AI;
 
 public class EnemyTargetInDetectionRangeState : EnemyState
 {
-    private bool[] meleeAttacks = new bool[4];
+    private bool[] meleeAttacks = new bool[3];
     private bool isTargetInMeleeAttack0Range;
     private bool isTargetInMeleeAttack1Range;
     private bool isTargetInMeleeAttack2Range;
-    private bool isTargetInMeleeAttack3Range;
+    private bool isTargetInDashAttackRange;
+    private bool isTargetInWideAttackRange;
     private Timer repositioningTimer;
 
     private Vector3 currentDestination;
@@ -67,7 +68,8 @@ public class EnemyTargetInDetectionRangeState : EnemyState
         isTargetInMeleeAttack0Range = enemy.combat.IsTargetInRangeOf(enemy.combat.meleeAttack0[0]);
         isTargetInMeleeAttack1Range = enemy.combat.IsTargetInRangeOf(enemy.combat.meleeAttack1[0]);
         isTargetInMeleeAttack2Range = enemy.combat.IsTargetInRangeOf(enemy.combat.meleeAttack2[0]);
-        isTargetInMeleeAttack3Range = enemy.combat.IsTargetInRangeOf(enemy.combat.meleeAttack3[0]);
+        isTargetInDashAttackRange = Vector3.Distance(enemy.detection.currentProjectedPosition, enemy.detection.currentTarget.entityDetection.currentProjectedPosition) < 400.0f;
+        isTargetInWideAttackRange = enemy.combat.IsTargetInRangeOf(enemy.combat.wideRangeAttack);
     }
 
     public override void LogicUpdate()
@@ -76,42 +78,73 @@ public class EnemyTargetInDetectionRangeState : EnemyState
 
         if (!onStateExit)
         {
+            
+
+            repositioningTimer.Tick();
+        }
+    }
+
+    public override void LateLogicUpdate()
+    {
+        base.LateLogicUpdate();
+
+        if (!onStateExit)
+        {
             if (isGrounded)
             {
                 if (!isTargetInDetectionRange)
                 {
-                    enemy.detection.currentTarget?.entityCombat.targetedBy.Remove(enemy);
+                    if (enemy.detection.currentTargetLastVelocity.x * facingDirection < 0)
+                    {
+                        enemy.movement.Flip();
+                    }
+                    // enemy.detection.currentTarget?.entityCombat.targetedBy.Remove(enemy);
                     stateMachine.ChangeState(enemy.idleState);
                 }
                 else if (enemy.movement.navMeshAgentState != NavMeshAgentState.TraverseAround)
                 {
-                    meleeAttacks[0] = isTargetInMeleeAttack0Range && enemy.meleeAttack0State.available;
-                    meleeAttacks[1] = isTargetInMeleeAttack1Range && enemy.meleeAttack1State.available;
-                    meleeAttacks[2] = enemy.detection.currentTarget.entityDetection.currentGroundCollider.Equals(enemy.detection.currentGroundCollider) && enemy.meleeAttack2State.available;
-                    meleeAttacks[3] = isTargetInMeleeAttack3Range && enemy.meleeAttack3State.available;
-
-                    int? meleeAttackType = UtilityFunctions.RandomTrueIndex(meleeAttacks);
-
-                    if (meleeAttackType.HasValue)
+                    // Debug.Log("Alerted?: " + enemy.status[(int)CurrentStatus.Alerted]);
+                    /*if (enemy.status[(int)CurrentStatus.Alerted] && enemy.dodgeAttackState.available)
                     {
-                        switch (meleeAttackType.Value)
+                        stateMachine.ChangeState(enemy.dodgeAttackState);
+                    }
+                    else*/ if (isTargetInWideAttackRange && enemy.wideAttackState.available)
+                    {
+                        stateMachine.ChangeState(enemy.wideAttackState);
+                    }
+                    else if (isTargetInDashAttackRange && enemy.dashAttackState.available)
+                    {
+                        stateMachine.ChangeState(enemy.dashAttackState);
+                    }
+                    else if (isTargetInWideAttackRange && enemy.wideAttackState.available)
+                    {
+                        stateMachine.ChangeState(enemy.wideAttackState);
+                    }
+                    else
+                    {
+                        meleeAttacks[0] = isTargetInMeleeAttack0Range && enemy.meleeAttack0State.available;
+                        meleeAttacks[1] = isTargetInMeleeAttack1Range && enemy.meleeAttack1State.available;
+                        meleeAttacks[2] = isTargetInMeleeAttack2Range && enemy.meleeAttack2State.available;
+
+                        int? meleeAttackType = UtilityFunctions.RandomTrueIndex(meleeAttacks);
+
+                        if (meleeAttackType.HasValue)
                         {
-                            case 0:
-                                stateMachine.ChangeState(enemy.meleeAttack0State); break;
-                            case 1:
-                                stateMachine.ChangeState(enemy.meleeAttack1State); break;
-                            case 2:
-                                stateMachine.ChangeState(enemy.meleeAttack2State); break;
-                            case 3:
-                                stateMachine.ChangeState(enemy.meleeAttack3State); break;
-                            default:
-                                break;
+                            switch (meleeAttackType.Value)
+                            {
+                                case 0:
+                                    stateMachine.ChangeState(enemy.meleeAttack0State); break;
+                                case 1:
+                                    stateMachine.ChangeState(enemy.meleeAttack1State); break;
+                                case 2:
+                                    stateMachine.ChangeState(enemy.meleeAttack2State); break;
+                                default:
+                                    break;
+                            }
                         }
                     }
                 }
             }
-
-            repositioningTimer.Tick();
         }
     }
 
@@ -128,11 +161,14 @@ public class EnemyTargetInDetectionRangeState : EnemyState
             {
                 currentDestination = enemy.detection.currentTarget.entityDetection.currentProjectedPosition - enemy.orthogonalRigidbody.transform.right * enemy.enemyData.adequateDistance + (Vector3)positionOffset;
 
+                while (!enemy.detection.GetPositionGroundCollider(currentDestination).Equals(enemy.detection.currentGroundCollider))
+                {
+                    currentDestination += enemy.orthogonalRigidbody.transform.right * enemy.enemyData.stepSize;
+                }
+
                 if (enemy.navMeshAgent.enabled)
                 {
                     enemy.navMeshAgent.SetDestination(currentDestination);
-                    enemy.animator.SetBool("move", enemy.navMeshAgent.remainingDistance > enemy.navMeshAgent.stoppingDistance);
-                    enemy.animator.SetBool("idle", enemy.navMeshAgent.remainingDistance <= enemy.navMeshAgent.stoppingDistance);
 
                     if (!enemy.navMeshAgent.pathPending && enemy.navMeshAgent.remainingDistance <= enemy.navMeshAgent.stoppingDistance && !enemy.navMeshAgent.hasPath)
                     {
@@ -162,7 +198,13 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                 }
             }
 
-            enemy.animator.SetBool("moveBack", enemy.navMeshAgent.desiredVelocity.x * targetDirection < 0);
+            enemy.animator.SetBool("move", enemy.navMeshAgent.enabled);
+            enemy.animator.SetBool("idle", !enemy.navMeshAgent.enabled);
+            if (enemy.navMeshAgent.enabled)
+            {
+                enemy.animator.SetBool("moveBack", enemy.navMeshAgent.desiredVelocity.x * targetDirection < 0);
+            }
+            
             /*if (navMeshAgentState == NavMeshAgentState.Halt)
             {
 

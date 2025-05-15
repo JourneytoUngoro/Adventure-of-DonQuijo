@@ -17,7 +17,7 @@ public abstract class Detection : CoreComponent
     [SerializeField] private bool showColliderInformation;
     [SerializeField] private bool showFacingObstacleInformation;
 
-    // Suppose that we want the character to appear in (x, y, z) position in 3D space
+    [field: SerializeField] public Entity currentTarget { get; protected set; }
     public Vector3 currentScreenPosition { get; protected set; } // orthogonal rigidbody's screen position: (x, y + z, z)
     public Vector3 currentSpacePosition { get; protected set; } // orthogonal rigidbody's position in space: (x, y, z)
     public Vector3 currentProjectedPosition { get; protected set; } // orthogonal rigidbody's position when it is projected on plane: (x, y, projected ground height)
@@ -69,13 +69,13 @@ public abstract class Detection : CoreComponent
         currentProjectedPosition = workSpace;
 
         Array.Clear(forwardObstacleColliders, 0, maxDetectionCount);
-        Physics2D.OverlapBoxNonAlloc(groundCheckPosition + entity.orthogonalRigidbody.transform.right * (entity.entityCollider.bounds.extents.x + entity.entityCollider.bounds.extents.y), Vector2.one * entity.entityCollider.bounds.size.y, 0.0f, forwardObstacleColliders, whatIsGround);
+        Physics2D.OverlapBoxNonAlloc(groundCheckPosition + entity.orthogonalRigidbody.transform.right * (entity.entityCollider.bounds.extents.x + entity.entityCollider.bounds.extents.y), new Vector2(1.0f, 0.9f) * entity.entityCollider.bounds.size.y, 0.0f, forwardObstacleColliders, whatIsGround);
         Array.Clear(backwardObstacleColliders, 0, maxDetectionCount);
-        Physics2D.OverlapBoxNonAlloc(groundCheckPosition - entity.orthogonalRigidbody.transform.right * (entity.entityCollider.bounds.extents.x + entity.entityCollider.bounds.extents.y), Vector2.one * entity.entityCollider.bounds.size.y, 0.0f, backwardObstacleColliders, whatIsGround);
+        Physics2D.OverlapBoxNonAlloc(groundCheckPosition - entity.orthogonalRigidbody.transform.right * (entity.entityCollider.bounds.extents.x + entity.entityCollider.bounds.extents.y), new Vector2(1.0f, 0.9f) * entity.entityCollider.bounds.size.y, 0.0f, backwardObstacleColliders, whatIsGround);
         Array.Clear(upwardObstacleColliders, 0, maxDetectionCount);
-        Physics2D.OverlapBoxNonAlloc(groundCheckPosition + entity.orthogonalRigidbody.transform.up * entity.entityCollider.bounds.size.y, entity.entityCollider.bounds.size, 0.0f, upwardObstacleColliders, whatIsGround);
+        Physics2D.OverlapBoxNonAlloc(groundCheckPosition + entity.orthogonalRigidbody.transform.up * entity.entityCollider.bounds.size.y, new Vector2(entity.entityCollider.bounds.size.x * 0.9f, entity.entityCollider.bounds.size.y), 0.0f, upwardObstacleColliders, whatIsGround);
         Array.Clear(downwardObstacleColliders, 0, maxDetectionCount);
-        Physics2D.OverlapBoxNonAlloc(groundCheckPosition - entity.orthogonalRigidbody.transform.up * entity.entityCollider.bounds.size.y, entity.entityCollider.bounds.size, 0.0f, downwardObstacleColliders, whatIsGround);
+        Physics2D.OverlapBoxNonAlloc(groundCheckPosition - entity.orthogonalRigidbody.transform.up * entity.entityCollider.bounds.size.y, new Vector2(entity.entityCollider.bounds.size.x * 0.9f, entity.entityCollider.bounds.size.y), 0.0f, downwardObstacleColliders, whatIsGround);
         detectingHorizontalObstacle.first = IsDetectingObstacle(CheckPositionAxis.Horizontal, CheckPositionDirection.Front);
         detectingHorizontalObstacle.second = IsDetectingObstacle(CheckPositionAxis.Horizontal, CheckPositionDirection.Back);
         detectingVerticalObstacle.first = IsDetectingObstacle(CheckPositionAxis.Vertical, CheckPositionDirection.Front);

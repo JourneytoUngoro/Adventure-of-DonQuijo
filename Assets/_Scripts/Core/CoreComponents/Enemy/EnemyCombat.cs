@@ -10,8 +10,10 @@ public class EnemyCombat : Combat
     [field: SerializeField] public List<CombatAbilityWithColliders> meleeAttack0 { get; private set; }
     [field: SerializeField] public List<CombatAbilityWithColliders> meleeAttack1 { get; private set; }
     [field: SerializeField] public List<CombatAbilityWithColliders> meleeAttack2 { get; private set; }
-    [field: SerializeField] public List<CombatAbilityWithColliders> meleeAttack3 { get; private set; }
-    [field: SerializeField] public List<CombatAbilityWithColliders> meleeAttack4 { get; private set; }
+    [field: SerializeField] public List<CombatAbilityWithColliders> dodgeAttack { get; private set; }
+    [field: SerializeField] public List<CombatAbilityWithColliders> dashAttack { get; private set; }
+    // [field: SerializeField] public CombatAbilityWithColliders dashAttack { get; private set; }
+    [field: SerializeField] public CombatAbilityWithColliders wideRangeAttack { get; private set; }
 
     [SerializeField] private Transform blockParryTransform;
     private Timer blockCoolDownTimer;
@@ -43,6 +45,14 @@ public class EnemyCombat : Combat
         blockCoolDownTimer.Tick();
     }
 
+    public override void GetKnockback(KnockbackComponent knockbackComponent, OverlapCollider[] overlapColliders)
+    {
+        if (!enemy.enemyStateMachine.currentState.Equals(enemy.stunnedState))
+        {
+            base.GetKnockback(knockbackComponent, overlapColliders);
+        }
+    }
+
     protected override void ChangeToKnockbackState(float knockbackTime)
     {
         enemy.knockbackState.knockbackTimer.ChangeDuration(knockbackTime);
@@ -57,6 +67,9 @@ public class EnemyCombat : Combat
 
             if ((sourceEntity.transform.position.x - enemy.transform.position.x) * enemy.movement.facingDirection >= 0)
             {
+                Debug.Log("Enemy Parried");
+                enemy.animator.SetTrigger("parried");
+                enemy.enemyStateMachine.ChangeState(enemy.blockParryState);
                 return true;
             }
             else return false;
@@ -78,6 +91,9 @@ public class EnemyCombat : Combat
                     currentParryStack = Mathf.Clamp(currentParryStack + 1, 0, enemy.enemyData.maxParryableCount);
                 }
 
+                Debug.Log("Enemy Blocked");
+                enemy.animator.SetTrigger("blocked");
+                enemy.enemyStateMachine.ChangeState(enemy.blockParryState);
                 return true;
             }
             else return false;
@@ -125,4 +141,18 @@ public class EnemyCombat : Combat
 
         return targetInRange;
     }
+
+    public void Alerted(Entity sourceEntity, CombatAbility combatAbility)
+    {
+        if (currentParryStack > 0)
+        {
+
+        }
+        else if (currentBlockStack > 0)
+        {
+
+        }
+        
+        enemy.enemyStateMachine.ChangeState(enemy.blockParryState);
+    } 
 }

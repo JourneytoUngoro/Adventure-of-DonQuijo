@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b0c88ffbf70e7e4d904df43f444088e, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  <entityHeight>k__BackingField: 80
+  <entityStature>k__BackingField: 57
   <gravityScale>k__BackingField: 100
   <moveSpeed>k__BackingField: {x: 150, y: 75}
   <dashSpeed>k__BackingField: {x: 300, y: 150}
@@ -20,6 +20,9 @@ MonoBehaviour:
   <gotoLandingStateTime>k__BackingField: 2
   <stunRecoveryTime>k__BackingField: 3
   <landingRecoveryTime>k__BackingField: 1
+  <knockbackReboundThresholdSpeed>k__BackingField: 300
+  <wallKnockbackReboundThresholdAngle>k__BackingField: 30
+  <decelerationRatio>k__BackingField: 0.7
   <dashInputBufferTime>k__BackingField: 0.5
   <dashMaintainTime>k__BackingField: 0.2
   <jumpInputBufferTime>k__BackingField: 0.2

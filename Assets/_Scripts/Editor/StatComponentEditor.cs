@@ -6,6 +6,8 @@ using UnityEngine;
 [CustomPropertyDrawer(typeof(StatComponent))]
 public class StatComponentEditor : PropertyDrawer
 {
+    private SerializedProperty slider;
+    private SerializedProperty reverseSlider;
     private SerializedProperty maxValue;
     private SerializedProperty minValue;
     private SerializedProperty currentValue;
@@ -22,6 +24,8 @@ public class StatComponentEditor : PropertyDrawer
         float singleLineHeight = EditorGUIUtility.singleLineHeight;
         float newLineHeight = EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
 
+        slider = property.FindPropertyRelative("slider");
+        reverseSlider = property.FindPropertyRelative("reverseSlider");
         maxValue = property.FindPropertyRelative("<maxValue>k__BackingField");
         minValue = property.FindPropertyRelative("<minValue>k__BackingField");
         currentValue = property.FindPropertyRelative("<currentValue>k__BackingField");
@@ -37,6 +41,13 @@ public class StatComponentEditor : PropertyDrawer
 
         if (property.isExpanded)
         {
+            if (property.displayName != "Level")
+            {
+                position.y += newLineHeight;
+                EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, singleLineHeight), slider, new GUIContent("Slider"));
+                position.y += newLineHeight;
+                EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, singleLineHeight), reverseSlider, new GUIContent("Reverse Slider"));
+            }
             position.y += newLineHeight;
             EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, singleLineHeight), maxValue, new GUIContent("Max Value"));
             position.y += newLineHeight;
@@ -95,7 +106,7 @@ public class StatComponentEditor : PropertyDrawer
         {
             if (property.displayName != "Level")
             {
-                multiplier += 6.0f;
+                multiplier += 8.0f;
             }
             else
             {

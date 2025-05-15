@@ -24,7 +24,7 @@ public class PlayerGroundedState : PlayerState
 
         if (!onStateExit)
         {
-            if (!isGrounded)
+            /*if (!isGrounded)
             {
                 stateMachine.ChangeState(player.inAirState);
             }
@@ -32,16 +32,19 @@ public class PlayerGroundedState : PlayerState
             {
                 stateMachine.ChangeState(player.jumpState);
             }
-            else if (dodgeInputPressed && player.dodgeState.available)
+            else */if (dodgeInputPressed && player.dodgeState.available)
             {
                 stateMachine.ChangeState(player.dodgeState);
             }
-            else if (itemInputPressed && player.cureState.available)
+            else if (blockParryInputPressed && player.blockParryState.available)
             {
-                // stateMachine.ChangeState(player.cureState);
                 stateMachine.ChangeState(player.blockParryState);
             }
-            else if (attackInputPressed)
+            else if (itemInputPressed && player.cureState.available)
+            {
+                stateMachine.ChangeState(player.cureState);
+            }
+            else if (attackInputPressed && !(stateMachine.currentState.Equals(player.moveState) && player.moveState.isDashing))
             {
                 if (player.meleeAttack0State.attackStroke == 0)
                 {
@@ -55,6 +58,10 @@ public class PlayerGroundedState : PlayerState
                 {
                     stateMachine.ChangeState(player.meleeAttack2State);
                 }
+            }
+            else if (strongAttackInputPressed && !(stateMachine.currentState.Equals(player.moveState) && player.moveState.isDashing))
+            {
+                stateMachine.ChangeState(player.strongAttackState);
             }
         }
 

@@ -19,7 +19,12 @@ public class Enemy : Entity
     public EnemyMeleeAttack0State meleeAttack0State { get; private set; }
     public EnemyMeleeAttack1State meleeAttack1State { get; private set; }
     public EnemyMeleeAttack2State meleeAttack2State { get; private set; }
-    public EnemyMeleeAttack3State meleeAttack3State { get; private set; }
+    public EnemyDodgeAttackState dodgeAttackState { get; private set; }
+    public EnemyDashAttackState dashAttackState { get; private set; }
+    public EnemyWideAttackState wideAttackState { get; private set; }
+    // public EnemyRangedAttckState rangedAttckState { get; private set; }
+    public EnemyBlockParryState blockParryState { get; private set; }
+    public EnemyDeadState deadState { get; private set; }
     public List<EnemyAbilityState> abilityStates { get; protected set; }
     #endregion
 
@@ -44,7 +49,7 @@ public class Enemy : Entity
     protected override void Start()
     {
         base.Start();
-
+        
         movement = entityMovement as EnemyMovement;
         detection = entityDetection as EnemyDetection;
         combat = entityCombat as EnemyCombat;
@@ -57,10 +62,14 @@ public class Enemy : Entity
         idleState = new EnemyIdleState(this, "idle");
         stunnedState = new EnemyStunnedState(this, "stunned");
         knockbackState = new EnemyKnockbackState(this, "knockback");
-        meleeAttack0State = new EnemyMeleeAttack0State(this, "meleeAttack");
-        meleeAttack1State = new EnemyMeleeAttack1State(this, "meleeAttack");
-        meleeAttack2State = new EnemyMeleeAttack2State(this, "move");
-        meleeAttack3State = new EnemyMeleeAttack3State(this, "meleeAttack");
+        meleeAttack0State = new EnemyMeleeAttack0State(this, "meleeAttack0");
+        meleeAttack1State = new EnemyMeleeAttack1State(this, "meleeAttack1");
+        meleeAttack2State = new EnemyMeleeAttack2State(this, "meleeAttack2");
+        dodgeAttackState = new EnemyDodgeAttackState(this, "dodgeAttack");
+        wideAttackState = new EnemyWideAttackState(this, "wideAttack");
+        dashAttackState = new EnemyDashAttackState(this, "dashAttack");
+        blockParryState = new EnemyBlockParryState(this, "blockParry");
+
         targetInDetectionRangeState = new EnemyTargetInDetectionRangeState(this, "move");
 
         abilityStates = new List<EnemyAbilityState>();

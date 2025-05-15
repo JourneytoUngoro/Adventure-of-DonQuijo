@@ -10,6 +10,9 @@ public abstract class Stats : CoreComponent
     [field: SerializeField] public StatComponent level { get; protected set; }
     [field: SerializeField] public StatComponent health { get; protected set; }
     [field: SerializeField] public StatComponent posture { get; protected set; }
+    [field: SerializeField] public StatComponent healthLevel { get; protected set; }
+    [field: SerializeField] public StatComponent givenDamageMultiplier { get; protected set; }
+    [field: SerializeField] public StatComponent takenDamageMultiplier { get; protected set; }
 
     // ==============================================================================
 
@@ -83,6 +86,7 @@ public abstract class Stats : CoreComponent
         health.SetCurrentValue(health.graph.accumulationPerLevel.Evaluate(level.currentValue));
         
         posture.SetMaxValue(posture.graph.accumulationPerLevel.Evaluate(level.currentValue));
+        posture.SetCurrentValue(posture.graph.accumulationPerLevel.Evaluate(level.currentValue));
     }
 
     protected virtual void Update()
