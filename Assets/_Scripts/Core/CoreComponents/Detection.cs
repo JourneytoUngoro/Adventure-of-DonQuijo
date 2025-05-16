@@ -12,7 +12,7 @@ public enum CheckPositionDirection { Front, Back, Heading }
 public abstract class Detection : CoreComponent
 {
     [field: SerializeField] public LayerMask whatIsGround { get; private set; }
-    public List<Collider2D> groundColliders { get; private set; }
+    public List<Collider2D> groundColliders { get; private set; } = new List<Collider2D>();
 
     [SerializeField] private bool showPositionInformation;
     [SerializeField] private bool showColliderInformation;

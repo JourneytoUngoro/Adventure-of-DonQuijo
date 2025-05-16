@@ -58,8 +58,8 @@ public class PlayerState : EntityState
         inputY = Manager.Instance.inputHandler.normInputY;
         jumpInputHolding = Manager.Instance.inputHandler.jumpInputHolding;
         jumpInputPressed = Manager.Instance.inputHandler.jumpInputPressed;
-/*        blockParryInputHolding = Manager.Instance.inputHandler.blockParryInputHolding;
-        blockParryInputPressed = Manager.Instance.inputHandler.blockParryInputPressed;*/
+        blockParryInputHolding = Manager.Instance.inputHandler.blockParryInputHolding;
+        blockParryInputPressed = Manager.Instance.inputHandler.blockParryInputPressed;
         attackInputPressed = Manager.Instance.inputHandler.attackInputPressed;
         strongAttackInputPressed = Manager.Instance.inputHandler.strongAttackInputPressed;
         dodgeInputPressed = Manager.Instance.inputHandler.dodgeInputPressed;

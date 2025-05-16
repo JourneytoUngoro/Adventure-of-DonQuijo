@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "newPlayerData", menuName = "Data/Player Data")]
 public class PlayerData : EntityData
 {
+    [field: Header("System Data")]
+    [field: SerializeField] public float waitTimeAfterDeath { get; private set; } = 2.0f;
+
     [field: Header("Control Data")]
     [field: SerializeField] public float dashInputBufferTime { get; private set; } = 0.5f;
     [field: SerializeField] public float dashMaintainTime { get; private set; } = 0.1f;

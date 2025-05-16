@@ -23,9 +23,10 @@ public class TestSampleSceneController : MonoBehaviour
     }
     private IEnumerator DelayedDialogueStart()
     {
+        
         fadeUI.HideUI();
-        yield return new WaitForSeconds(0.5f/*fadeUI.fadeTime*/);
-
+        yield return new WaitForSeconds(fadeUI.fadeTime);
+        
         DialogueManager.Instance.EnterDialogue(guideTextAsset, null, guideNPC);
     }
 }

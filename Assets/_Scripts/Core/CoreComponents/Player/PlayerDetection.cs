@@ -34,13 +34,13 @@ public class PlayerDetection : Detection, IDataPersistance
     public void LoadData(GameData data)
     {
         Debug.Log("Load Data in PlayerDetection");
-        currentSpacePosition = data.lastPlayerPosition;
+        /*currentSpacePosition = data.lastPlayerPosition;
         currentProjectedPosition = currentSpacePosition;
         currentEntityHeight = currentSpacePosition.z;
         currentGroundHeight = currentSpacePosition.z;
         player.transform.position = new Vector3(currentSpacePosition.x, currentSpacePosition.y, 0.0f);
         player.orthogonalRigidbody.transform.localPosition = new Vector3(0.0f, currentEntityHeight, currentEntityHeight);
-        currentScreenPosition = player.orthogonalRigidbody.transform.position;
+        currentScreenPosition = player.orthogonalRigidbody.transform.position;*/
     }
 
     public void SaveData(GameData data)

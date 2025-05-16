@@ -208,7 +208,6 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                 }
             }
 
-            Debug.Log("Velocity: " + enemy.navMeshAgent.velocity.sqrMagnitude);
             /*enemy.animator.SetBool("move", enemy.navMeshAgent.velocity.sqrMagnitude > epsilon);
             enemy.animator.SetBool("idle", !(enemy.navMeshAgent.velocity.sqrMagnitude < epsilon));*/
             enemy.animator.SetBool("move", enemy.navMeshAgent.enabled);

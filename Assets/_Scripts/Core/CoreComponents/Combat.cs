@@ -9,7 +9,7 @@ using UnityEngine;
 public abstract class Combat : CoreComponent
 {
     [field: SerializeField] public LayerMask whatIsDamageable { get; protected set; }
-    public List<Collider2D> damagedTargets { get; private set; }
+    public List<Collider2D> damagedTargets { get; private set; } = new List<Collider2D>();
     public List<Entity> surroundedBy { get; private set; } = new List<Entity>();
     public List<Entity> targetedBy { get; private set; } = new List<Entity>();
     // public Coroutine dashAttackCoroutine { get; protected set; }
