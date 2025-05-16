@@ -77,6 +77,7 @@ public class Manager : MonoBehaviour
     public void FindPlayer()
     {
         player = GameObject.Find("Player").GetComponent<Player>();
+        Debug.Log(player == null ? "can't find player" : "found player");
         Debug.Assert(player != null, $"can't find player on the {SceneManager.GetActiveScene().name}!");
     }
     #endregion

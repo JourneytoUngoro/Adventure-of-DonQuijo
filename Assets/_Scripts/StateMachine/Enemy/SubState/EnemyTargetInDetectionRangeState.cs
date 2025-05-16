@@ -118,7 +118,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                             stateMachine.ChangeState(enemy.blockParryState);
                         }
                     }
-                    /*else if (isTargetInWideAttackRange && enemy.wideAttackState.available)
+                    else if (isTargetInWideAttackRange && enemy.wideAttackState.available)
                     {
                         stateMachine.ChangeState(enemy.wideAttackState);
                     }
@@ -129,11 +129,11 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                     else if (isTargetInWideAttackRange && enemy.wideAttackState.available)
                     {
                         stateMachine.ChangeState(enemy.wideAttackState);
-                    }*/
+                    }
                     else
                     {
-                        // meleeAttacks[0] = isTargetInMeleeAttack0Range && enemy.meleeAttack0State.available;
-                        // meleeAttacks[1] = isTargetInMeleeAttack1Range && enemy.meleeAttack1State.available;
+                        meleeAttacks[0] = isTargetInMeleeAttack0Range && enemy.meleeAttack0State.available;
+                        meleeAttacks[1] = isTargetInMeleeAttack1Range && enemy.meleeAttack1State.available;
                         meleeAttacks[2] = isTargetInMeleeAttack2Range && enemy.meleeAttack2State.available;
 
                         int? meleeAttackType = UtilityFunctions.RandomTrueIndex(meleeAttacks);
