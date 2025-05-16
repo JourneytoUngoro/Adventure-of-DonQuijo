@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum TimerControl { Stop, Start }
+
 [Serializable]
 public class StatComponent
 {
@@ -14,6 +16,7 @@ public class StatComponent
     public event Action OnCurrentValueMax;
     public event Action OnCurrentValueChange;
 
+    [SerializeField] private bool reverseSlider;
     [SerializeField] private Slider slider;
 
     [field: SerializeField] public float maxValue { get; private set; }
@@ -57,6 +60,20 @@ public class StatComponent
             {
                 recoveryTimer.Tick();
             }
+        }
+    }
+
+    public void ControlRecoveryTimer(TimerControl timerControl)
+    {
+        switch (timerControl)
+        {
+            case TimerControl.Stop:
+                recoveryStartTimer.StopTimer(); break;
+            case TimerControl.Start:
+                recoveryStartTimer.StartSingleUseTimer(); break;
+            default:
+                Debug.LogWarning($"Unknown type of TimerControl variable found in in {entity.name}.");
+                break;
         }
     }
 
@@ -135,7 +152,7 @@ public class StatComponent
     {
         if (slider != null)
         {
-            slider.value = currentValue / maxValue;
+            slider.value = reverseSlider ? 1.0f - currentValue / maxValue : currentValue / maxValue;
         }
     }
 }

@@ -19,8 +19,6 @@ public class EnemyMovement : Movement
     private Vector3 baseDestinationPosition;
     private Vector2 positionOffset;
 
-    private bool traverseAroundFlag;
-
     protected override void Awake()
     {
         base.Awake();
@@ -111,7 +109,7 @@ public class EnemyMovement : Movement
 
     public void ChangeNavMeshState(NavMeshAgentState navMeshAgentState)
     {
-        traverseAroundFlag = false;
+        // traverseAroundFlag = false;
         positionOffset = Random.insideUnitCircle * enemy.enemyData.repositionOffsetDistance;
 
         enemy.animator.SetBool("move", navMeshAgentState != NavMeshAgentState.Halt);
@@ -156,5 +154,12 @@ public class EnemyMovement : Movement
         }
 
         this.navMeshAgentState = navMeshAgentState;
+    }
+
+    public override void Flip()
+    {
+        base.Flip();
+
+        enemy.stats.statsCanvas.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
     }
 }

@@ -24,6 +24,7 @@ MonoBehaviour:
   <combatAbilityComponents>k__BackingField:
   - rid: 843630676115718144
   - rid: 843630676115718145
+  - rid: 2124230421670789126
   references:
     version: 2
     RefIds:
@@ -72,13 +73,17 @@ MonoBehaviour:
       data:
         name: KnockbackComponent
         <pertainedCombatAbility>k__BackingField: {fileID: 11400000}
-        <airborne>k__BackingField: 1
+        <airborne>k__BackingField: 0
         <directionBase>k__BackingField: 0
-        <knockbackDirection>k__BackingField: {x: -1, y: 0}
-        <knockbackSpeed>k__BackingField: 50
+        <knockbackDirection>k__BackingField: {x: 1, y: 0}
+        <knockbackSpeed>k__BackingField: 200
         <knockbackTime>k__BackingField: 0.3
         <easeFunction>k__BackingField: 9
-        <orthogonalVelocity>k__BackingField: -50
+        <orthogonalVelocity>k__BackingField: 0
+        <bounceWhenGrounded>k__BackingField: 0
+        <bounceDirection>k__BackingField: {x: 0, y: 0}
+        <bounceSpeed>k__BackingField: 0
+        <bounceWhenWall>k__BackingField: 0
         <knockbackDirectionWhenBlocked>k__BackingField: {x: -1, y: 0}
         <knockbackSpeedWhenBlocked>k__BackingField: 50
         <knockbackTimeWhenBlocked>k__BackingField: 0.3
@@ -93,3 +98,24 @@ MonoBehaviour:
         <counterKnockbackTimeWhenParried>k__BackingField: 0
         <counterEaseFunctionWhenParried>k__BackingField: 0
         <counterOrthogonalVelocityWhenParried>k__BackingField: 0
+    - rid: 2124230421670789126
+      type: {class: MovementComponent, ns: , asm: Assembly-CSharp}
+      data:
+        name: MovementComponent
+        <pertainedCombatAbility>k__BackingField: {fileID: 11400000}
+        <isDashAttack>k__BackingField: 0
+        <dashDirection>k__BackingField: 0
+        <planeDirection>k__BackingField: {x: 1, y: 0}
+        <planeVelocity>k__BackingField: 200
+        <moveTime>k__BackingField: 0.3
+        <attackStartTime>k__BackingField: 0
+        <attackFinishTime>k__BackingField: 0
+        <easeFunction>k__BackingField: 3
+        <easeCurve>k__BackingField:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        <reverseTime>k__BackingField: 1
+        <orthogonalVelocity>k__BackingField: 0

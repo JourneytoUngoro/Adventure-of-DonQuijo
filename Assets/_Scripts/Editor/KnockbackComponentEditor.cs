@@ -74,6 +74,8 @@ public class KnockbackComponentEditor : PropertyDrawer
             EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, lineHeight), airborne, new GUIContent("Airborne"));
             position.y += newLineHeight;
 
+            position.y += newLineHeight;
+            EditorGUI.LabelField(new Rect(position.x, position.y, position.size.x, lineHeight), new GUIContent("When Hit"), EditorStyles.boldLabel);
             if (directionBase.intValue != (int)DirectionBase.positionRelativeDirection)
             {
                 position.y += newLineHeight;
@@ -89,8 +91,11 @@ public class KnockbackComponentEditor : PropertyDrawer
                 position.y += newLineHeight;
                 EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, lineHeight), easeFunction, new GUIContent("Ease Function"));
             }
-            position.y += newLineHeight;
-            EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, lineHeight), orthogonalVelocity, new GUIContent("Orthogonal Velocity"));
+            if (airborne.boolValue)
+            {
+                position.y += newLineHeight;
+                EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, lineHeight), orthogonalVelocity, new GUIContent("Orthogonal Velocity"));
+            }
 
             if (pertainedCombatAbility.canBeBlocked)
             {
@@ -130,20 +135,23 @@ public class KnockbackComponentEditor : PropertyDrawer
                 EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, lineHeight), easeFunctionWhenParried, new GUIContent("Ease Function When Parried"));
                 // position.y += newLineHeight;
                 // EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, lineHeight), orthogonalVelocityWhenParried, new GUIContent("Orthogonal Velocity When Parried"));
-                if (directionBase.intValue != (int)DirectionBase.positionRelativeDirection)
+                if (!pertainedCombatAbility.stanceWhenParried)
                 {
+                    if (directionBase.intValue != (int)DirectionBase.positionRelativeDirection)
+                    {
+                        position.y += newLineHeight;
+                        EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, lineHeight), counterKnockbackDirectionWhenParried, new GUIContent("Counter Knockback Direction When Parried"));
+                    }
                     position.y += newLineHeight;
-                    EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, lineHeight), counterKnockbackDirectionWhenParried, new GUIContent("Counter Knockback Direction When Parried"));
-                }
-                position.y += newLineHeight;
-                EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, lineHeight), counterKnockbackSpeedWhenParried, new GUIContent("Counter Knockback Speed When Parried"));
-                position.y += newLineHeight;
-                EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, lineHeight), counterKnockbackTimeWhenParried, new GUIContent("Counter Knockback Time When Parried"));
-                position.y += newLineHeight;
-                EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, lineHeight), counterEaseFunctionWhenParried, new GUIContent("Counter Ease Function When Parried"));
+                    EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, lineHeight), counterKnockbackSpeedWhenParried, new GUIContent("Counter Knockback Speed When Parried"));
+                    position.y += newLineHeight;
+                    EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, lineHeight), counterKnockbackTimeWhenParried, new GUIContent("Counter Knockback Time When Parried"));
+                    position.y += newLineHeight;
+                    EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, lineHeight), counterEaseFunctionWhenParried, new GUIContent("Counter Ease Function When Parried"));
 
-                position.y += newLineHeight;
-                EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, lineHeight), counterOrthogonalVelocityWhenParried, new GUIContent("Counter Orthogonal Velocity When Parried Parried"));
+                    position.y += newLineHeight;
+                    EditorGUI.PropertyField(new Rect(position.x, position.y, position.size.x, lineHeight), counterOrthogonalVelocityWhenParried, new GUIContent("Counter Orthogonal Velocity When Parried Parried"));
+                }
             }
         }
 
@@ -157,10 +165,16 @@ public class KnockbackComponentEditor : PropertyDrawer
 
         pertainedCombatAbility = property.FindPropertyRelative("<pertainedCombatAbility>k__BackingField").objectReferenceValue as CombatAbility;
         directionBase = property.FindPropertyRelative("<directionBase>k__BackingField");
+        airborne = property.FindPropertyRelative("<airborne>k__BackingField");
 
         if (property.isExpanded)
         {
             multiplier += 8;
+
+            if (airborne.boolValue)
+            {
+                multiplier -= 1;
+            }
 
             if (directionBase.intValue == (int)DirectionBase.positionRelativeDirection)
             {
@@ -179,7 +193,12 @@ public class KnockbackComponentEditor : PropertyDrawer
 
             if (pertainedCombatAbility.canBeParried)
             {
-                multiplier += 12;
+                multiplier += 5;
+
+                if (!pertainedCombatAbility.stanceWhenParried)
+                {
+                    multiplier += 5;
+                }
 
                 if (directionBase.intValue == (int)DirectionBase.positionRelativeDirection)
                 {

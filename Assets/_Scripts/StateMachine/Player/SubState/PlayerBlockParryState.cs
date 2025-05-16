@@ -65,6 +65,8 @@ public class PlayerBlockParryState : PlayerAbilityState
         isParried = false;
         isBlocked = false;
         available = true;
+        player.animator.ResetTrigger("parried");
+        player.animator.ResetTrigger("blocked");
         player.animator.SetBool("inAir", !isGrounded);
         abilityCoolDownTimer.StartSingleUseTimer();
         player.combat.DisableBlockParryPrefabs();

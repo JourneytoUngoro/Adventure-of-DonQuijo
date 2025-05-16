@@ -13,6 +13,11 @@ public class StateMachineToAnimator : MonoBehaviour
         state.AnimationStartTrigger(index);
     }
 
+    public void AnimationAlertTrigger(int index)
+    {
+        state.AnimationAlertTrigger(index);
+    }
+
     public void AnimationAcitonTrigger(int index)
     {
         state.AnimationActionTrigger(index);
@@ -22,9 +27,4 @@ public class StateMachineToAnimator : MonoBehaviour
     {
         state.AnimationFinishTrigger(index);
     }
-
-    /*public void SetStanceLevel(Intensity stanceLevel)
-    {
-        state.entity.entityCombat.ChangeStanceLevel(stanceLevel);
-    }*/
 }

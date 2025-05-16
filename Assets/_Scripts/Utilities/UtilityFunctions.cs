@@ -12,6 +12,7 @@ public static class UtilityFunctions
     public static T GetRandom<T>(this IEnumerable<T> objects) => objects.ElementAt(random.Next(objects.Count()));
     public static bool Empty<T>(this IEnumerable<T> objects) => objects.Count() == 0 || objects.All(element => element == null);
     public static float RandomFloat(float minValue, float maxValue) => (float)random.NextDouble() * (maxValue - minValue) + minValue;
+    public static float DeviationFloat(float baseValue, float deviation) => RandomFloat(baseValue - deviation, baseValue + deviation);
     public static int RandomInteger(int minValue, int maxValue) => random.Next(minValue, maxValue);
     public static int RandomInteger(int maxValue) => random.Next(maxValue);
     public static bool IsInLayerMask(this GameObject obj, LayerMask mask) => (mask.value & (1 << obj.layer)) != 0;

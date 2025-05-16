@@ -56,14 +56,19 @@ public abstract class EntityState
         isAnimationFinished = false;
     }
 
-    public virtual void AnimationFinishTrigger(int index)
+    public virtual void AnimationAlertTrigger(int index)
     {
-        isAnimationFinished = true;
+
     }
 
     public virtual void AnimationActionTrigger(int index)
     {
         isAnimationActionTriggered = true;
+    }
+
+    public virtual void AnimationFinishTrigger(int index)
+    {
+        isAnimationFinished = true;
     }
 
     public virtual void DoChecks()

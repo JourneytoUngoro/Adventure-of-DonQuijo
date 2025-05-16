@@ -16,7 +16,7 @@ public class PlayerDodgeState : PlayerAbilityState
     {
         base.AnimationActionTrigger(index);
 
-        player.orthogonalRigidbody.gameObject.tag = "Idle";
+        player.gameObject.tag = "Idle";
     }
 
     public override void AnimationFinishTrigger(int index)
@@ -39,7 +39,7 @@ public class PlayerDodgeState : PlayerAbilityState
 
         available = false;
         player.stateMachineToAnimator.state = this;
-        player.orthogonalRigidbody.gameObject.tag = "Dodge";
+        player.gameObject.tag = "Dodge";
 
         if (inputX == 0 && inputY == 0)
         {
@@ -56,7 +56,7 @@ public class PlayerDodgeState : PlayerAbilityState
     {
         base.Exit();
 
-        player.orthogonalRigidbody.gameObject.tag = "Idle";
+        player.gameObject.tag = "Idle";
         player.animator.SetBool("backstep", false);
         abilityCoolDownTimer.StartSingleUseTimer();
     }

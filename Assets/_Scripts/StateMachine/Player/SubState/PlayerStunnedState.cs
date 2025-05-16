@@ -25,7 +25,7 @@ public class PlayerStunnedState : PlayerState
     {
         base.Exit();
 
-        player.stats.posture.SetCurrentValue(player.stats.posture.minValue);
+        player.stats.posture.SetCurrentValue(player.stats.posture.maxValue);
     }
 
     public override void LogicUpdate()

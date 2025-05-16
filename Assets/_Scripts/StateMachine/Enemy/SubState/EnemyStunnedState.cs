@@ -18,13 +18,15 @@ public class EnemyStunnedState : EnemyState
 
         canTransit = false;
         stunRecoveryTimer.StartSingleUseTimer();
+        enemy.stats.posture.ControlRecoveryTimer(TimerControl.Stop);
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        enemy.stats.posture.SetCurrentValue(enemy.stats.posture.minValue);
+        enemy.stats.posture.SetCurrentValue(enemy.stats.posture.maxValue);
+        enemy.stats.posture.ControlRecoveryTimer(TimerControl.Start);
     }
 
     public override void LogicUpdate()
@@ -34,6 +36,21 @@ public class EnemyStunnedState : EnemyState
         if (!onStateExit)
         {
             stunRecoveryTimer.Tick(isGrounded);
+
+            if (canTransit)
+            {
+                if (isGrounded)
+                {
+                    if (isTargetInDetectionRange)
+                    {
+                        stateMachine.ChangeState(enemy.targetInDetectionRangeState);
+                    }
+                    else
+                    {
+                        stateMachine.ChangeState(enemy.idleState);
+                    }
+                }
+            }
         }
     }
 }

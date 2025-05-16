@@ -47,7 +47,14 @@ public class BlockParry : MonoBehaviour
         {
             if (Time.time > parryStartTime + parryDurationTime)
             {
-                gameObject.SetActive(false);
+                if (pertainedCombatAbility.sourceEntity.GetType().Equals(typeof(Player)) && Manager.Instance.inputHandler.blockParryInputHolding)
+                {
+                    gameObject.layer = LayerMask.NameToLayer("BlockLayer");
+                }
+                else
+                {
+                    gameObject.SetActive(false);
+                }
             }
         }
     }

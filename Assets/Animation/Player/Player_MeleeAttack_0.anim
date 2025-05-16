@@ -21,19 +21,19 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -1965557275, guid: 8ee8aab410a127d42ac1c06c6af51f92, type: 3}
-    - time: 0.1
-      value: {fileID: 1343734850, guid: 8ee8aab410a127d42ac1c06c6af51f92, type: 3}
-    - time: 0.2
-      value: {fileID: -258754671, guid: 8ee8aab410a127d42ac1c06c6af51f92, type: 3}
-    - time: 0.3
-      value: {fileID: 1303539643, guid: 8ee8aab410a127d42ac1c06c6af51f92, type: 3}
+      value: {fileID: 2102980842, guid: 2583b7194b845864f94c0f48631639e4, type: 3}
+    - time: 0.08
+      value: {fileID: 345222182, guid: 2583b7194b845864f94c0f48631639e4, type: 3}
+    - time: 0.16
+      value: {fileID: -1346203630, guid: 2583b7194b845864f94c0f48631639e4, type: 3}
+    - time: 0.25
+      value: {fileID: -1346203630, guid: 2583b7194b845864f94c0f48631639e4, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 10
+  m_SampleRate: 100
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -50,16 +50,16 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -1965557275, guid: 8ee8aab410a127d42ac1c06c6af51f92, type: 3}
-    - {fileID: 1343734850, guid: 8ee8aab410a127d42ac1c06c6af51f92, type: 3}
-    - {fileID: -258754671, guid: 8ee8aab410a127d42ac1c06c6af51f92, type: 3}
-    - {fileID: 1303539643, guid: 8ee8aab410a127d42ac1c06c6af51f92, type: 3}
+    - {fileID: 2102980842, guid: 2583b7194b845864f94c0f48631639e4, type: 3}
+    - {fileID: 345222182, guid: 2583b7194b845864f94c0f48631639e4, type: 3}
+    - {fileID: -1346203630, guid: 2583b7194b845864f94c0f48631639e4, type: 3}
+    - {fileID: -1346203630, guid: 2583b7194b845864f94c0f48631639e4, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.4
+    m_StopTime: 0.26
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -86,7 +86,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.4
+  - time: 0.26
     functionName: AnimationFinishTrigger
     data: 
     objectReferenceParameter: {fileID: 0}

@@ -46,7 +46,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Dodge"",
+                    ""name"": ""Block"",
                     ""type"": ""Button"",
                     ""id"": ""d7c2cd8e-6496-477a-b697-9619ee7a6420"",
                     ""expectedControlType"": """",
@@ -112,6 +112,24 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""name"": ""UseItem"",
                     ""type"": ""Button"",
                     ""id"": ""16b64fc7-f4a8-4daf-890d-3d94c04d23b8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dodge"",
+                    ""type"": ""Button"",
+                    ""id"": ""e40fb7fe-6cf7-4f0d-88eb-8d94ab74f91f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""StrongAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""f84289c8-4e4b-4abd-8098-4c3674a81498"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -192,7 +210,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";PC"",
-                    ""action"": ""Dodge"",
+                    ""action"": ""Block"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -294,6 +312,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""UseItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ae7b615-296b-4cec-bcce-284ad31a37c2"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";PC"",
+                    ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e1d70009-4215-45d2-a9f9-463ffb99f614"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StrongAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -321,7 +361,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_CharacterControl = asset.FindActionMap("CharacterControl", throwIfNotFound: true);
         m_CharacterControl_Movement = m_CharacterControl.FindAction("Movement", throwIfNotFound: true);
         m_CharacterControl_Jump = m_CharacterControl.FindAction("Jump", throwIfNotFound: true);
-        m_CharacterControl_Dodge = m_CharacterControl.FindAction("Dodge", throwIfNotFound: true);
+        m_CharacterControl_Block = m_CharacterControl.FindAction("Block", throwIfNotFound: true);
         m_CharacterControl_Attack = m_CharacterControl.FindAction("Attack", throwIfNotFound: true);
         m_CharacterControl_InteractSelect = m_CharacterControl.FindAction("Interact/Select", throwIfNotFound: true);
         m_CharacterControl_Return = m_CharacterControl.FindAction("Return", throwIfNotFound: true);
@@ -329,6 +369,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_CharacterControl_Equipment = m_CharacterControl.FindAction("Equipment", throwIfNotFound: true);
         m_CharacterControl_Map = m_CharacterControl.FindAction("Map", throwIfNotFound: true);
         m_CharacterControl_UseItem = m_CharacterControl.FindAction("UseItem", throwIfNotFound: true);
+        m_CharacterControl_Dodge = m_CharacterControl.FindAction("Dodge", throwIfNotFound: true);
+        m_CharacterControl_StrongAttack = m_CharacterControl.FindAction("StrongAttack", throwIfNotFound: true);
     }
 
     ~@Controls()
@@ -397,7 +439,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private List<ICharacterControlActions> m_CharacterControlActionsCallbackInterfaces = new List<ICharacterControlActions>();
     private readonly InputAction m_CharacterControl_Movement;
     private readonly InputAction m_CharacterControl_Jump;
-    private readonly InputAction m_CharacterControl_Dodge;
+    private readonly InputAction m_CharacterControl_Block;
     private readonly InputAction m_CharacterControl_Attack;
     private readonly InputAction m_CharacterControl_InteractSelect;
     private readonly InputAction m_CharacterControl_Return;
@@ -405,13 +447,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControl_Equipment;
     private readonly InputAction m_CharacterControl_Map;
     private readonly InputAction m_CharacterControl_UseItem;
+    private readonly InputAction m_CharacterControl_Dodge;
+    private readonly InputAction m_CharacterControl_StrongAttack;
     public struct CharacterControlActions
     {
         private @Controls m_Wrapper;
         public CharacterControlActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_CharacterControl_Movement;
         public InputAction @Jump => m_Wrapper.m_CharacterControl_Jump;
-        public InputAction @Dodge => m_Wrapper.m_CharacterControl_Dodge;
+        public InputAction @Block => m_Wrapper.m_CharacterControl_Block;
         public InputAction @Attack => m_Wrapper.m_CharacterControl_Attack;
         public InputAction @InteractSelect => m_Wrapper.m_CharacterControl_InteractSelect;
         public InputAction @Return => m_Wrapper.m_CharacterControl_Return;
@@ -419,6 +463,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Equipment => m_Wrapper.m_CharacterControl_Equipment;
         public InputAction @Map => m_Wrapper.m_CharacterControl_Map;
         public InputAction @UseItem => m_Wrapper.m_CharacterControl_UseItem;
+        public InputAction @Dodge => m_Wrapper.m_CharacterControl_Dodge;
+        public InputAction @StrongAttack => m_Wrapper.m_CharacterControl_StrongAttack;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -434,9 +480,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
-            @Dodge.started += instance.OnDodge;
-            @Dodge.performed += instance.OnDodge;
-            @Dodge.canceled += instance.OnDodge;
+            @Block.started += instance.OnBlock;
+            @Block.performed += instance.OnBlock;
+            @Block.canceled += instance.OnBlock;
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
@@ -458,6 +504,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @UseItem.started += instance.OnUseItem;
             @UseItem.performed += instance.OnUseItem;
             @UseItem.canceled += instance.OnUseItem;
+            @Dodge.started += instance.OnDodge;
+            @Dodge.performed += instance.OnDodge;
+            @Dodge.canceled += instance.OnDodge;
+            @StrongAttack.started += instance.OnStrongAttack;
+            @StrongAttack.performed += instance.OnStrongAttack;
+            @StrongAttack.canceled += instance.OnStrongAttack;
         }
 
         private void UnregisterCallbacks(ICharacterControlActions instance)
@@ -468,9 +520,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
-            @Dodge.started -= instance.OnDodge;
-            @Dodge.performed -= instance.OnDodge;
-            @Dodge.canceled -= instance.OnDodge;
+            @Block.started -= instance.OnBlock;
+            @Block.performed -= instance.OnBlock;
+            @Block.canceled -= instance.OnBlock;
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
@@ -492,6 +544,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @UseItem.started -= instance.OnUseItem;
             @UseItem.performed -= instance.OnUseItem;
             @UseItem.canceled -= instance.OnUseItem;
+            @Dodge.started -= instance.OnDodge;
+            @Dodge.performed -= instance.OnDodge;
+            @Dodge.canceled -= instance.OnDodge;
+            @StrongAttack.started -= instance.OnStrongAttack;
+            @StrongAttack.performed -= instance.OnStrongAttack;
+            @StrongAttack.canceled -= instance.OnStrongAttack;
         }
 
         public void RemoveCallbacks(ICharacterControlActions instance)
@@ -522,7 +580,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnDodge(InputAction.CallbackContext context);
+        void OnBlock(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnInteractSelect(InputAction.CallbackContext context);
         void OnReturn(InputAction.CallbackContext context);
@@ -530,5 +588,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnEquipment(InputAction.CallbackContext context);
         void OnMap(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
+        void OnDodge(InputAction.CallbackContext context);
+        void OnStrongAttack(InputAction.CallbackContext context);
     }
 }

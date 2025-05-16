@@ -20,7 +20,8 @@ public class PlayerStats : Stats, IDataPersistance
         base.Start();
 
         health.OnCurrentValueMin += () => { player.playerStateMachine.ChangeState(player.deadState); };
-        posture.OnCurrentValueMax += () => { player.playerStateMachine.ChangeState(player.stunnedState); };
+        // posture.OnCurrentValueMin += () => { player.playerStateMachine.ChangeState(player.stunnedState); };
+
         experience.OnCurrentValueMax += () => { level.IncreaseCurrentValue(1); };
         level.OnCurrentValueChange += () =>
         {
