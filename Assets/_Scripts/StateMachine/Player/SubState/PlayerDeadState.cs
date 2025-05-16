@@ -16,9 +16,10 @@ public class PlayerDeadState : PlayerState
     public override void Enter()
     {
         base.Enter();
-
+        waitTimer.StartSingleUseTimer();
         player.gameObject.tag = "Invinsible";
         playerDeathAction?.Invoke();
+        Debug.Log("player Dead State Entered");
     }
 
     public override void Exit()
