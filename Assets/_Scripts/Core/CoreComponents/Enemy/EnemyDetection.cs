@@ -7,8 +7,6 @@ using UnityEngine;
 public class EnemyDetection : Detection
 {
     [field: SerializeField] public LayerMask whatIsChaseTarget { get; private set; }
-    [field: SerializeField] public Vector3 currentTargetLastPosition { get; protected set; }
-    [field: SerializeField] public Vector3 currentTargetLastVelocity { get; protected set; }
 
     #region Detection Variables
     [SerializeField] private Collider2D detectionRangeCollider;
@@ -48,11 +46,7 @@ public class EnemyDetection : Detection
     {
         base.FixedUpdate();
 
-        if (currentTarget != null)
-        {
-            currentTargetLastPosition = currentTarget.entityDetection.currentProjectedPosition;
-            currentTargetLastVelocity = currentTarget.entityMovement.currentVelocity;
-        }
+        
     }
 
     public Collider2D GetPositionGroundCollider(Vector2 groundCheckPosition)
@@ -128,19 +122,6 @@ public class EnemyDetection : Detection
                 currentTarget = null;
                 return false;
             }
-        }
-    }
-
-    // Below function is called when the currentTarget changes abruptly(ex. gets hit)
-    public void ChangeCurrentTarget(Entity currentTarget)
-    {
-        this.currentTarget = currentTarget;
-        currentTargetLastPosition = currentTarget.entityDetection.currentProjectedPosition;
-        currentTargetLastVelocity = currentTarget.entityMovement.currentVelocity;
-
-        if ((currentTargetLastPosition.x - enemy.detection.currentProjectedPosition.x) * enemy.movement.facingDirection < 0)
-        {
-            enemy.movement.Flip();
         }
     }
 }

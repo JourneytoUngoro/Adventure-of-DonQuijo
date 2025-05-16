@@ -132,12 +132,7 @@ public abstract class Combat : CoreComponent
             foreach (Collider2D damageTarget in damageTargets)
             {
                 Entity damageTargetEntity = damageTarget.GetComponent<Entity>();
-
-                if (damageTargetEntity.GetType().IsSubclassOf(typeof(Enemy)))
-                {
-                    Enemy damageTargetEnemy = damageTargetEntity as Enemy;
-                    damageTargetEnemy.detection.ChangeCurrentTarget(entity);
-                }
+                damageTargetEntity.entityDetection.ChangeCurrentTarget(entity);
 
                 if (damagedTargets.Contains(damageTarget)) continue;
                 if (damageTarget.CompareTag("Invinsible")) continue;

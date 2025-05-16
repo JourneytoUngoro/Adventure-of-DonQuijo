@@ -26,6 +26,7 @@ public class PlayerBlockParryState : PlayerAbilityState
         else if (index == 1)
         {
             isParried = true;
+            Manager.Instance.soundManager.PlaySoundFXClip("playerParrySuccessSFX", player.transform);
         }
     }
 

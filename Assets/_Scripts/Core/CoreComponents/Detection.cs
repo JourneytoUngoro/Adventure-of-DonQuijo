@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public enum CheckPositionAxis { Horizontal, Vertical }
 public enum CheckPositionDirection { Front, Back, Heading }
@@ -17,7 +18,6 @@ public abstract class Detection : CoreComponent
     [SerializeField] private bool showColliderInformation;
     [SerializeField] private bool showFacingObstacleInformation;
 
-    [field: SerializeField] public Entity currentTarget { get; protected set; }
     public Vector3 currentScreenPosition { get; protected set; } // orthogonal rigidbody's screen position: (x, y + z, z)
     public Vector3 currentSpacePosition { get; protected set; } // orthogonal rigidbody's position in space: (x, y, z)
     public Vector3 currentProjectedPosition { get; protected set; } // orthogonal rigidbody's position when it is projected on plane: (x, y, projected ground height)
@@ -28,6 +28,10 @@ public abstract class Detection : CoreComponent
     public pair<bool, bool> detectingHorizontalObstacle { get; protected set; } = new pair<bool, bool>(false, false);
     public pair<bool, bool> detectingVerticalObstacle { get; protected set; } = new pair<bool, bool>(false, false);
     public Collider2D currentGroundCollider { get; protected set; }
+
+    public Entity currentTarget { get; protected set; }
+    public Vector3 currentTargetLastPosition { get; protected set; }
+    public Vector3 currentTargetLastVelocity { get; protected set; }
 
     protected Collider2D currentCeilingCollider;
     protected Collider2D[] projectedPositionColliders = new Collider2D[maxDetectionCount];
@@ -80,6 +84,12 @@ public abstract class Detection : CoreComponent
         detectingHorizontalObstacle.second = IsDetectingObstacle(CheckPositionAxis.Horizontal, CheckPositionDirection.Back);
         detectingVerticalObstacle.first = IsDetectingObstacle(CheckPositionAxis.Vertical, CheckPositionDirection.Front);
         detectingVerticalObstacle.second = IsDetectingObstacle(CheckPositionAxis.Vertical, CheckPositionDirection.Back);
+
+        if (currentTarget != null)
+        {
+            currentTargetLastPosition = currentTarget.entityDetection.currentProjectedPosition;
+            currentTargetLastVelocity = currentTarget.entityMovement.currentVelocity;
+        }
 
         foreach (Collider2D groundCollider in groundColliders)
         {
@@ -243,6 +253,18 @@ public abstract class Detection : CoreComponent
     private void GetLoadedGrounds(Scene loadedScene, LoadSceneMode loadSceneMode)
     {
         groundColliders = UtilityFunctions.FindGameObjectsByLayer(whatIsGround, FindObjectsSortMode.None).Select(groundObject => groundObject.GetComponent<Collider2D>()).ToList();
+    }
+
+    // Below function is called when the currentTarget changes abruptly(ex. gets hit)
+    public void ChangeCurrentTarget(Entity currentTarget)
+    {
+        this.currentTarget = currentTarget;
+        currentTargetLastPosition = currentTarget.entityDetection.currentProjectedPosition;
+        currentTargetLastVelocity = currentTarget.entityMovement.currentVelocity;
+        if ((currentTargetLastPosition.x - entity.entityDetection.currentProjectedPosition.x) * entity.entityMovement.facingDirection < 0)
+        {
+            entity.entityMovement.Flip();
+        }
     }
 
     protected virtual void OnDrawGizmos()

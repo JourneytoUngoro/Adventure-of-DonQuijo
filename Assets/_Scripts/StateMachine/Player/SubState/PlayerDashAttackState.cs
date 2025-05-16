@@ -14,6 +14,7 @@ public class PlayerDashAttackState : PlayerAbilityState
         base.AnimationActionTrigger(index);
 
         player.combat.DoAttack(player.combat.dashAttack[1]);
+        Manager.Instance.soundManager.PlaySoundFXClip("dashAttackSFX", player.transform);
     }
 
     public override void AnimationFinishTrigger(int index)

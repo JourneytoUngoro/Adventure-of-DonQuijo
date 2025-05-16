@@ -36,6 +36,7 @@ public class PlayerMeleeAttack1State : PlayerAbilityState
 
         player.combat.DoAttack(player.combat.meleeAttack[1]);
         player.combat.damagedTargets.Clear();
+        Manager.Instance.soundManager.PlaySoundFXClip("lightAttack2SFX", player.transform);
     }
 
     public override void AnimationFinishTrigger(int index)

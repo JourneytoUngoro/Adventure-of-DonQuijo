@@ -3129,37 +3129,6 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
---- !u!1 &590814006
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 590814007}
-  m_Layer: 0
-  m_Name: Object
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &590814007
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 590814006}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &593037662
 GameObject:
   m_ObjectHideFlags: 0
@@ -7364,12 +7333,9 @@ MonoBehaviour:
   showPositionInformation: 0
   showColliderInformation: 0
   showFacingObstacleInformation: 0
-  <currentTarget>k__BackingField: {fileID: 0}
   <whatIsChaseTarget>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
-  <currentTargetLastPosition>k__BackingField: {x: 0, y: 0, z: 0}
-  <currentTargetLastVelocity>k__BackingField: {x: 0, y: 0, z: 0}
   detectionRangeCollider: {fileID: 941239852}
   chaseRangeCollider: {fileID: 0}
   constantlyFollowPlayer: 0
@@ -7874,7 +7840,7 @@ GameObject:
   - component: {fileID: 1434702728}
   - component: {fileID: 1434702729}
   m_Layer: 0
-  m_Name: SoundFX Managert
+  m_Name: Sound Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8178,6 +8144,7 @@ GameObject:
   - component: {fileID: 1502738978}
   - component: {fileID: 1502738977}
   - component: {fileID: 1502738976}
+  - component: {fileID: 1502738980}
   m_Layer: 6
   m_Name: Player
   m_TagString: Idle
@@ -8291,6 +8258,102 @@ Transform:
   - {fileID: 2027281174}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1502738980
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502738975}
+  m_Enabled: 0
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1507190479
 GameObject:
   m_ObjectHideFlags: 0
@@ -12429,7 +12492,6 @@ MonoBehaviour:
   showPositionInformation: 0
   showColliderInformation: 0
   showFacingObstacleInformation: 0
-  <currentTarget>k__BackingField: {fileID: 0}
 --- !u!1 &1922156666
 GameObject:
   m_ObjectHideFlags: 0
@@ -13929,12 +13991,9 @@ MonoBehaviour:
   showPositionInformation: 0
   showColliderInformation: 0
   showFacingObstacleInformation: 0
-  <currentTarget>k__BackingField: {fileID: 0}
   <whatIsChaseTarget>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
-  <currentTargetLastPosition>k__BackingField: {x: 0, y: 0, z: 0}
-  <currentTargetLastVelocity>k__BackingField: {x: 0, y: 0, z: 0}
   detectionRangeCollider: {fileID: 1546604051}
   chaseRangeCollider: {fileID: 0}
   constantlyFollowPlayer: 0
@@ -15416,7 +15475,6 @@ MonoBehaviour:
   showPositionInformation: 0
   showColliderInformation: 0
   showFacingObstacleInformation: 0
-  <currentTarget>k__BackingField: {fileID: 0}
 --- !u!4 &8754143780800908711
 Transform:
   m_ObjectHideFlags: 0
@@ -15480,7 +15538,6 @@ SceneRoots:
   - {fileID: 2064775386}
   - {fileID: 1762094909}
   - {fileID: 306674429}
-  - {fileID: 590814007}
   - {fileID: 4530156883300795544}
   - {fileID: 1502738979}
   - {fileID: 1588174378}

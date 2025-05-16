@@ -31,6 +31,7 @@ public class PlayerMoveState : PlayerGroundedState
 
         dashInputXBufferTimer.StartSingleUseTimer();
         dashInputYBufferTimer.StartSingleUseTimer();
+        player.audioSource.enabled = true;
     }
 
     public override void Exit()
@@ -47,6 +48,8 @@ public class PlayerMoveState : PlayerGroundedState
             prevInputX = 0;
             prevInputY = 0;
         }
+
+        player.audioSource.enabled = false;
     }
 
     public override void PhysicsUpdate()
@@ -74,11 +77,13 @@ public class PlayerMoveState : PlayerGroundedState
             if (isDashing)
             {
                 player.animator.SetBool("dash", true);
+                player.audioSource.clip = Manager.Instance.soundManager.clipDictionary["playerDashSFX"];
                 player.movement.SetVelocity(inputX * playerData.dashSpeed.x, inputY * playerData.dashSpeed.y);
             }
             else
             {
                 player.animator.SetBool("dash", false);
+                player.audioSource.clip = Manager.Instance.soundManager.clipDictionary["playerWalkSFX"];
                 player.movement.SetVelocity(inputX * playerData.moveSpeed.x, inputY * playerData.moveSpeed.y);
             }
         }

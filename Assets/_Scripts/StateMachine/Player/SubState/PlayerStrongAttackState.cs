@@ -38,6 +38,7 @@ public class PlayerStrongAttackState : PlayerAbilityState
         {
             player.combat.DoAttack(player.combat.strongAttack);
             player.combat.damagedTargets.Clear();
+            Manager.Instance.soundManager.PlaySoundFXClip("heavyAttackSFX", player.transform);
         }
     }
 

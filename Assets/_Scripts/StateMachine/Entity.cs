@@ -17,6 +17,7 @@ public class Entity : MonoBehaviour
     public Rigidbody2D entityRigidbody { get; protected set; }
     public OrthogonalRigidbody orthogonalRigidbody { get; protected set; }
     public EntityStateMachine entityStateMachine { get; protected set; }
+    public AudioSource audioSource { get; protected set; }
     public Core core { get; protected set; }
     public StateMachineToAnimator stateMachineToAnimator { get; protected set; }
     #endregion
@@ -48,6 +49,7 @@ public class Entity : MonoBehaviour
         stateMachineToAnimator = GetComponentInChildren<StateMachineToAnimator>();
         orthogonalRigidbody = GetComponentInChildren<OrthogonalRigidbody>();
         spriteRenderer = GetComponentsInChildren<SpriteRenderer>().Where(component => component.gameObject != gameObject).FirstOrDefault();
+        audioSource = GetComponent<AudioSource>();
 
         core = GetComponentInChildren<Core>();
         status = new bool[Enum.GetValues(typeof(CurrentStatus)).Length];

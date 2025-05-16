@@ -29,7 +29,7 @@ public class SoundManager : MonoBehaviour
     [TabGroup("Tab", "BGM")][SerializeField] private AudioSource bgmSource;
 
     [Title("Clip Database")] [SerializeField] private AudioClipDatabase clipDatabase;
-    [ShowInInspector] private Dictionary<string, AudioClip> clipDictionary;
+    [field: SerializeField] public Dictionary<string, AudioClip> clipDictionary { get; private set; }
 
     [Title("Sound Player Pool")][SerializeField] private GameObject soundPlayerPrefab;
     [SerializeField] private int poolSize = 30;

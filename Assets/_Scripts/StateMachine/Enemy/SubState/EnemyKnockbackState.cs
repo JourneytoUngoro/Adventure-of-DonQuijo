@@ -39,7 +39,7 @@ public class EnemyKnockbackState : EnemyState
         shouldTransitToDeadState = enemy.stats.health.currentValue == enemy.stats.health.minValue;
         enemy.stats.posture.ControlRecoveryTimer(TimerControl.Stop);
 
-        Manager.Instance.soundFXManager.PlaySoundFXClip(Manager.Instance.soundFXManager.enemyHitSoundFX, enemy.transform);
+        Manager.Instance.soundManager.PlaySoundFXClip("", enemy.transform);
     }
 
     public override void Exit()
