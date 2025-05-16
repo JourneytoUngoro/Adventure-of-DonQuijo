@@ -15,7 +15,7 @@ public class EnemyMeleeAttack2State : EnemyAbilityState
     {
         base.AnimationActionTrigger(index);
 
-        // enemy.combat.DoAttack(enemy.combat.dashAttack);
+        enemy.combat.DoAttack(enemy.combat.meleeAttack2[index]);
         enemy.combat.damagedTargets.Clear();
     }
 

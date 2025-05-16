@@ -47,3 +47,9 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 84fda23d32834a447820805d63977b85, type: 3}
   - key: healthRecorverSFX
     clip: {fileID: 8300000, guid: 33a4798d4f748024982b59c37fccf1a1, type: 3}
+  - key: playerAttack1SFX
+    clip: {fileID: 8300000, guid: 33cf01ed119b3214f8dc43969904f3ab, type: 3}
+  - key: playerAttack2SFX
+    clip: {fileID: 8300000, guid: d41cc594ba7a34f4780de4c83a58ac88, type: 3}
+  - key: playerAttack3SFX
+    clip: {fileID: 8300000, guid: ba8864fa2435f3d48a368c21c4ddbf0f, type: 3}
