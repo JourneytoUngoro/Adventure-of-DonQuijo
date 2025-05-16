@@ -112,7 +112,7 @@ public class SoundManager : MonoBehaviour
     }
 
     // TODO 함수 추가하기
-/*    public void PlaySoundFXClip(IEnumerable<AudioClip> audioClips, Transform spawnTransform, float pitchDeviation = 0.0f, float volume = 1.0f)
+    /*public void PlaySoundFXClip(IEnumerable<AudioClip> audioClips, Transform spawnTransform, float pitchDeviation = 0.0f, float volume = 1.0f)
     {
         if (audioClips == null)
         {
@@ -133,7 +133,7 @@ public class SoundManager : MonoBehaviour
 
         AudioClip clip = audioClips.ElementAt(index);
 
-       float pitch = 1.0f + UtilityFunctions.RandomFloat(-pitchDeviation, pitchDeviation);
+        float pitch = 1.0f + UtilityFunctions.RandomFloat(-pitchDeviation, pitchDeviation);
 
     }*/
 

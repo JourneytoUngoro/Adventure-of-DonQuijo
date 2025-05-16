@@ -255,7 +255,14 @@ public abstract class Combat : CoreComponent
 
         GetHealthDamage(damageComponent, isParrying, isBlocking);
         GetPostureDamage(damageComponent, isParrying, isBlocking);
+
+        if (!isParrying && !isBlocking)
+        {
+            WhenGotHit();
+        }
     }
+
+    public abstract void WhenGotHit();
 
     public virtual void GetHealthDamage(DamageComponent damageComponent, bool isParrying, bool isBlocking)
     {

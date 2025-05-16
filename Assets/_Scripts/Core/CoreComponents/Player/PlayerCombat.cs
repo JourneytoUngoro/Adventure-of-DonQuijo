@@ -23,6 +23,11 @@ public class PlayerCombat : Combat
         player = entity as Player;
     }
 
+    public override void WhenGotHit()
+    {
+
+    }
+
     public override void GetKnockback(KnockbackComponent knockbackComponent, OverlapCollider[] overlapColliders)
     {
         if (!player.playerStateMachine.currentState.Equals(player.stunnedState))

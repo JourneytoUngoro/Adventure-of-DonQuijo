@@ -68,6 +68,12 @@ public class EnemyCombat : Combat
         return blocked;
     }
 
+    public override void WhenGotHit()
+    {
+        currentParryStack = Mathf.Clamp(currentParryStack + 1, 0, enemy.enemyData.maxParryableCount);
+        Manager.Instance.soundManager.PlaySoundFXClip("lightAttack1SFX", enemy.transform);
+    }
+
     public override void GetKnockback(KnockbackComponent knockbackComponent, OverlapCollider[] overlapColliders)
     {
         if (!enemy.enemyStateMachine.currentState.Equals(enemy.stunnedState))
@@ -122,18 +128,4 @@ public class EnemyCombat : Combat
 
         return targetInRange;
     }
-
-    public void Alerted(Entity sourceEntity, CombatAbility combatAbility)
-    {
-        if (currentParryStack > 0)
-        {
-
-        }
-        else if (currentBlockStack > 0)
-        {
-
-        }
-        
-        enemy.enemyStateMachine.ChangeState(enemy.blockParryState);
-    } 
 }
