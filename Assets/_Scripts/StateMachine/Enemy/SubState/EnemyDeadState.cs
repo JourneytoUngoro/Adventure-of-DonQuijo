@@ -20,5 +20,6 @@ public class EnemyDeadState : EnemyState
         base.Enter();
 
         enemy.gameObject.tag = "Invinsible";
+        enemy.stateMachineToAnimator.state = this;
     }
 }
