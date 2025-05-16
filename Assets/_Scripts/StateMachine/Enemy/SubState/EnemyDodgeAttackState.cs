@@ -24,6 +24,7 @@ public class EnemyDodgeAttackState : EnemyAbilityState
         base.AnimationActionTrigger(index);
 
         enemy.gameObject.tag = "Idle";
+        startDashAttack = true;
         enemy.combat.DoAttack(enemy.combat.dodgeAttack[1]);
         enemy.combat.damagedTargets.Clear();
     }

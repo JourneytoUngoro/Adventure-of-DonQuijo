@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum TimerControl { Stop, Start }
+
 [Serializable]
 public class StatComponent
 {
@@ -58,6 +60,20 @@ public class StatComponent
             {
                 recoveryTimer.Tick();
             }
+        }
+    }
+
+    public void ControlRecoveryTimer(TimerControl timerControl)
+    {
+        switch (timerControl)
+        {
+            case TimerControl.Stop:
+                recoveryStartTimer.StopTimer(); break;
+            case TimerControl.Start:
+                recoveryStartTimer.StartSingleUseTimer(); break;
+            default:
+                Debug.LogWarning($"Unknown type of TimerControl variable found in in {entity.name}.");
+                break;
         }
     }
 

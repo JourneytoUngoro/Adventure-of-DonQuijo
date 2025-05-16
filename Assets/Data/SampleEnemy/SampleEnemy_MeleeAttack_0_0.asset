@@ -258,7 +258,7 @@ MonoBehaviour:
         <knockbackDirection>k__BackingField: {x: 1, y: 0}
         <knockbackSpeed>k__BackingField: 100
         <knockbackTime>k__BackingField: 0.3
-        <easeFunction>k__BackingField: 9
+        <easeFunction>k__BackingField: 3
         <orthogonalVelocity>k__BackingField: 0
         <bounceWhenGrounded>k__BackingField: 0
         <bounceDirection>k__BackingField: {x: 0, y: 0}

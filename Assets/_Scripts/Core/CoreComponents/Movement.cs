@@ -251,10 +251,10 @@ public abstract class Movement : CoreComponent
             velocityChangeCoroutine = null;
         }
 
-        if (entity.entityCombat.dashAttackCoroutine != null)
+        /*if (entity.entityCombat.dashAttackCoroutine != null)
         {
             StopCoroutine(entity.entityCombat.dashAttackCoroutine);
-        }
+        }*/
     }
 
     public void OnContact(bool onContact) => this.onContact = onContact;

@@ -18,6 +18,7 @@ public class EnemyStunnedState : EnemyState
 
         canTransit = false;
         stunRecoveryTimer.StartSingleUseTimer();
+        enemy.stats.posture.ControlRecoveryTimer(TimerControl.Stop);
     }
 
     public override void Exit()
@@ -25,6 +26,7 @@ public class EnemyStunnedState : EnemyState
         base.Exit();
 
         enemy.stats.posture.SetCurrentValue(enemy.stats.posture.maxValue);
+        enemy.stats.posture.ControlRecoveryTimer(TimerControl.Start);
     }
 
     public override void LogicUpdate()

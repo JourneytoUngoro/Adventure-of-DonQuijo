@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyCombat : Combat
@@ -12,13 +13,13 @@ public class EnemyCombat : Combat
     [field: SerializeField] public List<CombatAbilityWithColliders> meleeAttack2 { get; private set; }
     [field: SerializeField] public List<CombatAbilityWithColliders> dodgeAttack { get; private set; }
     [field: SerializeField] public List<CombatAbilityWithColliders> dashAttack { get; private set; }
-    // [field: SerializeField] public CombatAbilityWithColliders dashAttack { get; private set; }
     [field: SerializeField] public CombatAbilityWithColliders wideRangeAttack { get; private set; }
+    [field: SerializeField] public CombatAbilityWithColliders block { get; private set; }
+    [field: SerializeField] public CombatAbilityWithColliders parry { get; private set; }
+    public int currentBlockStack { get; set; }
+    public int currentParryStack { get; set; }
 
-    [SerializeField] private Transform blockParryTransform;
     private Timer blockCoolDownTimer;
-    private int currentBlockStack;
-    private int currentParryStack;
     private float currentParryGauge;
 
     private Collider2D[] detectedEntities = new Collider2D[maxDetectionCount];
@@ -33,16 +34,38 @@ public class EnemyCombat : Combat
         contactFilter.useLayerMask = true;
     }
 
-    protected virtual void Start()
+    protected override void Start()
     {
+        base.Start();
+
+        // TODO: Script Order Problem
         EnemyData enemyData = entity.entityData as EnemyData;
         blockCoolDownTimer = new Timer(enemyData.blockCoolDownTime);
         blockCoolDownTimer.timerAction += () => { currentBlockStack = Mathf.Clamp(currentBlockStack + 1, 0, enemyData.maxBlockableCount); };
+        blockCoolDownTimer.StartMultiUseTimer();
     }
 
     protected virtual void Update()
     {
         blockCoolDownTimer.Tick();
+    }
+
+    public override bool IsBlocking(Entity sourceEntity, OverlapCollider[] overlapColliders)
+    {
+        bool blocked = base.IsBlocking(sourceEntity, overlapColliders);
+
+        if (blocked)
+        {
+            currentParryGauge += enemy.enemyData.parryGaugeWhenBlocked;
+
+            if (currentParryGauge >= 1.0f)
+            {
+                currentParryGauge -= 1.0f;
+                currentParryStack = Mathf.Clamp(currentParryStack + 1, 0, enemy.enemyData.maxParryableCount);
+            }
+        }
+
+        return blocked;
     }
 
     public override void GetKnockback(KnockbackComponent knockbackComponent, OverlapCollider[] overlapColliders)
@@ -57,48 +80,6 @@ public class EnemyCombat : Combat
     {
         enemy.knockbackState.knockbackTimer.ChangeDuration(knockbackTime);
         enemy.enemyStateMachine.ChangeState(enemy.knockbackState);
-    }
-
-    public override bool IsParrying(Entity sourceEntity, OverlapCollider[] overlapColliders)
-    {
-        if (currentParryStack > 0)
-        {
-            currentParryStack -= 1;
-
-            if ((sourceEntity.transform.position.x - enemy.transform.position.x) * enemy.movement.facingDirection >= 0)
-            {
-                Debug.Log("Enemy Parried");
-                enemy.animator.SetTrigger("parried");
-                enemy.enemyStateMachine.ChangeState(enemy.blockParryState);
-                return true;
-            }
-            else return false;
-        }
-        else return false;
-    }
-
-    public override bool IsBlocking(Entity sourceEntity, OverlapCollider[] overlapColliders)
-    {
-        if (currentBlockStack > 0)
-        {
-            currentBlockStack -= 1;
-
-            if ((sourceEntity.transform.position.x - enemy.transform.position.x) * enemy.movement.facingDirection >= 0)
-            {
-                currentParryGauge += enemy.enemyData.parryGaugeWhenBlocked;
-                if (currentParryGauge >= 1.0f)
-                {
-                    currentParryStack = Mathf.Clamp(currentParryStack + 1, 0, enemy.enemyData.maxParryableCount);
-                }
-
-                Debug.Log("Enemy Blocked");
-                enemy.animator.SetTrigger("blocked");
-                enemy.enemyStateMachine.ChangeState(enemy.blockParryState);
-                return true;
-            }
-            else return false;
-        }
-        else return false;
     }
 
     public bool IsTargetInRangeOf(CombatAbilityWithColliders combatAbility)

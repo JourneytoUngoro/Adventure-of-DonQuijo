@@ -33,11 +33,6 @@ public class EnemyMovement : Movement
         navMeshAgent = enemy.navMeshAgent;
         enemy.navMeshAgent.autoTraverseOffMeshLink = false;
         StartCoroutine(TraverseNavmeshLink());
-
-        if (facingDirection == -1)
-        {
-            enemy.stats.statsCanvas.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
-        }
     }
 
     protected override void FixedUpdate()

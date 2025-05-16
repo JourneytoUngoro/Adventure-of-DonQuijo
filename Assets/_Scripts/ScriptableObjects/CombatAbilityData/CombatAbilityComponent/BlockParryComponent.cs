@@ -15,15 +15,15 @@ public class BlockParryComponent : CombatAbilityComponent
         {
             BlockParryArea blockParryArea = blockParryAreas[Mathf.Min(index, blockParryAreas.Count() - 1)];
             GameObject blockParryGameObject = overlapColliders[index].overlapCollider.gameObject;
-            BlockParry shieldParry = blockParryGameObject.GetComponent<BlockParry>();
+            BlockParry blockParry = blockParryGameObject.GetComponent<BlockParry>();
 
             if (blockParryArea.blockParryType.Equals(BlockParryType.Parry))
             {
-                shieldParry.SetParryData(pertainedCombatAbility, blockParryArea.parryTime[blockParryArea.currentIndex], blockParryArea.parryDurationTime[blockParryArea.currentIndex], blockParryArea.changeToBlock, overlapColliders[index]);
+                blockParry.SetParryData(pertainedCombatAbility, blockParryArea.parryTime[blockParryArea.currentIndex], blockParryArea.parryDurationTime[blockParryArea.currentIndex], blockParryArea.changeToBlock, overlapColliders[index]);
             }
             else
             {
-                shieldParry.SetBlockData(pertainedCombatAbility, overlapColliders[index]);
+                blockParry.SetBlockData(pertainedCombatAbility, overlapColliders[index]);
             }
 
             if (Time.time != blockParryArea.lastCalledTime)

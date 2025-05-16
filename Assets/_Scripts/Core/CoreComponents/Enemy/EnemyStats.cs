@@ -22,5 +22,10 @@ public class EnemyStats : Stats
 
         health.OnCurrentValueMin += () => { enemy.enemyStateMachine.ChangeState(enemy.deadState); };
         // detectionRatio.OnCurrentValueMax += () => { enemy.enemyStateMachine.ChangeState(enemy.targetInDetectionRangeState); };
+
+        if (enemy.movement.facingDirection == -1)
+        {
+            statsCanvas.transform.Rotate(new Vector3(0.0f, 180.0f, 0.0f));
+        }
     }
 }

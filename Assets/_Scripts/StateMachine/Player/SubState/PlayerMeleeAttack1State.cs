@@ -58,10 +58,8 @@ public class PlayerMeleeAttack1State : PlayerAbilityState
         base.Enter();
 
         canCancel = true;
-        isAbilityDone = false;
         transitToNextAttack = false;
         attackInputPressed = false;
-        player.stateMachineToAnimator.state = this;
         player.animator.SetInteger("typeIndex", 1);
         player.movement.SetVelocityZero();
     }

@@ -252,7 +252,7 @@ MonoBehaviour:
       data:
         name: KnockbackComponent
         <pertainedCombatAbility>k__BackingField: {fileID: 11400000}
-        <airborne>k__BackingField: 0
+        <airborne>k__BackingField: 1
         <directionBase>k__BackingField: 0
         <knockbackDirection>k__BackingField: {x: 1, y: 0}
         <knockbackSpeed>k__BackingField: 100

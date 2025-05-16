@@ -73,13 +73,13 @@ MonoBehaviour:
       data:
         name: KnockbackComponent
         <pertainedCombatAbility>k__BackingField: {fileID: 11400000}
-        <airborne>k__BackingField: 1
+        <airborne>k__BackingField: 0
         <directionBase>k__BackingField: 0
-        <knockbackDirection>k__BackingField: {x: -1, y: 0}
-        <knockbackSpeed>k__BackingField: 50
+        <knockbackDirection>k__BackingField: {x: 1, y: 0}
+        <knockbackSpeed>k__BackingField: 200
         <knockbackTime>k__BackingField: 0.3
         <easeFunction>k__BackingField: 9
-        <orthogonalVelocity>k__BackingField: -50
+        <orthogonalVelocity>k__BackingField: 0
         <bounceWhenGrounded>k__BackingField: 0
         <bounceDirection>k__BackingField: {x: 0, y: 0}
         <bounceSpeed>k__BackingField: 0

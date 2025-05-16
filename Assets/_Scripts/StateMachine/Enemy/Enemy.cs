@@ -69,6 +69,7 @@ public class Enemy : Entity
         wideAttackState = new EnemyWideAttackState(this, "wideAttack");
         dashAttackState = new EnemyDashAttackState(this, "dashAttack");
         blockParryState = new EnemyBlockParryState(this, "blockParry");
+        deadState = new EnemyDeadState(this, "dead");
 
         targetInDetectionRangeState = new EnemyTargetInDetectionRangeState(this, "move");
 

@@ -32,14 +32,15 @@ MonoBehaviour:
   <repositionOffsetDistance>k__BackingField: 10
   <repositioningTime>k__BackingField: 4
   <maxBlockableCount>k__BackingField: 2
-  <blockCoolDownTime>k__BackingField: 3
+  <blockCoolDownTime>k__BackingField: 10
   <blockPossibility>k__BackingField: 0.7
   <parryGaugeWhenBlocked>k__BackingField: 0.6
   <maxParryableCount>k__BackingField: 1
+  <blockParryTime>k__BackingField: 0.4
   <meleeAttack0CoolDown>k__BackingField: 4
   <meleeAttack1CoolDown>k__BackingField: 10
   <meleeAttack2CoolDown>k__BackingField: 4
   <dashAttackCoolDown>k__BackingField: 15
-  <dodgeAttackCoolDown>k__BackingField: 3
+  <dodgeAttackCoolDown>k__BackingField: 15
   <wideAttackCoolDown>k__BackingField: 10
   <canvasDisableTime>k__BackingField: 5

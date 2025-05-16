@@ -12,12 +12,12 @@ public abstract class Combat : CoreComponent
     public List<Collider2D> damagedTargets { get; private set; }
     public List<Entity> surroundedBy { get; private set; } = new List<Entity>();
     public List<Entity> targetedBy { get; private set; } = new List<Entity>();
-    public Coroutine dashAttackCoroutine { get; protected set; }
+    // public Coroutine dashAttackCoroutine { get; protected set; }
     public int stanceLevel { get; protected set; }
 
     protected const int maxDetectionCount = 10;
-
     protected Collider2D[] detectedDamageTargets = new Collider2D[maxDetectionCount];
+    private ContactFilter2D blockParryContactFilter;
 
     protected override void Awake()
     {
@@ -71,6 +71,13 @@ public abstract class Combat : CoreComponent
                 }
             }
         }
+    }
+
+    protected virtual void Start()
+    {
+        blockParryContactFilter = new ContactFilter2D();
+        blockParryContactFilter.useLayerMask = true;
+        blockParryContactFilter.useTriggers = true;
     }
 
     public virtual pair<bool, bool> DoAttack(CombatAbilityWithColliders combatAbilityWithColliders, bool includeMovement = true)
@@ -221,7 +228,7 @@ public abstract class Combat : CoreComponent
         }*/
     }
 
-    private IEnumerator DashAttack(CombatAbilityWithColliders combatAbility, float attackTime)
+    /*private IEnumerator DashAttack(CombatAbilityWithColliders combatAbility, float attackTime)
     {
         float coroutineElapsedTime = 0.0f;
         WaitForFixedUpdate waitForFixedUpdate = new WaitForFixedUpdate();
@@ -241,7 +248,7 @@ public abstract class Combat : CoreComponent
 
             coroutineElapsedTime += Time.fixedDeltaTime;
         }
-    }
+    }*/
 
     public virtual void GetDamage(DamageComponent damageComponent, OverlapCollider[] overlapColliders)
     {
@@ -500,8 +507,57 @@ public abstract class Combat : CoreComponent
     }
 
     protected abstract void ChangeToKnockbackState(float knockbackTime);
-    public abstract bool IsParrying(Entity sourceEntity, OverlapCollider[] overlapColliders);
-    public abstract bool IsBlocking(Entity sourceEntity, OverlapCollider[] overlapColliders);
+
+    public virtual bool IsParrying(Entity sourceEntity, OverlapCollider[] overlapColliders)
+    {
+        bool isParrying = false;
+
+        if (sourceEntity != null)
+        {
+            List<Collider2D> parryColliders = new List<Collider2D>();
+            blockParryContactFilter.SetLayerMask(LayerMask.GetMask("ParryLayer"));
+
+            foreach (OverlapCollider overlapCollider in overlapColliders)
+            {
+                overlapCollider.overlapCollider.OverlapCollider(blockParryContactFilter, parryColliders);
+                BlockParry parry = parryColliders.Select(collider => collider.GetComponent<BlockParry>()).Where(blockParry => blockParry.pertainedCombatAbility.sourceEntity.Equals(entity)).FirstOrDefault();
+
+                if (parry != null)
+                {
+                    isParrying = parry.overlapCollider.limitAngle ? CheckWithinAngle(entity.orthogonalRigidbody.transform.right, sourceEntity.entityDetection.currentProjectedPosition - entity.entityDetection.currentProjectedPosition, parry.overlapCollider.counterClockwiseAngle, parry.overlapCollider.clockwiseAngle) : true;
+                }
+
+                if (isParrying) break;
+            }
+        }
+
+        return isParrying;
+    }
+
+    public virtual bool IsBlocking(Entity sourceEntity, OverlapCollider[] overlapColliders)
+    {
+        bool isBlocking = false;
+
+        if (sourceEntity != null)
+        {
+            List<Collider2D> blockColliders = new List<Collider2D>();
+            blockParryContactFilter.SetLayerMask(LayerMask.GetMask("BlockLayer"));
+
+            foreach (OverlapCollider overlapCollider in overlapColliders)
+            {
+                overlapCollider.overlapCollider.OverlapCollider(blockParryContactFilter, blockColliders);
+                BlockParry block = blockColliders.Select(collider => collider.GetComponent<BlockParry>()).Where(blockParry => blockParry.pertainedCombatAbility.sourceEntity.Equals(entity)).FirstOrDefault();
+
+                if (block != null)
+                {
+                    isBlocking = block.overlapCollider.limitAngle ? CheckWithinAngle(entity.orthogonalRigidbody.transform.right, sourceEntity.entityDetection.currentProjectedPosition - entity.entityDetection.currentProjectedPosition, block.overlapCollider.counterClockwiseAngle, block.overlapCollider.clockwiseAngle) : true;
+                }
+                if (isBlocking) break;
+            }
+        }
+
+        return isBlocking;
+    }
 
     public bool CheckWithinAngle(Vector2 baseVector, Vector2 targetVector, float counterClockwiseAngle, float clockwiseAngle)
     {

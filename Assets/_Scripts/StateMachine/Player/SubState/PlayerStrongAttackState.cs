@@ -61,8 +61,6 @@ public class PlayerStrongAttackState : PlayerAbilityState
         base.Enter();
 
         canCancel = true;
-        isAbilityDone = false;
-        player.stateMachineToAnimator.state = this;
         player.movement.SetVelocityZero();
         // Manager.Instance.soundFXManager.PlaySoundFXClip(Manager.Instance.soundFXManager.playerAttackSoundFX, player.transform);
     }

@@ -20,6 +20,15 @@ public class PlayerAbilityState : PlayerState
         base.Enter();
 
         isAbilityDone = false;
+        player.stateMachineToAnimator.state = this;
+        player.stats.posture.ControlRecoveryTimer(TimerControl.Stop);
+    }
+
+    public override void Exit() 
+    {
+        base.Exit();
+
+        player.stats.posture.ControlRecoveryTimer(TimerControl.Start);
     }
 
     public void SetAvailable(bool available) => this.available = available;

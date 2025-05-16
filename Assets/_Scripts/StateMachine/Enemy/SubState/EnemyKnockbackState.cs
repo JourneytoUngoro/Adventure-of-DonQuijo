@@ -37,6 +37,8 @@ public class EnemyKnockbackState : EnemyState
 
         shouldTransitToStunnedState = enemy.stats.posture.currentValue == enemy.stats.posture.minValue;
         shouldTransitToDeadState = enemy.stats.health.currentValue == enemy.stats.health.minValue;
+        enemy.stats.posture.ControlRecoveryTimer(TimerControl.Stop);
+
         Manager.Instance.soundFXManager.PlaySoundFXClip(Manager.Instance.soundFXManager.enemyHitSoundFX, enemy.transform);
     }
 
@@ -45,6 +47,9 @@ public class EnemyKnockbackState : EnemyState
         base.Exit();
 
         // TODO: Invinsible after fall
+        enemy.movement.SetVelocityZero();
+        enemy.movement.StopVelocityChangeOverTime();
+        enemy.stats.posture.ControlRecoveryTimer(TimerControl.Start);
     }
 
     public override void LogicUpdate()

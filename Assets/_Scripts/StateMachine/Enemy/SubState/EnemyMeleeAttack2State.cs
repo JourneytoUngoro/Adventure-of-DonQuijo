@@ -78,4 +78,20 @@ public class EnemyMeleeAttack2State : EnemyAbilityState
             }
         }
     }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+
+        if (!onStateExit)
+        {
+            if (!isAbilityDone)
+            {
+                if ((enemy.detection.currentTarget.entityDetection.currentProjectedPosition.x - enemy.detection.currentProjectedPosition.x) * facingDirection < 0)
+                {
+                    enemy.movement.Flip();
+                }
+            }
+        }
+    }
 }

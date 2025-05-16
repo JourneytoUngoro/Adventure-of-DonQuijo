@@ -63,10 +63,8 @@ public class PlayerMeleeAttack0State : PlayerAbilityState
         base.Enter();
 
         canCancel = true;
-        isAbilityDone = false;
         transitToNextAttack = false;
         attackInputPressed = false;
-        player.stateMachineToAnimator.state = this;
         player.animator.SetInteger("typeIndex", 0);
         player.movement.SetVelocityZero();
         Manager.Instance.soundFXManager.PlaySoundFXClip(Manager.Instance.soundFXManager.playerAttackSoundFX, player.transform);

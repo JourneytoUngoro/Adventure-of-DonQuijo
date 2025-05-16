@@ -147,7 +147,7 @@ MonoBehaviour:
         <airborne>k__BackingField: 0
         <directionBase>k__BackingField: 0
         <knockbackDirection>k__BackingField: {x: 1, y: 0}
-        <knockbackSpeed>k__BackingField: 100
+        <knockbackSpeed>k__BackingField: 150
         <knockbackTime>k__BackingField: 0.3
         <easeFunction>k__BackingField: 3
         <orthogonalVelocity>k__BackingField: 0
@@ -156,16 +156,16 @@ MonoBehaviour:
         <bounceSpeed>k__BackingField: 0
         <bounceWhenWall>k__BackingField: 0
         <knockbackDirectionWhenBlocked>k__BackingField: {x: 1, y: 0}
-        <knockbackSpeedWhenBlocked>k__BackingField: 50
+        <knockbackSpeedWhenBlocked>k__BackingField: 100
         <knockbackTimeWhenBlocked>k__BackingField: 0.3
         <easeFunctionWhenBlocked>k__BackingField: 3
         <knockbackDirectionWhenParried>k__BackingField: {x: 1, y: 0}
-        <knockbackSpeedWhenParried>k__BackingField: 50
+        <knockbackSpeedWhenParried>k__BackingField: 100
         <knockbackTimeWhenParried>k__BackingField: 0.3
         <easeFunctionWhenParried>k__BackingField: 3
         <counterProtrudedWhenParried>k__BackingField: 0
         <counterKnockbackDirectionWhenParried>k__BackingField: {x: -1, y: 0}
-        <counterKnockbackSpeedWhenParried>k__BackingField: 50
+        <counterKnockbackSpeedWhenParried>k__BackingField: 100
         <counterKnockbackTimeWhenParried>k__BackingField: 0.5
         <counterEaseFunctionWhenParried>k__BackingField: 3
         <counterOrthogonalVelocityWhenParried>k__BackingField: 0

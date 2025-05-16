@@ -9,7 +9,6 @@ public class PlayerKnockbackState : PlayerState
     // TODO: Make bounce back when hit wall
     // TODO: When posture is maxed, the entity will transit to stunnedState. For the purpose of good game play experience, the stunnedStateRecoveryTimer will be ticked no matter what state the player currently is.
     // TODO: Would it be better to make player uncontrollable during all the time in stunnedState? Or would it be better to recover from the stunnedState right after it gets hit?
-    private bool bounceBack;
     private bool shouldTransitToStunnedState;
     private bool shouldTransitToDeadState;
     private Vector3 knockbackVelocityBeforeCollision;

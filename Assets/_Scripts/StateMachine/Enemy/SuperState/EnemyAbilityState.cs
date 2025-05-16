@@ -21,6 +21,7 @@ public class EnemyAbilityState : EnemyState
 
         isAbilityDone = false;
         entity.stateMachineToAnimator.state = this;
+        enemy.stats.posture.ControlRecoveryTimer(TimerControl.Stop);
     }
 
     public override void Exit()
@@ -28,6 +29,7 @@ public class EnemyAbilityState : EnemyState
         base.Exit();
 
         isAbilityDone = true;
+        enemy.stats.posture.ControlRecoveryTimer(TimerControl.Start);
     }
 
     public override void PhysicsUpdate()

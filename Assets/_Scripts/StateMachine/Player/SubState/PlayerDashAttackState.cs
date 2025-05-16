@@ -27,8 +27,6 @@ public class PlayerDashAttackState : PlayerAbilityState
     {
         base.Enter();
 
-        isAbilityDone = false;
-        player.stateMachineToAnimator.state = this;
         player.combat.DoAttack(player.combat.dashAttack[0]);
         // Manager.Instance.soundFXManager.PlaySoundFXClip(Manager.Instance.soundFXManager.playerAttackSoundFX, player.transform);
     }

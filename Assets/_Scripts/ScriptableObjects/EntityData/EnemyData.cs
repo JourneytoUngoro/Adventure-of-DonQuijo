@@ -23,6 +23,7 @@ public class EnemyData : EntityData
     [field: SerializeField] public float blockPossibility { get; private set; } = 0.7f;
     [field: SerializeField] public float parryGaugeWhenBlocked { get; private set; } = 0.6f;
     [field: SerializeField] public int maxParryableCount { get; private set; } = 1;
+    [field: SerializeField] public float blockParryTime { get; private set; } = 0.4f;
 
     [field: Header("MeleeAttack State")]
     [field: SerializeField] public float meleeAttack0CoolDown { get; private set; } = 4.0f;

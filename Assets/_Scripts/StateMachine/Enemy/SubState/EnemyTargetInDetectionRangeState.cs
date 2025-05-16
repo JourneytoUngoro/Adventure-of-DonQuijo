@@ -103,12 +103,22 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                 }
                 else if (enemy.movement.navMeshAgentState != NavMeshAgentState.TraverseAround)
                 {
-                    // Debug.Log("Alerted?: " + enemy.status[(int)CurrentStatus.Alerted]);
-                    /*if (enemy.status[(int)CurrentStatus.Alerted] && enemy.dodgeAttackState.available)
+                    if (enemy.status[(int)CurrentStatus.Alerted])
                     {
-                        stateMachine.ChangeState(enemy.dodgeAttackState);
+                        if (enemy.combat.currentParryStack > 0)
+                        {
+                            stateMachine.ChangeState(enemy.blockParryState);
+                        }
+                        else if (enemy.dodgeAttackState.available)
+                        {
+                            stateMachine.ChangeState(enemy.dodgeAttackState);
+                        }
+                        else if (enemy.combat.currentBlockStack > 0)
+                        {
+                            stateMachine.ChangeState(enemy.blockParryState);
+                        }
                     }
-                    else*/ if (isTargetInWideAttackRange && enemy.wideAttackState.available)
+                    else if (isTargetInWideAttackRange && enemy.wideAttackState.available)
                     {
                         stateMachine.ChangeState(enemy.wideAttackState);
                     }
@@ -198,8 +208,12 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                 }
             }
 
+            Debug.Log("Velocity: " + enemy.navMeshAgent.velocity.sqrMagnitude);
+            /*enemy.animator.SetBool("move", enemy.navMeshAgent.velocity.sqrMagnitude > epsilon);
+            enemy.animator.SetBool("idle", !(enemy.navMeshAgent.velocity.sqrMagnitude < epsilon));*/
             enemy.animator.SetBool("move", enemy.navMeshAgent.enabled);
             enemy.animator.SetBool("idle", !enemy.navMeshAgent.enabled);
+
             if (enemy.navMeshAgent.enabled)
             {
                 enemy.animator.SetBool("moveBack", enemy.navMeshAgent.desiredVelocity.x * targetDirection < 0);
