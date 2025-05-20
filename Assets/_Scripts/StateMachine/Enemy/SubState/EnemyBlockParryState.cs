@@ -53,6 +53,8 @@ public class EnemyBlockParryState : EnemyAbilityState
         base.Exit();
 
         available = true;
+        enemy.animator.ResetTrigger("blocked");
+        enemy.animator.ResetTrigger("parried");
     }
 
     public override void LogicUpdate()

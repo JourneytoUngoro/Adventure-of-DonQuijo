@@ -2125,7 +2125,19 @@ MonoBehaviour:
     m_ActionId: dd6c1bf3-a355-4024-9cac-0eb1282de376
     m_ActionName: CharacterControl/Jump[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1242574148}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnBlockParryInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: d7c2cd8e-6496-477a-b697-9619ee7a6420
     m_ActionName: CharacterControl/Dodge[/Keyboard/leftShift]
   - m_PersistentCalls:
@@ -2180,6 +2192,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 16b64fc7-f4a8-4daf-890d-3d94c04d23b8
     m_ActionName: CharacterControl/UseItem[/Keyboard/1,/Keyboard/2,/Keyboard/3]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e40fb7fe-6cf7-4f0d-88eb-8d94ab74f91f
+    m_ActionName: CharacterControl/Dodge[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f84289c8-4e4b-4abd-8098-4c3674a81498
+    m_ActionName: CharacterControl/StrongAttack[/Keyboard/s]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: CharacterControl

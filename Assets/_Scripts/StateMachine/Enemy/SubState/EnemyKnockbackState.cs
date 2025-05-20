@@ -48,6 +48,8 @@ public class EnemyKnockbackState : EnemyState
         enemy.movement.SetVelocityZero();
         enemy.movement.StopVelocityChangeOverTime();
         enemy.stats.posture.ControlRecoveryTimer(TimerControl.Start);
+        enemy.animator.ResetTrigger("gotHit");
+        enemy.animator.ResetTrigger("wasParried");
     }
 
     public override void LogicUpdate()

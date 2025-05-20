@@ -82,13 +82,13 @@ public class EnemyDetection : Detection
                 currentTarget = detectionRangeColliders.Where(collider => collider != null).Select(collider => collider.gameObject.GetComponent<Entity>()).OrderBy(collider => Vector3.SqrMagnitude(collider.transform.position - entity.transform.position)).FirstOrDefault();
                 currentTarget?.entityCombat.targetedBy.Add(enemy);
 
-                return currentTarget != null;
+                return currentTarget != null && !currentTarget.isDead;
             }
             else
             {
                 if (detectionRangeColliders.Contains(currentTarget.entityCollider))
                 {
-                    return true;
+                    return !currentTarget.isDead;
                 }
                 else
                 {

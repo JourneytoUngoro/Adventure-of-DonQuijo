@@ -13,6 +13,7 @@ public class EnemyDeadState : EnemyState
         base.AnimationFinishTrigger(index);
 
         enemy.gameObject.SetActive(false);
+        Test_EndingPanel.instance.ShowWinPanel();
     }
 
     public override void Enter()

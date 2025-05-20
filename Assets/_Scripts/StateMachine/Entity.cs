@@ -34,7 +34,7 @@ public class Entity : MonoBehaviour
     #region Other Variables
     [field: SerializeField] public bool printStateChange { get; private set; }
     [field: SerializeField] public int entityLevel { get; protected set; }
-    public bool isDead { get; protected set; }
+    public bool isDead { get; set; }
     public bool[] status { get; protected set; }
     public float currentEntityStature { get; protected set; }
 

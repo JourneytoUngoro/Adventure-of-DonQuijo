@@ -72,6 +72,12 @@ public class EnemyCombat : Combat
     {
         currentParryStack = Mathf.Clamp(currentParryStack + 1, 0, enemy.enemyData.maxParryableCount);
         Manager.Instance.soundManager.PlaySoundFXClip("lightAttack1SFX", enemy.transform);
+
+        if (enemy.enemyStateMachine.currentState.Equals(enemy.knockbackState))
+        {
+            enemy.animator.SetTrigger("gotHit");
+            enemy.animator.SetInteger("typeIndex", UtilityFunctions.RandomInteger(3));
+        }
     }
 
     public override void GetKnockback(KnockbackComponent knockbackComponent, OverlapCollider[] overlapColliders)

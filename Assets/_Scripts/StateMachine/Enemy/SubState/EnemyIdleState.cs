@@ -22,7 +22,7 @@ public class EnemyIdleState : EnemyState
 
         if (!onStateExit)
         {
-            if (isTargetInDetectionRange)
+            if (isTargetInDetectionRange && !enemy.detection.currentTarget.isDead)
             {
                 stateMachine.ChangeState(enemy.targetInDetectionRangeState);
             }
