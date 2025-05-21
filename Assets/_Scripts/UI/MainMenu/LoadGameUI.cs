@@ -162,14 +162,16 @@ public class LoadGameUI : MonoBehaviour
     {
         ImageUI fadeUI = Manager.Instance.uiManager.GetUI(UIType.FadeImage).GetComponent<ImageUI>();
         Debug.Assert(fadeUI != null, "fade image is null! ");
-        fadeUI.ShowUI();
+        fadeUI.ShowAndHideUI(3f);
 
-        yield return new WaitForSeconds(fadeUI.fadeTime);
+        yield return new WaitForSeconds(2.5f);
 
         // TODO : Save-Load 시 저장된 씬 불러와야 한다 
-        if (showCutScene /*isFirstPlay*/)
+        if (isFirstPlay)
         {
-            gameObject.GetComponent<CutsceneController>().PlayCutScene();
+            // TODO : cutscene01 재생으로 바꿔야 한다
+            SceneManager.LoadScene("SampleScene");
+            Manager.Instance.soundManager.PlayBGM("battleBGM");
         }
         else
         {
