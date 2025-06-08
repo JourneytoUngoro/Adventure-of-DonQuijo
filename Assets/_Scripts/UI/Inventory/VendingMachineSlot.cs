@@ -2,18 +2,71 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class VendingMachineSlot : MonoBehaviour
+public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
+    public int slotId;
+
     public int itemId;
     public TextMeshProUGUI itemName;
-    public Button getButton;
+    public Image itemImage;
+    [HideInInspector] public Item item;
 
-    public void SetItemData(int id, string name)
+    private Image backgroundImage;
+    private Sprite originalSprite;
+    public  Sprite chosenlSprite;
+
+    private PanelScaler scaler;
+    private VendingMachinePopupUI vmUI;
+    private PopupUI vmPopup;
+
+    private void Start()
     {
-        itemId = id;
-        itemName.text = name;
+        scaler = GetComponent<PanelScaler>();
+        vmUI = GetComponentInParent<VendingMachinePopupUI>();
+        vmPopup = vmUI.GetComponent<PopupUI>();
+
+        backgroundImage = GetComponentInParent<Image>();
+        originalSprite = backgroundImage.sprite;
+
+        Debug.Assert(vmUI != null, "VendingMachinePopupUI is null!");
     }
 
+
+    public void SetItemData(Item item)
+    {
+        this.item = item;
+        itemId = item.id;
+        itemName.text = item.details.label;
+        itemImage.sprite = item.details.icon;
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        if (!vmPopup.isOpened ) return;
+
+        vmUI.SetSelectedSlot(this);
+        ChangeSelectedState(true);
+    }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        ChangeSelectedState(false);
+    }
+
+    public void ChangeSelectedState(bool chosen)
+    {
+        if (chosen)
+        {
+            scaler.OnSelectedState();
+            backgroundImage.sprite = chosenlSprite;
+        }
+        else
+        {
+            scaler.OnUnSelectedState();
+            backgroundImage.sprite = originalSprite;
+        }
+    }
 }

@@ -17,13 +17,19 @@ public class PlayerInputHandler : MonoBehaviour
     public bool blockParryInputPressed { get; private set; }
     public bool blockParryInputHolding { get; private set; }
     public bool interactInputPressed { get; private set; }
+    public bool returnInputPressed { get; private set; }
     public int normInputX { get; private set; }
     public int normInputY { get; private set; }
     public bool itemInputPressed { get; private set; }
 
+    public bool confirmInputPressed { get; private set; }
+    public bool cancelInputPressed { get; private set; }
+    public bool toggleMenuPressed { get; private set; }
+
     private Timer jumpInputBufferTimer; // This is a timer to keep player's jump input for better control. For example, if it holds jump input for 0.1s and the player character hits the ground in 0.1s, the character will automatically jump right after hitting the ground even when the player does not press another jump input.
     private Timer lockMovementTimer;
     private bool movementLocked;
+    private bool disableCharacterControl;
     
     private void Awake()
     {
@@ -48,7 +54,12 @@ public class PlayerInputHandler : MonoBehaviour
         strongAttackInputPressed = controls.CharacterControl.StrongAttack.WasPressedThisFrame();
         blockParryInputPressed = controls.CharacterControl.Block.WasPressedThisFrame();
         interactInputPressed = controls.CharacterControl.InteractSelect.WasPressedThisFrame();
+        returnInputPressed = controls.CharacterControl.Return.WasPressedThisFrame();
         itemInputPressed = controls.CharacterControl.UseItem.WasPressedThisFrame();
+
+        confirmInputPressed = controls.UIControl.Confirm.WasPressedThisFrame();
+        cancelInputPressed = controls.UIControl.Cancel.WasPressedThisFrame();
+        toggleMenuPressed = controls.UIControl.ToggleMenu.WasPressedThisFrame();
     }
 
     public void OnMoveInput(InputAction.CallbackContext context)
@@ -60,6 +71,13 @@ public class PlayerInputHandler : MonoBehaviour
             normInputX = Mathf.RoundToInt(movementInput.x);
             normInputY = Mathf.RoundToInt(movementInput.y);
         }
+
+        // PlayerInput의 Behaviour이 'Invoke Unity Events'라서 별도 처리
+        if (disableCharacterControl)
+        {
+            normInputX = 0; normInputY = 0;
+        }
+
     }
 
     public void OnJumpInput(InputAction.CallbackContext context)
@@ -88,15 +106,12 @@ public class PlayerInputHandler : MonoBehaviour
         {
             blockParryInputHolding = false;
         }
-    }
 
-    public void OnPauseMenu(InputAction.CallbackContext context)
-    {
-        if (context.started)
+        // PlayerInput의 Behaviour이 'Invoke Unity Events'라서 별도 처리
+        if (disableCharacterControl)
         {
-            Manager.Instance.uiManager.EscPressed();
+            blockParryInputHolding = false;
         }
-
     }
 
     public void OnUseItem(InputAction.CallbackContext context)
@@ -108,19 +123,37 @@ public class PlayerInputHandler : MonoBehaviour
             string keyName = control.name;
             int itemIndex = -1;
 
-            #region figure item id
-            switch (keyName)
-            {
-                case "1": itemIndex = 1; break; case "2": itemIndex = 2; break;  case "3": itemIndex = 3; break;
-            }
-            #endregion
+            // PlayerInput의 Behaviour이 'Invoke Unity Events'라서 별도 처리
 
-            if (itemIndex > 0)
+            if (!disableCharacterControl && keyName != null)
             {
-                Manager.Instance.itemManager.UseItem(itemIndex);
+                #region figure item id
+                switch (keyName)
+                {
+                    case "1": itemIndex = 1; break;
+                    case "2": itemIndex = 2; break;
+                    case "3": itemIndex = 3; break;
+                }
+                #endregion
             }
+
+            if (itemIndex == -1) return;
+
+            Manager.Instance.itemManager.UseItem(itemIndex);
         }
     }
+
+/*    public void OnToggleMenu(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            toggleMenuPressed = true;
+        }
+        if (context.canceled)
+        {
+            toggleMenuPressed = false;
+        }
+    }*/
 
 
     public void LockMoveInput(Vector2 direction, float duration)
@@ -151,4 +184,18 @@ public class PlayerInputHandler : MonoBehaviour
 
 
     public void InactiveJumpInput() => jumpInputPressed = false;
+
+    public void EnableCharacterControl()
+    {
+        controls.CharacterControl.Enable();
+        disableCharacterControl = false;
+    }
+
+    public void DisableCharacterControl()
+    {
+        controls.CharacterControl.Disable();
+        disableCharacterControl = true;
+    }
+    public bool IsCharacterControlEnabled() => controls.CharacterControl.enabled;
+
 }

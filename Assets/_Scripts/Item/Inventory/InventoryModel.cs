@@ -25,6 +25,8 @@ public class InventoryModel
     {
         this.capacity = capacity;
         this.Items = new ObservableItemArray(capacity);
+        this.coins = 1000;
+
 
         // starting items 등록 
 /*        foreach (var details in itemDetails)

@@ -116,7 +116,7 @@ public class LoadGameUI : MonoBehaviour
         nowProfileId = saveSlotUI[index].profileId;
 
         guidePopup.ShowUI();
-        guidePopup.SetDynamicPopupEvent(LoadGameWithSlot, guidePopup.HideUI);
+        guidePopup.SetDynamicPopupEvent(LoadGameWithSlot, () => guidePopup.HideUI());
     }
 
     public void OnClickEditButton()
@@ -139,7 +139,7 @@ public class LoadGameUI : MonoBehaviour
                             "", $"슬롯 {index + 1}에 저장된 데이터를 삭제하겠습니까?", "확인", ""));
         guidePopup.ShowUI();
 
-        guidePopup.SetDynamicPopupEvent(DeleteGameWithSlot, guidePopup.HideUI);
+        guidePopup.SetDynamicPopupEvent(DeleteGameWithSlot, () => guidePopup.HideUI());
     }
 
 

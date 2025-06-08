@@ -1,7 +1,5 @@
-using JetBrains.Annotations;
-using System.Collections.Generic;
+using System;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -37,7 +35,6 @@ public class PopupUI : UIBase
     public override void HideUI()
     {
         base.HideUI();
-
         Manager.Instance.uiManager.activatedPopups.TryPop(out _);
     }
 
@@ -123,6 +120,11 @@ public class PopupUI : UIBase
     {
         if (type == UIType.DynamicPopup)
             Manager.Instance.uiManager.popupPool.Return(this);
+    }
+
+    public void SetPopupInfo(string info)
+    {
+        infoTMP.text = info;
     }
 
 }

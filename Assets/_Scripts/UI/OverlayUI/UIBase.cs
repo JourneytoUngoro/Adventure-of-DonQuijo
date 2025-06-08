@@ -1,7 +1,6 @@
 using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+using System;
 using UnityEngine;
 
 public enum UIType
@@ -26,6 +25,9 @@ public abstract class UIBase : MonoBehaviour
 
     public float fadeTime;
     public float delayTime;
+
+    public bool isOpened { get; set; }
+
     [field: SerializeField] public bool BlockClick { get; private set; }
 
     protected CanvasGroup group;
@@ -37,6 +39,9 @@ public abstract class UIBase : MonoBehaviour
     private Coroutine showCoroutine = null;
     private Coroutine showAndHideCoroutine = null;
 
+    private Action onShow;
+    private Action onHide;
+   
     private void Awake()
     {
         group = GetComponent<CanvasGroup>();
@@ -52,17 +57,21 @@ public abstract class UIBase : MonoBehaviour
 
     public virtual void ShowUI()
     {
+        this.onShow?.Invoke();
+
         if (showCoroutine != null) { Manager.Instance.uiManager.StopCoroutine(showCoroutine); }
         
         rectTransform.SetAsLastSibling();
         showCoroutine = Manager.Instance.uiManager.StartCoroutine(ShowUICoroutine(delayTime));
+
+        isOpened = true;
     }
 
     public IEnumerator ShowUICoroutine(float delayTime)
     {
         yield return new WaitForSeconds(delayTime);
 
-        group.blocksRaycasts |= true;
+        group.blocksRaycasts = true;
         group.DOFade(1, fadeTime).SetUpdate(true);
     }
 
@@ -76,6 +85,7 @@ public abstract class UIBase : MonoBehaviour
 
     public IEnumerator ShowAndHideCoroutine(float waitTime)
     {
+        isOpened = true;
         group.blocksRaycasts = true;
         group.DOFade(1, fadeTime);
 
@@ -85,17 +95,21 @@ public abstract class UIBase : MonoBehaviour
 
         ReturnToPool();
         group.blocksRaycasts = false;
+        isOpened = false;
     }
 
     public virtual void HideUI()
     {
-        Debug.Assert(rectTransform != null, "rectTransform null!");
+        // Debug.Assert(rectTransform != null, "rectTransform null!");
         rectTransform.SetAsFirstSibling();
 
         group.DOFade(0, fadeTime).SetUpdate(true);
 
         ReturnToPool();
         group.blocksRaycasts = false;
+        isOpened = false;
+
+        this.onHide?.Invoke();
     }
 
     public virtual void Move(Vector2 direction, bool ease)
@@ -108,5 +122,7 @@ public abstract class UIBase : MonoBehaviour
 
     public RectTransform GetRectTransform() { return rectTransform; }
 
+    public void SetOnShow(Action onShow) => this.onShow = onShow;
+    public void SetOnHide(Action onHide) => this.onHide = onHide;
 
 }

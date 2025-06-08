@@ -17,6 +17,7 @@ public class ItemManager : MonoBehaviour
         {
             SetupInGameScene();
         }
+        SetupInGameScene();
     }
 
     public void SetupInGameScene()

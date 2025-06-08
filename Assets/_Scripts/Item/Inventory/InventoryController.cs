@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Rendering.LookDev;
 
 public class InventoryController
 {
@@ -14,10 +16,6 @@ public class InventoryController
 
     InventoryController(InventoryView view, in InventoryModel model, int capacity)
     {
-        Debug.Assert(view != null, "View is null");
-        Debug.Assert(model != null, "Model is null");
-        Debug.Assert(capacity > 0, "Capacity is less than 1");
-
         this.view = view;
         this.model = model;
         this.capacity = capacity;
@@ -74,22 +72,21 @@ public class InventoryController
     public bool AcquireItem(Item item, int quantity = 1)
     {
         int indexIfExist = model.Contains(item);
-
         if (indexIfExist != -1)
         {
             // 현재 인벤토리에 포함된 아이템
             if (model.PlusQuantity(indexIfExist, item, quantity))
             {
                 // 추가 성공
-                Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(
-                    $"Success Acquire Item {item.details.label}, now useQuantity {model.Quantity(item)} ")).ShowAndHideUI(3f);
+                string text = $"인벤토리에 추가됐습니다. \n현재 수량 : {model.Quantity(item)} 개";
+                SetInventoryTextInfo(text);
                 return true;
             }
             else
             {
                 // 수량 초과로 추가 실패
-                Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(
-                    $"Fail Acquire Item {item.details.label}, now useQuantity {model.Quantity(item)} > max useQuantity {item.details.maxStack} ")).ShowAndHideUI(3f);
+                string text = $"최대 보유 수량에 도달했습니다.";
+                SetInventoryTextInfo(text);
                 return false;
             }
         }
@@ -99,21 +96,19 @@ public class InventoryController
             if (model.Add(item))
             {
                 // 인벤토리 추가 성공
-                Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(
-                    $"Success Acquire Item {item.details.label}, now index {model.Contains(item)}, now useQuantity {model.Quantity(item)} ")).ShowAndHideUI(3f);
+                string text = $"인벤토리에 추가됐습니다. \n현재 수량 : {model.Quantity(item)} 개";
+                SetInventoryTextInfo(text);
                 return true;
             }
             else
             {
                 // 인벤토리 용량 초과로 추가 실패
-                Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(
-                    $"Fail Acquire Item {item.details.label}, now count {model.Items.Count}")).ShowAndHideUI(3f);
+                string text = $"인벤토리가 꽉 찼습니다.";
+                SetInventoryTextInfo(text);
                 return false;
 
             }
-
         }
-
     }
 
     public void AddCoins(int amount)
@@ -122,7 +117,7 @@ public class InventoryController
         RefreshCoins();
     }
 
-    public void MinusCoints(int amount)
+    public void MinusCoins(int amount)
     {
         model.MinusCoins(amount);
         RefreshCoins();
@@ -143,8 +138,8 @@ public class InventoryController
         else
         {
             // coins 이 부족하다
-            Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(
-                $"Item Price {item.details.price} > Coins {model.coins}")).ShowAndHideUI(3f);
+            string text = $"코인이 부족합니다.";
+            SetInventoryTextInfo(text);
         }
 
         return false;
@@ -163,23 +158,23 @@ public class InventoryController
             if (!IsUnderMaxOverlap(item))
             {
                 // 최대 가용 횟수 초과
-                Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(
-                        $"Fail Use Item {item.details.label}")).ShowAndHideUI(3f);
+                string text = $"Fail Use Item {item.details.label}";
+                SetInventoryTextInfo(text);
                 return false;
             }
 
             // 사용 가능 여부
             if (model.MinusQuantity(indexIfExist, item, useQuantity))
             {
-                Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(
-                        $"Success Use Item {item.details.label}, current quntity {model.Quantity(item)}")).ShowAndHideUI(3f);
+                string text = $"Success Use Item {item.details.label}, current quntity {model.Quantity(item)}";
+                SetInventoryTextInfo(text);
                 return true;
             }
         } 
         else
         {
-            Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(
-                    $"Fail Use Item {item.details.label}, current quntity {model.Quantity(item)}")).ShowAndHideUI(3f);
+            string text = $"Fail Use Item {item.details.label}, current quntity {model.Quantity(item)}";
+            SetInventoryTextInfo(text);
         }
         return false;
     }
@@ -221,6 +216,14 @@ public class InventoryController
     public void SwapItems(int index1, int index2)
     {
         model.Swap(index1-1, index2-1);
+    }
+
+    private void SetInventoryTextInfo(string info)
+    {
+        TextInfoUI textInfo = Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(info));
+
+        textInfo.SetAnchoredPositioin(0, -400);
+        textInfo.ShowAndHideUI(3f);
     }
 
 

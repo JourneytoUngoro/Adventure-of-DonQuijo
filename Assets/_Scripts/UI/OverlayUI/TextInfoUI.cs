@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 /// <summary>
 ///  UIManager.Instance.Get(UIType.type)...;

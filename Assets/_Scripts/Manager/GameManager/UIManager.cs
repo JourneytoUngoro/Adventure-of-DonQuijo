@@ -13,6 +13,9 @@ public class UIManager : MonoBehaviour
 
     public Stack<PopupUI> activatedPopups = new Stack<PopupUI>();
 
+    private bool toggleMenuPressed;
+    private bool popupOpened;
+
     #region UI Object Pool
     public UIObjectPool<PopupUI> popupPool;
     public UIObjectPool<TextInfoUI> textInfoPool;
@@ -29,6 +32,9 @@ public class UIManager : MonoBehaviour
     {
         uiCanvas = GameObject.Find("Overlay Canvas")?.transform;
         pool = GameObject.Find("Pooled Objects")?.transform;
+
+        toggleMenuPressed = false;
+        popupOpened = false;
         
         // TODO : SampleScene 삭제 시 제거
         InCaseSampleScene();
@@ -37,6 +43,28 @@ public class UIManager : MonoBehaviour
         CreatePool();
     }
 
+    private void Update()
+    {
+        toggleMenuPressed = Manager.Instance.inputHandler.toggleMenuPressed;
+
+        if (toggleMenuPressed)
+        {
+            Debug.Log("Esc Key pressed");
+            EscPressed();
+        }
+
+        IsOpenedPopup();
+
+        if (popupOpened && Manager.Instance.inputHandler.IsCharacterControlEnabled())
+        {
+            Manager.Instance.inputHandler.DisableCharacterControl();
+        }
+        else if (!popupOpened && !Manager.Instance.inputHandler.IsCharacterControlEnabled())
+        {
+            Manager.Instance.inputHandler.EnableCharacterControl();
+        }
+        // Debug.Log("CharacterControl is enabled : " + Manager.Instance.inputHandler.IsCharacterControlEnabled());
+    }
 
     private void RegisterUIObjects()
     {
@@ -109,15 +137,29 @@ public class UIManager : MonoBehaviour
 
     public void EscPressed()
     {
-        if (activatedPopups.Count > 0)
+        if (popupOpened)
         {
             // Debug.Log($"activated popup : {activatedPopups.Count}, {activatedPopups.Peek().name}");
             activatedPopups.Peek().HideUI();
         }
         else
         {
-            startingUIDictionary[UIType.settingPopup].ShowUI();
+            // startingUIDictionary[UIType.settingPopup].ShowUI();
         }
+    }
+
+    public void IsOpenedPopup()
+    {
+        if (activatedPopups.Count > 0)
+        {
+            popupOpened = true;
+        }
+        else 
+        {
+            popupOpened = false;
+        }
+        // Debug.Log(Manager.Instance.uiManager.activatedPopups.Count + " popups activated");
+
     }
 
     #region Test 이후 삭제

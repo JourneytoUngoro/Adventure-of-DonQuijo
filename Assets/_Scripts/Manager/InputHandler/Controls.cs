@@ -82,15 +82,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Pause/Menu"",
-                    ""type"": ""Button"",
-                    ""id"": ""2891114b-29ad-460f-9f7c-10ab8d5ef33d"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Equipment"",
                     ""type"": ""Button"",
                     ""id"": ""7c0a1817-012e-4aa7-969c-5f84f0927723"",
@@ -249,17 +240,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c8051434-0b70-4c6d-9715-72713d7d6346"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pause/Menu"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""f4a1b799-4824-4468-8124-951348907bef"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
@@ -336,6 +316,74 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UIControl"",
+            ""id"": ""2f57c9bb-35f0-4bc1-95ae-6076bfa0224f"",
+            ""actions"": [
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""46a5626e-e01b-4587-bf09-feb862fb19e9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""a49aec27-0f60-4506-a1d9-3b8e8d49907e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""6f6b3a1a-212e-460d-9e9b-d0fb65aceb59"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""81107421-de17-488c-b310-b20aed5366d1"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""805abb47-fc11-4634-8b86-8edf9a82f38d"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c3bdbacf-a76a-48ce-9d8c-908002708c25"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -365,17 +413,22 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_CharacterControl_Attack = m_CharacterControl.FindAction("Attack", throwIfNotFound: true);
         m_CharacterControl_InteractSelect = m_CharacterControl.FindAction("Interact/Select", throwIfNotFound: true);
         m_CharacterControl_Return = m_CharacterControl.FindAction("Return", throwIfNotFound: true);
-        m_CharacterControl_PauseMenu = m_CharacterControl.FindAction("Pause/Menu", throwIfNotFound: true);
         m_CharacterControl_Equipment = m_CharacterControl.FindAction("Equipment", throwIfNotFound: true);
         m_CharacterControl_Map = m_CharacterControl.FindAction("Map", throwIfNotFound: true);
         m_CharacterControl_UseItem = m_CharacterControl.FindAction("UseItem", throwIfNotFound: true);
         m_CharacterControl_Dodge = m_CharacterControl.FindAction("Dodge", throwIfNotFound: true);
         m_CharacterControl_StrongAttack = m_CharacterControl.FindAction("StrongAttack", throwIfNotFound: true);
+        // UIControl
+        m_UIControl = asset.FindActionMap("UIControl", throwIfNotFound: true);
+        m_UIControl_Confirm = m_UIControl.FindAction("Confirm", throwIfNotFound: true);
+        m_UIControl_Cancel = m_UIControl.FindAction("Cancel", throwIfNotFound: true);
+        m_UIControl_ToggleMenu = m_UIControl.FindAction("ToggleMenu", throwIfNotFound: true);
     }
 
     ~@Controls()
     {
         UnityEngine.Debug.Assert(!m_CharacterControl.enabled, "This will cause a leak and performance issues, Controls.CharacterControl.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_UIControl.enabled, "This will cause a leak and performance issues, Controls.UIControl.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -443,7 +496,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControl_Attack;
     private readonly InputAction m_CharacterControl_InteractSelect;
     private readonly InputAction m_CharacterControl_Return;
-    private readonly InputAction m_CharacterControl_PauseMenu;
     private readonly InputAction m_CharacterControl_Equipment;
     private readonly InputAction m_CharacterControl_Map;
     private readonly InputAction m_CharacterControl_UseItem;
@@ -459,7 +511,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_CharacterControl_Attack;
         public InputAction @InteractSelect => m_Wrapper.m_CharacterControl_InteractSelect;
         public InputAction @Return => m_Wrapper.m_CharacterControl_Return;
-        public InputAction @PauseMenu => m_Wrapper.m_CharacterControl_PauseMenu;
         public InputAction @Equipment => m_Wrapper.m_CharacterControl_Equipment;
         public InputAction @Map => m_Wrapper.m_CharacterControl_Map;
         public InputAction @UseItem => m_Wrapper.m_CharacterControl_UseItem;
@@ -492,9 +543,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Return.started += instance.OnReturn;
             @Return.performed += instance.OnReturn;
             @Return.canceled += instance.OnReturn;
-            @PauseMenu.started += instance.OnPauseMenu;
-            @PauseMenu.performed += instance.OnPauseMenu;
-            @PauseMenu.canceled += instance.OnPauseMenu;
             @Equipment.started += instance.OnEquipment;
             @Equipment.performed += instance.OnEquipment;
             @Equipment.canceled += instance.OnEquipment;
@@ -532,9 +580,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Return.started -= instance.OnReturn;
             @Return.performed -= instance.OnReturn;
             @Return.canceled -= instance.OnReturn;
-            @PauseMenu.started -= instance.OnPauseMenu;
-            @PauseMenu.performed -= instance.OnPauseMenu;
-            @PauseMenu.canceled -= instance.OnPauseMenu;
             @Equipment.started -= instance.OnEquipment;
             @Equipment.performed -= instance.OnEquipment;
             @Equipment.canceled -= instance.OnEquipment;
@@ -567,6 +612,68 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public CharacterControlActions @CharacterControl => new CharacterControlActions(this);
+
+    // UIControl
+    private readonly InputActionMap m_UIControl;
+    private List<IUIControlActions> m_UIControlActionsCallbackInterfaces = new List<IUIControlActions>();
+    private readonly InputAction m_UIControl_Confirm;
+    private readonly InputAction m_UIControl_Cancel;
+    private readonly InputAction m_UIControl_ToggleMenu;
+    public struct UIControlActions
+    {
+        private @Controls m_Wrapper;
+        public UIControlActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Confirm => m_Wrapper.m_UIControl_Confirm;
+        public InputAction @Cancel => m_Wrapper.m_UIControl_Cancel;
+        public InputAction @ToggleMenu => m_Wrapper.m_UIControl_ToggleMenu;
+        public InputActionMap Get() { return m_Wrapper.m_UIControl; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIControlActions set) { return set.Get(); }
+        public void AddCallbacks(IUIControlActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIControlActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIControlActionsCallbackInterfaces.Add(instance);
+            @Confirm.started += instance.OnConfirm;
+            @Confirm.performed += instance.OnConfirm;
+            @Confirm.canceled += instance.OnConfirm;
+            @Cancel.started += instance.OnCancel;
+            @Cancel.performed += instance.OnCancel;
+            @Cancel.canceled += instance.OnCancel;
+            @ToggleMenu.started += instance.OnToggleMenu;
+            @ToggleMenu.performed += instance.OnToggleMenu;
+            @ToggleMenu.canceled += instance.OnToggleMenu;
+        }
+
+        private void UnregisterCallbacks(IUIControlActions instance)
+        {
+            @Confirm.started -= instance.OnConfirm;
+            @Confirm.performed -= instance.OnConfirm;
+            @Confirm.canceled -= instance.OnConfirm;
+            @Cancel.started -= instance.OnCancel;
+            @Cancel.performed -= instance.OnCancel;
+            @Cancel.canceled -= instance.OnCancel;
+            @ToggleMenu.started -= instance.OnToggleMenu;
+            @ToggleMenu.performed -= instance.OnToggleMenu;
+            @ToggleMenu.canceled -= instance.OnToggleMenu;
+        }
+
+        public void RemoveCallbacks(IUIControlActions instance)
+        {
+            if (m_Wrapper.m_UIControlActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIControlActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIControlActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIControlActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIControlActions @UIControl => new UIControlActions(this);
     private int m_PCSchemeIndex = -1;
     public InputControlScheme PCScheme
     {
@@ -584,11 +691,16 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnInteractSelect(InputAction.CallbackContext context);
         void OnReturn(InputAction.CallbackContext context);
-        void OnPauseMenu(InputAction.CallbackContext context);
         void OnEquipment(InputAction.CallbackContext context);
         void OnMap(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
         void OnStrongAttack(InputAction.CallbackContext context);
+    }
+    public interface IUIControlActions
+    {
+        void OnConfirm(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
+        void OnToggleMenu(InputAction.CallbackContext context);
     }
 }
