@@ -17,6 +17,7 @@ public class PlayerStunnedState : PlayerState
         base.Enter();
 
         canTransit = false;
+        player.movement.SetVelocityZero();
         stunRecoveryTimer.StartSingleUseTimer();
         player.knockbackState.TransitedToStunnedState();
     }

@@ -24,7 +24,7 @@ public class PlayerKnockbackState : PlayerState
         base.Enter();
 
         canTransit = false;
-
+        
         player.animator.SetInteger("typeIndex", UtilityFunctions.RandomInteger(3));
 
         if (isGrounded)
@@ -100,12 +100,11 @@ public class PlayerKnockbackState : PlayerState
 
                 if (!canTransit)
                 {
-                    float velocityXAbsolute = Mathf.Abs(knockbackVelocityBeforeCollision.x);
-                    float velocityZAbsolute = Mathf.Abs(knockbackVelocityBeforeCollision.z);
                     float velocityAngle = Mathf.Atan2(Mathf.Abs(knockbackVelocityBeforeCollision.z), Mathf.Abs(knockbackVelocityBeforeCollision.x)) * Mathf.Rad2Deg;
-                    
+
                     if (isGrounded)
                     {
+                        Debug.Log("ChangeVelocity");
                         player.movement.SetVelocityX(knockbackVelocityBeforeCollision.x * UtilityFunctions.DeviationFloat(player.playerData.decelerationRatio, 0.1f));
                         player.movement.SetVelocityY(knockbackVelocityBeforeCollision.y * UtilityFunctions.DeviationFloat(player.playerData.decelerationRatio, 0.1f));
                         player.movement.SetVelocityZ(knockbackVelocityBeforeCollision.z * -UtilityFunctions.DeviationFloat(player.playerData.decelerationRatio, 0.1f));
@@ -113,22 +112,57 @@ public class PlayerKnockbackState : PlayerState
                     // TODO: Currently does not support Y-Axis Knockback
                     else if (player.movement.onContact)
                     {
+                        // Below code prevents entity from bouncing off from the wall.
                         player.movement.SetVelocityY(knockbackVelocityBeforeCollision.y);
 
                         if (knockbackVelocityBeforeCollision.x > 0 && player.detection.detectingHorizontalObstacle.first)
                         {
-                            /*if (knockbackVelocityBeforeCollision.magnitude < player.playerData.knockbackReboundThresholdSpeed)
+                            if (knockbackVelocityBeforeCollision.magnitude < player.playerData.knockbackReboundThresholdSpeed)
                             {
-                                if (velocityXAbsolute > velocityZAbsolute)
+                                if (knockbackVelocityBeforeCollision.z > 0)
                                 {
-                                    player.movement.SetVelocityX(knockbackVelocityBeforeCollision.x * player.playerData.decelerationRatio);
-                                    player.movement.SetVelocityZ(knockbackVelocityBeforeCollision.z * -player.playerData.decelerationRatio);
+                                    player.movement.SetVelocityX(knockbackVelocityBeforeCollision.x * -UtilityFunctions.DeviationFloat(player.playerData.decelerationRatio, 0.1f));
+                                    player.movement.SetVelocityZ(knockbackVelocityBeforeCollision.z * UtilityFunctions.DeviationFloat(player.playerData.decelerationRatio, 0.1f));
                                 }
                                 else
                                 {
-
+                                    player.movement.SetVelocityX(knockbackVelocityBeforeCollision.x * -UtilityFunctions.DeviationFloat(player.playerData.decelerationRatio, 0.1f));
+                                    player.movement.SetVelocityZ(knockbackVelocityBeforeCollision.z);
                                 }
-                            }*/
+                            }
+                            else
+                            {
+                                if (knockbackVelocityBeforeCollision.z > 0)
+                                {
+                                    if (velocityAngle < player.playerData.wallKnockbackReboundThresholdAngle)
+                                    {
+                                        float reboundRadian = UtilityFunctions.DeviationFloat(player.playerData.wallKnockbackReboundThresholdAngle, 10.0f) * Mathf.Deg2Rad;
+                                        Vector2 reboundVector = new Vector2(Mathf.Abs(Mathf.Cos(reboundRadian)), Mathf.Abs(Mathf.Sin(reboundRadian)));
+                                        player.movement.SetVelocityX(knockbackVelocityBeforeCollision.magnitude * reboundVector.x * UtilityFunctions.DeviationFloat(player.playerData.decelerationRatio, 0.1f));
+                                        player.movement.SetVelocityZ(knockbackVelocityBeforeCollision.magnitude * reboundVector.y * UtilityFunctions.DeviationFloat(player.playerData.decelerationRatio, 0.1f));
+                                    }
+                                    else
+                                    {
+                                        player.movement.SetVelocityX(knockbackVelocityBeforeCollision.x * -player.playerData.decelerationRatio);
+                                        player.movement.SetVelocityZ(knockbackVelocityBeforeCollision.z * (1.0f - player.playerData.decelerationRatio));
+                                    }
+                                }
+                                else
+                                {
+                                    if (velocityAngle < player.playerData.wallKnockbackReboundThresholdAngle)
+                                    {
+                                        float reboundRadian = UtilityFunctions.DeviationFloat(player.playerData.wallKnockbackReboundThresholdAngle, 10.0f) * Mathf.Deg2Rad;
+                                        Vector2 reboundVector = new Vector2(Mathf.Abs(Mathf.Cos(reboundRadian)), Mathf.Abs(Mathf.Sin(reboundRadian)));
+                                        player.movement.SetVelocityX(knockbackVelocityBeforeCollision.magnitude * reboundVector.x * UtilityFunctions.DeviationFloat(player.playerData.decelerationRatio, 0.1f));
+                                        player.movement.SetVelocityZ(knockbackVelocityBeforeCollision.magnitude * reboundVector.y * UtilityFunctions.DeviationFloat(player.playerData.decelerationRatio, 0.1f));
+                                    }
+                                    else
+                                    {
+                                        player.movement.SetVelocityX(knockbackVelocityBeforeCollision.x * -UtilityFunctions.DeviationFloat(player.playerData.decelerationRatio, 0.1f));
+                                        player.movement.SetVelocityZ(knockbackVelocityBeforeCollision.z);
+                                    }
+                                }
+                            }
                         }
                         else if (knockbackVelocityBeforeCollision.x < 0 && player.detection.detectingHorizontalObstacle.second)
                         {

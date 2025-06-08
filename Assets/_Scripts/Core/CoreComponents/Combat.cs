@@ -404,6 +404,8 @@ public abstract class Combat : CoreComponent
                 break;
         }
 
+        entity.entityMovement.StopVelocityChangeOverTime();
+
         if (knockbackComponent.pertainedCombatAbility.canBeParried)
         {
             if (isParrying)
@@ -458,8 +460,15 @@ public abstract class Combat : CoreComponent
                         entity.SetStatusValues(CurrentStatus.Knockback);
                         entity.animator.SetBool("airborne", knockbackComponent.airborne || !entity.entityDetection.isGrounded);
 
-                        entity.entityMovement.SetVelocityChangeOverTime(knockbackComponent.knockbackDirection.normalized * directionMultiplier, knockbackComponent.knockbackSpeed, knockbackComponent.knockbackTime, knockbackComponent.easeFunction, true, false);
-                        entity.entityMovement.SetVelocityZ(knockbackComponent.orthogonalVelocity);
+                        if (knockbackComponent.airborne)
+                        {
+                            entity.entityMovement.SetVelocity(knockbackComponent.knockbackDirection.normalized * directionMultiplier * knockbackComponent.knockbackSpeed);
+                            entity.entityMovement.SetVelocityZ(knockbackComponent.orthogonalVelocity);
+                        }
+                        else
+                        {
+                            entity.entityMovement.SetVelocityChangeOverTime(knockbackComponent.knockbackDirection.normalized * directionMultiplier, knockbackComponent.knockbackSpeed, knockbackComponent.knockbackTime, knockbackComponent.easeFunction, true, false);
+                        }
 
                         entity.entityCombat.ChangeToKnockbackState(knockbackComponent.knockbackTime);
                     }
@@ -469,8 +478,15 @@ public abstract class Combat : CoreComponent
                     entity.SetStatusValues(CurrentStatus.Knockback);
                     entity.animator.SetBool("airborne", knockbackComponent.airborne || !entity.entityDetection.isGrounded);
 
-                    entity.entityMovement.SetVelocityChangeOverTime(knockbackComponent.knockbackDirection.normalized * directionMultiplier, knockbackComponent.knockbackSpeed, knockbackComponent.knockbackTime, knockbackComponent.easeFunction, true, false);
-                    entity.entityMovement.SetVelocityZ(knockbackComponent.orthogonalVelocity);
+                    if (knockbackComponent.airborne)
+                    {
+                        entity.entityMovement.SetVelocity(knockbackComponent.knockbackDirection.normalized * directionMultiplier * knockbackComponent.knockbackSpeed);
+                        entity.entityMovement.SetVelocityZ(knockbackComponent.orthogonalVelocity);
+                    }
+                    else
+                    {
+                        entity.entityMovement.SetVelocityChangeOverTime(knockbackComponent.knockbackDirection.normalized * directionMultiplier, knockbackComponent.knockbackSpeed, knockbackComponent.knockbackTime, knockbackComponent.easeFunction, true, false);
+                    }
 
                     entity.entityCombat.ChangeToKnockbackState(knockbackComponent.knockbackTime);
                 }
@@ -490,8 +506,15 @@ public abstract class Combat : CoreComponent
                 entity.SetStatusValues(CurrentStatus.Knockback);
                 entity.animator.SetBool("airborne", knockbackComponent.airborne || !entity.entityDetection.isGrounded);
 
-                entity.entityMovement.SetVelocityChangeOverTime(knockbackComponent.knockbackDirection.normalized * directionMultiplier, knockbackComponent.knockbackSpeed, knockbackComponent.knockbackTime, knockbackComponent.easeFunction, true, false);
-                entity.entityMovement.SetVelocityZ(knockbackComponent.orthogonalVelocity);
+                if (knockbackComponent.airborne)
+                {
+                    entity.entityMovement.SetVelocity(knockbackComponent.knockbackDirection.normalized * directionMultiplier * knockbackComponent.knockbackSpeed);
+                    entity.entityMovement.SetVelocityZ(knockbackComponent.orthogonalVelocity);
+                }
+                else
+                {
+                    entity.entityMovement.SetVelocityChangeOverTime(knockbackComponent.knockbackDirection.normalized * directionMultiplier, knockbackComponent.knockbackSpeed, knockbackComponent.knockbackTime, knockbackComponent.easeFunction, true, false);
+                }
 
                 entity.entityCombat.ChangeToKnockbackState(knockbackComponent.knockbackTime);
             }
@@ -501,14 +524,22 @@ public abstract class Combat : CoreComponent
             entity.SetStatusValues(CurrentStatus.Knockback);
             entity.animator.SetBool("airborne", knockbackComponent.airborne || !entity.entityDetection.isGrounded);
 
-            entity.entityMovement.SetVelocityChangeOverTime(knockbackComponent.knockbackDirection.normalized * directionMultiplier, knockbackComponent.knockbackSpeed, knockbackComponent.knockbackTime, knockbackComponent.easeFunction, true, false);
-            entity.entityMovement.SetVelocityZ(knockbackComponent.orthogonalVelocity);
+            if (knockbackComponent.airborne)
+            {
+                entity.entityMovement.SetVelocity(knockbackComponent.knockbackDirection.normalized * directionMultiplier * knockbackComponent.knockbackSpeed);
+                entity.entityMovement.SetVelocityZ(knockbackComponent.orthogonalVelocity);
+            }
+            else
+            {
+                entity.entityMovement.SetVelocityChangeOverTime(knockbackComponent.knockbackDirection.normalized * directionMultiplier, knockbackComponent.knockbackSpeed, knockbackComponent.knockbackTime, knockbackComponent.easeFunction, true, false);
+            }
 
             entity.entityCombat.ChangeToKnockbackState(knockbackComponent.knockbackTime);
         }
     }
 
     protected abstract void ChangeToKnockbackState(float knockbackTime);
+    // protected abstract void ChangeToKnockbackState(KnockbackComponent knockbackComponent, bool isParried, bool isBlocked);
 
     public virtual bool IsParrying(Entity sourceEntity, OverlapCollider[] overlapColliders)
     {

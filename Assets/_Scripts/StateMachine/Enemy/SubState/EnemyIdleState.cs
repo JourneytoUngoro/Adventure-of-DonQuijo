@@ -13,6 +13,8 @@ public class EnemyIdleState : EnemyState
         base.Enter();
 
         enemy.navMeshAgent.enabled = false;
+        enemy.movement.StopVelocityChangeOverTime();
+        enemy.movement.SetVelocityZero();
         enemy.SetCurrentEntityStature(enemy.enemyData.entityStature);
     }
 

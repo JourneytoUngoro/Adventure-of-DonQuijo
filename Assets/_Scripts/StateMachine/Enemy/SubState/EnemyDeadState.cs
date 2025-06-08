@@ -22,5 +22,7 @@ public class EnemyDeadState : EnemyState
 
         enemy.gameObject.tag = "Invinsible";
         enemy.stateMachineToAnimator.state = this;
+        enemy.movement.StopVelocityChangeOverTime();
+        enemy.movement.SetVelocityZero();
     }
 }
