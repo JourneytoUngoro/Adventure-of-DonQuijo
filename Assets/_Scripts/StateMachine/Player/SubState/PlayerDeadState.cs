@@ -21,7 +21,8 @@ public class PlayerDeadState : PlayerState
         waitTimer.StartSingleUseTimer();
         player.gameObject.tag = "Invinsible";
         playerDeathAction?.Invoke();
-        Debug.Log("player Dead State Entered");
+        player.movement.StopVelocityChangeOverTime();
+        player.movement.SetVelocityZero();
         player.stats.posture.ControlRecoveryTimer(TimerControl.Stop);
     }
 

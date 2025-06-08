@@ -87,9 +87,9 @@ MonoBehaviour:
             m_Curve:
             - serializedVersion: 3
               time: 1
-              value: 10
-              inSlope: 0
-              outSlope: 0
+              value: 100
+              inSlope: -10
+              outSlope: -10
               tangentMode: 34
               weightedMode: 0
               inWeight: 0
@@ -97,8 +97,8 @@ MonoBehaviour:
             - serializedVersion: 3
               time: 10
               value: 10
-              inSlope: 0
-              outSlope: 0
+              inSlope: -10
+              outSlope: -10
               tangentMode: 34
               weightedMode: 0
               inWeight: 0.33333334
@@ -111,7 +111,7 @@ MonoBehaviour:
             m_Curve:
             - serializedVersion: 3
               time: 1
-              value: 10
+              value: 100
               inSlope: 0
               outSlope: 0
               tangentMode: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
               outWeight: 0
             - serializedVersion: 3
               time: 10
-              value: 20
+              value: 110
               inSlope: 0
               outSlope: 0
               tangentMode: 0
@@ -144,13 +144,13 @@ MonoBehaviour:
       data:
         name: KnockbackComponent
         <pertainedCombatAbility>k__BackingField: {fileID: 11400000}
-        <airborne>k__BackingField: 0
+        <airborne>k__BackingField: 1
         <directionBase>k__BackingField: 0
         <knockbackDirection>k__BackingField: {x: 1, y: 0}
         <knockbackSpeed>k__BackingField: 200
         <knockbackTime>k__BackingField: 0.3
         <easeFunction>k__BackingField: 3
-        <orthogonalVelocity>k__BackingField: 100
+        <orthogonalVelocity>k__BackingField: 300
         <bounceWhenGrounded>k__BackingField: 0
         <bounceDirection>k__BackingField: {x: 0, y: 0}
         <bounceSpeed>k__BackingField: 0

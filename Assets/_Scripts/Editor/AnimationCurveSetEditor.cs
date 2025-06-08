@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using static Codice.Client.BaseCommands.BranchExplorer.Layout.BrExLayout;
 
 [CustomPropertyDrawer(typeof(AnimationCurveSet))]
 public class AnimationCurveSetEditor : PropertyDrawer
 {
     private SerializedProperty incrementPerLevel;
     private SerializedProperty accumulationPerLevel;
-    private bool modificationCheck = false;
+    private AnimationCurve prevIncrementCurve;
+    private AnimationCurve prevAccumulationCurve;
+    private float valueThreshold = 0.01f;
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
@@ -37,22 +38,46 @@ public class AnimationCurveSetEditor : PropertyDrawer
                 AnimationCurve incrementCurve = incrementPerLevel.animationCurveValue;
                 AnimationCurve accumulationCurve = accumulationPerLevel.animationCurveValue;
 
-                if (incrementPerLevel.serializedObject.hasModifiedProperties)
+                bool incrementCurveModified = !AnimationCurveEquals(incrementCurve, prevIncrementCurve);
+                bool accumulationCurveModified = !AnimationCurveEquals(accumulationCurve, prevIncrementCurve);
+
+                if (incrementCurveModified)
                 {
-                    AnimationCurve modifiedAccumulationCurve = IncrementToAccumulation(incrementCurve);
-                    accumulationPerLevel.animationCurveValue = modifiedAccumulationCurve;
-                    modificationCheck = true;
+                    incrementCurve = SetIndexes(incrementCurve);
+                    accumulationCurve = IncrementToAccumulation(incrementCurve);
                 }
 
-                if (accumulationPerLevel.serializedObject.hasModifiedProperties && !modificationCheck)
+                if (accumulationCurveModified)
                 {
-                    AnimationCurve modifiedIncrementCurve = AccumulationToIncrement(accumulationCurve);
-                    incrementPerLevel.animationCurveValue = modifiedIncrementCurve;
+                    accumulationCurve = SetIndexes(accumulationCurve);
+                    incrementCurve = AccumulationToIncrement(accumulationCurve);
                 }
+
+                incrementPerLevel.animationCurveValue = incrementCurve;
+                accumulationPerLevel.animationCurveValue = accumulationCurve;
             }
         }
 
+        prevIncrementCurve = incrementPerLevel.animationCurveValue;
+        prevAccumulationCurve = accumulationPerLevel.animationCurveValue;
+
         EditorGUI.EndProperty();
+    }
+
+    private AnimationCurve SetIndexes(AnimationCurve curve)
+    {
+        AnimationCurve animationCurve = new AnimationCurve();
+
+        int totalKeyCount = curve.keys.Length;
+        int maxKey = Mathf.RoundToInt(curve.keys[totalKeyCount - 1].time);
+
+        for (int keyValue = 0; keyValue < maxKey; keyValue++)
+        {
+            Keyframe keyframe = new Keyframe(keyValue + 1, curve.Evaluate(keyValue + 1));
+            animationCurve.AddKey(keyframe);
+        }
+
+        return animationCurve;
     }
 
     private AnimationCurve IncrementToAccumulation(AnimationCurve incrementCurve)
@@ -106,5 +131,26 @@ public class AnimationCurveSetEditor : PropertyDrawer
         }
 
         return multiplier * newLineHeight;
+    }
+
+    public bool AnimationCurveEquals(AnimationCurve curveA, AnimationCurve curveB)
+    {
+        Keyframe[] keysA = curveA.keys;
+        Keyframe[] keysB = curveB.keys;
+
+        if (keysA.Length != keysB.Length)
+        {
+            return false;
+        }
+
+        for (int index = 0; index < keysA.Length; index++)
+        {
+            if (keysA[index].time != keysB[index].time || keysA[index].value != keysB[index].value)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

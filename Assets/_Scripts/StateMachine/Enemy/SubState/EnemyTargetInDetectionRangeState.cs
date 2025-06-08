@@ -21,6 +21,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
     private bool traverseAroundFlag;
 
     private NavMeshAgentState navMeshAgentState;
+    private NavMeshPath tempPath;
 
     public EnemyTargetInDetectionRangeState(Enemy enemy, string animBoolName) : base(enemy, animBoolName)
     {
@@ -118,7 +119,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                             stateMachine.ChangeState(enemy.blockParryState);
                         }
                     }
-                    /*else if (isTargetInWideAttackRange && enemy.wideAttackState.available)
+                    else if (isTargetInWideAttackRange && enemy.wideAttackState.available)
                     {
                         stateMachine.ChangeState(enemy.wideAttackState);
                     }
@@ -129,11 +130,11 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                     else if (isTargetInWideAttackRange && enemy.wideAttackState.available)
                     {
                         stateMachine.ChangeState(enemy.wideAttackState);
-                    }*/
+                    }
                     else
                     {
-                        // meleeAttacks[0] = isTargetInMeleeAttack0Range && enemy.meleeAttack0State.available;
-                        // meleeAttacks[1] = isTargetInMeleeAttack1Range && enemy.meleeAttack1State.available;
+                        meleeAttacks[0] = isTargetInMeleeAttack0Range && enemy.meleeAttack0State.available;
+                        meleeAttacks[1] = isTargetInMeleeAttack1Range && enemy.meleeAttack1State.available;
                         meleeAttacks[2] = isTargetInMeleeAttack2Range && enemy.meleeAttack2State.available;
 
                         int? meleeAttackType = UtilityFunctions.RandomTrueIndex(meleeAttacks);
@@ -171,7 +172,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
             {
                 currentDestination = enemy.detection.currentTarget.entityDetection.currentProjectedPosition - enemy.orthogonalRigidbody.transform.right * enemy.enemyData.adequateDistance + (Vector3)positionOffset;
 
-                while (!enemy.detection.GetPositionGroundCollider(currentDestination).Equals(enemy.detection.currentGroundCollider))
+                while (!enemy.detection.GetPositionGroundCollider(currentDestination).Equals(enemy.detection.currentGroundCollider) && HasPathTo(currentDestination))
                 {
                     currentDestination += enemy.orthogonalRigidbody.transform.right * enemy.enemyData.stepSize;
                 }
@@ -299,5 +300,11 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                 Debug.LogWarning($"Unknown navMeshAgentState of {navMeshAgentState} found in {enemy.name}.");
             }*/
         }
+    }
+
+    private bool HasPathTo(Vector3 destination)
+    {
+        bool pathFound = NavMesh.CalculatePath(enemy.detection.currentProjectedPosition, destination, NavMesh.AllAreas, tempPath);
+        return pathFound && tempPath.status == NavMeshPathStatus.PathComplete;
     }
 }
