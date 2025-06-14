@@ -92,7 +92,7 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
                 Manager.Instance.gameManager.ResumeGame();
                 if (Manager.Instance.gameManager.player.gameObject.activeSelf)
                 {
-                    Manager.Instance.gameManager.player.playerInput.currentActionMap.Enable();
+                    Manager.Instance.inputHandler.playerInput.currentActionMap.Enable();
                 }
             }
         }
@@ -120,7 +120,7 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
         Manager.Instance.gameManager.PauseGame();
         if (Manager.Instance.gameManager.player.gameObject.activeSelf)
         {
-            Manager.Instance.gameManager.player.playerInput.currentActionMap.Disable();
+            Manager.Instance.inputHandler.playerInput.currentActionMap.Disable();
         }
         elapsedTime = 0.0f;
         fadeInOutImage.color = currentColor;
@@ -317,7 +317,7 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
             {
                 Collider2D doorCollider = doorTriggerInteraction.gameObject.GetComponent<Collider2D>();
                 Vector2 groundPosition = new Vector2(doorCollider.bounds.center.x, doorCollider.bounds.min.y);
-                Manager.Instance.gameManager.player.movement.SetPosition(groundPosition + Manager.Instance.gameManager.player.entityCollider.bounds.extents.y * Vector2.up);
+                // Manager.Instance.gameManager.player.movement.SetPosition(groundPosition + Manager.Instance.gameManager.player.entityCollider.bounds.extents.y * Vector2.up);
                 break;
             }
         }
@@ -341,7 +341,7 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
             default: break;
         }
 
-        Manager.Instance.gameManager.player.movement.SetPosition(targetPosition);
+        // Manager.Instance.gameManager.player.movement.SetPosition(targetPosition);
     }
 
     private async void OnActiveSceneChanged(Scene current, Scene next)
