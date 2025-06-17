@@ -71,7 +71,6 @@ public class FileDataHandler
 
     public void Save(GameData data, string profileId)
     {
-        Debug.Log("File Handler Try Save");
         if (profileId == null) return;
 
         string fullPath = Path.Combine(dataDirPath, profileId, dataFileName);

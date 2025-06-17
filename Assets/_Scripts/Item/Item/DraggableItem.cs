@@ -1,3 +1,4 @@
+using Ink.Parsed;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,4 +14,22 @@ public class DraggableItem : DraggableObject<Item>
 
         elementImage.sprite = element.details.icon;
     }
+
+    public override void DroppedOutsideSlot()
+    {
+        base.DroppedOutsideSlot();
+
+        transform.SetParent(parentTransform);
+        elementImage.raycastTarget = true;
+
+        //Manager.Instance.itemManager.CheckAbandonItem(element, CancelAbandonItem);
+
+    }
+
+    public void CancelAbandonItem()
+    {
+
+    }
+
+
 }

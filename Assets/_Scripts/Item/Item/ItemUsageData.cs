@@ -12,7 +12,7 @@ public class ItemUsageData
         itemUsageData = new Item[ItemDatabase.totalItems];
         for (int i = 1; i <= ItemDatabase.totalItems; i++)
         {
-            itemUsageData[i-1] = ItemDatabase.GetDetailsById(i).Create(0);
+            itemUsageData[ i-1] = ItemDatabase.GetDetailsById(i).Create();
         }
     }
 }

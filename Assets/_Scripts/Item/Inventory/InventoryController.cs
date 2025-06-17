@@ -1,10 +1,8 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.Rendering.LookDev;
 
 public class InventoryController
 {
@@ -12,7 +10,7 @@ public class InventoryController
     InventoryModel model;
     int capacity;
 
-    Item[] itemUsageData;
+    [ShowInInspector] public Item[] itemUsageData;
 
     InventoryController(InventoryView view, in InventoryModel model, int capacity)
     {
@@ -31,6 +29,22 @@ public class InventoryController
     public void LoadItemUsageData(ItemUsageData data)
     {
         this.itemUsageData = data.itemUsageData;
+
+        for (int i = 0; i < itemUsageData.Length; i++)
+        {
+            if (itemUsageData[i].details == null)
+            {
+                itemUsageData[i].details = ItemDatabase.GetDetailsById(itemUsageData[i].id);
+                Debug.LogWarning($"{itemUsageData[i].details.label} detail allocated again");
+            }
+        }
+
+
+        if (this.itemUsageData == null)
+        {
+            Debug.Log("InventoryController.itemUsageData is null");
+            this.itemUsageData = new ItemUsageData().itemUsageData;
+        }
     }
 
     public ItemUsageData SaveItemUsageData()
@@ -158,7 +172,7 @@ public class InventoryController
             if (!IsUnderMaxOverlap(item))
             {
                 // 최대 가용 횟수 초과
-                string text = $"Fail Use Item {item.details.label}";
+                string text = $"{item.details.label} 아이템은 최대 섭취 횟수에 도달했습니다.";
                 SetInventoryTextInfo(text);
                 return false;
             }
@@ -166,15 +180,16 @@ public class InventoryController
             // 사용 가능 여부
             if (model.MinusQuantity(indexIfExist, item, useQuantity))
             {
-                string text = $"Success Use Item {item.details.label}, current quntity {model.Quantity(item)}";
+                string text = $"{item.details.label} 아이템 섭취에 성공했습니다.";
                 SetInventoryTextInfo(text);
                 return true;
             }
         } 
         else
         {
-            string text = $"Fail Use Item {item.details.label}, current quntity {model.Quantity(item)}";
+            string text = $"{item.details.label} 아이템은 섭취할 수 없습니다.";
             SetInventoryTextInfo(text);
+            Debug.LogError($"wrong access to {item.details.label}!");
         }
         return false;
     }

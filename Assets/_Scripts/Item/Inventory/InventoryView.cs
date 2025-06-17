@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class InventoryView : MonoBehaviour
 {
@@ -11,6 +12,16 @@ public class InventoryView : MonoBehaviour
 
     ItemSlot[] itemSlots;
     TextMeshProUGUI coinTMP;
+
+    public PopupUI guidePopup;
+
+    private void Start()
+    {
+        guidePopup = transform.parent.Find("Guide Popup")?.GetComponent<PopupUI>();
+        Debug.Assert(guidePopup != null, "InventoryView.guidePopup is null!");
+
+        SetGuidePopupEvents();
+    }
 
     public IEnumerator InitializeView()
     {
@@ -30,4 +41,27 @@ public class InventoryView : MonoBehaviour
         coinTMP.text = $"coin : {amount}";
     }
 
+    public bool CheckAbandonItem(Item item)
+    {
+        guidePopup.SetPopupInfo($"{item.details.label} 아이템을 버리시겠습니까?");
+        guidePopup.ShowUI();
+
+        return true;
+    }
+
+    private void SetGuidePopupEvents()
+    {
+        guidePopup.SetDynamicPopupEvent(OnClickGuidePopupConfrimBtn, OnClickGuidePopupCancelBtn);
+    }
+
+    private void OnClickGuidePopupConfrimBtn()
+    {
+        // Manager.Instance.itemManager.
+        guidePopup.HideUI();
+    }
+
+    private void OnClickGuidePopupCancelBtn()
+    {
+        guidePopup.HideUI();
+    }
 }

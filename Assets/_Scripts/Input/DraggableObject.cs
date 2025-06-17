@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 public abstract class DraggableObject<T> : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
@@ -81,18 +82,16 @@ public abstract class DraggableObject<T> : MonoBehaviour, IBeginDragHandler, IEn
                 transform.SetParent(parentTransform);
                 droppedSlot.OnDrop(this);
                 elementImage.raycastTarget = true;
-                DroppedOutsideSlot();
+                DroppedInsideSlot();
                 return;
             }
         }
 
         // 인벤토리 슬롯이 아닌 외부에 놓인 경우 
-        transform.SetParent (parentTransform);
-        elementImage.raycastTarget = true;
-
-        // TODO : 슬롯 외부에 뒀을 때 로직 추가
-        Debug.Log("슬롯 외부에 element를 뒀습니다.");
-        DroppedInsideSlot();
+        /*        transform.SetParent (parentTransform);
+                elementImage.raycastTarget = true;*/
+        Debug.Log("외부에 놓이다.");
+        DroppedOutsideSlot();
     }
 
     public virtual void DroppedOutsideSlot() { }

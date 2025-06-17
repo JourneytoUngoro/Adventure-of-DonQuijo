@@ -1,9 +1,11 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ItemManager : MonoBehaviour
 {
-
+    InventoryView inventoryView;
     Inventory inventory;
     InventoryController controller() => inventory.GetInventoryController();
 
@@ -58,5 +60,19 @@ public class ItemManager : MonoBehaviour
         controller().SwapItems(index1, index2);
     }
 
+/*    public IEnumerator CheckAbandonItem(Item item, Action afterChoice)
+    {
+        bool abandon = inventoryView.CheckAbandonItem(item);
+
+        if (abandon)
+        {
+
+        }
+        else
+        {
+            afterChoice?.Invoke();
+        }
+
+    }*/
 
 }

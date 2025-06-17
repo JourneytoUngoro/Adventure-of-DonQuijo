@@ -1153,7 +1153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530b5c0c81b71b244b71ddf682ebf024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guidePopup: {fileID: 0}
+  guidePopup: {fileID: 4640109464132476448}
+  canOpenGuide: 0
 --- !u!1 &8300016131063245760
 GameObject:
   m_ObjectHideFlags: 0

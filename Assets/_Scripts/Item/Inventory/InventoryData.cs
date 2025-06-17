@@ -8,4 +8,5 @@ public class InventoryData
     public Item[] items;
     public int capacity;
     public int coins;
+
 }
