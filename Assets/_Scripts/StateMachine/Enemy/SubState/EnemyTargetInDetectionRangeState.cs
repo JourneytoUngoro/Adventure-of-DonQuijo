@@ -21,7 +21,6 @@ public class EnemyTargetInDetectionRangeState : EnemyState
     private bool traverseAroundFlag;
 
     private NavMeshAgentState navMeshAgentState;
-    private NavMeshPath tempPath;
 
     public EnemyTargetInDetectionRangeState(Enemy enemy, string animBoolName) : base(enemy, animBoolName)
     {
@@ -33,6 +32,17 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                 traverseAroundFlag = false;
                 enemy.navMeshAgent.enabled = true;
                 navMeshAgentState = NavMeshAgentState.TraverseAround;
+
+
+                if (UtilityFunctions.RandomSuccess(0.5f))
+                {
+
+                }
+                else
+                {
+
+                }
+                
                 positionOffset = Random.insideUnitCircle * enemy.enemyData.repositionOffsetDistance;
                 baseDestinationPosition = enemy.detection.currentTarget.entityDetection.currentProjectedPosition;
 
@@ -51,6 +61,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
         enemy.navMeshAgent.enabled = true;
         repositioningTimer.StartMultiUseTimer();
         navMeshAgentState = NavMeshAgentState.Chase;
+        enemy.detection.currentTarget.entityCombat.targetedBy.Add(enemy);
         positionOffset = Random.insideUnitCircle * enemy.enemyData.repositionOffsetDistance;
     }
 
@@ -170,9 +181,9 @@ public class EnemyTargetInDetectionRangeState : EnemyState
 
             if (navMeshAgentState == NavMeshAgentState.Chase)
             {
-                currentDestination = enemy.detection.currentTarget.entityDetection.currentProjectedPosition - enemy.orthogonalRigidbody.transform.right * enemy.enemyData.adequateDistance + (Vector3)positionOffset;
+                currentDestination = enemy.detection.currentTarget.entityDetection.currentProjectedPosition - enemy.orthogonalRigidbody.transform.right * enemy.enemyData.surroundingDistance + (Vector3)positionOffset;
 
-                while (!enemy.detection.GetPositionGroundCollider(currentDestination).Equals(enemy.detection.currentGroundCollider) && HasPathTo(currentDestination))
+                while (!enemy.detection.GetPositionGroundCollider(currentDestination).Equals(enemy.detection.currentGroundCollider) && enemy.movement.HasPathTo(currentDestination))
                 {
                     currentDestination += enemy.orthogonalRigidbody.transform.right * enemy.enemyData.stepSize;
                 }
@@ -199,7 +210,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
             {
                 if (!traverseAroundFlag && !enemy.navMeshAgent.pathPending && enemy.navMeshAgent.remainingDistance <= enemy.navMeshAgent.stoppingDistance && !enemy.navMeshAgent.hasPath)
                 {
-                    currentDestination = traverseDirection == 1 ? baseDestinationPosition + Vector3.right * enemy.enemyData.adequateDistance + (Vector3)positionOffset : baseDestinationPosition - Vector3.right * enemy.enemyData.adequateDistance;
+                    currentDestination = traverseDirection == 1 ? baseDestinationPosition + Vector3.right * enemy.enemyData.surroundingDistance + (Vector3)positionOffset : baseDestinationPosition - Vector3.right * enemy.enemyData.surroundingDistance;
                     enemy.navMeshAgent.SetDestination(currentDestination);
                     traverseAroundFlag = true;
                 }
@@ -300,11 +311,5 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                 Debug.LogWarning($"Unknown navMeshAgentState of {navMeshAgentState} found in {enemy.name}.");
             }*/
         }
-    }
-
-    private bool HasPathTo(Vector3 destination)
-    {
-        bool pathFound = NavMesh.CalculatePath(enemy.detection.currentProjectedPosition, destination, NavMesh.AllAreas, tempPath);
-        return pathFound && tempPath.status == NavMeshPathStatus.PathComplete;
     }
 }

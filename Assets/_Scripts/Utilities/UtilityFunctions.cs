@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Random = System.Random;
+using UnityEngine.AI;
 
 public static class UtilityFunctions
 {
