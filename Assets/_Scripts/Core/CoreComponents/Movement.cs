@@ -27,7 +27,6 @@ public abstract class Movement : CoreComponent
 
     public virtual void SetVelocityX(float velocity)
     {
-        Debug.Log("SetVelocityTo: " + velocity);
         if (facingDirection * velocity < 0)
         {
             if (onContact && entity.entityDetection.detectingHorizontalObstacle.second)

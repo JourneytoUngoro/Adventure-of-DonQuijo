@@ -42,7 +42,8 @@ public class ObjectPoolingManager : MonoBehaviour
             for (int objectCount = 0; objectCount < objectInfos[objectIndex].defaultCapacity; objectCount++)
             {
                 objectName = objectInfos[objectIndex].prefab.name;
-                CreatePooledObject().GetComponent<PooledObject>().ReleaseObject();
+                PooledObject pooledObject = CreatePooledObject().GetComponent<PooledObject>();
+                pooledObject.objectPool.Release(pooledObject.gameObject);
             }
         }
     }

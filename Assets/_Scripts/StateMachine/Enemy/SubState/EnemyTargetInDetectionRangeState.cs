@@ -181,7 +181,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
 
             if (navMeshAgentState == NavMeshAgentState.Chase)
             {
-                currentDestination = enemy.detection.currentTarget.entityDetection.currentProjectedPosition - enemy.orthogonalRigidbody.transform.right * enemy.enemyData.surroundingDistance + (Vector3)positionOffset;
+                currentDestination = enemy.detection.currentTarget.entityDetection.currentProjectedPosition - enemy.orthogonalRigidbody.transform.right * enemy.enemyData.chaseDistance + (Vector3)positionOffset;
 
                 while (!enemy.detection.GetPositionGroundCollider(currentDestination).Equals(enemy.detection.currentGroundCollider) && enemy.movement.HasPathTo(currentDestination))
                 {
@@ -199,7 +199,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                 }
                 else
                 {
-                    if (Vector3.Distance(enemy.detection.currentProjectedPosition, enemy.detection.currentTarget.entityDetection.currentProjectedPosition) > enemy.enemyData.maxDistance)
+                    if (Vector3.Distance(enemy.detection.currentProjectedPosition, enemy.detection.currentTarget.entityDetection.currentProjectedPosition) > enemy.enemyData.maxChaseDistance)
                     {
                         positionOffset = Random.insideUnitCircle * enemy.enemyData.repositionOffsetDistance;
                         enemy.navMeshAgent.enabled = true;
@@ -210,7 +210,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
             {
                 if (!traverseAroundFlag && !enemy.navMeshAgent.pathPending && enemy.navMeshAgent.remainingDistance <= enemy.navMeshAgent.stoppingDistance && !enemy.navMeshAgent.hasPath)
                 {
-                    currentDestination = traverseDirection == 1 ? baseDestinationPosition + Vector3.right * enemy.enemyData.surroundingDistance + (Vector3)positionOffset : baseDestinationPosition - Vector3.right * enemy.enemyData.surroundingDistance;
+                    currentDestination = traverseDirection == 1 ? baseDestinationPosition + Vector3.right * enemy.enemyData.chaseDistance + (Vector3)positionOffset : baseDestinationPosition - Vector3.right * enemy.enemyData.chaseDistance;
                     enemy.navMeshAgent.SetDestination(currentDestination);
                     traverseAroundFlag = true;
                 }

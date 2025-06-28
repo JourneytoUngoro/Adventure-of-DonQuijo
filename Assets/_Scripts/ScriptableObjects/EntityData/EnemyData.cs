@@ -10,13 +10,14 @@ public class EnemyData : EntityData
 
     [field: Header("Target In Detection Range State")]
     [field: SerializeField] public float stepSize { get; private set; } = 5.0f;
-    [field: SerializeField] public float maxDistance { get; private set; } = 80.0f;
-    [field: SerializeField] public float surroundingDistance { get; private set; } = 60.0f;
+    [field: SerializeField] public float chaseDistance { get; private set; } = 60.0f;
+    [field: SerializeField] public float maxChaseDistance { get; private set; } = 80.0f;
+    [field: SerializeField] public float minChaseDistance { get; private set; } = 40.0f;
     [field: SerializeField] public float targetingDistance { get; private set; } = 200.0f;
-    [field: SerializeField] public float walkAroundDistance { get; private set; } = 20.0f;
+    [field: SerializeField] public float traverseAroundDistance { get; private set; } = 20.0f;
+    [field: SerializeField] public float repositionOffsetDistance { get; private set; } = 10.0f;
     [field: SerializeField] public float repositioningTime { get; private set; } = 8.0f;
     [field: SerializeField] public float repositioningPossibility { get; private set; } = 0.6f;
-    [field: SerializeField] public float repositionOffsetDistance { get; private set; } = 10.0f;
 
     [field: Header("Block / Parry State")]
     [field: SerializeField] public int maxBlockableCount { get; private set; } = 2;

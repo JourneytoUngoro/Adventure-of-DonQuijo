@@ -49,22 +49,17 @@ public class EnemyDetection : Detection
         
     }
 
+    /// <summary>
+    /// Returns highest ground collider of the given position regardless of z position.
+    /// </summary>
+    /// <param name="groundCheckPosition"></param>
+    /// <returns></returns>
     public Collider2D GetPositionGroundCollider(Vector2 groundCheckPosition)
     {
         Array.Clear(designatedPositionColliders, 0, maxDetectionCount);
         Physics2D.OverlapBoxNonAlloc(groundCheckPosition, entity.entityCollider.size, 0.0f, designatedPositionColliders, whatIsGround);
-        return projectedPositionColliders.Where(groundCollider => groundCollider != null && groundCollider.transform.position.z + groundCollider.GetComponent<HeightData>().height <= currentEntityHeight).OrderByDescending(groundCollider => groundCollider.transform.position.z + groundCollider.GetComponent<HeightData>().height).FirstOrDefault();
+        return projectedPositionColliders.Where(groundCollider => groundCollider != null).OrderByDescending(groundCollider => groundCollider.transform.position.z + groundCollider.GetComponent<HeightData>().height).FirstOrDefault();
     }
-
-    /*public bool isTargetInAggroRange(bool exclusive)
-    {
-
-    }
-
-    public bool isTargetInVigilanceRange(bool exclusive)
-    {
-        
-    }*/
 
     public bool isTargetInDetectionRange()
     {
