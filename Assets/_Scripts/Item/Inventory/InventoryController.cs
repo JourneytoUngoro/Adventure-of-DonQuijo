@@ -125,15 +125,10 @@ public class InventoryController
         }
     }
 
-    public void AddCoins(int amount)
+    public void UpdateCoins(int amount)
     {
-        model.AddCoins(amount);
-        RefreshCoins();
-    }
-
-    public void MinusCoins(int amount)
-    {
-        model.MinusCoins(amount);
+        if (amount >= 0) { model.AddCoins(amount); }
+        else { model.MinusCoins(amount); }
         RefreshCoins();
     }
 
@@ -210,6 +205,22 @@ public class InventoryController
             return true;
         }
         return false;
+    }
+
+    public void AbandonItem(Item item)
+    {
+        bool success = model.Remove(item);
+
+        Debug.Log($"Log -1 on successful item abandon, 0 on failure. : {model.Contains(item)}");
+    }
+
+    public int GetItemIndex(Item item)
+    {
+        for (int i = 0; i < capacity; i++)
+        {
+            if (model.Get(i) == item) return i;
+        }
+        return -1;
     }
 
     public bool IsUnderMaxOverlap(Item item)

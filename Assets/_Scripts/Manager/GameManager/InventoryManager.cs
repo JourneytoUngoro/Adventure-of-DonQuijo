@@ -3,9 +3,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ItemManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour
 {
-    InventoryView inventoryView;
+    InventoryView inventoryView() => inventory.GetInventoryView();
     Inventory inventory;
     InventoryController controller() => inventory.GetInventoryController();
 
@@ -26,6 +26,7 @@ public class ItemManager : MonoBehaviour
     {
         inventory = GameObject.Find("Item Inventory").GetComponent<Inventory>();
         player = GameObject.Find("Player").GetComponent<Player>();
+
 
         Debug.Assert(inventory != null, "item manager inventory null");
         Debug.Assert(player != null, "item manager player null!");
@@ -60,19 +61,25 @@ public class ItemManager : MonoBehaviour
         controller().SwapItems(index1, index2);
     }
 
-/*    public IEnumerator CheckAbandonItem(Item item, Action afterChoice)
+    public void UpdateCoinAmount(int amount)
     {
-        bool abandon = inventoryView.CheckAbandonItem(item);
+        controller().UpdateCoins(amount);
+    }
+
+
+    public async void CheckAbandonItem(DraggableItem requester, Item item)
+    {
+        bool abandon = await inventoryView().CheckAbandonItem(item);
 
         if (abandon)
         {
-
+            requester.ConfirmAbandonItem();
+            controller().AbandonItem(item);
         }
         else
         {
-            afterChoice?.Invoke();
+            requester.CancelAbandonItem();
         }
-
-    }*/
+    }
 
 }

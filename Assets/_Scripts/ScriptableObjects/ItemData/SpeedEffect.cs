@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SpeedEffect", menuName = "Scriptable Object/Item/Item Effect/Speed Effect")]
+[CreateAssetMenu(fileName = "SpeedEffect", menuName = "Scriptable Object/Item/Item PlayDropEffect/Speed PlayDropEffect")]
 public class SpeedEffect : ItemEffect
 { 
     [SerializeField] private float percentage = 0.1f;
@@ -17,6 +17,6 @@ public class SpeedEffect : ItemEffect
 
         target.stats.speed.IncreaseMaxValue(speedAmount);
 
-        Debug.Log($"Speed Effect : {debugging} + {speedAmount}  = {target.stats.speed.currentValue} ");
+        Debug.Log($"Speed PlayDropEffect : {debugging} + {speedAmount}  = {target.stats.speed.currentValue} ");
     }
 }

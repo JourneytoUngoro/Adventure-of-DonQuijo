@@ -5,6 +5,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public enum SoundCategory
 {
@@ -89,19 +90,21 @@ public class SoundManager : MonoBehaviour
     }
 
     // sfx player 
-    private void Play(string key, AudioMixerGroup group, Transform spawnTransform, float pitchDeviation = 0.0f, float volume = 1.0f)
+    private SoundPlayer Play(string key, AudioMixerGroup group, Transform spawnTransform, float pitchDeviation = 0.0f, float volume = 1.0f)
     {
         AudioClip clip = GetClip(key);
 
         if (clip == null)
         {
             Debug.LogWarning("clip is null!");
-            return;
+            return null;
         }
 
         SoundPlayer sp = GetSoundPlayer();
         sp.gameObject.SetActive(true);
         sp.Play(clip, group, volume, ReturnSoundPlayer, spawnTransform, pitchDeviation);
+
+        return sp;
     }
 
     public void PlaySoundFXClip(string key, Transform spawnTransform, float pitchDeviation = 0.0f, float volume = 1.0f)
@@ -111,7 +114,16 @@ public class SoundManager : MonoBehaviour
         Play(key, sfxGroup, spawnTransform, pitch, volume);
     }
 
-    // TODO 함수 추가하기
+    // Use this when a specific object should not play multiple overlapping sound effects.
+    public void PlaySoundFXClip(out SoundPlayer sp, string key, Transform spawnTransform, float pitchDeviation = 0.0f, float volume = 1.0f)
+    {
+        float pitch = 1.0f + UtilityFunctions.RandomFloat(-pitchDeviation, pitchDeviation);
+
+        sp = Play(key, sfxGroup, spawnTransform, pitch, volume);
+    }
+
+
+    // TODO : 함수 추가하기
     /*public void PlaySoundFXClip(IEnumerable<AudioClip> audioClips, Transform spawnTransform, float pitchDeviation = 0.0f, float volume = 1.0f)
     {
         if (audioClips == null)
@@ -179,6 +191,7 @@ public class SoundManager : MonoBehaviour
     private void ReturnSoundPlayer(SoundPlayer sp)
     {
         sp.gameObject.SetActive(false);
+        sp.isPlaying = false;
         pool.Enqueue(sp);
     }
 

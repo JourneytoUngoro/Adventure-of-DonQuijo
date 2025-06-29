@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "HealEffect", menuName = "Scriptable Object/Item/Item Effect/Heal Effect")]
+[CreateAssetMenu(fileName = "HealEffect", menuName = "Scriptable Object/Item/Item PlayDropEffect/Heal PlayDropEffect")]
 public class HealEffect : ItemEffect
 {
     [SerializeField] private float percentage = 1.0f;
@@ -14,6 +14,6 @@ public class HealEffect : ItemEffect
 
         target.stats.health.IncreaseCurrentValue(healAmount);
 
-        Debug.Log($"Heal Effect : {debugging} + {healAmount}  = {target.stats.health.currentValue} ");
+        Debug.Log($"Heal PlayDropEffect : {debugging} + {healAmount}  = {target.stats.health.currentValue} ");
     }
 }

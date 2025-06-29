@@ -43,5 +43,10 @@ public class Inventory : MonoBehaviour, IDataPersistance
         return controller;
     }
 
+    public InventoryView GetInventoryView()
+    {
+        return view;
+    }
+
 
 }

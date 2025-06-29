@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "LifeEffect", menuName = "Scriptable Object/Item/Item Effect/Life Effect")]
+[CreateAssetMenu(fileName = "LifeEffect", menuName = "Scriptable Object/Item/Item PlayDropEffect/Life PlayDropEffect")]
 
 public class LifeEffect : ItemEffect
 {
@@ -19,6 +19,6 @@ public class LifeEffect : ItemEffect
 
         target.stats.health.SetCurrentValue(fullAmount);
 
-        Debug.Log($"Heal Effect : + {debugging}  = {target.stats.health.currentValue} ");
+        Debug.Log($"Heal PlayDropEffect : + {debugging}  = {target.stats.health.currentValue} ");
     }
 }

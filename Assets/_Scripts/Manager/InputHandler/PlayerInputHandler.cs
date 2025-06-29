@@ -185,17 +185,34 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void InactiveJumpInput() => jumpInputPressed = false;
 
-    public void EnableCharacterControl()
+    public void SetCharacterControlEnabled(bool enabled)
     {
-        controls.CharacterControl.Enable();
-        disableCharacterControl = false;
+        if (enabled)
+        {
+            controls.CharacterControl.Enable();
+            disableCharacterControl = false;
+        }
+        else
+        {
+            controls.CharacterControl.Disable();
+            disableCharacterControl = true;
+        }
     }
 
-    public void DisableCharacterControl()
+    public void SetUIControlEnabled(bool enabled)
     {
-        controls.CharacterControl.Disable();
-        disableCharacterControl = true;
+        if (enabled)
+        {
+            controls.UIControl.Enable();
+        }
+        else
+        {
+            controls.UIControl.Disable();
+        }
     }
+
     public bool IsCharacterControlEnabled() => controls.CharacterControl.enabled;
+
+    public bool IsUIControlEnabled() => controls.UIControl.enabled;
 
 }

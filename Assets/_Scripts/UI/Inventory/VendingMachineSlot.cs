@@ -11,6 +11,9 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
 
     public int itemId;
     public TextMeshProUGUI itemName;
+    public TextMeshProUGUI itemPrice;
+    public TextMeshProUGUI itemInfo;
+
     public Image itemImage;
     [HideInInspector] public Item item;
 
@@ -40,6 +43,9 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
         this.item = item;
         itemId = item.id;
         itemName.text = item.details.label;
+        itemInfo.text = item.details.description;
+        itemPrice.text = "$ "+ item.details.price.ToString();
+
         itemImage.sprite = item.details.icon;
     }
 

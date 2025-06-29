@@ -86,11 +86,6 @@ public abstract class DraggableObject<T> : MonoBehaviour, IBeginDragHandler, IEn
                 return;
             }
         }
-
-        // 인벤토리 슬롯이 아닌 외부에 놓인 경우 
-        /*        transform.SetParent (parentTransform);
-                elementImage.raycastTarget = true;*/
-        Debug.Log("외부에 놓이다.");
         DroppedOutsideSlot();
     }
 

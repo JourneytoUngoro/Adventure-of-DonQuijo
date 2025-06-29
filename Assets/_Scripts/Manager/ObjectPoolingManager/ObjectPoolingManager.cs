@@ -42,7 +42,8 @@ public class ObjectPoolingManager : MonoBehaviour
             for (int objectCount = 0; objectCount < objectInfos[objectIndex].defaultCapacity; objectCount++)
             {
                 objectName = objectInfos[objectIndex].prefab.name;
-                CreatePooledObject().GetComponent<PooledObject>().ReleaseObject();
+                PooledObject pooledObject = CreatePooledObject().GetComponent<PooledObject>();
+                pooledObject.objectPool.Release(pooledObject.gameObject);
             }
         }
     }
@@ -64,6 +65,7 @@ public class ObjectPoolingManager : MonoBehaviour
     private void OnReturnToPool(GameObject pooledObject)
     {
         pooledObject.GetComponent<PooledObject>().isPooled = true;
+        Debug.Log("ReturnToPool 실행");
         pooledObject.SetActive(false);
     }
 
@@ -87,6 +89,7 @@ public class ObjectPoolingManager : MonoBehaviour
 
     public void ReleaseGameObject(GameObject pooledObject)
     {
+        Debug.Log("ObjectPoolingManager.ReleaseGameObject()");
         pooledObject.GetComponent<PooledObject>().ReleaseObject();
     }
 }

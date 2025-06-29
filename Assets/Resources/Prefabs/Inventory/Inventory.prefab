@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbcb1519a9e118244b82d9aa420f2ab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guidePopup: {fileID: 0}
 --- !u!114 &6229563529729618223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4974248716148123899}
   m_Layer: 5
-  m_Name: Coin
+  m_Name: Coin Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

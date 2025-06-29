@@ -65,9 +65,10 @@ public class ObservableItemArray : IObservableArray<Item>
     // 아이템 목록에 존재한다면 지운다 
     public bool TryRemove(Item item)
     {
-        for (var i = 0; i < items.Length; i++)
+        int index = Contains(item);
+        if (index >= 0)
         {
-            if (TryRemoveAt(i)) return true;
+            if (TryRemoveAt(index)) return true;
         }
 
         return false;
