@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "StrongAttackEffect", menuName = "Scriptable Object/Item/Item PlayDropEffect/Strong Attack PlayDropEffect")]
+[CreateAssetMenu(fileName = "StrongAttackEffect", menuName = "Scriptable Object/Item/Item Effect/Strong Attack Effect")]
 public class StrongAttackEffect : ItemEffect
 {
-    //[SerializeField] private float percentage = 0.2f;
+    // [SerializeField] private float percentage = 0.2f;
     public override void ApplyEffect(Player target)
     {
 

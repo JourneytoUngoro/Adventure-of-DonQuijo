@@ -34,6 +34,8 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
         backgroundImage = GetComponentInParent<Image>();
         originalSprite = backgroundImage.sprite;
 
+        GetComponent<Button>().onClick.AddListener(OnClickVMSlot);
+
         Debug.Assert(vmUI != null, "VendingMachinePopupUI is null!");
     }
 
@@ -74,5 +76,11 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
             scaler.OnUnSelectedState();
             backgroundImage.sprite = originalSprite;
         }
+    }
+
+    public void OnClickVMSlot()
+    {
+        vmUI.ShowPurchaseGuide();
+        Debug.Log("on click vm slot");
     }
 }

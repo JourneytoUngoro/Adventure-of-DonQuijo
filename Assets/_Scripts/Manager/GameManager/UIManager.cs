@@ -167,7 +167,7 @@ public class UIManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "SampleScene")
         {
-            uiCanvas = GameObject.Find("Test Canvas").transform;
+            uiCanvas = GameObject.Find("Overlay Canvas").transform;
         }
     }
     #endregion

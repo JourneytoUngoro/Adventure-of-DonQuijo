@@ -13,5 +13,4 @@ public class QuestData
         this.state = state;
         this.nowProgress = nowProgress;
     }
-
 }
