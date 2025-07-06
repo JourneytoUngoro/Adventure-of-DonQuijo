@@ -100,11 +100,16 @@ public abstract class Combat : CoreComponent
                 case BlockParryComponent blockParryComponent:
                     blockParryComponent.ApplyCombatAbility(null, combatAbilityWithColliders.overlapColliders);
                     break;
+                case ProjectileComponent projectileComponent:
+                    
+                    projectileComponent.ApplyCombatAbility(null, combatAbilityWithColliders.overlapColliders);
+                    break;
                 /*case ProjectileComponent projectileComponent:
                     Transform[] projectileFireTransforms = combatAbilityWithColliders.overlapColliders.Where(overlapCollider => !overlapCollider.overlapBox && !overlapCollider.overlapCircle).Select(overlapCollider => overlapCollider.centerTransform).ToArray();
                     projectileComponent.ApplyCombatAbility(damageTargets, projectileFireTransforms, null);
                     break;*/
-                default: break;
+                default:
+                    break;
             }
         }
 
@@ -113,14 +118,14 @@ public abstract class Combat : CoreComponent
             foreach (OverlapCollider overlapCollider in combatAbilityWithColliders.overlapColliders)
             {
                 Array.Clear(detectedDamageTargets, 0, maxDetectionCount);
-                overlapCollider.overlapCollider.OverlapCollider(contactFilter, detectedDamageTargets);
+                overlapCollider.collider.OverlapCollider(contactFilter, detectedDamageTargets);
                 damageTargets = damageTargets
                     .Union(detectedDamageTargets.Where(target => {
                         if (target == null) return false;
                         Entity targetEntity = target.GetComponentInParent<Entity>();
                         float targetEntityFeetHeight = targetEntity.entityDetection.currentEntityHeight;
                         float targetEntityHeadHeight = targetEntityFeetHeight + targetEntity.currentEntityStature;
-                        float colliderBottomHeight = overlapCollider.overlapCollider.gameObject.transform.position.z + entity.entityDetection.currentEntityHeight;
+                        float colliderBottomHeight = overlapCollider.collider.gameObject.transform.position.z + entity.entityDetection.currentEntityHeight;
                         float colliderTopHeight = colliderBottomHeight + overlapCollider.height;
                         return !(targetEntityHeadHeight <= colliderBottomHeight || colliderTopHeight <= targetEntityFeetHeight);
                     })).ToList();
@@ -267,7 +272,7 @@ public abstract class Combat : CoreComponent
     public virtual void GetHealthDamage(DamageComponent damageComponent, bool isParrying, bool isBlocking)
     {
         Entity sourceEntity = damageComponent.pertainedCombatAbility.sourceEntity;
-        float healthDamage = damageComponent.healthDamage.accumulationPerLevel.Evaluate(entity.entityStats.level.currentValue);
+        float healthDamage = damageComponent.healthDamage.accumulationPerLevel.Evaluate(entity.entityStats.power.currentValue);
 
         if (damageComponent.pertainedCombatAbility.canBeParried)
         {
@@ -334,7 +339,7 @@ public abstract class Combat : CoreComponent
     public virtual void GetPostureDamage(DamageComponent damageComponent, bool isParrying, bool isShielding)
     {
         Entity sourceEntity = damageComponent.pertainedCombatAbility.sourceEntity;
-        float postureDamage = damageComponent.postureDamage.accumulationPerLevel.Evaluate(entity.entityStats.level.currentValue);
+        float postureDamage = damageComponent.postureDamage.accumulationPerLevel.Evaluate(entity.entityStats.power.currentValue);
 
         if (damageComponent.pertainedCombatAbility.canBeParried)
         {
@@ -552,7 +557,7 @@ public abstract class Combat : CoreComponent
 
             foreach (OverlapCollider overlapCollider in overlapColliders)
             {
-                overlapCollider.overlapCollider.OverlapCollider(blockParryContactFilter, parryColliders);
+                overlapCollider.collider.OverlapCollider(blockParryContactFilter, parryColliders);
                 BlockParry parry = parryColliders.Select(collider => collider.GetComponent<BlockParry>()).Where(blockParry => blockParry.pertainedCombatAbility.sourceEntity.Equals(entity)).FirstOrDefault();
 
                 if (parry != null)
@@ -578,7 +583,7 @@ public abstract class Combat : CoreComponent
 
             foreach (OverlapCollider overlapCollider in overlapColliders)
             {
-                overlapCollider.overlapCollider.OverlapCollider(blockParryContactFilter, blockColliders);
+                overlapCollider.collider.OverlapCollider(blockParryContactFilter, blockColliders);
                 BlockParry block = blockColliders.Select(collider => collider.GetComponent<BlockParry>()).Where(blockParry => blockParry.pertainedCombatAbility.sourceEntity.Equals(entity)).FirstOrDefault();
 
                 if (block != null)

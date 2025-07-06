@@ -9,6 +9,9 @@ public class PlayerCombat : Combat
     [field: SerializeField] public List<CombatAbilityWithColliders> dashAttack { get; private set; }
     [field: SerializeField] public List<CombatAbilityWithColliders> strongDashAttack { get; private set; }
     [field: SerializeField] public List<CombatAbilityWithColliders> meleeAttack { get; private set; }
+    [field: SerializeField] public List<CombatAbilityWithColliders> rangedAttack { get; private set; }
+    [field: SerializeField] public List<CombatAbilityWithColliders> whirlwind { get; private set; }
+    [field: SerializeField] public List<CombatAbilityWithColliders> chargeAttack { get; private set; }
     [field: SerializeField] public CombatAbilityWithColliders strongAttack { get; private set; }
     [field: SerializeField] public CombatAbilityWithColliders blockParry { get; private set; }
     // [field: SerializeField] public CombatAbilityWithColliders aerialBlockParryArea { get; private set; }
@@ -52,14 +55,14 @@ public class PlayerCombat : Combat
         foreach (OverlapCollider overlapCollider in combatAbilityWithColliders.overlapColliders)
         {
             Array.Clear(detectedDamageTargets, 0, maxDetectionCount);
-            overlapCollider.overlapCollider.OverlapCollider(contactFilter, detectedDamageTargets);
+            overlapCollider.collider.OverlapCollider(contactFilter, detectedDamageTargets);
             damageTargets = damageTargets
                 .Union(detectedDamageTargets.Where(target => {
                     if (target == null) return false;
                     Entity targetEntity = target.GetComponentInParent<Entity>();
                     float targetEntityFeetHeight = targetEntity.entityDetection.currentEntityHeight;
                     float targetEntityHeadHeight = targetEntityFeetHeight + targetEntity.currentEntityStature;
-                    float colliderBottomHeight = overlapCollider.overlapCollider.gameObject.transform.position.z + entity.entityDetection.currentEntityHeight;
+                    float colliderBottomHeight = overlapCollider.collider.gameObject.transform.position.z + entity.entityDetection.currentEntityHeight;
                     float colliderTopHeight = colliderBottomHeight + overlapCollider.height;
                     return !(targetEntityHeadHeight <= colliderBottomHeight || colliderTopHeight <= targetEntityFeetHeight);
                 })).ToList();

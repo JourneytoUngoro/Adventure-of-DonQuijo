@@ -33,4 +33,10 @@ public class PlayerData : EntityData
 
     [field: Header("Attack State")]
     [field: SerializeField] public float attackStrokeTime { get; private set; } = 2.0f;
+
+    [field: Header("Whirlwind State")]
+    [field: SerializeField] public float whirlwindCoolDownTime { get; private set; } = 1.0f;
+
+    [field: Header("ChargeAttack State")]
+    [field: SerializeField] public float chargeAttackCoolDownTime { get; private set; } = 1.0f;
 }

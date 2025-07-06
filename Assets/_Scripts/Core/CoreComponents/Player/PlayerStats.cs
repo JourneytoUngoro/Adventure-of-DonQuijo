@@ -22,13 +22,13 @@ public class PlayerStats : Stats, IDataPersistance
         health.OnCurrentValueMin += () => { player.playerStateMachine.ChangeState(player.deadState); };
         // posture.OnCurrentValueMin += () => { player.playerStateMachine.ChangeState(player.stunnedState); };
 
-        experience.OnCurrentValueMax += () => { level.IncreaseCurrentValue(1); };
-        level.OnCurrentValueChange += () =>
+        experience.OnCurrentValueMax += () => { power.IncreaseCurrentValue(1); };
+        power.OnCurrentValueChange += () =>
         {
-            health.IncreaseMaxValue(health.graph.incrementPerLevel.Evaluate(level.currentValue));
-            health.IncreaseCurrentValue(health.graph.incrementPerLevel.Evaluate(level.currentValue));
-            posture.IncreaseMaxValue(posture.graph.incrementPerLevel.Evaluate(level.currentValue));
-            posture.IncreaseCurrentValue(posture.graph.incrementPerLevel.Evaluate(level.currentValue));
+            health.IncreaseMaxValue(health.graph.incrementPerLevel.Evaluate(power.currentValue));
+            health.IncreaseCurrentValue(health.graph.incrementPerLevel.Evaluate(power.currentValue));
+            posture.IncreaseMaxValue(posture.graph.incrementPerLevel.Evaluate(power.currentValue));
+            posture.IncreaseCurrentValue(posture.graph.incrementPerLevel.Evaluate(power.currentValue));
         };
     }
 
@@ -39,7 +39,7 @@ public class PlayerStats : Stats, IDataPersistance
 
     public void SaveData(GameData data)
     {
-        data.currentLevel = (int)level.currentValue;
+        data.currentLevel = (int)power.currentValue;
         data.currentHealth = health.currentValue;
         data.currentPosture = posture.currentValue;
     }

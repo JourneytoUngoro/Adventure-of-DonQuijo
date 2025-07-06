@@ -8,7 +8,7 @@ public class PlayerDodgeState : PlayerAbilityState
     public PlayerDodgeState(Player player, string animBoolName) : base(player, animBoolName)
     {
         available = true;
-        abilityCoolDownTimer = new Timer(playerData.dodgeCoolDownTime);
+        abilityCoolDownTimer.ChangeDuration(playerData.dodgeCoolDownTime);
         abilityCoolDownTimer.timerAction += () => { available = true; };
     }
 
