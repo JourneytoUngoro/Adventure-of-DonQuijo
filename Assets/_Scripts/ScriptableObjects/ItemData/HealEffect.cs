@@ -8,12 +8,11 @@ public class HealEffect : ItemEffect
     [SerializeField] private float percentage = 1.0f;
     public override void ApplyEffect(Player target)
     {
-        float debugging = target.stats.health.currentValue;
+        float currentHealValue = target.stats.health.currentValue;
+        float additionalHealAmount = target.stats.health.currentValue * percentage;
 
-        float healAmount = target.stats.health.currentValue * percentage;
+        target.stats.health.IncreaseCurrentValue(additionalHealAmount);
 
-        target.stats.health.IncreaseCurrentValue(healAmount);
-
-        Debug.Log($"Heal Effect : {debugging} + {healAmount}  = {target.stats.health.currentValue} ");
+        Debug.Log($"apply heal effect : {currentHealValue} + {additionalHealAmount}  = {target.stats.health.currentValue} ");
     }
 }

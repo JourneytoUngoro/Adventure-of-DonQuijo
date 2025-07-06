@@ -11,12 +11,11 @@ public class SpeedEffect : ItemEffect
         // TODO : speed로 변경해야 한다 
 
         // 최대 속도 10% 증가
-        float debugging = target.stats.speed.currentValue;
-
+        float currentSpeedValue = target.stats.speed.currentValue;
         float speedAmount = target.stats.speed.maxValue * percentage;
 
         target.stats.speed.IncreaseMaxValue(speedAmount);
 
-        Debug.Log($"Speed Effect : {debugging} + {speedAmount}  = {target.stats.speed.currentValue} ");
+        Debug.Log($"apply speed effect :{currentSpeedValue} + {speedAmount}  = {target.stats.speed.currentValue} ");
     }
 }

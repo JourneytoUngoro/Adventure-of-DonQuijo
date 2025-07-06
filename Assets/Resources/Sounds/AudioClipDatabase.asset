@@ -53,3 +53,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: d41cc594ba7a34f4780de4c83a58ac88, type: 3}
   - key: playerAttack3SFX
     clip: {fileID: 8300000, guid: ba8864fa2435f3d48a368c21c4ddbf0f, type: 3}
+  - key: coinCollectSFX
+    clip: {fileID: 8300000, guid: ce67402fbcf52434dbdda26ac4a06175, type: 3}
+  - key: coinDropSFX
+    clip: {fileID: 8300000, guid: 9b1d0404800a4b24f90851ffa68fa77d, type: 3}

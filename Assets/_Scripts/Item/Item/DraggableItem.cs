@@ -1,4 +1,4 @@
-using Ink.Parsed;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,17 +18,20 @@ public class DraggableItem : DraggableObject<Item>
     public override void DroppedOutsideSlot()
     {
         base.DroppedOutsideSlot();
+        Manager.Instance.itemManager.CheckAbandonItem(this, element);
 
+    }
+
+    public void ConfirmAbandonItem()
+    {
         transform.SetParent(parentTransform);
         elementImage.raycastTarget = true;
-
-        //Manager.Instance.itemManager.CheckAbandonItem(element, CancelAbandonItem);
-
     }
 
     public void CancelAbandonItem()
     {
-
+        transform.SetParent(parentTransform);
+        elementImage.raycastTarget = true;
     }
 
 

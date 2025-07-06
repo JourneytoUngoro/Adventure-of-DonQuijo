@@ -63,8 +63,8 @@ public class VendingMachinePopupUI : MonoBehaviour
 
             slots[i - 1].SetItemData(item);
             slots[i - 1].slotId = i - 1;
-
         }
+
         SetSelectedSlot(slots[0]);
         StartSelectSlotUI(selectedSlot);
     }
@@ -73,7 +73,6 @@ public class VendingMachinePopupUI : MonoBehaviour
     private void SetEvents()
     {
         vmPopup.confirmButton.onClick.RemoveAllListeners();
-
         vmPopup.confirmButton.onClick.AddListener(() => { vmPopup.HideUI(); });
 
         vmPopup.SetOnShow(() => StartSelectSlotUI(slots[0]));
@@ -109,7 +108,7 @@ public class VendingMachinePopupUI : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(selectedSlot.gameObject);
     }
 
-    // 적어도 하나의 슬롯은 언제나 활성화
+    // active at least one slot
     private void KeepSelectedSlot()
     {
         GameObject selectedObject = EventSystem.current.currentSelectedGameObject;
@@ -130,7 +129,7 @@ public class VendingMachinePopupUI : MonoBehaviour
         guidePopup.SetDynamicPopupEvent(OnClickGuideConfirmBtn, OnClickGuideCancelBtn);
     }
 
-    private void ShowPurchaseGuide()
+    public void ShowPurchaseGuide()
     {
         guidePopup.SetPopupInfo($"{selectedSlot.item.details.label} 아이템을 \n구매하시겠습니까?");
         guidePopup.ShowUI();

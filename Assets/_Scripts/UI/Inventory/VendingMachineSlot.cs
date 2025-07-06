@@ -11,6 +11,9 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
 
     public int itemId;
     public TextMeshProUGUI itemName;
+    public TextMeshProUGUI itemPrice;
+    public TextMeshProUGUI itemInfo;
+
     public Image itemImage;
     [HideInInspector] public Item item;
 
@@ -31,6 +34,8 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
         backgroundImage = GetComponentInParent<Image>();
         originalSprite = backgroundImage.sprite;
 
+        GetComponent<Button>().onClick.AddListener(OnClickVMSlot);
+
         Debug.Assert(vmUI != null, "VendingMachinePopupUI is null!");
     }
 
@@ -40,6 +45,9 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
         this.item = item;
         itemId = item.id;
         itemName.text = item.details.label;
+        itemInfo.text = item.details.description;
+        itemPrice.text = "$ "+ item.details.price.ToString();
+
         itemImage.sprite = item.details.icon;
     }
 
@@ -68,5 +76,11 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
             scaler.OnUnSelectedState();
             backgroundImage.sprite = originalSprite;
         }
+    }
+
+    public void OnClickVMSlot()
+    {
+        vmUI.ShowPurchaseGuide();
+        Debug.Log("on click vm slot");
     }
 }

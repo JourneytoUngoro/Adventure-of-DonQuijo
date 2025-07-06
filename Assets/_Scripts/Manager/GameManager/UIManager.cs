@@ -57,11 +57,11 @@ public class UIManager : MonoBehaviour
 
         if (popupOpened && Manager.Instance.inputHandler.IsCharacterControlEnabled())
         {
-            Manager.Instance.inputHandler.DisableCharacterControl();
+            Manager.Instance.inputHandler.SetCharacterControlEnabled(false);
         }
         else if (!popupOpened && !Manager.Instance.inputHandler.IsCharacterControlEnabled())
         {
-            Manager.Instance.inputHandler.EnableCharacterControl();
+            Manager.Instance.inputHandler.SetCharacterControlEnabled(true);
         }
         // Debug.Log("CharacterControl is enabled : " + Manager.Instance.inputHandler.IsCharacterControlEnabled());
     }
@@ -167,7 +167,7 @@ public class UIManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "SampleScene")
         {
-            uiCanvas = GameObject.Find("Test Canvas").transform;
+            uiCanvas = GameObject.Find("Overlay Canvas").transform;
         }
     }
     #endregion

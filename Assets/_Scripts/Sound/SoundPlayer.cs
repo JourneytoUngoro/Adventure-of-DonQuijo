@@ -5,6 +5,9 @@ using UnityEngine.Audio;
 
 public class SoundPlayer : MonoBehaviour
 {
+    public bool isPlaying;
+    public bool canPlaying;
+
     private AudioSource audioSource;
     private System.Action<SoundPlayer> onFinished;
 
@@ -12,6 +15,8 @@ public class SoundPlayer : MonoBehaviour
     {
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
+        isPlaying = false;
+        canPlaying = true;
     }
 
     public void Play(AudioClip clip, AudioMixerGroup mixer, float volume, System.Action<SoundPlayer> onFinished)
@@ -21,9 +26,11 @@ public class SoundPlayer : MonoBehaviour
         audioSource.volume = volume;
         audioSource.outputAudioMixerGroup = mixer;
 
+        isPlaying = true;
         audioSource.Play();
 
         Invoke(nameof(ReturnToPool), clip.length);
+        isPlaying = false;
     }
 
     public void Play(AudioClip clip, AudioMixerGroup mixer, float volume, System.Action<SoundPlayer> onFinished, Transform spawnsTransform, float pitch)
@@ -35,6 +42,7 @@ public class SoundPlayer : MonoBehaviour
         audioSource.pitch = pitch;
         audioSource.outputAudioMixerGroup = mixer;
 
+        isPlaying = true;
         audioSource.Play();
 
         Invoke(nameof(ReturnToPool), clip.length);
@@ -43,6 +51,11 @@ public class SoundPlayer : MonoBehaviour
     private void ReturnToPool()
     {
         onFinished?.Invoke(this);
+    }
+
+    public void StopPlayingAudioClip()
+    {
+        audioSource.Stop();
     }
 
 }

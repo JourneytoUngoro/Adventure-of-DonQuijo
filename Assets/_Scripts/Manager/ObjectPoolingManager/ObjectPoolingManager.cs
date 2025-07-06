@@ -65,6 +65,7 @@ public class ObjectPoolingManager : MonoBehaviour
     private void OnReturnToPool(GameObject pooledObject)
     {
         pooledObject.GetComponent<PooledObject>().isPooled = true;
+        Debug.Log("ReturnToPool 실행");
         pooledObject.SetActive(false);
     }
 
@@ -88,6 +89,7 @@ public class ObjectPoolingManager : MonoBehaviour
 
     public void ReleaseGameObject(GameObject pooledObject)
     {
+        Debug.Log("ObjectPoolingManager.ReleaseGameObject()");
         pooledObject.GetComponent<PooledObject>().ReleaseObject();
     }
 }
