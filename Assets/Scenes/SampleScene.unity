@@ -2193,7 +2193,7 @@ RectTransform:
   m_Father: {fileID: 1808919788}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3003,115 +3003,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!1001 &525633230
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7357477938123498745, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_Name
-      value: Overlay Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 7357477938123498745, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1066460423}
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
---- !u!224 &525633231 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
-  m_PrefabInstance: {fileID: 525633230}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &581224613
 GameObject:
   m_ObjectHideFlags: 0
@@ -3188,29 +3079,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d09e11ea96e7864f85b7bdbe2f30f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <level>k__BackingField:
-    reverseSlider: 0
-    slider: {fileID: 0}
-    <maxValue>k__BackingField: 99
-    <minValue>k__BackingField: 1
-    <currentValue>k__BackingField: 1
-    <enableRecovery>k__BackingField: 0
-    <recoveryStartTime>k__BackingField: 0
-    <recoveryDuration>k__BackingField: 0
-    <recoveryValue>k__BackingField: 0
-    <graph>k__BackingField:
-      <incrementPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <accumulationPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
   <health>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 1808919789}
@@ -3329,7 +3197,53 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  <healthLevel>k__BackingField:
+  <power>k__BackingField:
+    reverseSlider: 0
+    slider: {fileID: 0}
+    <maxValue>k__BackingField: 0
+    <minValue>k__BackingField: 0
+    <currentValue>k__BackingField: 0
+    <enableRecovery>k__BackingField: 0
+    <recoveryStartTime>k__BackingField: 0
+    <recoveryDuration>k__BackingField: 0
+    <recoveryValue>k__BackingField: 0
+    <graph>k__BackingField:
+      <incrementPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <accumulationPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  <speed>k__BackingField:
+    reverseSlider: 0
+    slider: {fileID: 0}
+    <maxValue>k__BackingField: 0
+    <minValue>k__BackingField: 0
+    <currentValue>k__BackingField: 0
+    <enableRecovery>k__BackingField: 0
+    <recoveryStartTime>k__BackingField: 0
+    <recoveryDuration>k__BackingField: 0
+    <recoveryValue>k__BackingField: 0
+    <graph>k__BackingField:
+      <incrementPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <accumulationPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  <durability>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
     <maxValue>k__BackingField: 0
@@ -3376,52 +3290,6 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   <takenDamageMultiplier>k__BackingField:
-    reverseSlider: 0
-    slider: {fileID: 0}
-    <maxValue>k__BackingField: 0
-    <minValue>k__BackingField: 0
-    <currentValue>k__BackingField: 0
-    <enableRecovery>k__BackingField: 0
-    <recoveryStartTime>k__BackingField: 0
-    <recoveryDuration>k__BackingField: 0
-    <recoveryValue>k__BackingField: 0
-    <graph>k__BackingField:
-      <incrementPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <accumulationPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-  <speed>k__BackingField:
-    reverseSlider: 0
-    slider: {fileID: 0}
-    <maxValue>k__BackingField: 0
-    <minValue>k__BackingField: 0
-    <currentValue>k__BackingField: 0
-    <enableRecovery>k__BackingField: 0
-    <recoveryStartTime>k__BackingField: 0
-    <recoveryDuration>k__BackingField: 0
-    <recoveryValue>k__BackingField: 0
-    <graph>k__BackingField:
-      <incrementPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <accumulationPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-  <power>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
     <maxValue>k__BackingField: 0
@@ -3690,37 +3558,6 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
---- !u!1 &619222341
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 619222342}
-  m_Layer: 0
-  m_Name: Shadow
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &619222342
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 619222341}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1986507542}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -4178,7 +4015,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!195 &693722041
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4456,105 +4293,6 @@ PolygonCollider2D:
       - {x: -100, y: 40.5}
       - {x: 80, y: 223}
   m_UseDelaunayMesh: 0
---- !u!1 &724180031
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 724180032}
-  - component: {fileID: 724180034}
-  - component: {fileID: 724180033}
-  m_Layer: 0
-  m_Name: Object
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &724180032
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 724180031}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1986507542}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &724180033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 724180031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 787a36c0a38d70d4ba7f930a640d3f22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocity: 0
-  gravityScale: 0
---- !u!212 &724180034
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 724180031}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!1 &735092257
 GameObject:
   m_ObjectHideFlags: 0
@@ -5353,7 +5091,7 @@ MonoBehaviour:
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: dbb1736a7ce762f45aa0c4c3a4081319, type: 2}
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 2105536770}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 57
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 0}
@@ -5366,7 +5104,7 @@ MonoBehaviour:
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: ed95777e820ffc04d866753536ffc808, type: 2}
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 2105536770}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 57
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 0}
@@ -5376,7 +5114,7 @@ MonoBehaviour:
   <meleeAttack>k__BackingField:
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 1553440990}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 50
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 2050915765}
@@ -5385,7 +5123,7 @@ MonoBehaviour:
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: af954c9c6565acb45af7490fa333777b, type: 2}
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 606638334}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 50
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 2050915765}
@@ -5394,17 +5132,29 @@ MonoBehaviour:
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: af954c9c6565acb45af7490fa333777b, type: 2}
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 1040118945}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 100
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 2050915765}
       <clockwiseAngle>k__BackingField: 0
       <counterClockwiseAngle>k__BackingField: 0
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: 35843011b2072d84887bbe5dff588288, type: 2}
+  <rangedAttack>k__BackingField:
+  - <visualize>k__BackingField: 0
+    <overlapColliders>k__BackingField:
+    - <collider>k__BackingField: {fileID: 0}
+      <height>k__BackingField: 0
+      <limitAngle>k__BackingField: 0
+      <angleCheckBaseTransform>k__BackingField: {fileID: 2116623946}
+      <clockwiseAngle>k__BackingField: 0
+      <counterClockwiseAngle>k__BackingField: 0
+    <combatAbilityData>k__BackingField: {fileID: 0}
+  <whirlwind>k__BackingField: []
+  <chargeAttack>k__BackingField: []
   <strongAttack>k__BackingField:
     <visualize>k__BackingField: 1
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 1566565643}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 50
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 1566565642}
@@ -5414,7 +5164,7 @@ MonoBehaviour:
   <blockParry>k__BackingField:
     <visualize>k__BackingField: 1
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 1675927721}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 80
       <limitAngle>k__BackingField: 1
       <angleCheckBaseTransform>k__BackingField: {fileID: 1475918893}
@@ -6516,7 +6266,7 @@ MonoBehaviour:
   <meleeAttack0>k__BackingField:
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 1539126973}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 65
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 0}
@@ -6525,7 +6275,7 @@ MonoBehaviour:
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: 7d425a2ac4117764fae082534af48350, type: 2}
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 128079248}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 65
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 0}
@@ -6534,7 +6284,7 @@ MonoBehaviour:
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: 2769ce8e88bb57f4487b67e62754d2e1, type: 2}
   - <visualize>k__BackingField: 1
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 1730606981}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 65
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 0}
@@ -6544,7 +6294,7 @@ MonoBehaviour:
   <meleeAttack1>k__BackingField:
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 1668161503}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 65
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 0}
@@ -6553,7 +6303,7 @@ MonoBehaviour:
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: c5a516785bbfc9c4e87be46c4f89fc1c, type: 2}
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 1333758786}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 65
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 0}
@@ -6562,7 +6312,7 @@ MonoBehaviour:
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: 6c4bfe4ce45e1cb42986b597a09897eb, type: 2}
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 672755525}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 65
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 0}
@@ -6572,7 +6322,7 @@ MonoBehaviour:
   <meleeAttack2>k__BackingField:
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 1477285803}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 65
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 0}
@@ -6581,7 +6331,7 @@ MonoBehaviour:
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: 9d5686fe52aa1474484eddb9ab6a9f01, type: 2}
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 1861337781}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 65
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 0}
@@ -6594,7 +6344,7 @@ MonoBehaviour:
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: 4413a0a122285a94b946e34eea031bdd, type: 2}
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 1879240818}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 57
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 0}
@@ -6607,7 +6357,7 @@ MonoBehaviour:
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: d7ecbf9c4f3fa8540a270552358b603b, type: 2}
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 248825002}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 80
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 0}
@@ -6617,7 +6367,7 @@ MonoBehaviour:
   <wideRangeAttack>k__BackingField:
     <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 1837328807}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 65
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 0}
@@ -6627,7 +6377,7 @@ MonoBehaviour:
   <block>k__BackingField:
     <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 406436103}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 0
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 1315829694}
@@ -6637,7 +6387,7 @@ MonoBehaviour:
   <parry>k__BackingField:
     <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 406436103}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 0
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 1315829694}
@@ -6739,364 +6489,6 @@ MonoBehaviour:
   m_MinRegionArea: 0
   m_HideEditorLogs: 0
   m_NavMeshData: {fileID: 23800000, guid: fc2f514181298da42aacdb443a84bb61, type: 2}
---- !u!1001 &1066460422
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 525633231}
-    m_Modifications:
-    - target: {fileID: 310891092059954161, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 310891092059954161, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 310891092059954161, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 77.29315
-      objectReference: {fileID: 0}
-    - target: {fileID: 310891092059954161, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -275.14246
-      objectReference: {fileID: 0}
-    - target: {fileID: 1014563936004252195, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_fontSize
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 1014563936004252195, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 1325374956493983103, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1325374956493983103, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1325374956493983103, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 1325374956493983103, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -76.4162
-      objectReference: {fileID: 0}
-    - target: {fileID: 1491410991337759771, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1491410991337759771, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1491410991337759771, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 1491410991337759771, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 1491410991337759771, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1491410991337759771, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2423661163321412339, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2423661163321412339, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2423661163321412339, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2423661163321412339, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2423661163321412339, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2423661163321412339, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -50
-      objectReference: {fileID: 0}
-    - target: {fileID: 3232912777825060872, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_Name
-      value: Inventory
-      objectReference: {fileID: 0}
-    - target: {fileID: 3549009493246555417, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3549009493246555417, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3549009493246555417, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 77.29315
-      objectReference: {fileID: 0}
-    - target: {fileID: 3549009493246555417, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -91.71416
-      objectReference: {fileID: 0}
-    - target: {fileID: 4635086384589302259, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4635086384589302259, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4635086384589302259, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4635086384589302259, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4635086384589302259, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4635086384589302259, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4806521639107734267, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4806521639107734267, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4806521639107734267, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4806521639107734267, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4806521639107734267, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4806521639107734267, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4974248716148123899, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -727
-      objectReference: {fileID: 0}
-    - target: {fileID: 4974248716148123899, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 353
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343767671912257809, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343767671912257809, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343767671912257809, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343767671912257809, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343767671912257809, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343767671912257809, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -50
-      objectReference: {fileID: 0}
-    - target: {fileID: 5489901863603193105, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5489901863603193105, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5489901863603193105, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5489901863603193105, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -76.4162
-      objectReference: {fileID: 0}
-    - target: {fileID: 5923671725009781637, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5923671725009781637, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5923671725009781637, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5923671725009781637, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5923671725009781637, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 5923671725009781637, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -50
-      objectReference: {fileID: 0}
-    - target: {fileID: 7323189117792958705, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7323189117792958705, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7323189117792958705, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 77.29315
-      objectReference: {fileID: 0}
-    - target: {fileID: 7323189117792958705, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -458.5708
-      objectReference: {fileID: 0}
-    - target: {fileID: 7863855159543947416, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7863855159543947416, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7863855159543947416, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7863855159543947416, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7863855159543947416, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7863855159543947416, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7863855159543947416, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7863855159543947416, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7863855159543947416, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7863855159543947416, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7863855159543947416, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7863855159543947416, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7863855159543947416, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7863855159543947416, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7863855159543947416, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7863855159543947416, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7863855159543947416, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7863855159543947416, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7863855159543947416, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7863855159543947416, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8098659102779528951, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8098659102779528951, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8098659102779528951, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 8098659102779528951, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -76.4162
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
---- !u!224 &1066460423 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7863855159543947416, guid: 0554da25811d97a42abb67cb1ad4387e, type: 3}
-  m_PrefabInstance: {fileID: 1066460422}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1066483418
 GameObject:
   m_ObjectHideFlags: 0
@@ -10327,29 +9719,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d09e11ea96e7864f85b7bdbe2f30f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <level>k__BackingField:
-    reverseSlider: 0
-    slider: {fileID: 0}
-    <maxValue>k__BackingField: 99
-    <minValue>k__BackingField: 1
-    <currentValue>k__BackingField: 1
-    <enableRecovery>k__BackingField: 0
-    <recoveryStartTime>k__BackingField: 0
-    <recoveryDuration>k__BackingField: 0
-    <recoveryValue>k__BackingField: 0
-    <graph>k__BackingField:
-      <incrementPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <accumulationPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
   <health>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 1804172494}
@@ -10468,7 +9837,53 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  <healthLevel>k__BackingField:
+  <power>k__BackingField:
+    reverseSlider: 0
+    slider: {fileID: 0}
+    <maxValue>k__BackingField: 0
+    <minValue>k__BackingField: 0
+    <currentValue>k__BackingField: 0
+    <enableRecovery>k__BackingField: 0
+    <recoveryStartTime>k__BackingField: 0
+    <recoveryDuration>k__BackingField: 0
+    <recoveryValue>k__BackingField: 0
+    <graph>k__BackingField:
+      <incrementPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <accumulationPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  <speed>k__BackingField:
+    reverseSlider: 0
+    slider: {fileID: 0}
+    <maxValue>k__BackingField: 0
+    <minValue>k__BackingField: 0
+    <currentValue>k__BackingField: 0
+    <enableRecovery>k__BackingField: 0
+    <recoveryStartTime>k__BackingField: 0
+    <recoveryDuration>k__BackingField: 0
+    <recoveryValue>k__BackingField: 0
+    <graph>k__BackingField:
+      <incrementPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <accumulationPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  <durability>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
     <maxValue>k__BackingField: 0
@@ -10515,52 +9930,6 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   <takenDamageMultiplier>k__BackingField:
-    reverseSlider: 0
-    slider: {fileID: 0}
-    <maxValue>k__BackingField: 0
-    <minValue>k__BackingField: 0
-    <currentValue>k__BackingField: 0
-    <enableRecovery>k__BackingField: 0
-    <recoveryStartTime>k__BackingField: 0
-    <recoveryDuration>k__BackingField: 0
-    <recoveryValue>k__BackingField: 0
-    <graph>k__BackingField:
-      <incrementPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <accumulationPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-  <speed>k__BackingField:
-    reverseSlider: 0
-    slider: {fileID: 0}
-    <maxValue>k__BackingField: 0
-    <minValue>k__BackingField: 0
-    <currentValue>k__BackingField: 0
-    <enableRecovery>k__BackingField: 0
-    <recoveryStartTime>k__BackingField: 0
-    <recoveryDuration>k__BackingField: 0
-    <recoveryValue>k__BackingField: 0
-    <graph>k__BackingField:
-      <incrementPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <accumulationPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-  <power>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
     <maxValue>k__BackingField: 0
@@ -11262,7 +10631,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1706157343
 Transform:
   m_ObjectHideFlags: 0
@@ -11720,7 +11089,7 @@ MonoBehaviour:
   <meleeAttack0>k__BackingField:
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 788303053}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 30
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 0}
@@ -11729,7 +11098,7 @@ MonoBehaviour:
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: 7d425a2ac4117764fae082534af48350, type: 2}
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 314367489}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 65
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 0}
@@ -11739,7 +11108,7 @@ MonoBehaviour:
   <meleeAttack1>k__BackingField:
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 351621906}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 65
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 0}
@@ -11749,7 +11118,7 @@ MonoBehaviour:
   <meleeAttack2>k__BackingField:
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 782800779}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 30
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 0}
@@ -11982,7 +11351,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2116623946}
   m_Father: {fileID: 997863574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1804172492
@@ -12302,29 +11672,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbd99c3dc3cac641b775f41e2521e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <level>k__BackingField:
-    reverseSlider: 0
-    slider: {fileID: 0}
-    <maxValue>k__BackingField: 99
-    <minValue>k__BackingField: 1
-    <currentValue>k__BackingField: 1
-    <enableRecovery>k__BackingField: 0
-    <recoveryStartTime>k__BackingField: 0
-    <recoveryDuration>k__BackingField: -1
-    <recoveryValue>k__BackingField: 0
-    <graph>k__BackingField:
-      <incrementPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <accumulationPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
   <health>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 1084703284}
@@ -12515,7 +11862,53 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  <healthLevel>k__BackingField:
+  <power>k__BackingField:
+    reverseSlider: 0
+    slider: {fileID: 0}
+    <maxValue>k__BackingField: 0
+    <minValue>k__BackingField: 0
+    <currentValue>k__BackingField: 0
+    <enableRecovery>k__BackingField: 0
+    <recoveryStartTime>k__BackingField: 0
+    <recoveryDuration>k__BackingField: 0
+    <recoveryValue>k__BackingField: 0
+    <graph>k__BackingField:
+      <incrementPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <accumulationPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  <speed>k__BackingField:
+    reverseSlider: 0
+    slider: {fileID: 0}
+    <maxValue>k__BackingField: 0
+    <minValue>k__BackingField: 0
+    <currentValue>k__BackingField: 0
+    <enableRecovery>k__BackingField: 0
+    <recoveryStartTime>k__BackingField: 0
+    <recoveryDuration>k__BackingField: 0
+    <recoveryValue>k__BackingField: 0
+    <graph>k__BackingField:
+      <incrementPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <accumulationPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  <durability>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
     <maxValue>k__BackingField: 0
@@ -12562,52 +11955,6 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   <takenDamageMultiplier>k__BackingField:
-    reverseSlider: 0
-    slider: {fileID: 0}
-    <maxValue>k__BackingField: 0
-    <minValue>k__BackingField: 0
-    <currentValue>k__BackingField: 0
-    <enableRecovery>k__BackingField: 0
-    <recoveryStartTime>k__BackingField: 0
-    <recoveryDuration>k__BackingField: 0
-    <recoveryValue>k__BackingField: 0
-    <graph>k__BackingField:
-      <incrementPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <accumulationPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-  <speed>k__BackingField:
-    reverseSlider: 0
-    slider: {fileID: 0}
-    <maxValue>k__BackingField: 0
-    <minValue>k__BackingField: 0
-    <currentValue>k__BackingField: 0
-    <enableRecovery>k__BackingField: 0
-    <recoveryStartTime>k__BackingField: 0
-    <recoveryDuration>k__BackingField: 0
-    <recoveryValue>k__BackingField: 0
-    <graph>k__BackingField:
-      <incrementPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <accumulationPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-  <power>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
     <maxValue>k__BackingField: 0
@@ -13311,7 +12658,7 @@ RectTransform:
   m_Father: {fileID: 1289957746}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -13432,136 +12779,6 @@ Transform:
   m_Children:
   - {fileID: 1566626079}
   - {fileID: 1396298568}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1986507538
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1986507542}
-  - component: {fileID: 1986507541}
-  - component: {fileID: 1986507540}
-  - component: {fileID: 1986507539}
-  m_Layer: 0
-  m_Name: Projectile
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1986507539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1986507538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59ccae47cec2bfa4e84254fb5c767f92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPooled: 1
-  <combatAbility>k__BackingField: {fileID: 0}
-  whatIsDamageable:
-    serializedVersion: 2
-    m_Bits: 0
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 0
-  piercingProjectile: 0
-  autoDestructionTime: 10
---- !u!61 &1986507540
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1986507538}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!50 &1986507541
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1986507538}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!4 &1986507542
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1986507538}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 120, y: -95, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 724180032}
-  - {fileID: 619222342}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1991625791
@@ -14855,6 +14072,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 40, y: 20}
   m_EdgeRadius: 0
+--- !u!1 &2116623945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2116623946}
+  m_Layer: 6
+  m_Name: ProjectileFireBaseDirection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2116623946
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116623945}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1784545792}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2131912319
 GameObject:
   m_ObjectHideFlags: 0
@@ -15206,29 +14454,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbd99c3dc3cac641b775f41e2521e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <level>k__BackingField:
-    reverseSlider: 0
-    slider: {fileID: 0}
-    <maxValue>k__BackingField: 99
-    <minValue>k__BackingField: 1
-    <currentValue>k__BackingField: 1
-    <enableRecovery>k__BackingField: 0
-    <recoveryStartTime>k__BackingField: 0
-    <recoveryDuration>k__BackingField: -1
-    <recoveryValue>k__BackingField: 0
-    <graph>k__BackingField:
-      <incrementPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <accumulationPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
   <health>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
@@ -15244,40 +14469,31 @@ MonoBehaviour:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0
-          value: 100
-          inSlope: -90
-          outSlope: -90
-          tangentMode: 34
+          time: 1
+          value: 15
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
           weightedMode: 0
           inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 10
-          inSlope: -45
-          outSlope: -45
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          outWeight: 0
         - serializedVersion: 3
           time: 2
-          value: 10
+          value: 15
           inSlope: 0
           outSlope: 0
-          tangentMode: 34
+          tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0
         - serializedVersion: 3
           time: 3
-          value: 10
+          value: 15
           inSlope: 0
           outSlope: 0
-          tangentMode: 34
+          tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -15286,17 +14502,8 @@ MonoBehaviour:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0
-          value: 100
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
           time: 1
-          value: 110
+          value: 15
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -15305,7 +14512,7 @@ MonoBehaviour:
           outWeight: 0
         - serializedVersion: 3
           time: 2
-          value: 120
+          value: 30
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -15314,7 +14521,7 @@ MonoBehaviour:
           outWeight: 0
         - serializedVersion: 3
           time: 3
-          value: 130
+          value: 45
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -15419,7 +14626,53 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  <healthLevel>k__BackingField:
+  <power>k__BackingField:
+    reverseSlider: 0
+    slider: {fileID: 0}
+    <maxValue>k__BackingField: 0
+    <minValue>k__BackingField: 0
+    <currentValue>k__BackingField: 0
+    <enableRecovery>k__BackingField: 0
+    <recoveryStartTime>k__BackingField: 0
+    <recoveryDuration>k__BackingField: 0
+    <recoveryValue>k__BackingField: 0
+    <graph>k__BackingField:
+      <incrementPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <accumulationPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  <speed>k__BackingField:
+    reverseSlider: 0
+    slider: {fileID: 0}
+    <maxValue>k__BackingField: 0
+    <minValue>k__BackingField: 0
+    <currentValue>k__BackingField: 0
+    <enableRecovery>k__BackingField: 0
+    <recoveryStartTime>k__BackingField: 0
+    <recoveryDuration>k__BackingField: 0
+    <recoveryValue>k__BackingField: 0
+    <graph>k__BackingField:
+      <incrementPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <accumulationPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  <durability>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
     <maxValue>k__BackingField: 0
@@ -15466,52 +14719,6 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   <takenDamageMultiplier>k__BackingField:
-    reverseSlider: 0
-    slider: {fileID: 0}
-    <maxValue>k__BackingField: 0
-    <minValue>k__BackingField: 0
-    <currentValue>k__BackingField: 0
-    <enableRecovery>k__BackingField: 0
-    <recoveryStartTime>k__BackingField: 0
-    <recoveryDuration>k__BackingField: 0
-    <recoveryValue>k__BackingField: 0
-    <graph>k__BackingField:
-      <incrementPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <accumulationPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-  <speed>k__BackingField:
-    reverseSlider: 0
-    slider: {fileID: 0}
-    <maxValue>k__BackingField: 0
-    <minValue>k__BackingField: 0
-    <currentValue>k__BackingField: 0
-    <enableRecovery>k__BackingField: 0
-    <recoveryStartTime>k__BackingField: 0
-    <recoveryDuration>k__BackingField: 0
-    <recoveryValue>k__BackingField: 0
-    <graph>k__BackingField:
-      <incrementPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      <accumulationPerLevel>k__BackingField:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-  <power>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
     <maxValue>k__BackingField: 0
@@ -15998,7 +15205,7 @@ MonoBehaviour:
   <meleeAttack>k__BackingField:
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 6413124981311561074}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 80
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 6782979322673924015}
@@ -16007,7 +15214,7 @@ MonoBehaviour:
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: af954c9c6565acb45af7490fa333777b, type: 2}
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 6413124981311561074}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 80
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 6782979322673924015}
@@ -16016,13 +15223,16 @@ MonoBehaviour:
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: af954c9c6565acb45af7490fa333777b, type: 2}
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 6413124981311561074}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 80
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 6782979322673924015}
       <clockwiseAngle>k__BackingField: 0
       <counterClockwiseAngle>k__BackingField: 0
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: 35843011b2072d84887bbe5dff588288, type: 2}
+  <rangedAttack>k__BackingField: []
+  <whirlwind>k__BackingField: []
+  <chargeAttack>k__BackingField: []
   <strongAttack>k__BackingField:
     <visualize>k__BackingField: 1
     <overlapColliders>k__BackingField: []
@@ -16030,7 +15240,7 @@ MonoBehaviour:
   <blockParry>k__BackingField:
     <visualize>k__BackingField: 1
     <overlapColliders>k__BackingField:
-    - <overlapCollider>k__BackingField: {fileID: 7603455121573249312}
+    - <collider>k__BackingField: {fileID: 0}
       <height>k__BackingField: 80
       <limitAngle>k__BackingField: 1
       <angleCheckBaseTransform>k__BackingField: {fileID: 509666864180253437}
@@ -16461,5 +15671,3 @@ SceneRoots:
   - {fileID: 1969219431}
   - {fileID: 4530156883300795544}
   - {fileID: 1588174378}
-  - {fileID: 1986507542}
-  - {fileID: 525633230}

@@ -14,7 +14,7 @@ public class BlockParryComponent : CombatAbilityComponent
         for (int index = 0; index < overlapColliders.Count(); index++)
         {
             BlockParryArea blockParryArea = blockParryAreas[Mathf.Min(index, blockParryAreas.Count() - 1)];
-            GameObject blockParryGameObject = overlapColliders[index].overlapCollider.gameObject;
+            GameObject blockParryGameObject = overlapColliders[index].collider.gameObject;
             BlockParry blockParry = blockParryGameObject.GetComponent<BlockParry>();
 
             if (blockParryArea.blockParryType.Equals(BlockParryType.Parry))

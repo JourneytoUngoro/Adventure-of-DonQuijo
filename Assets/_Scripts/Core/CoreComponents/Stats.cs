@@ -7,21 +7,13 @@ using UnityEngine;
 
 public abstract class Stats : CoreComponent
 {
-    [field: SerializeField] public StatComponent level { get; protected set; }
     [field: SerializeField] public StatComponent health { get; protected set; }
     [field: SerializeField] public StatComponent posture { get; protected set; }
-    [field: SerializeField] public StatComponent healthLevel { get; protected set; }
+    [field: SerializeField] public StatComponent power { get; protected set; }
+    [field: SerializeField] public StatComponent speed { get; protected set; }
+    [field: SerializeField] public StatComponent durability { get; protected set; }
     [field: SerializeField] public StatComponent givenDamageMultiplier { get; protected set; }
     [field: SerializeField] public StatComponent takenDamageMultiplier { get; protected set; }
-
-    // ==============================================================================
-
-    [field: SerializeField] public StatComponent speed { get; protected set; }
-    [field: SerializeField] public StatComponent power { get; protected set; }
-
-    // ===============================================================================
-
-
 
     // [field: SerializeField, PreventAdd, Tooltip("Warning: Status effects system is based on enum. You should NEVER change the order of the list!!!!!!")] public List<StatComponent> statusEffects { get; protected set; }
     // [field: EnumFlags] public StatusEffect currentlyAppliedStatusEffect { get; protected set; }
@@ -82,13 +74,11 @@ public abstract class Stats : CoreComponent
 
     protected virtual void Start()
     {
-        health.SetMaxValue(health.graph.accumulationPerLevel.Evaluate(level.currentValue));
-        health.SetCurrentValue(health.graph.accumulationPerLevel.Evaluate(level.currentValue));
+        health.SetMaxValue(health.graph.accumulationPerLevel.Evaluate(power.currentValue));
+        health.SetCurrentValue(health.graph.accumulationPerLevel.Evaluate(power.currentValue));
         
-        posture.SetMaxValue(posture.graph.accumulationPerLevel.Evaluate(level.currentValue));
-        posture.SetCurrentValue(posture.graph.accumulationPerLevel.Evaluate(level.currentValue));
-
-        // TODO : speed, power stats need to implemented
+        posture.SetMaxValue(posture.graph.accumulationPerLevel.Evaluate(power.currentValue));
+        posture.SetCurrentValue(posture.graph.accumulationPerLevel.Evaluate(power.currentValue));
     }
 
     protected virtual void Update()

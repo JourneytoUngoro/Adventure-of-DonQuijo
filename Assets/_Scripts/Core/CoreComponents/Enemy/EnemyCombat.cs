@@ -104,7 +104,7 @@ public class EnemyCombat : Combat
 
         foreach (OverlapCollider overlapCollider in combatAbility.overlapColliders)
         {
-            overlapCollider.overlapCollider.OverlapCollider(contactFilter, detectedEntities);
+            overlapCollider.collider.OverlapCollider(contactFilter, detectedEntities);
             targetInRange = Array.Exists(detectedEntities, detectedEntity => detectedEntity != null && detectedEntity == enemy.detection.currentTarget.entityCollider);
 
             if (targetInRange) break;
@@ -125,7 +125,7 @@ public class EnemyCombat : Combat
         {
             foreach (OverlapCollider overlapCollider in combatAbility.overlapColliders)
             {
-                overlapCollider.overlapCollider.OverlapCollider(contactFilter, detectedEntities);
+                overlapCollider.collider.OverlapCollider(contactFilter, detectedEntities);
                 targetInRange = Array.Exists(detectedEntities, detectedEntity => detectedEntity != null && detectedEntity == enemy.detection.currentTarget.entityCollider);
 
                 if (targetInRange) break;

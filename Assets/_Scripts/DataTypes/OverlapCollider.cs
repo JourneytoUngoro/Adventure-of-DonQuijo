@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public struct OverlapCollider
 {
-    [field: SerializeField] public Collider2D overlapCollider { get; private set; }
+    [field: SerializeField] public Collider2D collider { get; private set; }
     [field: SerializeField] public float height { get; private set; }
     [field: SerializeField, Tooltip("Limiting angle is not affected by rotation of the collider's rotation.")] public bool limitAngle { get; private set; }
     [field: SerializeField] public Transform angleCheckBaseTransform { get; private set; }
