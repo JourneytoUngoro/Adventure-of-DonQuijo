@@ -44,7 +44,7 @@ public class PlayerStats : Stats, IDataPersistance
 
     public void SaveData(GameData data)
     {
-        data.currentLevel = (int)power.currentValue;
+        // data.currentLevel = (int)power.currentValue;
         data.currentHealth = health.currentValue;
         data.currentPosture = posture.currentValue;
         data.moveSpeed = speed.currentValue;
