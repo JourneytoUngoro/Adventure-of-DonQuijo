@@ -1,36 +1,17 @@
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestManager : MonoBehaviour
+public class QuestManager : MonoBehaviour, IDataPersistance
 {
     [ShowInInspector]
     private Dictionary<string, Quest> questDict;
 
-    private void Awake()
-    {
-        questDict = LoadAllQuests();
-    }
+    public int totalQuestsCount { get; private set; }
 
-    private Quest CreateQuestObject(QuestInfoSO questInfo)
-    {
-        Quest quest = null;
-        if (PlayerPrefs.HasKey(questInfo.id))
-        {
-            string serializedData = PlayerPrefs.GetString(questInfo.id);
-            QuestData questData = JsonUtility.FromJson<QuestData>(serializedData);
-            quest = new Quest(questInfo, questData.state, questData.nowProgress);
-        }
-        else
-        {
-            quest = new Quest(questInfo);
-        }
-
-        Debug.Assert(quest != null, "can't load quest info!");
-
-        return quest;
-    }
+    private QuestsData questsData = null;
 
     public Quest GetQuestById(string id)
     {
@@ -54,21 +35,12 @@ public class QuestManager : MonoBehaviour
 
     public bool CheckClearQuest(Quest quest)
     {
-        if (quest.currentProgress >= quest.goalProgress)
+        if (quest.currentProgress >= quest.questInfo.goalProgress)
         {
-            Debug.Log($"clear {quest.questInfo.questTitle} quest!");
+            Debug.Log($"{quest.currentProgress} >= {quest.questInfo.goalProgress}");
             return true;
         }
-
         return false;
-    }
-
-    private void OnApplicationQuit()
-    {
-        foreach (Quest quest in questDict.Values)
-        {
-            SaveQuest(quest);
-        }
     }
 
     public void StartQuest(string id)
@@ -81,23 +53,38 @@ public class QuestManager : MonoBehaviour
     public void UpdateQuest(string id)
     {
         Quest quest = GetQuestById(id);
+
         if(CheckClearQuest(quest))
         {
             ChangeQuestState(id, QuestState.CanComplete);
-        }
-        else
-        {
 
+            // quest completed automatically without player interactoin
+            if (quest.questInfo.isAutoComplete)
+            {
+                CompleteQuest(id);
+            }
         }
     }
 
-    public void FinishQuest(string id)
+    public void CompleteQuest(string id)
     {
-        Quest quest = GetQuestById(id);
-        
-
-
+        // CheckState.CanComplete -> CheckState.Completed
+        if (!(GetQuestState(id) == QuestState.CanComplete)) return;
+        ChangeQuestState(id, QuestState.Completed);
+        RequestReward(id);
     }
+
+    public void RequestReward(string id)
+    {
+        Debug.Log("try give reward");
+        Reward reward = GetQuestById(id).questInfo.reward.GetComponent<Reward>();
+        
+        if (!reward.canGiveReward) return;
+        reward.GiveRewardTo();
+    }
+
+    public QuestState GetQuestState(string id) => GetQuestById(id).state;
+
     private Dictionary<string, Quest> LoadAllQuests()
     {
         // folder path : Assets/Resources/Quests
@@ -109,24 +96,65 @@ public class QuestManager : MonoBehaviour
         {
             if (!idToQuestDict.ContainsKey(so.id))
             {
-                idToQuestDict.Add(so.id, CreateQuestObject(so));
+                idToQuestDict.Add(so.id, new Quest(so));
             }
         }
-        Debug.Log($"load all quests : {idToQuestDict.Count}");
+        totalQuestsCount = idToQuestDict.Count;
+        
         return idToQuestDict;
     }
 
-
     private void SaveQuest(Quest quest)
     {
-        QuestData questData = quest.GetQuestData();
+        QuestData questData = quest.GetQuestData(quest.questInfo.id);
         string serializedData = JsonUtility.ToJson(questData);
         PlayerPrefs.SetString(quest.questInfo.id, serializedData);
     }
 
-    private void RequestReward(Quest quest)
+    private void OnApplicationQuit()
     {
-        // add get reward
+        foreach (Quest quest in questDict.Values)
+        {
+            SaveQuest(quest);
+        }
     }
 
+    public void LoadData(GameData data)
+    {
+        questDict = LoadAllQuests();
+
+        questsData = data.questsData;
+
+        bool isNew = questsData.questDatas == null || questsData.questCount == 0;
+
+        if (isNew)
+        {
+            questsData.questCount = QuestsDatabase.totalQuests;
+            questsData.questDatas = new QuestData[questsData.questCount];
+
+            // Debug.Log("new game started, and new quests data created");
+            return;
+        }
+
+        foreach (Quest quest in questDict.Values)
+        {
+            QuestData questData = questsData.GetQuestData(quest.questInfo.id);
+            quest.currentProgress = questData.currentProgress;
+            quest.state = questData.state;
+        }
+    }
+
+    public void SaveData(GameData data)
+    {
+        QuestsData quests = new QuestsData();
+        quests.questCount = QuestsDatabase.totalQuests;
+        quests.questDatas = new QuestData[quests.questCount];
+
+        foreach (Quest quest in questDict.Values)
+        {
+            QuestData questData = quest.GetQuestData(quest.questInfo.id);
+            quests.PushQuestData(questData);
+        }
+        data.questsData = quests;
+    }
 }

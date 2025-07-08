@@ -15,7 +15,7 @@ public class UnityEventInvokerEditor : Editor
 
         if (Application.isPlaying)
         {
-            if (GUILayout.Button("Excute!"))
+            if (GUILayout.Button("실행하기"))
             {
                 onClick?.Invoke();
             }

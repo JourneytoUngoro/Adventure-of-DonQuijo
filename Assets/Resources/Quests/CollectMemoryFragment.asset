@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a402f0867cf1d458cc7eb2b7e394ab, type: 3}
   m_Name: CollectMemoryFragment
   m_EditorClassIdentifier: 
+  id: collectMemoryFragment
   questTitle: "\uAE30\uC5B5\uC758 \uC870\uAC01 \uBAA8\uC73C\uAE30"
   questDescription: "\uAE30\uC5B5\uC758 \uC870\uAC01\uC744 n\uAC1C \uBAA8\uC73C\uC138\uC694."
-  coinReward: 0
+  goalProgress: 30
+  reward: {fileID: 8794157975829506508, guid: 1d86be3e7756cef47a63c1af6432c98e, type: 3}
+  isAutoStart: 1
+  isAutoComplete: 1

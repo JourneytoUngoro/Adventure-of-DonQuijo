@@ -87,6 +87,8 @@ public abstract class Stats : CoreComponent
         
         posture.SetMaxValue(posture.graph.accumulationPerLevel.Evaluate(level.currentValue));
         posture.SetCurrentValue(posture.graph.accumulationPerLevel.Evaluate(level.currentValue));
+
+        // TODO : speed, power stats need to implemented
     }
 
     protected virtual void Update()

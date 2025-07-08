@@ -1,14 +1,15 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CoinObject : InteractBase
 {
     public LayerMask playerMask;
 
-    [field: SerializeField] public int minValue { get; private set; }
-    [field: SerializeField] public int maxValue { get; private set; }
-    [field: SerializeField] public int value {  get; private set; }
+    public int value = 2;
+
+    public float coinLifeTime = 3.5f;
+    public Timer timer { get; private set; }
 
     public float moveSpeed = 1f;
     public float epsilon = 2.0f;
@@ -16,25 +17,31 @@ public class CoinObject : InteractBase
     private Player player;
     private bool isChasingPlayer;
 
-    private PooledObject pooledObject;
-    private DropEffect dropEffect;
+    public PooledObject pooledObject {  get; private set; }
+    public DropEffect dropEffect { get; private set; }
+
+    public Action<CoinObject> onRelease;
+    
 
     public void Start()
-    {        
+    {
         // TODO : Player 의존성 주입 필요
         player = FindAnyObjectByType<Player>();
 
         pooledObject = GetComponent<PooledObject>();
         dropEffect = GetComponent<DropEffect>();
 
-        SetCoinInfos();
+        isChasingPlayer = false;
     }
 
-
-    public void SetCoinInfos()
+    public void SetTimer()
     {
-        this.value = Random.Range(minValue, maxValue + 1);
-        isChasingPlayer = false;
+        timer = new Timer(coinLifeTime);
+    }
+
+    public void SetTimer(float time)
+    {
+        timer = new Timer(time);
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
@@ -72,10 +79,15 @@ public class CoinObject : InteractBase
         }
 
         Manager.Instance.soundManager.PlaySoundFXClip("coinCollectSFX", transform);
-        Manager.Instance.itemManager.UpdateCoinAmount(this.value);
+        Manager.Instance.itemManager.UpdateCoinAmount(value);
 
         // Always return this object to the pool when done.
-        pooledObject.ReleaseObject();        
+        pooledObject.ReleaseObject();
+        onRelease?.Invoke(this);
+    }
+    public void SetCoinValue(int value)
+    {
+        this.value = value;
     }
 
     public override void Interact()

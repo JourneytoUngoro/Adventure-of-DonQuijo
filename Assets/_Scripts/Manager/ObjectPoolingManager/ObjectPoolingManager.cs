@@ -18,10 +18,14 @@ public class ObjectPoolingManager : MonoBehaviour
     private string objectName;
 
     private Dictionary<string, IObjectPool<GameObject>> objectPoolDictionary = new Dictionary<string, IObjectPool<GameObject>>();
+    
+    public PooledCoinController pooledCoinController { get; private set; }
+    public PooledMemoryFragmentController pooledMemoryFragmentController { get; private set; }
 
     private void Awake()
     {
         Initialize();
+        FindPooledObjectController();
     }
 
 
@@ -65,7 +69,6 @@ public class ObjectPoolingManager : MonoBehaviour
     private void OnReturnToPool(GameObject pooledObject)
     {
         pooledObject.GetComponent<PooledObject>().isPooled = true;
-        Debug.Log("ReturnToPool 실행");
         pooledObject.SetActive(false);
     }
 
@@ -91,5 +94,10 @@ public class ObjectPoolingManager : MonoBehaviour
     {
         Debug.Log("ObjectPoolingManager.ReleaseGameObject()");
         pooledObject.GetComponent<PooledObject>().ReleaseObject();
+    }
+    private void FindPooledObjectController()
+    {
+        pooledCoinController = GetComponentInChildren<PooledCoinController>();  
+        pooledMemoryFragmentController = GetComponentInChildren<PooledMemoryFragmentController>();
     }
 }

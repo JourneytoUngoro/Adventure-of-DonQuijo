@@ -52,7 +52,7 @@ public class InventoryModel
         {
             // new GameData
             inventoryData.items = new Item[capacity];
-            Debug.Log("InventoryModel created new InventoryData.items, cause it's new game");
+            // Debug.Log("InventoryModel created new InventoryData.items, cause it's new game");
         }
         else
         {
@@ -73,8 +73,6 @@ public class InventoryModel
         }
 
         this.Items.items = inventoryData.items;
-
-        Debug.Log("InventoryModel.LoadData()");
     }
 
     public InventoryData SaveData()

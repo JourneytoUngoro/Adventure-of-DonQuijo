@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class LifeEffect : ItemEffect
 {
-    [SerializeField] private float precentage = 0.5f;
+    [SerializeField] private float percentage = 0.5f;
     public override void ApplyEffect(Player target)
     {
 
@@ -15,7 +15,7 @@ public class LifeEffect : ItemEffect
 
         float currentHealValue = target.stats.health.currentValue;
 
-        float fullAmount = target.stats.health.maxValue * 0.5f;
+        float fullAmount = target.stats.health.maxValue * percentage;
 
         target.stats.health.SetCurrentValue(fullAmount);
 

@@ -46,7 +46,6 @@ public class Timer
                 if (Time.time + timeOffset > startTime + duration)
                 {
                     timerAction?.Invoke();
-
                     if (isSingleUse)
                     {
                         StopTimer();

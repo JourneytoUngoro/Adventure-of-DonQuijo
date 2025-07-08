@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MemoryFragmentData : MonoBehaviour
+[System.Serializable]
+public class MemoryFragmentData 
 {
-    void Start()
-    {
-        
-    }
+    public int count = 0;
+    public List<SerializableVector3> memoryFragmentPositions = new List<SerializableVector3>();
 
-    void Update()
+    public void AddMemoryFragmentPositions(Vector3 mfPosition)
     {
-        
+        memoryFragmentPositions.Add(new SerializableVector3(mfPosition));
     }
 }

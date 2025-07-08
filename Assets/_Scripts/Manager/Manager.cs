@@ -15,6 +15,8 @@ public class Manager : MonoBehaviour
     public DataManager dataManager { get; private set; }
 /*    public SoundFXManager soundFXManager { get; private set; }
 */    public SoundManager soundManager { get; private set; }
+    public QuestManager questManager {  get; private set; }
+    public StageManager stageManager { get; private set; }
 
     private void Awake()
     {
@@ -40,6 +42,8 @@ public class Manager : MonoBehaviour
 
         // soundFXManager = GetComponentInChildren<SoundFXManager>();
         soundManager = GetComponentInChildren<SoundManager>();
+        questManager = GetComponentInChildren<QuestManager>();
+        stageManager = GetComponentInChildren<StageManager>();
     }
 
     #region Test

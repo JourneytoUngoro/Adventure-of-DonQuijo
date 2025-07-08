@@ -35,12 +35,18 @@ public class PlayerStats : Stats, IDataPersistance
     public void LoadData(GameData data)
     {
         // TODO: Implement LoadData
+        health.SetMaxValue(data.maxHealth);
+        health.SetCurrentValue(data.currentHealth);
+        posture.SetCurrentValue(data.currentPosture);
+        speed.SetCurrentValue(data.moveSpeed);
+        power.SetCurrentValue(data.postureDamage);
     }
 
     public void SaveData(GameData data)
     {
-        data.currentLevel = (int)level.currentValue;
         data.currentHealth = health.currentValue;
         data.currentPosture = posture.currentValue;
+        data.moveSpeed = speed.currentValue;
+        data.postureDamage = power.currentValue;
     }
 }

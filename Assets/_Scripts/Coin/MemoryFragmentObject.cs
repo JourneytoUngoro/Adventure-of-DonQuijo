@@ -1,10 +1,16 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MemoryFragmentObject : InteractBase
 {
     public LayerMask playerMask;
+
+    public QuestInfoSO relatedQuest;
+    private string questId;
+
+    public float mfLifeTime = 4f;
+    public Timer timer {  get; private set; }
 
     public float moveSpeed = 1f;
     public float epsilon = 2.0f;
@@ -12,11 +18,15 @@ public class MemoryFragmentObject : InteractBase
     private Player player;
     private bool isChasingPlayer;
 
-    private PooledObject pooledObject;
-    private DropEffect dropEffect;
+    public PooledObject pooledObject {  get; private set; }
+    public DropEffect dropEffect { get; private set; }
+
+    public Action<MemoryFragmentObject> onRelease;
 
     public void Start()
     {
+        transform.parent = GameObject.Find("MemoryFragment Object Pool").transform;
+
         // TODO : Player 의존성 주입 필요
         player = FindAnyObjectByType<Player>();
 
@@ -24,13 +34,20 @@ public class MemoryFragmentObject : InteractBase
         dropEffect = GetComponent<DropEffect>();
 
         isChasingPlayer = false;
+        questId = relatedQuest.id;
     }
 
+    public void SetTimer()
+    {
+        timer = new Timer(mfLifeTime);
+    }
+    public void SetTimer(float time)
+    {
+        timer = new Timer(time);
+    }
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
-
-        Debug.Log("충돌했다@"+ collision.gameObject.name +  "와 " + collision.gameObject.transform.position + "에서");
 
         if (isChasingPlayer) { return; }
 
@@ -39,7 +56,6 @@ public class MemoryFragmentObject : InteractBase
 
     private IEnumerator NearToPlayer()
     {
-        Debug.Log("왜 이동함?");
         isChasingPlayer = true;
 
         Vector3 dir = player.transform.position - transform.position;
@@ -65,12 +81,18 @@ public class MemoryFragmentObject : InteractBase
 
         // TODO : change audioClip to  "memoryCollectSFX"
         Manager.Instance.soundManager.PlaySoundFXClip("coinCollectSFX", transform);
-        
-        // TODO : add quest handle logic 
-        // Manager.Instance.questManager.UpdateQuestState(Quest quest);
 
+        OnObtainMemoryFragment();
+ 
         // Always return this object to the pool when done.
         pooledObject.ReleaseObject();
+        onRelease?.Invoke(this);
+    }
+
+    public void OnObtainMemoryFragment()
+    {
+        Manager.Instance.questManager.GetQuestById(questId).UpdateProgress();
+        Manager.Instance.stageManager.nowStage.UpdateCollectedMemoryFragment();
     }
 
     public override void Interact()

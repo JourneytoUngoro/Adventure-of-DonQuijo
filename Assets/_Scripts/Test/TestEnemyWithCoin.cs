@@ -1,16 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TestEnemyWithCoin : MonoBehaviour
 {
-    public void DropCoinOnEnemyDeath()
+    public void Test_OnEnemyDeath()
     {
-        Manager.Instance.objectPoolingManager.gameObject.GetComponentInChildren<PooledCoinController>().DropCoinsFromEnemy(transform);
+
+        Manager.Instance.stageManager.OnEnemyDeath(transform);
     }
 
-    public void DropMemoryFragmentOnEnemyDeath()
-    {
-        Manager.Instance.objectPoolingManager.gameObject.GetComponentInChildren<PooledMemoryFragmentController>().DropMemoryFragmentFromEnemy(transform);
-    }
+
 }

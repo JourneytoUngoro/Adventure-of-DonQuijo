@@ -54,10 +54,9 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 0
-  <minValue>k__BackingField: 0
-  <maxValue>k__BackingField: 0
-  <value>k__BackingField: 0
-  moveSpeed: 2
+  value: 2
+  coinLifeTime: 3
+  moveSpeed: 2.5
   epsilon: 2
 --- !u!114 &449691791892981287
 MonoBehaviour:
@@ -71,10 +70,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f4d48e594c6a044b13cf27a39f8b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 10
-  jumpDuration: 0.15
-  horizontalDistance: 10
-  horizontalmultiplier: 2
+  jumpHeight: 15
+  jumpDuration: 0.2
+  horizontalDistance: 7
+  horizontalmultiplier: 1.5
   fallDuration: 0.4
   bounceDuration: 0.5
   jumpEffect: 6

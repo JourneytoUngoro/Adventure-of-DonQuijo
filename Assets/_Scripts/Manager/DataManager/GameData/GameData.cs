@@ -10,10 +10,16 @@ public class GameData
 {
     public string displayedLastPlayTime;
     public long lastPlayTime;
-    public int currentLevel;
+
+    // player attributes
+    public float maxHealth;
     public float currentHealth;
     public float currentPosture;
     public float currentExperience;
+    public float moveSpeed;
+    public float postureDamage;
+
+    // game attributes
     public Vector3 lastPlayerPosition;
     public bool[] bossDefeat;
     public string currentScene;
@@ -22,6 +28,11 @@ public class GameData
 
     public InventoryData inventoryData;
     public ItemUsageData itemUsageData;
+
+    public QuestsData questsData;
+    public StageData stageData;
+    public CoinData coinData;
+    public MemoryFragmentData memoryFragmentData;
 
     public int mentality;
     public float totalPlayTime;
@@ -65,15 +76,21 @@ public class GameData
     {
         this.displayedLastPlayTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         this.lastPlayTime = DateTime.Now.Ticks;
-        this.currentLevel = 1;
+        this.maxHealth = 100.0f;
         this.currentHealth = 100.0f;
         this.currentPosture = 0.0f;
         this.currentExperience = 0.0f;
+        this.moveSpeed = 0.0f;
+        this.postureDamage = 0.0f;
         this.lastPlayerPosition = Vector3.zero;
         this.currentScene = "SampleScene";
         // mapOpened = new Dictionary<string, bool>();
 
         this.inventoryData = new InventoryData();
         this.itemUsageData = new ItemUsageData();
+        this.questsData = new QuestsData();
+        this.stageData = new StageData();
+        this.coinData = new CoinData();
+        this.memoryFragmentData = new MemoryFragmentData();
     }
 }

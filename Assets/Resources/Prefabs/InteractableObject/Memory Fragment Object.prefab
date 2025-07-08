@@ -138,6 +138,7 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 0
+  relatedQuest: {fileID: 11400000, guid: 2ef76d0428a67ce458697ab894beaecd, type: 2}
   moveSpeed: 2
   epsilon: 2
 --- !u!114 &6087498623338046745
@@ -153,11 +154,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpHeight: 15
-  jumpDuration: 0.3
-  horizontalDistance: 12
-  horizontalmultiplier: 2.5
-  fallDuration: 0.6
-  bounceDuration: 0.5
+  jumpDuration: 0.15
+  horizontalDistance: 9
+  horizontalmultiplier: 2
+  fallDuration: 0.5
+  bounceDuration: 0.4
   jumpEffect: 6
   fallHorizontalEffect: 1
   bounceEffect: 30
