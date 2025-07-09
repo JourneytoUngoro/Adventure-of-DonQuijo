@@ -869,7 +869,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &856095523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -913,7 +913,7 @@ MonoBehaviour:
   isEditing: 1
   fadeDuratoin: 2.5
   DonquijoteObj: {fileID: 940941636}
-  donStartPosition: {x: -0.6, y: 0, z: 0}
+  donStartPosition: {x: -0.3, y: 0, z: 0}
   donEndPosition: {x: 0, y: 0, z: 0}
   donZoomPosition: {x: -1, y: -0.3, z: 0}
   donDuration: 3.5
@@ -930,7 +930,7 @@ MonoBehaviour:
   zoomOrthographicSize: 4.5
   zoomDuration: 3.5
   beforeZoomWaitTime: 0.35
-  zoomEase: 6
+  zoomEase: 16
   FadeObj: {fileID: 835721180}
 --- !u!4 &856095525
 Transform:
@@ -1080,7 +1080,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &956019964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2206,15 +2206,15 @@ MonoBehaviour:
   knightStartScale: {x: 0.9, y: 0.9, z: 0}
   knightEndPosition: {x: 0, y: 0.5, z: 0}
   knightEndScale: {x: 1, y: 1, z: 1}
-  knightDuration: 2
-  knightEase: 5
+  knightDuration: 1.5
+  knightEase: 7
   BackgroundObj: {fileID: 673038879}
   bgStartPosition: {x: 0, y: 0.4, z: 0}
   bgStartScale: {x: 1, y: 1, z: 1}
   bgEndPosition: {x: 0, y: 0, z: 0}
   bgEndScale: {x: 0.9, y: 0.9, z: 0}
-  bgDuration: 2
-  bgEase: 5
+  bgDuration: 1.5
+  bgEase: 7
   LightObj: {fileID: 399343968}
   lightStartScale: {x: 0.01, y: 0.01, z: 0}
   lightMaxScale: {x: 1.3, y: 1.3, z: 0}
