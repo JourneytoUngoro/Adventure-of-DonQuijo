@@ -56,7 +56,6 @@ public class SkillSlotUI : MonoBehaviour
         Debug.Assert(abilitySkillState != null, "skill slot is null!");
     }
 
-    private int frame = 0;
     private void Update()
     {
 
