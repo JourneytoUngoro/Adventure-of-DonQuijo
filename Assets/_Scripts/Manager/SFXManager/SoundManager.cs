@@ -123,7 +123,6 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    // TODO : 함수 추가하기
     /*public void PlaySoundFXClip(IEnumerable<AudioClip> audioClips, Transform spawnTransform, float pitchDeviation = 0.0f, float volume = 1.0f)
     {
         if (audioClips == null)
@@ -202,11 +201,11 @@ public class SoundManager : MonoBehaviour
 
         string exposedName = category switch
         {
-            SoundCategory.Master => "MasterVolume",
-            SoundCategory.BGM => "BGMVolume",
-            SoundCategory.SFX => "SFXVolume",
-            SoundCategory.UI => "UIVolume",
-            _ => "MasterVolume"
+            SoundCategory.Master => MASTER_VOL_KEY,
+            SoundCategory.BGM => BGM_VOL_KEY,
+            SoundCategory.SFX => SFX_VOL_KEY,
+            SoundCategory.UI => UI_VOL_KEY,
+            _ => MASTER_VOL_KEY
         };
 
         audioMixer.SetFloat(exposedName, dB);
@@ -219,6 +218,31 @@ public class SoundManager : MonoBehaviour
         SetVolume(SoundCategory.BGM, PlayerPrefs.GetFloat(BGM_VOL_KEY, 1f));
         SetVolume(SoundCategory.SFX, PlayerPrefs.GetFloat(SFX_VOL_KEY, 1f));
         SetVolume(SoundCategory.UI, PlayerPrefs.GetFloat(UI_VOL_KEY, 1f));
+    }
+
+    public float GetVolumeValue(SoundCategory category)
+    {
+        float current = 0f;
+        switch (category)
+        {
+            case SoundCategory.Master:
+                current = PlayerPrefs.GetFloat(MASTER_VOL_KEY, 1f);
+                break;
+            case SoundCategory.BGM:
+                current = PlayerPrefs.GetFloat(BGM_VOL_KEY, 1f);
+                break;
+            case SoundCategory.SFX:
+                current = PlayerPrefs.GetFloat(SFX_VOL_KEY, 1f);
+                break;
+            case SoundCategory.UI:
+                current = PlayerPrefs.GetFloat(UI_VOL_KEY, 1f);
+                break;
+            default:
+                current = 1f;
+                break;
+        }
+
+        return current;
     }
 
 }

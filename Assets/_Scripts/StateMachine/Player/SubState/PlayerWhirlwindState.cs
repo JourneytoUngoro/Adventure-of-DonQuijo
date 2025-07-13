@@ -33,7 +33,6 @@ public class PlayerWhirlwindState : PlayerAbilityState
 
         available = false;
         player.stateMachineToAnimator.state = this;
-        // TODO: 감속 매커니즘
     }
 
     public override void Exit()

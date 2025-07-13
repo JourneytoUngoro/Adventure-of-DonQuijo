@@ -165,4 +165,20 @@ public class Timer
         timeOffset = adjustTimeAmount;
         this.isAdjustTimeSingleUse = isAdjustTimeSingleUse;
     }
+
+    public float GetElapsedTime()
+    {
+        // 경과한 시간 반환하도록 
+        float elapsedTime = (Time.time + timeOffset) - startTime;
+        return elapsedTime;
+    }
+
+    public float GetLeftTime()
+    {
+        float leftTime = duration - GetElapsedTime();
+        return Mathf.Max(0, leftTime);
+    }
+
+
 }
+

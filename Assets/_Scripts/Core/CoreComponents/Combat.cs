@@ -35,8 +35,8 @@ public abstract class Combat : CoreComponent
 
             foreach (CombatAbilityWithColliders combatAbilityWithTransforms in combatAbilityList)
             {
+                // TODO : 삭제!!
                 if (combatAbilityWithTransforms.combatAbilityData == null) continue;
-
                 combatAbilityWithTransforms.combatAbilityData.sourceEntity = entity;
 
                 foreach (CombatAbilityComponent combatAbilityComponent in combatAbilityWithTransforms.combatAbilityData.combatAbilityComponents)
@@ -59,6 +59,8 @@ public abstract class Combat : CoreComponent
         foreach (PropertyInfo property in combatAbilityProperties)
         {
             CombatAbilityWithColliders combatAbilityWithTransforms = property.GetValue(this) as CombatAbilityWithColliders;
+            // TODO : 삭제!! 
+            if (combatAbilityWithTransforms.combatAbilityData == null) continue;
 
             if (combatAbilityWithTransforms.combatAbilityData == null) continue;
 

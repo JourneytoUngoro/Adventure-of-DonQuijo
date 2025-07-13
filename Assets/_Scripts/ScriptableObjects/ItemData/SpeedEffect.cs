@@ -8,9 +8,7 @@ public class SpeedEffect : ItemEffect
     [SerializeField] private float percentage = 0.1f;
     public override void ApplyEffect(Player target)
     {
-        // TODO : speed로 변경해야 한다 
-
-        // 최대 속도 10% 증가
+        // Increases player's max speed by 10%
         float currentSpeedValue = target.stats.speed.currentValue;
         float speedAmount = target.stats.speed.maxValue * percentage;
 

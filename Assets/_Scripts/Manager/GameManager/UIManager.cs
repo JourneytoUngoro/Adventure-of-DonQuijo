@@ -33,11 +33,10 @@ public class UIManager : MonoBehaviour
         uiCanvas = GameObject.Find("Overlay Canvas")?.transform;
         pool = GameObject.Find("Pooled Objects")?.transform;
 
+        InCaseTestScene();
+
         toggleMenuPressed = false;
         popupOpened = false;
-        
-        // TODO : SampleScene 삭제 시 제거
-        InCaseSampleScene();
 
         RegisterUIObjects();
         CreatePool();
@@ -144,7 +143,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            // startingUIDictionary[UIType.settingPopup].ShowUI();
+             startingUIDictionary[UIType.settingPopup].ShowUI();
         }
     }
 
@@ -163,11 +162,15 @@ public class UIManager : MonoBehaviour
     }
 
     #region Test 이후 삭제
-    void InCaseSampleScene()
+    void InCaseTestScene()
     {
-        if (SceneManager.GetActiveScene().name == "SampleScene")
+        if (uiCanvas == null || pool == null)
         {
-            uiCanvas = GameObject.Find("Overlay Canvas").transform;
+            Debug.LogWarning("UIManager error! uiCanvas or pool can't find proper transform");
+            
+            Transform tmpTransform = FindObjectOfType<Canvas>().transform;
+            uiCanvas = tmpTransform;
+            pool = tmpTransform;
         }
     }
     #endregion

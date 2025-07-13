@@ -32,7 +32,7 @@ public class PlayerMoveState : PlayerGroundedState
         dashInputXBufferTimer.StartSingleUseTimer();
         dashInputYBufferTimer.StartSingleUseTimer();
         // player.audioSource.enabled = true;
-        player.audioSource.Play();
+        // player.audioSource.Play();
     }
 
     public override void Exit()
@@ -51,7 +51,7 @@ public class PlayerMoveState : PlayerGroundedState
         }
 
         // player.audioSource.enabled = false;
-        player.audioSource.Stop();
+        // player.audioSource.Stop();
     }
 
     public override void PhysicsUpdate()
@@ -79,22 +79,22 @@ public class PlayerMoveState : PlayerGroundedState
             if (isDashing)
             {
                 player.animator.SetBool("dash", true);
-                if (player.audioSource.clip != Manager.Instance.soundManager.clipDictionary["playerDashSFX"])
-                {
-                    player.audioSource.clip = Manager.Instance.soundManager.clipDictionary["playerDashSFX"];
-                    player.audioSource.Play();
-                }
+                //if (player.audioSource.clip != Manager.Instance.soundManager.clipDictionary["playerDashSFX"])
+                //{
+                //    player.audioSource.clip = Manager.Instance.soundManager.clipDictionary["playerDashSFX"];
+                //    player.audioSource.Play();
+                //}
 
                 player.movement.SetVelocity(inputX * playerData.dashSpeed.x, inputY * playerData.dashSpeed.y);
             }
             else
             {
                 player.animator.SetBool("dash", false);
-                if (player.audioSource.clip != Manager.Instance.soundManager.clipDictionary["playerWalkSFX"])
-                {
-                    player.audioSource.clip = Manager.Instance.soundManager.clipDictionary["playerWalkSFX"];
-                    player.audioSource.Play();
-                }
+                //if (player.audioSource.clip != Manager.Instance.soundManager.clipDictionary["playerWalkSFX"])
+                //{
+                //    player.audioSource.clip = Manager.Instance.soundManager.clipDictionary["playerWalkSFX"];
+                //    player.audioSource.Play();
+                //}
                 
                 player.movement.SetVelocity(inputX * playerData.moveSpeed.x, inputY * playerData.moveSpeed.y);
             }
