@@ -2,14 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerChargeAttackState : PlayerAbilityState
+public class PlayerRangedAttackState : PlayerAbilityState
 {
-    private bool startDashAttack;
-
-    public PlayerChargeAttackState(Player player, string animBoolName) : base(player, animBoolName)
+    public PlayerRangedAttackState(Player player, string animBoolName) : base(player, animBoolName)
     {
         available = true;
-        abilityCoolDownTimer.ChangeDuration(playerData.chargeAttackCoolDownTime);
+        abilityCoolDownTimer.ChangeDuration(playerData.rangedAttackCoolDownTime);
         abilityCoolDownTimer.timerAction += () => { available = true; };
     }
 
@@ -17,8 +15,7 @@ public class PlayerChargeAttackState : PlayerAbilityState
     {
         base.AnimationActionTrigger(index);
 
-        startDashAttack = true;
-        player.combat.DoAttack(player.combat.dashAttack[0]);
+        player.combat.DoAttack(player.combat.rangedAttack[0]);
     }
 
     public override void AnimationFinishTrigger(int index)
@@ -33,7 +30,6 @@ public class PlayerChargeAttackState : PlayerAbilityState
         base.Enter();
 
         available = false;
-        startDashAttack = false;
         player.combat.SetStanceLevel(1);
         player.movement.SetVelocityZero();
     }
@@ -55,11 +51,6 @@ public class PlayerChargeAttackState : PlayerAbilityState
 
         if (!onStateExit)
         {
-            if (startDashAttack)
-            {
-                player.combat.DoAttack(player.combat.chargeAttack[1]);
-            }
-
             if (isAbilityDone)
             {
                 if (isGrounded)

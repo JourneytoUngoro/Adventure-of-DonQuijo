@@ -95,6 +95,7 @@ public class PlayerMoveState : PlayerGroundedState
                     player.audioSource.clip = Manager.Instance.soundManager.clipDictionary["playerWalkSFX"];
                     player.audioSource.Play();
                 }
+                
                 player.movement.SetVelocity(inputX * playerData.moveSpeed.x, inputY * playerData.moveSpeed.y);
             }
         }

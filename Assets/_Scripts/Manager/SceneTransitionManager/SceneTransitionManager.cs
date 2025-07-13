@@ -1,4 +1,4 @@
-/*using AYellowpaper.SerializedCollections;
+using AYellowpaper.SerializedCollections;
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
@@ -351,10 +351,10 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
             await Task.Delay(10);
         }
 
-        *//*while (Manager.Instance.gameManager.player == null)
+        /*while (Manager.Instance.gameManager.player == null)
         {
             await Task.Delay(10);
-        }*//*
+        }*/
 
         Debug.Log($"Active scene changed from \"{current.name}\" to \"{next.name}\"");
         LoadAndUnloadScenes();
@@ -422,4 +422,4 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
             // data system saves the game before loading the game
         }
     }
-}*/
+}

@@ -39,4 +39,7 @@ public class PlayerData : EntityData
 
     [field: Header("ChargeAttack State")]
     [field: SerializeField] public float chargeAttackCoolDownTime { get; private set; } = 1.0f;
+
+    [field: Header("RangedAttack State")]
+    [field: SerializeField] public float rangedAttackCoolDownTime { get; private set; } = 1.0f;
 }
