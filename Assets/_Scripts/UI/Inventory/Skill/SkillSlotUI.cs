@@ -39,7 +39,6 @@ public class SkillSlotUI : MonoBehaviour
 
         hasStarted = false;
 
-
         Debug.Assert(coolDownImage != null, "cool down image is null!");
     }
 
@@ -97,7 +96,6 @@ public class SkillSlotUI : MonoBehaviour
     public void ExecuteTestTimer()
     {
         coolDownTimer.StartSingleUseTimer();
-        Debug.Log($"timer.timerAcitve changed : {coolDownTimer.timerActive}");
     }
 
 }

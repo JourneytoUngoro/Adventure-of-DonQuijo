@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine.SceneManagement;
 using System;
+using Sirenix.OdinInspector;
 
 public class DataManager : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class DataManager : MonoBehaviour
     public string selectedProfileId { get; private set; } // Profile Id of current save file. Initial value is null when nothing is selected. Value changes when the player selects a save slot.
 
     public GameData gameData { get; private set; } // current selected Profile Id's game data
+
+    [ShowInInspector]
     private List<IDataPersistance> dataPersistanceObjects;
     private FileDataHandler dataHandler;
 

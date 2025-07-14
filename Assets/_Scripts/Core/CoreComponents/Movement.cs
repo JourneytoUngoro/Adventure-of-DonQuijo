@@ -36,7 +36,7 @@ public abstract class Movement : CoreComponent
             else
             {
                 Debug.Log(velocity);
-                Debug.Log(entity.entityStats.speed.currentValue);
+                Debug.Log($"current speed stat value : {entity.entityStats.speed.currentValue}");
                 workSpace.Set(velocity * entity.entityStats.speed.currentValue, entity.entityRigidbody.velocity.y, 0.0f);
             }
         }

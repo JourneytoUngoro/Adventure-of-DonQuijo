@@ -164,13 +164,21 @@ public class UIManager : MonoBehaviour
     #region Test 이후 삭제
     void InCaseTestScene()
     {
-        if (uiCanvas == null || pool == null)
+        if (uiCanvas == null)
         {
-            Debug.LogWarning("UIManager error! uiCanvas or pool can't find proper transform");
+            Debug.LogWarning("UIManager error! uiCanvas can't find proper transform");
             
             Transform tmpTransform = FindObjectOfType<Canvas>().transform;
             uiCanvas = tmpTransform;
-            pool = tmpTransform;
+        }
+
+        if (pool == null)
+        {
+            Debug.LogWarning("UIManager error! pool can't find proper transform");
+
+            GameObject pooledObject = new GameObject("Pooled Objects");
+            pool = pooledObject.transform;
+            pooledObject.transform.SetParent(uiCanvas);
         }
     }
     #endregion

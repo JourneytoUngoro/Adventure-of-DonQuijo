@@ -74,13 +74,15 @@ public abstract class Stats : CoreComponent
 
     protected virtual void Start()
     {
-        speed.SetCurrentValue(1.0f);
-
         health.SetMaxValue(health.graph.accumulationPerLevel.Evaluate(power.currentValue));
         health.SetCurrentValue(health.graph.accumulationPerLevel.Evaluate(power.currentValue));
         
         posture.SetMaxValue(posture.graph.accumulationPerLevel.Evaluate(power.currentValue));
         posture.SetCurrentValue(posture.graph.accumulationPerLevel.Evaluate(power.currentValue));
+
+        Debug.Log($"{gameObject.name} In Start() : power {power.currentValue}");
+        Debug.Log($"{gameObject.name} In Start() : health Max {health.maxValue}, health {health.currentValue}");
+        Debug.Log($"{gameObject.name} In Start() : posture Max {posture.maxValue}, posture {health.currentValue}");
     }
 
     protected virtual void Update()

@@ -80,7 +80,7 @@ public class GameData
         this.currentHealth = 100.0f;
         this.currentPosture = 0.0f;
         this.currentExperience = 0.0f;
-        this.moveSpeed = 0.0f;
+        this.moveSpeed = 1.0f; // Stats.speed
         this.postureDamage = 0.0f;
         this.lastPlayerPosition = Vector3.zero;
         this.currentScene = "SampleScene";

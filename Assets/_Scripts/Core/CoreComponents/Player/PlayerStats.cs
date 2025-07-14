@@ -35,19 +35,26 @@ public class PlayerStats : Stats, IDataPersistance
     public void LoadData(GameData data)
     {
         // TODO: Implement LoadData
-        health.SetMaxValue(data.maxHealth);
+/*        health.SetMaxValue(data.maxHealth);
         health.SetCurrentValue(data.currentHealth);
-        posture.SetCurrentValue(data.currentPosture);
+        posture.SetCurrentValue(data.currentPosture);*/
         speed.SetCurrentValue(data.moveSpeed);
         power.SetCurrentValue(data.postureDamage);
+
+        Debug.Log($"speed : {speed.currentValue}");
+        // Debug.Log($"power : {power.currentValue}");
     }
 
     public void SaveData(GameData data)
     {
-        // data.currentLevel = (int)power.currentValue;
         data.currentHealth = health.currentValue;
         data.currentPosture = posture.currentValue;
         data.moveSpeed = speed.currentValue;
         data.postureDamage = power.currentValue;
+
+        // Debug.Log($"health : {health.currentValue}");
+        // Debug.Log($"posture : {posture.currentValue}");
+        Debug.Log($"speed : {speed.currentValue}");
+        // Debug.Log($"power : {power.currentValue}");
     }
 }

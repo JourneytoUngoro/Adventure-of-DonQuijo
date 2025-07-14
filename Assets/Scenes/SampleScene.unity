@@ -316,7 +316,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 997863574}
+  m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 180
@@ -1447,22 +1447,6 @@ MonoBehaviour:
     m_ActionId: 58b61811-db2b-459f-b782-41ed92816ea0
     m_ActionName: CharacterControl/Return[/Keyboard/x]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 267137749}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnPauseMenu
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 2891114b-29ad-460f-9f7c-10ab8d5ef33d
-    m_ActionName: CharacterControl/Pause/Menu[/Keyboard/escape]
-  - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 7c0a1817-012e-4aa7-969c-5f84f0927723
     m_ActionName: CharacterControl/Equipment[/Keyboard/e]
@@ -1494,6 +1478,18 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f84289c8-4e4b-4abd-8098-4c3674a81498
     m_ActionName: CharacterControl/StrongAttack[/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 46a5626e-e01b-4587-bf09-feb862fb19e9
+    m_ActionName: UIControl/Confirm[/Keyboard/z]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a49aec27-0f60-4506-a1d9-3b8e8d49907e
+    m_ActionName: UIControl/Cancel[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6f6b3a1a-212e-460d-9e9b-d0fb65aceb59
+    m_ActionName: UIControl/ToggleMenu[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: CharacterControl
@@ -8274,7 +8270,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1502738976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14495,12 +14491,12 @@ GameObject:
   - component: {fileID: 6577656055440202189}
   - component: {fileID: 4237936041892102205}
   m_Layer: 6
-  m_Name: Player
+  m_Name: Player(1)
   m_TagString: Idle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2358767429959086576
 MonoBehaviour:
   m_ObjectHideFlags: 0
