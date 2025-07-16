@@ -22,39 +22,40 @@ public class PlayerStats : Stats, IDataPersistance
         health.OnCurrentValueMin += () => { player.playerStateMachine.ChangeState(player.deadState); };
         // posture.OnCurrentValueMin += () => { player.playerStateMachine.ChangeState(player.stunnedState); };
 
-        experience.OnCurrentValueMax += () => { power.IncreaseCurrentValue(1); };
-        power.OnCurrentValueChange += () =>
+        experience.OnCurrentValueMax += () => { postureLevel.IncreaseCurrentValue(1); };
+
+        healthLevel.OnCurrentValueChange += () =>
         {
-            health.IncreaseMaxValue(health.graph.incrementPerLevel.Evaluate(power.currentValue));
-            health.IncreaseCurrentValue(health.graph.incrementPerLevel.Evaluate(power.currentValue));
-            posture.IncreaseMaxValue(posture.graph.incrementPerLevel.Evaluate(power.currentValue));
-            posture.IncreaseCurrentValue(posture.graph.incrementPerLevel.Evaluate(power.currentValue));
+            Debug.Log($"evaluate amount : {health.graph.incrementPerLevel.Evaluate(healthLevel.currentValue)}");
+
+            health.SetMaxValue(healthLevel.graph.incrementPerLevel.Evaluate(healthLevel.currentValue));
+            health.IncreaseCurrentValue(health.graph.incrementPerLevel.Evaluate(healthLevel.currentValue));
+        };
+
+        postureLevel.OnCurrentValueChange += () =>
+        {
+            posture.IncreaseMaxValue(posture.graph.incrementPerLevel.Evaluate(postureLevel.currentValue));
+            posture.IncreaseCurrentValue(posture.graph.incrementPerLevel.Evaluate(postureLevel.currentValue));
         };
     }
 
     public void LoadData(GameData data)
     {
-        // TODO: Implement LoadData
-/*        health.SetMaxValue(data.maxHealth);
+        health.SetMaxValue(data.maxHealth); // In case new game
         health.SetCurrentValue(data.currentHealth);
-        posture.SetCurrentValue(data.currentPosture);*/
-        speed.SetCurrentValue(data.moveSpeed);
-        power.SetCurrentValue(data.postureDamage);
-
-        Debug.Log($"speed : {speed.currentValue}");
-        // Debug.Log($"power : {power.currentValue}");
+        healthLevel.SetCurrentValue(data.currentHealthLevel);
+        posture.SetCurrentValue(data.currentPosture);
+        postureLevel.SetCurrentValue(data.postureLevel);
+        speedLevel.SetCurrentValue(data.moveSpeed);
     }
 
     public void SaveData(GameData data)
     {
+        data.maxHealth = health.maxValue;
         data.currentHealth = health.currentValue;
+        data.currentHealthLevel = healthLevel.currentValue;
         data.currentPosture = posture.currentValue;
-        data.moveSpeed = speed.currentValue;
-        data.postureDamage = power.currentValue;
-
-        // Debug.Log($"health : {health.currentValue}");
-        // Debug.Log($"posture : {posture.currentValue}");
-        Debug.Log($"speed : {speed.currentValue}");
-        // Debug.Log($"power : {power.currentValue}");
+        data.postureLevel = postureLevel.currentValue;
+        data.moveSpeed = speedLevel.currentValue;
     }
 }

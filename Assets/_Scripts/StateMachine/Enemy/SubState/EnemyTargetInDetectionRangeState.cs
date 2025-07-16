@@ -268,7 +268,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                     navMeshAgent.SetDestination(currentDestination);
                     recaliberationPosition = enemy.transform.position;
                     Vector3 chaseDirection = navMeshAgent.desiredVelocity == Vector3.zero ? (currentDestination - navMeshAgent.transform.position).normalized : navMeshAgent.velocity.normalized;
-                    navMeshAgent.speed = Mathf.Abs(chaseDirection.x) * enemy.enemyData.moveSpeed.x + Mathf.Abs(chaseDirection.y) * enemy.enemyData.moveSpeed.y;
+                    navMeshAgent.speedLevel = Mathf.Abs(chaseDirection.x) * enemy.enemyData.moveSpeed.x + Mathf.Abs(chaseDirection.y) * enemy.enemyData.moveSpeed.y;
                     enemy.animator.SetBool("moveBack", navMeshAgent.desiredVelocity.x * targetDirection < 0);
 
                     if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance && !navMeshAgent.hasPath)
@@ -298,7 +298,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                 navMeshAgent.SetDestination(currentDestination);
                 recaliberationPosition = enemy.transform.position;
                 Vector3 traverseDirection = navMeshAgent.desiredVelocity == Vector3.zero ? (currentDestination - navMeshAgent.transform.position).normalized : navMeshAgent.velocity.normalized;
-                navMeshAgent.speed = Mathf.Abs(traverseDirection.x) * enemy.enemyData.moveSpeed.x + Mathf.Abs(traverseDirection.y) * enemy.enemyData.moveSpeed.y;
+                navMeshAgent.speedLevel = Mathf.Abs(traverseDirection.x) * enemy.enemyData.moveSpeed.x + Mathf.Abs(traverseDirection.y) * enemy.enemyData.moveSpeed.y;
                 enemy.animator.SetBool("moveBack", navMeshAgent.desiredVelocity.x * targetDirection < 0);
 
                 if (traverseAroundFlag && !navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance && !navMeshAgent.hasPath)

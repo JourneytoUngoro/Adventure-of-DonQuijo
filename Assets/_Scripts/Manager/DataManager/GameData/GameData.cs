@@ -14,10 +14,11 @@ public class GameData
     // player attributes
     public float maxHealth;
     public float currentHealth;
+    public float currentHealthLevel;
     public float currentPosture;
+    public float postureLevel;
     public float currentExperience;
     public float moveSpeed;
-    public float postureDamage;
 
     // game attributes
     public Vector3 lastPlayerPosition;
@@ -78,10 +79,11 @@ public class GameData
         this.lastPlayTime = DateTime.Now.Ticks;
         this.maxHealth = 100.0f;
         this.currentHealth = 100.0f;
-        this.currentPosture = 0.0f;
+        this.currentHealthLevel = 1.0f;
+        this.currentPosture = 25.0f;
         this.currentExperience = 0.0f;
-        this.moveSpeed = 1.0f; // Stats.speed
-        this.postureDamage = 0.0f;
+        this.moveSpeed = 1.0f; // Stats.speedLevel
+        this.postureLevel = 1.0f;
         this.lastPlayerPosition = Vector3.zero;
         this.currentScene = "SampleScene";
         // mapOpened = new Dictionary<string, bool>();

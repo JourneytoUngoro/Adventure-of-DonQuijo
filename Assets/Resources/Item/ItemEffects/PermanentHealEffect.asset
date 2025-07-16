@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e4895f82e03e974580012d804edbcff, type: 3}
+  m_Script: {fileID: 11500000, guid: f12704ccf71ad704c9064df7c793a68d, type: 3}
   m_Name: PermanentHealEffect
   m_EditorClassIdentifier: 
   percentage: 1

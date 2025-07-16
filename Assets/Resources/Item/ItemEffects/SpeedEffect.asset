@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e990f58bb33ec6438755ad1eaaf86a3, type: 3}
   m_Name: SpeedEffect
   m_EditorClassIdentifier: 
-  percentage: 0.1
+  percentage: 0.15
