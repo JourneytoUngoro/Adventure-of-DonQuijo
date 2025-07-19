@@ -10,6 +10,8 @@ public class VendingMachineController : InteractBase
 
     private PopupUI popup;
     private VendingMachinePopupUI vmPopup;
+    private TextInfoUI textUI;
+
     private float delayTime = 0.4f;
 
     private void Start()
@@ -31,7 +33,6 @@ public class VendingMachineController : InteractBase
         StartCoroutine(SetCanOpenGuide(true));
     }
 
-    TextInfoUI textUI;
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);

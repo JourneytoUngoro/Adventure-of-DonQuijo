@@ -4,17 +4,19 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-   public static Dictionary<UIType, UIBase> startingUIDictionary = new Dictionary<UIType, UIBase>();
+    public static Dictionary<UIType, UIBase> startingUIDictionary = new Dictionary<UIType, UIBase>();
 
-    // TODO : 테스트, 폴더 통합 이후 Load 하는 방식으로 바꾸기
-    public PopupUI popupPrefab;
-    public TextInfoUI textInfoPrefab;
-    public ImageUI imagePrefab;
+    private PopupUI popupPrefab;
+    private TextInfoUI textInfoPrefab;
+    private ImageUI imagePrefab;
 
     public Stack<PopupUI> activatedPopups = new Stack<PopupUI>();
 
     private bool toggleMenuPressed;
     private bool popupOpened;
+
+    private TextInfoUI currentTextInfoUI;
+    private ImageUI clickBlockImageUI;
 
     #region UI Object Pool
     public UIObjectPool<PopupUI> popupPool;
@@ -24,20 +26,21 @@ public class UIManager : MonoBehaviour
     int objectCount = 2;
     #endregion
 
-    Transform uiCanvas; // UI Object가 표시될 전용 캔버스 
-    Transform pool; 
-    GameObject clickBlocker; // TODO : UI 활성화 시 클릭 막는 로직 추가 
+    private Transform uiCanvas; // UI Object가 표시될 전용 캔버스 
+    private Transform pool;
 
     private void Awake()
     {
         uiCanvas = GameObject.Find("Overlay Canvas")?.transform;
         pool = GameObject.Find("Pooled Objects")?.transform;
-
         InCaseTestScene();
 
         toggleMenuPressed = false;
         popupOpened = false;
 
+        currentTextInfoUI = null;
+
+        LoadUIPrefabs();
         RegisterUIObjects();
         CreatePool();
     }
@@ -62,7 +65,22 @@ public class UIManager : MonoBehaviour
         {
             Manager.Instance.inputHandler.SetCharacterControlEnabled(true);
         }
-        // Debug.Log("CharacterControl is enabled : " + Manager.Instance.inputHandler.IsCharacterControlEnabled());
+    }
+
+    private void LoadUIPrefabs()
+    {
+        popupPrefab = Resources.Load<PopupUI>("Prefabs/UI/PopupPrefab");
+        textInfoPrefab = Resources.Load<TextInfoUI>("Prefabs/UI/TextInfoPrefab");
+        imagePrefab = Resources.Load<ImageUI>("Prefabs/UI/ImagePrefab");
+
+        clickBlockImageUI = Object.Instantiate(Resources.Load<GameObject>("Prefabs/UI/ClickBlocker")).GetComponent<ImageUI>();
+        clickBlockImageUI.transform.SetParent(uiCanvas, false);
+        //clickBlockImageUI.GetRectTransform().
+
+        Debug.Assert(popupPrefab != null, "popup prefab is null!");
+        Debug.Assert(textInfoPrefab != null, "textInfo prefab is null!");
+        Debug.Assert(imagePrefab != null, "null!");
+        Debug.Assert(clickBlockImageUI != null, "null");
     }
 
     private void RegisterUIObjects()
@@ -143,7 +161,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-             startingUIDictionary[UIType.settingPopup].ShowUI();
+            startingUIDictionary[UIType.settingPopup].ShowUI();
         }
     }
 
@@ -153,13 +171,37 @@ public class UIManager : MonoBehaviour
         {
             popupOpened = true;
         }
-        else 
+        else
         {
             popupOpened = false;
+            clickBlockImageUI.HideUI();
         }
         // Debug.Log(Manager.Instance.uiManager.activatedPopups.Count + " popups activated");
 
     }
+
+    public void OpenPopupUI()
+    {
+        clickBlockImageUI.ShowUI();
+        clickBlockImageUI.transform.SetSiblingIndex(Mathf.Max(clickBlockImageUI.transform.parent.childCount - 2, 0));
+    }
+       
+
+    public void OpenTextInfoUI(TextInfoUI textInfo) => currentTextInfoUI = textInfo;
+
+    public bool CheckCurrentTextInfo(TextInfoUI textInfo) => ReferenceEquals(currentTextInfoUI, textInfo);
+
+    public void HideCurrentTextInfoUI()
+    {
+        if (currentTextInfoUI != null)
+        {
+            // just set alpha value to 0
+            currentTextInfoUI.GetComponent<CanvasGroup>().alpha = 0f;
+        }
+        currentTextInfoUI = null;
+    }
+
+
 
     #region Test 이후 삭제
     void InCaseTestScene()
@@ -178,7 +220,7 @@ public class UIManager : MonoBehaviour
 
             GameObject pooledObject = new GameObject("Pooled Objects");
             pool = pooledObject.transform;
-            pooledObject.transform.SetParent(uiCanvas);
+            pooledObject.transform.SetParent(pool);
         }
     }
     #endregion

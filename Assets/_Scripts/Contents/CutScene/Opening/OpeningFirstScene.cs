@@ -26,6 +26,12 @@ public class OpeningFirstScene : MonoBehaviour, ICutScene
     public float donDuration;
     [TabGroup("Don Quijote")] [Tooltip("패럴랙스 시 오브젝트 이동 두트윈 효과")]
     public Ease donEase;
+    [TabGroup("Don Quijote")][Tooltip("Blur Radius")][Range(0.1f, 5.0f)]
+    public float donBlurRadius;
+    [TabGroup("Don Quijote")][Tooltip("줌 시퀀스 시작 이후, 블러 효과 시작까지의 시간")]
+    public float donBlurStartTime;
+    [TabGroup("Don Quijote")][Tooltip("블러 진행 시간")]
+    public float donBlurTime;
 
 
     [TabGroup("Background")]
@@ -61,12 +67,16 @@ public class OpeningFirstScene : MonoBehaviour, ICutScene
 
     public Action onFinish { get; set; }
     private Color fadeColor;
+    private Material donBlurMaterial;
 
     public void InitializeScene()
     {
         SetFadeEffect();
 
+        donBlurMaterial = DonquijoteObj.GetComponent<Renderer>().material;
+
         DonquijoteObj.transform.position = donStartPosition;
+        donBlurMaterial.SetFloat("_BlurSize", 0.1f);
         BackgroundObj.transform.position = bgStartPosition;
         vCam1.transform.position = vCam1StartPosition;
         vCam1.m_Lens.OrthographicSize = vCam1StratOrthoSize;
@@ -95,6 +105,7 @@ public class OpeningFirstScene : MonoBehaviour, ICutScene
         donBackgroundSequence.Append(
             DonquijoteObj.transform.DOMove(donEndPosition, donDuration).SetEase(donEase)
             );
+
         // bg's move
         donBackgroundSequence.Join(
             BackgroundObj.transform.DOMove(bgEndPosition, bgDuration).SetEase(bgEase)
@@ -118,11 +129,22 @@ public class OpeningFirstScene : MonoBehaviour, ICutScene
             DonquijoteObj.transform.DOMove(donZoomPosition, zoomDuration).SetEase(zoomEase)
             );
 
+        // don quijote's blur effect
+        Sequence blurSequence = DOTween.Sequence();
+        blurSequence.AppendInterval(donBlurStartTime);
+        blurSequence.Append(
+            DOTween.To(() => donBlurMaterial.GetFloat("_BlurSize"),
+                                x => donBlurMaterial.SetFloat("_BlurSize", x),
+                                donBlurRadius,
+                                donBlurTime
+            ));
+
         Sequence masterSequence = DOTween.Sequence();
-        masterSequence.AppendInterval(fadeDuratoin / 2f).OnComplete(() => masterSequence.Join(donBackgroundSequence));
+        masterSequence.AppendInterval(fadeDuratoin / 2f).OnComplete(() => masterSequence.Join(donBackgroundSequence)); // wait n seconds
         masterSequence.Join(fadeSequence);
         masterSequence.AppendInterval(beforeZoomWaitTime);
         masterSequence.Append(zoomSequence);
+        masterSequence.Join(blurSequence);
         masterSequence.AppendInterval(0.2f).OnComplete(() => {
             if (!isEditing) { onFinish?.Invoke(); }
             vCam1.m_Lens.OrthographicSize = vCam1StratOrthoSize;

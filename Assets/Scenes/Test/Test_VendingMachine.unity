@@ -1259,7 +1259,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 240
+  orthographic size: 180
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1816,7 +1816,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &312079377
 Transform:
   m_ObjectHideFlags: 0
@@ -4641,7 +4641,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  <power>k__BackingField:
+  <healthLevel>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
     <maxValue>k__BackingField: 0
@@ -4664,7 +4664,30 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  <speed>k__BackingField:
+  <postureLevel>k__BackingField:
+    reverseSlider: 0
+    slider: {fileID: 0}
+    <maxValue>k__BackingField: 0
+    <minValue>k__BackingField: 0
+    <currentValue>k__BackingField: 0
+    <enableRecovery>k__BackingField: 0
+    <recoveryStartTime>k__BackingField: 0
+    <recoveryDuration>k__BackingField: 0
+    <recoveryValue>k__BackingField: 0
+    <graph>k__BackingField:
+      <incrementPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <accumulationPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  <speedLevel>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
     <maxValue>k__BackingField: 0
@@ -6179,37 +6202,6 @@ Transform:
   - {fileID: 933340705}
   m_Father: {fileID: 2004323604}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &864329702
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 864329703}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &864329703
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 864329702}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -74.1, y: -202.2, z: 1.1876286}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &866948059
 GameObject:
   m_ObjectHideFlags: 0
@@ -6475,7 +6467,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  <power>k__BackingField:
+  <healthLevel>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
     <maxValue>k__BackingField: 0
@@ -6498,7 +6490,30 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  <speed>k__BackingField:
+  <postureLevel>k__BackingField:
+    reverseSlider: 0
+    slider: {fileID: 0}
+    <maxValue>k__BackingField: 0
+    <minValue>k__BackingField: 0
+    <currentValue>k__BackingField: 0
+    <enableRecovery>k__BackingField: 0
+    <recoveryStartTime>k__BackingField: 0
+    <recoveryDuration>k__BackingField: 0
+    <recoveryValue>k__BackingField: 0
+    <graph>k__BackingField:
+      <incrementPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <accumulationPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  <speedLevel>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
     <maxValue>k__BackingField: 0
@@ -12324,6 +12339,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coin Object
       objectReference: {fileID: 0}
+    - target: {fileID: 433675706252112897, guid: b115fcd493471074bbc9f66a2591b228, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7921129724674394508, guid: b115fcd493471074bbc9f66a2591b228, type: 3}
       propertyPath: m_LocalPosition.x
       value: -495.7
@@ -12640,7 +12659,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde667b3d7077cb4dabe20dcbeb771f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customEditorDescription: 
   onClick:
     m_PersistentCalls:
       m_Calls:
@@ -12756,9 +12774,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b87f45a7f8cf24ea5f2ce7fb1753e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupPrefab: {fileID: 1203774757604747321, guid: 96ec64f393253fb49a5abb489bd03e8a, type: 3}
-  textInfoPrefab: {fileID: 8397104400056502976, guid: bc934adb9ea1664499fdb887a513fba6, type: 3}
-  imagePrefab: {fileID: -388096200361407989, guid: 54e48e103ea77bc4b95393d6d58fed59, type: 3}
 --- !u!1 &1808161520
 GameObject:
   m_ObjectHideFlags: 0
@@ -13121,7 +13136,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  <power>k__BackingField:
+  <healthLevel>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
     <maxValue>k__BackingField: 0
@@ -13144,7 +13159,30 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  <speed>k__BackingField:
+  <postureLevel>k__BackingField:
+    reverseSlider: 0
+    slider: {fileID: 0}
+    <maxValue>k__BackingField: 0
+    <minValue>k__BackingField: 0
+    <currentValue>k__BackingField: 0
+    <enableRecovery>k__BackingField: 0
+    <recoveryStartTime>k__BackingField: 0
+    <recoveryDuration>k__BackingField: 0
+    <recoveryValue>k__BackingField: 0
+    <graph>k__BackingField:
+      <incrementPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <accumulationPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  <speedLevel>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
     <maxValue>k__BackingField: 0
@@ -15634,6 +15672,5 @@ SceneRoots:
   - {fileID: 386412789}
   - {fileID: 6384593610932781290}
   - {fileID: 151962858}
-  - {fileID: 864329703}
   - {fileID: 1782625594}
   - {fileID: 2138442919}

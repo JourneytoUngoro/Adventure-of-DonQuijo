@@ -386,7 +386,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde667b3d7077cb4dabe20dcbeb771f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customEditorDescription: "\uCEF7\uC2E0 \uC2E4\uD589\uD558\uAE30"
   onClick:
     m_PersistentCalls:
       m_Calls:
@@ -414,7 +413,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde667b3d7077cb4dabe20dcbeb771f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customEditorDescription: "\uCEF7\uC2E0 \uCC98\uC74C \uC0C1\uD0DC\uB85C \uCD08\uAE30\uD654\uD558\uAE30"
   onClick:
     m_PersistentCalls:
       m_Calls:
@@ -869,7 +867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &856095523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -882,7 +880,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde667b3d7077cb4dabe20dcbeb771f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customEditorDescription: "\uCEF7\uC2E0 \uC2E4\uD589\uD558\uAE30"
   onClick:
     m_PersistentCalls:
       m_Calls:
@@ -918,6 +915,9 @@ MonoBehaviour:
   donZoomPosition: {x: -1, y: -0.3, z: 0}
   donDuration: 3.5
   donEase: 6
+  donBlurRadius: 2.01
+  donBlurStartTime: 0.8
+  donBlurTime: 2.7
   BackgroundObj: {fileID: 1085760532}
   bgStartPosition: {x: 0.5, y: 0, z: 0}
   bgEndPosition: {x: 0, y: 0, z: 0}
@@ -961,7 +961,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde667b3d7077cb4dabe20dcbeb771f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customEditorDescription: "\uCEF7\uC2E0 \uCC98\uC74C \uC0C1\uD0DC\uB85C \uCD08\uAE30\uD654\uD558\uAE30"
   onClick:
     m_PersistentCalls:
       m_Calls:
@@ -1014,7 +1013,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 7ce6c20b47c22894b8d3b37b9d6c048b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1093,7 +1092,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde667b3d7077cb4dabe20dcbeb771f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customEditorDescription: "\uCEF7\uC2E0 \uCC98\uC74C \uC0C1\uD0DC\uB85C \uCD08\uAE30\uD654\uD558\uAE30"
   onClick:
     m_PersistentCalls:
       m_Calls:
@@ -1121,7 +1119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde667b3d7077cb4dabe20dcbeb771f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customEditorDescription: "\uCEF7\uC2E0 \uC2E4\uD589\uD558\uAE30"
   onClick:
     m_PersistentCalls:
       m_Calls:
@@ -1709,7 +1706,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde667b3d7077cb4dabe20dcbeb771f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customEditorDescription: "\uCEF7\uC2E0 \uCC98\uC74C \uC0C1\uD0DC\uB85C \uCD08\uAE30\uD654\uD558\uAE30"
   onClick:
     m_PersistentCalls:
       m_Calls:
@@ -1737,7 +1733,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde667b3d7077cb4dabe20dcbeb771f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customEditorDescription: "\uCEF7\uC2E0 \uC2E4\uD589\uD558\uAE30"
   onClick:
     m_PersistentCalls:
       m_Calls:
@@ -2112,7 +2107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde667b3d7077cb4dabe20dcbeb771f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customEditorDescription: "\uCEF7\uC2E0 \uCC98\uC74C \uC0C1\uD0DC\uB85C \uCD08\uAE30\uD654\uD558\uAE30"
   onClick:
     m_PersistentCalls:
       m_Calls:
@@ -2140,7 +2134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde667b3d7077cb4dabe20dcbeb771f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customEditorDescription: "\uCEF7\uC2E0 \uC2E4\uD589\uD558\uAE30"
   onClick:
     m_PersistentCalls:
       m_Calls:

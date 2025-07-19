@@ -13,6 +13,7 @@ public enum UIType
     QuestPopup, // 퀘스트 진행 팝업
     TextInfo, // 텍스트 정보 
     FadeImage, // 페이드 효과 이미지
+    ClickBlocker, 
     DynamicPopup, // 동적으로 생성되는 팝업
     DynamicTextInfo, // 동적으로 생성되는 텍스트 정보
     DynamicImage,  // 동적으로 생성되는 이미지

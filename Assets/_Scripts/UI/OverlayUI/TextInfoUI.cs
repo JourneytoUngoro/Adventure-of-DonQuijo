@@ -9,34 +9,56 @@ using System;
 public class TextInfoUI : UIBase
 {
     // 오브젝트                      // 씬 상의 오브젝트 이름
-    TextMeshProUGUI infoTMP; // Info TMP
-    Image backgroundImage; // Background Image
+    private TextMeshProUGUI infoTMP; // Info TMP
+    private Image backgroundImage; // Background Image
+
+    public bool canOverlap = false;
 
     protected override void AllowmentComponent()
     {
         infoTMP = GetComponentInChildren<TextMeshProUGUI>();
         backgroundImage = GetComponent<Image>();
 
+        canOverlap = false;
+        Debug.Log($"canOverlap -> {canOverlap}");
     }
 
     public override void ShowUI()
     {
+        // Only one text ui should be displayed
+        if (!canOverlap)
+        {
+            Manager.Instance.uiManager.HideCurrentTextInfoUI();
+        }
+
+        Manager.Instance.uiManager.OpenTextInfoUI(this);
+        
         base.ShowUI();
     }
 
     public override void HideUI()
     {
+        if (Manager.Instance.uiManager.CheckCurrentTextInfo(this))
+        {
+            Manager.Instance.uiManager.HideCurrentTextInfoUI();
+        }
         base.HideUI();
     }
 
     public override void ShowAndHideUI(float waitTime)
     {
+        // Only one text ui should be displayed
+        if (!canOverlap)
+        {
+            Manager.Instance.uiManager.HideCurrentTextInfoUI();
+        }
+        Manager.Instance.uiManager.OpenTextInfoUI(this);
+
         base.ShowAndHideUI(waitTime);
     }
 
     public override void Move(Vector2 direction, bool ease)
     {
-        // TODO : 패널 움직이는 기능 구현 
         base.Move(direction, ease);
     }
 

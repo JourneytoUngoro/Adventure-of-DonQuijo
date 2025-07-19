@@ -29,6 +29,7 @@ public class PopupUI : UIBase
     public override void ShowUI()
     {
         base.ShowUI();
+        Manager.Instance.uiManager.OpenPopupUI();
         Manager.Instance.uiManager.activatedPopups.Push(this);
     }
 

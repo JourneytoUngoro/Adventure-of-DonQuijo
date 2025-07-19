@@ -5,7 +5,15 @@ using UnityEngine.UI;
 public class ImageUI : UIBase
 {
     // 오브젝트                      // 씬 상의 오브젝트 이름
-    Image backgroundImage; // Background Image
+    Image backgroundImage; // Image
+
+
+    protected override void AllowmentComponent()
+    {
+        base.AllowmentComponent();
+
+        backgroundImage = transform.Find("Image")?.GetComponent<Image>();
+    }
 
     public override void ShowUI()
     {
@@ -14,6 +22,7 @@ public class ImageUI : UIBase
 
     public override void HideUI()
     {
+        // if (rectTransform != null)
         base.HideUI();
     }
 
