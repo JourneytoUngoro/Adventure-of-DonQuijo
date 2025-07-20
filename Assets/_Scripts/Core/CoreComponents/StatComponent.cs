@@ -113,6 +113,7 @@ public class StatComponent
 
     public void SetCurrentValue(float value)
     {
+        Debug.Log($"Set {name} to {value}.");
         currentValue = Mathf.Clamp(value, minValue, maxValue);
         SetSliderValue();
         OnCurrentValueChange?.Invoke();

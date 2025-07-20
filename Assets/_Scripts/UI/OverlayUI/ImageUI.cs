@@ -7,21 +7,6 @@ public class ImageUI : UIBase
     // 오브젝트                      // 씬 상의 오브젝트 이름
     Image backgroundImage; // Background Image
 
-    public override void ShowUI()
-    {
-        base.ShowUI();
-    }
-
-    public override void HideUI()
-    {
-        base.HideUI();
-    }
-
-    public override void ShowAndHideUI(float waitTime)
-    {
-        base.ShowAndHideUI(waitTime);
-    }
-
     public ImageUI SetDynamicImage(Image image)
     {
         backgroundImage = image;
@@ -29,15 +14,16 @@ public class ImageUI : UIBase
         return this;
     }
 
-    public override void Move(Vector2 direction, bool ease)
+    protected override void AllowmentComponent()
     {
-        base.Move(direction, ease);
-        // TODO : 패널 움직이는 기능 구현 
+        
     }
+
     protected override void ReturnToPool()
     {
         if (type == UIType.DynamicImage)
-        Manager.Instance.uiManager.imagePool.Return(this);
+        {
+            Manager.Instance.uiManager.imagePool.Return(this);
+        }
     }
-
 }

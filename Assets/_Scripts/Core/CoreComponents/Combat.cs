@@ -276,7 +276,7 @@ public abstract class Combat : CoreComponent
     public virtual void GetHealthDamage(DamageComponent damageComponent, bool isParrying, bool isBlocking)
     {
         Entity sourceEntity = damageComponent.pertainedCombatAbility.sourceEntity;
-        float healthDamage = damageComponent.healthDamage.accumulationPerLevel.Evaluate(entity.entityStats.power.currentValue);
+        float healthDamage = damageComponent.healthDamage.accumulationPerLevel.Evaluate(sourceEntity.entityStats.power.currentValue);
 
         if (damageComponent.pertainedCombatAbility.canBeParried)
         {
@@ -343,7 +343,7 @@ public abstract class Combat : CoreComponent
     public virtual void GetPostureDamage(DamageComponent damageComponent, bool isParrying, bool isShielding)
     {
         Entity sourceEntity = damageComponent.pertainedCombatAbility.sourceEntity;
-        float postureDamage = damageComponent.postureDamage.accumulationPerLevel.Evaluate(entity.entityStats.power.currentValue);
+        float postureDamage = damageComponent.postureDamage.accumulationPerLevel.Evaluate(sourceEntity.entityStats.power.currentValue);
 
         if (damageComponent.pertainedCombatAbility.canBeParried)
         {

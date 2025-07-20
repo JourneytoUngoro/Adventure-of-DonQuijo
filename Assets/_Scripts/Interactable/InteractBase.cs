@@ -52,6 +52,10 @@ public abstract class InteractBase : MonoBehaviour, IInteractable
                 player.interactableGameObjects.ForEach(interactable => interactable.canInteract = false);
                 player.interactableGameObjects.FirstOrDefault().canInteract = true; 
             }
+            else
+            {
+                canInteract = true;
+            }
         }
     }
 
@@ -85,6 +89,10 @@ public abstract class InteractBase : MonoBehaviour, IInteractable
                 player.interactableGameObjects.OrderBy(interactable => Vector3.SqrMagnitude(player.transform.position - interactable.transform.position));
                 player.interactableGameObjects.ForEach(interactable => interactable.canInteract = false);
                 player.interactableGameObjects.FirstOrDefault().canInteract = true;
+            }
+            else
+            {
+                canInteract = true;
             }
         }
     }

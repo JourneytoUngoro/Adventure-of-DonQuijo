@@ -20,29 +20,20 @@ public class EnemyTargetInDetectionRangeState : EnemyState
 
     private bool traverseAroundFlag;
 
-    private NavMeshAgentState navMeshAgentState;
-
     public EnemyTargetInDetectionRangeState(Enemy enemy, string animBoolName) : base(enemy, animBoolName)
     {
         repositioningTimer = new Timer(enemyData.repositioningTime);
         repositioningTimer.timerAction += () =>
         {
+            Debug.Log("TraverseTimer");
+
             if (UtilityFunctions.RandomSuccess(enemy.enemyData.repositioningPossibility))
             {
                 traverseAroundFlag = false;
                 enemy.navMeshAgent.enabled = true;
-                navMeshAgentState = NavMeshAgentState.TraverseAround;
+                enemy.movement.ChangeNavMeshAgentState(NavMeshAgentState.TraverseAround);
+                Debug.Log("Traverse!");
 
-
-                if (UtilityFunctions.RandomSuccess(0.5f))
-                {
-
-                }
-                else
-                {
-
-                }
-                
                 positionOffset = Random.insideUnitCircle * enemy.enemyData.repositionOffsetDistance;
                 baseDestinationPosition = enemy.detection.currentTarget.entityDetection.currentProjectedPosition;
 
@@ -60,7 +51,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
 
         enemy.navMeshAgent.enabled = true;
         repositioningTimer.StartMultiUseTimer();
-        navMeshAgentState = NavMeshAgentState.Chase;
+        enemy.movement.ChangeNavMeshAgentState(NavMeshAgentState.Chase);
         enemy.detection.currentTarget.entityCombat.targetedBy.Add(enemy);
         positionOffset = Random.insideUnitCircle * enemy.enemyData.repositionOffsetDistance;
     }
@@ -80,7 +71,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
         isTargetInMeleeAttack0Range = enemy.combat.IsTargetInRangeOf(enemy.combat.meleeAttack0[0]);
         isTargetInMeleeAttack1Range = enemy.combat.IsTargetInRangeOf(enemy.combat.meleeAttack1[0]);
         isTargetInMeleeAttack2Range = enemy.combat.IsTargetInRangeOf(enemy.combat.meleeAttack2[0]);
-        isTargetInDashAttackRange = Vector3.Distance(enemy.detection.currentProjectedPosition, enemy.detection.currentTarget.entityDetection.currentProjectedPosition) < 400.0f;
+        isTargetInDashAttackRange = enemy.detection.currentTarget != null && Vector3.Distance(enemy.detection.currentProjectedPosition, enemy.detection.currentTarget.entityDetection.currentProjectedPosition) < 400.0f;
         isTargetInWideAttackRange = enemy.combat.IsTargetInRangeOf(enemy.combat.wideRangeAttack);
     }
 
@@ -115,7 +106,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                 }
                 else if (enemy.movement.navMeshAgentState != NavMeshAgentState.TraverseAround)
                 {
-                    if (enemy.status[(int)CurrentStatus.Alerted])
+                    /*if (enemy.status[(int)CurrentStatus.Alerted])
                     {
                         if (enemy.combat.currentParryStack > 0)
                         {
@@ -164,7 +155,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                                     break;
                             }
                         }
-                    }
+                    }*/
                 }
             }
         }
@@ -176,7 +167,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
 
         if (!onStateExit)
         {
-            float targetDirection = enemy.detection.currentTarget.entityDetection.currentProjectedPosition.x - enemy.detection.currentProjectedPosition.x > 0 ? 1 : -1;
+            /*float targetDirection = enemy.detection.currentTarget.entityDetection.currentProjectedPosition.x - enemy.detection.currentProjectedPosition.x > 0 ? 1 : -1;
             enemy.movement.CheckIfShouldFlip(targetDirection);
 
             if (navMeshAgentState == NavMeshAgentState.Chase)
@@ -220,15 +211,15 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                 }
             }
 
-            /*enemy.animator.SetBool("move", enemy.navMeshAgent.velocity.sqrMagnitude > epsilon);
-            enemy.animator.SetBool("idle", !(enemy.navMeshAgent.velocity.sqrMagnitude < epsilon));*/
+            *//*enemy.animator.SetBool("move", enemy.navMeshAgent.velocity.sqrMagnitude > epsilon);
+            enemy.animator.SetBool("idle", !(enemy.navMeshAgent.velocity.sqrMagnitude < epsilon));*//*
             enemy.animator.SetBool("move", enemy.navMeshAgent.enabled);
             enemy.animator.SetBool("idle", !enemy.navMeshAgent.enabled);
 
             if (enemy.navMeshAgent.enabled)
             {
                 enemy.animator.SetBool("moveBack", enemy.navMeshAgent.desiredVelocity.x * targetDirection < 0);
-            }
+            }*/
             
             /*if (navMeshAgentState == NavMeshAgentState.Halt)
             {

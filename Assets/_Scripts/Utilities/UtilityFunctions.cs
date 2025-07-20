@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Random = System.Random;
-using UnityEngine.AI;
 
 public static class UtilityFunctions
 {
@@ -68,6 +67,17 @@ public static class UtilityFunctions
         }
 
         return list;
+    }
+
+    public static Vector2 PointOnEllipse(Vector2 direction, float radiusX, float radiusY)
+    {
+        if (direction == Vector2.zero) return Vector2.zero;
+
+        float dx = direction.x / radiusX;
+        float dy = direction.y / radiusY;
+        float length = Mathf.Sqrt(dx * dx + dy * dy);
+
+        return new Vector2(direction.x / length, direction.y / length);
     }
 
     public static T[] GetComponentsInChildren<T>(this GameObject gameObject, bool includeInactive, bool includeParent = true) where T : Component

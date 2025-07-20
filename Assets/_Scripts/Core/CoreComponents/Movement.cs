@@ -35,8 +35,6 @@ public abstract class Movement : CoreComponent
             }
             else
             {
-                Debug.Log(velocity);
-                Debug.Log(entity.entityStats.speed.currentValue);
                 workSpace.Set(velocity * entity.entityStats.speed.currentValue, entity.entityRigidbody.velocity.y, 0.0f);
             }
         }
@@ -87,6 +85,11 @@ public abstract class Movement : CoreComponent
     {
         SetVelocityX(velocity.x);
         SetVelocityY(velocity.y);
+    }
+
+    public void SetPosition(Vector3 position)
+    {
+        entity.entityDetection.SetPosition(position);
     }
 
     public void CheckIfShouldFlip(float velocityX)

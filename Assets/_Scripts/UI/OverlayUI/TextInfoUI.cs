@@ -19,27 +19,6 @@ public class TextInfoUI : UIBase
 
     }
 
-    public override void ShowUI()
-    {
-        base.ShowUI();
-    }
-
-    public override void HideUI()
-    {
-        base.HideUI();
-    }
-
-    public override void ShowAndHideUI(float waitTime)
-    {
-        base.ShowAndHideUI(waitTime);
-    }
-
-    public override void Move(Vector2 direction, bool ease)
-    {
-        // TODO : 패널 움직이는 기능 구현 
-        base.Move(direction, ease);
-    }
-
     /// <summary>
     /// 동적으로 텍스트 창을 생성한다.
     /// </summary>

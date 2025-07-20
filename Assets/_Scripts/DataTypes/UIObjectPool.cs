@@ -5,12 +5,12 @@ using UnityEngine;
 public class UIObjectPool<T> where T : MonoBehaviour
 {
     private readonly Queue<T> pool;
-    private  readonly T prefab;
+    private readonly T prefab;
     private readonly int limitedCount;
 
-    Transform parent;
+    private Transform parent;
 
-    public  int Count { get =>  pool.Count; }
+    public int Count { get =>  pool.Count; }
     
     public UIObjectPool(T prefab, int initialSize, Transform parent)
     {

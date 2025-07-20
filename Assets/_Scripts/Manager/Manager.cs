@@ -17,11 +17,13 @@ public class Manager : MonoBehaviour
 */    public SoundManager soundManager { get; private set; }
     public QuestManager questManager {  get; private set; }
     public StageManager stageManager { get; private set; }
+    public SceneTransitionManager sceneTransitionManager { get; private set; }
 
     private void Awake()
     {
         #region Singleton
-        if (Instance == null)
+        Instance = this;
+        /*if (Instance == null)
         {
             Instance = this;
         }
@@ -30,13 +32,13 @@ public class Manager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);*/
         #endregion
 
         inputHandler = GetComponentInChildren<PlayerInputHandler>();
         gameManager = GetComponentInChildren<GameManager>();
         objectPoolingManager = GetComponentInChildren<ObjectPoolingManager>();
-        itemManager = GetComponentInChildren<InventoryManager>();
+        // itemManager = GetComponentInChildren<InventoryManager>();
         uiManager = GetComponentInChildren<UIManager>();
         dataManager = GetComponentInChildren<DataManager>();
 
@@ -44,6 +46,7 @@ public class Manager : MonoBehaviour
         soundManager = GetComponentInChildren<SoundManager>();
         questManager = GetComponentInChildren<QuestManager>();
         stageManager = GetComponentInChildren<StageManager>();
+        sceneTransitionManager = GetComponentInChildren<SceneTransitionManager>();
     }
 
     #region Test

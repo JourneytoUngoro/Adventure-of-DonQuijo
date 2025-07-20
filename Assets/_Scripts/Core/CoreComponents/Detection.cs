@@ -255,6 +255,16 @@ public abstract class Detection : CoreComponent
         groundColliders = UtilityFunctions.FindGameObjectsByLayer(whatIsGround, FindObjectsSortMode.None).Select(groundObject => groundObject.GetComponent<Collider2D>()).ToList();
     }
 
+    public void SetPosition(Vector3 position)
+    {
+        workSpace.Set(position.x, position.y + position.z, position.z);
+        currentScreenPosition = workSpace; // orthogonal rigidbody's screen position: (x, y + z, z)
+        currentSpacePosition = position; // orthogonal rigidbody's position in space: (x, y, z)
+        entity.entityRigidbody.position = position;
+        workSpace.Set(0, position.z, position.z);
+        entity.orthogonalRigidbody.transform.localPosition = workSpace;
+    }
+
     // Below function is called when the currentTarget changes abruptly(ex. gets hit)
     public void ChangeCurrentTarget(Entity currentTarget)
     {

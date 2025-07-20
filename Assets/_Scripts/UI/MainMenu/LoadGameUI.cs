@@ -160,22 +160,25 @@ public class LoadGameUI : MonoBehaviour
 
     IEnumerator LoadCurrentScene()
     {
-        ImageUI fadeUI = Manager.Instance.uiManager.GetUI(UIType.FadeImage).GetComponent<ImageUI>();
-        Debug.Assert(fadeUI != null, "fade image is null! ");
-        fadeUI.ShowAndHideUI(3f);
+        // ImageUI fadeUI = Manager.Instance.uiManager.GetUI(UIType.FadeImage).GetComponent<ImageUI>();
+        // Debug.Assert(fadeUI != null, "fade image is null! ");
+        // fadeUI.ShowAndHideUI(3f);
 
-        yield return new WaitForSeconds(2.5f);
+        // yield return new WaitForSeconds(2.5f);
+        yield return null;
 
         // TODO : Save-Load 시 저장된 씬 불러와야 한다 
         if (isFirstPlay)
         {
             // TODO : cutscene01 재생으로 바꿔야 한다
-            SceneManager.LoadScene("SampleScene");
+            // SceneManager.LoadScene("SampleScene");
+            Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("SampleScene"), true, false);
             Manager.Instance.soundManager.PlayBGM("battleBGM");
         }
         else
         {
-            SceneManager.LoadScene("SampleScene");
+            // SceneManager.LoadScene("SampleScene");
+            Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("SampleScene"), true, true);
             Manager.Instance.soundManager.PlayBGM("battleBGM");
         }
     }

@@ -74,6 +74,7 @@ public abstract class Stats : CoreComponent
 
     protected virtual void Start()
     {
+        Debug.Log("Setting Stats for unknown reason!");
         speed.SetCurrentValue(1.0f);
 
         health.SetMaxValue(health.graph.accumulationPerLevel.Evaluate(power.currentValue));

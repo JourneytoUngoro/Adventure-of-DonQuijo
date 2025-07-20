@@ -4,12 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-   public static Dictionary<UIType, UIBase> startingUIDictionary = new Dictionary<UIType, UIBase>();
+    private static Dictionary<UIType, UIBase> startingUIDictionary = new Dictionary<UIType, UIBase>();
 
     // TODO : 테스트, 폴더 통합 이후 Load 하는 방식으로 바꾸기
-    public PopupUI popupPrefab;
-    public TextInfoUI textInfoPrefab;
-    public ImageUI imagePrefab;
+    [SerializeField] private PopupUI popupPrefab;
+    [SerializeField] private TextInfoUI textInfoPrefab;
+    [SerializeField] private ImageUI imagePrefab;
 
     public Stack<PopupUI> activatedPopups = new Stack<PopupUI>();
 
@@ -92,6 +92,11 @@ public class UIManager : MonoBehaviour
     public UIBase GetUI(UIType type)
     {
         return startingUIDictionary[type];
+    }
+
+    public T GetUI<T>(UIType type) where T : UIBase
+    {
+        return startingUIDictionary[type] as T;
     }
 
     public PopupUI ShowDynamicPopup(PopupData data)
