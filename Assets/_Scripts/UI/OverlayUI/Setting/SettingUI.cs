@@ -16,7 +16,7 @@ public class SettingUI : MonoBehaviour
     private void Start()
     {
         popup = GetComponent<PopupUI>();
-        popup.SetOnActivated(OnPopupOpened);
+        popup.SetOnShow(OnPopupOpened);
         contentRect = FindRectTransform(transform, "Content"); // Should check object's hierarchy 
 
         SetEvent();

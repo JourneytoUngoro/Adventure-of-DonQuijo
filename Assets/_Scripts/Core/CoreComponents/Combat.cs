@@ -276,7 +276,7 @@ public abstract class Combat : CoreComponent
     public virtual void GetHealthDamage(DamageComponent damageComponent, bool isParrying, bool isBlocking)
     {
         Entity sourceEntity = damageComponent.pertainedCombatAbility.sourceEntity;
-        float healthDamage = damageComponent.healthDamage.accumulationPerLevel.Evaluate(sourceEntity.entityStats.power.currentValue);
+        float healthDamage = damageComponent.healthDamage.accumulationPerLevel.Evaluate(sourceEntity.entityStats.postureLevel.currentValue);
 
         if (damageComponent.pertainedCombatAbility.canBeParried)
         {

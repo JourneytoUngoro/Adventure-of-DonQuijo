@@ -40,10 +40,12 @@ public class PauseMenuUI : MonoBehaviour
 
     private void RegisterAcivatedEvent()
     {
-        pauseMenuPopup.SetOnActivated(OnPauseMenuActivated);
+        pauseMenuPopup.SetOnShow(OnPauseMenuActivated);
+        pauseMenuPopup.SetOnHide(OnPaueMenuInactivated);
     }
 
     private void OnPauseMenuActivated() => Manager.Instance.gameManager.PauseGame();
+    private void OnPaueMenuInactivated() => Manager.Instance.gameManager.ResumeGame();
 
     private void RegisterButtonEvents()
     {
@@ -59,8 +61,6 @@ public class PauseMenuUI : MonoBehaviour
     private void OnClickContinueButton()
     {
         pauseMenuPopup.HideUI();
-
-        Manager.Instance.gameManager.ResumeGame();
     }
 
     private void OnClickSettingPopupButton()
@@ -83,11 +83,3 @@ public class PauseMenuUI : MonoBehaviour
     }
 
 }
-
-// 닫기를 수행하는 모든 곳에서 하나하나 닫는다면
-
-// 게임을 멈추는 경우 -> PauseMenu가 활성화 될 때
-
-// 멈춘 게임이 다시 실행되는 경우
-// - esc 누를 때 : uimanager에서 처리해야 함... 
-// - pause menu의 계속하기 버튼 누를 때 ... 이 코드에서 하면 됨 

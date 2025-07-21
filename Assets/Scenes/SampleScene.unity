@@ -2766,7 +2766,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  <power>k__BackingField:
+  <healthLevel>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
     <maxValue>k__BackingField: 0
@@ -2789,7 +2789,30 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  <speed>k__BackingField:
+  <postureLevel>k__BackingField:
+    reverseSlider: 0
+    slider: {fileID: 0}
+    <maxValue>k__BackingField: 0
+    <minValue>k__BackingField: 0
+    <currentValue>k__BackingField: 0
+    <enableRecovery>k__BackingField: 0
+    <recoveryStartTime>k__BackingField: 0
+    <recoveryDuration>k__BackingField: 0
+    <recoveryValue>k__BackingField: 0
+    <graph>k__BackingField:
+      <incrementPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <accumulationPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  <speedLevel>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
     <maxValue>k__BackingField: 0
@@ -9403,7 +9426,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  <power>k__BackingField:
+  <healthLevel>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
     <maxValue>k__BackingField: 0
@@ -9426,7 +9449,30 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  <speed>k__BackingField:
+  <postureLevel>k__BackingField:
+    reverseSlider: 0
+    slider: {fileID: 0}
+    <maxValue>k__BackingField: 0
+    <minValue>k__BackingField: 0
+    <currentValue>k__BackingField: 0
+    <enableRecovery>k__BackingField: 0
+    <recoveryStartTime>k__BackingField: 0
+    <recoveryDuration>k__BackingField: 0
+    <recoveryValue>k__BackingField: 0
+    <graph>k__BackingField:
+      <incrementPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <accumulationPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  <speedLevel>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
     <maxValue>k__BackingField: 0
@@ -11511,12 +11557,125 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  <power>k__BackingField:
+  <healthLevel>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
-    <maxValue>k__BackingField: 0
-    <minValue>k__BackingField: 0
-    <currentValue>k__BackingField: 0
+    <maxValue>k__BackingField: 5
+    <minValue>k__BackingField: 1
+    <currentValue>k__BackingField: 1
+    <enableRecovery>k__BackingField: 0
+    <recoveryStartTime>k__BackingField: 0
+    <recoveryDuration>k__BackingField: 0
+    <recoveryValue>k__BackingField: 0
+    <graph>k__BackingField:
+      <incrementPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 1
+          value: 100
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 2
+          value: 115
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 3
+          value: 130
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 4
+          value: 145
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 5
+          value: 160
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <accumulationPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 1
+          value: 100
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 2
+          value: 215
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 3
+          value: 345
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 4
+          value: 490
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 5
+          value: 650
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  <postureLevel>k__BackingField:
+    reverseSlider: 0
+    slider: {fileID: 0}
+    <maxValue>k__BackingField: 4
+    <minValue>k__BackingField: 1
+    <currentValue>k__BackingField: 1
     <enableRecovery>k__BackingField: 0
     <recoveryStartTime>k__BackingField: 0
     <recoveryDuration>k__BackingField: 0
@@ -11534,10 +11693,10 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  <speed>k__BackingField:
+  <speedLevel>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
-    <maxValue>k__BackingField: 2
+    <maxValue>k__BackingField: 0
     <minValue>k__BackingField: 0
     <currentValue>k__BackingField: 0
     <enableRecovery>k__BackingField: 0
@@ -14279,7 +14438,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  <power>k__BackingField:
+  <healthLevel>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
     <maxValue>k__BackingField: 0
@@ -14302,7 +14461,30 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  <speed>k__BackingField:
+  <postureLevel>k__BackingField:
+    reverseSlider: 0
+    slider: {fileID: 0}
+    <maxValue>k__BackingField: 0
+    <minValue>k__BackingField: 0
+    <currentValue>k__BackingField: 0
+    <enableRecovery>k__BackingField: 0
+    <recoveryStartTime>k__BackingField: 0
+    <recoveryDuration>k__BackingField: 0
+    <recoveryValue>k__BackingField: 0
+    <graph>k__BackingField:
+      <incrementPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      <accumulationPerLevel>k__BackingField:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  <speedLevel>k__BackingField:
     reverseSlider: 0
     slider: {fileID: 0}
     <maxValue>k__BackingField: 0

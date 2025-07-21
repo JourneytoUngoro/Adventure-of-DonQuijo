@@ -1,7 +1,8 @@
+using DG.Tweening;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 /// <summary>
 ///  UIManager.Instance.Get(UIType.type)...;
@@ -22,7 +23,7 @@ public class TextInfoUI : UIBase
         canOverlap = false;
     }
 
-    public override void ShowUI()
+    public override void ShowUI(TweenCallback onFadeInComplete = null)
     {
         // Show the new text and hide the previous one (only one should be visible at a time)
         if (!canOverlap)
@@ -32,20 +33,20 @@ public class TextInfoUI : UIBase
 
         Manager.Instance.uiManager.OpenTextInfoUI(this);
         
-        base.ShowUI();
+        base.ShowUI(onFadeInComplete);
     }
 
-    public override void HideUI()
+    public override void HideUI(TweenCallback onFadeOutComplete = null)
     {
         // if this text is current one, UIManager should know it will be hidden
         if (Manager.Instance.uiManager.CheckCurrentTextInfo(this))
         {
             Manager.Instance.uiManager.HideCurrentTextInfoUI();
         }
-        base.HideUI();
+        base.HideUI(onFadeOutComplete);
     }
 
-    public override void ShowAndHideUI(float waitTime)
+    public override void ShowAndHideUI(float waitTime, TweenCallback onFadeInComplete = null, TweenCallback onFadeOutComplete = null)
     {
         // Only one text ui should be displayed
         if (!canOverlap)
@@ -54,7 +55,7 @@ public class TextInfoUI : UIBase
         }
         Manager.Instance.uiManager.OpenTextInfoUI(this);
 
-        base.ShowAndHideUI(waitTime);
+        base.ShowAndHideUI(waitTime, onFadeInComplete, onFadeOutComplete);
     }
 
     /// <summary>

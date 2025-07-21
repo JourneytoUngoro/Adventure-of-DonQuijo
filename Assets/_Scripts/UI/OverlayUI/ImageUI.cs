@@ -10,8 +10,6 @@ public class ImageUI : UIBase
 
     protected override void AllowmentComponent()
     {
-        base.AllowmentComponent();
-
         backgroundImage = transform.Find("Image")?.GetComponent<Image>();
     }
 
@@ -20,11 +18,6 @@ public class ImageUI : UIBase
         backgroundImage = image;
 
         return this;
-    }
-
-    protected override void AllowmentComponent()
-    {
-        
     }
 
     protected override void ReturnToPool()

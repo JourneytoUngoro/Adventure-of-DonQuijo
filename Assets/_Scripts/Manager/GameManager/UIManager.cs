@@ -80,12 +80,6 @@ public class UIManager : MonoBehaviour
 
         clickBlockImageUI = Object.Instantiate(Resources.Load<GameObject>("Prefabs/UI/ClickBlocker")).GetComponent<ImageUI>();
         clickBlockImageUI.transform.SetParent(uiCanvas, false);
-        //clickBlockImageUI.GetRectTransform().
-
-        Debug.Assert(popupPrefab != null, "popup prefab is null!");
-        Debug.Assert(textInfoPrefab != null, "textInfo prefab is null!");
-        Debug.Assert(imagePrefab != null, "null!");
-        Debug.Assert(clickBlockImageUI != null, "null");
     }
 
     private void RegisterUIObjects()
@@ -103,6 +97,7 @@ public class UIManager : MonoBehaviour
 
     void CreatePool()
     {
+        if (pool == null) { Debug.Log("Not prepared pool objects in scene"); }
         popupPool = new UIObjectPool<PopupUI>(popupPrefab, objectCount, pool);
         textInfoPool = new UIObjectPool<TextInfoUI>(textInfoPrefab, objectCount, pool);
         imagePool = new UIObjectPool<ImageUI>(imagePrefab, objectCount, pool);
@@ -167,11 +162,7 @@ public class UIManager : MonoBehaviour
         if (popupOpened)
         {
             // Debug.Log($"activated popup : {activatedPopups.Count}, {activatedPopups.Peek().name}");
-            PopupUI hidedPopup = activatedPopups.Peek();
-            hidedPopup.HideUI();
-
-            // If the pause menu is closed, resume the game
-            if (hidedPopup.type == UIType.pausePopup) { Manager.Instance.gameManager.ResumeGame(); }
+            activatedPopups.Peek().HideUI();
         }
         else
         {
@@ -197,7 +188,7 @@ public class UIManager : MonoBehaviour
         else
         {
             popupOpened = false;
-            clickBlockImageUI.HideUI();
+            clickBlockImageUI?.HideUI();
         }
         // Debug.Log(Manager.Instance.uiManager.activatedPopups.Count + " popups activated");
 
@@ -231,6 +222,22 @@ public class UIManager : MonoBehaviour
 
         clickBlockImageUI.transform.SetParent(parent);
         clickBlockImageUI.transform.SetSiblingIndex(siblingIndex - 1);
+    }
+
+    private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
+
+    private void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Implement logic to initialize necessary UI elements
+
+        if (clickBlockImageUI == null || clickBlockImageUI.transform.parent != uiCanvas || clickBlockImageUI.transform.parent == null)
+        {
+            // If clickBlockImage is either not on the "Overlay Cavas" or destroyed
+            clickBlockImageUI = Object.Instantiate(Resources.Load<GameObject>("Prefabs/UI/ClickBlocker")).GetComponent<ImageUI>();
+            clickBlockImageUI.transform.SetParent(uiCanvas, false);
+        }
     }
 
     #region Test 이후 삭제

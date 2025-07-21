@@ -1929,7 +1929,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 932.8406}
   m_SizeDelta: {x: 0, y: 1306.2}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2194493260575077716
@@ -2127,7 +2127,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2797404261582433349}
   m_HandleRect: {fileID: 8384529278994588713}
   m_Direction: 2
-  m_Value: 1
+  m_Value: -0.000000032714677
   m_Size: 0.28583634
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4862,6 +4862,7 @@ GameObject:
   - component: {fileID: 327013520652665419}
   - component: {fileID: 33396830234113885}
   - component: {fileID: 3508849827387043540}
+  - component: {fileID: 5653889532497822072}
   m_Layer: 5
   m_Name: Setting Popup Prefab
   m_TagString: Untagged
@@ -4959,7 +4960,7 @@ MonoBehaviour:
   fadeTime: 0
   delayTime: 0
   <BlockClick>k__BackingField: 0
-  position: {x: 0, y: 0}
+  <position>k__BackingField: {x: 0, y: 0}
   titleTMP: {fileID: 1209091710694617032}
   infoTMP: {fileID: 0}
   confirmButton: {fileID: 953384849172093259}
@@ -4978,6 +4979,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   confirmButton: {fileID: 953384849172093259}
   cancelButton: {fileID: 5977508039110403129}
+--- !u!114 &5653889532497822072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4970300252608089527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fde667b3d7077cb4dabe20dcbeb771f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3508849827387043540}
+        m_TargetAssemblyTypeName: SettingUI, Assembly-CSharp
+        m_MethodName: OnPopupOpened
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5004638461187719099
 GameObject:
   m_ObjectHideFlags: 0

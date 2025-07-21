@@ -51,7 +51,7 @@ public class SaveSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         {
             isNull = false;
             playerHP = data.currentHealth.ToString();
-            memoryFragment = data.questsData.questDatas[0].currentProgress.ToString(); 
+            memoryFragment = "수정해";// data.questsData.questDatas[0].currentProgress.ToString(); 
             lastPlayTime = data.displayedLastPlayTime;
         }
         else

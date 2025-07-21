@@ -247,7 +247,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 9944f1076a61cd7488abf7bb6d3b3f59, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -563,7 +563,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 1d2c8ddaf45c8134da214fb866464bbf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -739,7 +739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotUI: {fileID: 4134522012303346598}
-  skillState: 1
+  skillState: 0
 --- !u!1 &6549904147278639185
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,7 +965,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotUI: {fileID: 6765706181749622901}
-  skillState: 0
+  skillState: 1
 --- !u!1 &6838737983935653707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1345,7 +1345,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 33080d11264b63c459deb90e37b1b9c9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

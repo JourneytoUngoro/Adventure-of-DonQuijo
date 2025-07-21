@@ -17,8 +17,6 @@ public class PopupUI : UIBase
     [HideInInspector] public Button confirmButton; // Confirm Button
     [HideInInspector] public Button cancelButton; // Cancel Button
 
-    public Action onActivated;
-
     // Starting Popup으로 씬 상에 미리 생성되어 있는 팝업창
 
     protected override void AllowmentComponent()
@@ -31,9 +29,7 @@ public class PopupUI : UIBase
 
     public override void ShowUI(TweenCallback onFadeInComplete = null)
     {
-        base.ShowUI();
-
-        if (onActivated != null) onActivated();
+        base.ShowUI(onFadeInComplete);
 
         Manager.Instance.uiManager.activatedPopups.Push(this);
         Manager.Instance.uiManager.BeforeShowPopupUI();
@@ -50,13 +46,6 @@ public class PopupUI : UIBase
         {
             Manager.Instance.uiManager.AfterHidePopupUI();
         }
-    }
-
-    public override void ShowAndHideUI(float waitTime)
-    {
-        if (onActivated != null) onActivated();
-
-        base.ShowAndHideUI(waitTime);
     }
 
     /// <summary>
@@ -135,11 +124,6 @@ public class PopupUI : UIBase
     public void SetPopupInfo(string info)
     {
         infoTMP.text = info;
-    }
-
-    public void SetOnActivated(Action onActivated)
-    {
-        this.onActivated = onActivated;
     }
 }
 
