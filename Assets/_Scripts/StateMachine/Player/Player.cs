@@ -28,6 +28,10 @@ public class Player : Entity
     public PlayerBlockParryState blockParryState { get; private set; }
     public PlayerDeadState deadState { get; private set; }
     public PlayerCureState cureState { get; private set; }
+    public PlayerWhirlwindState whirlwindState { get; private set; }
+    public PlayerRangedAttackState rangedAttackState { get; private set; }
+    public PlayerChargeAttackState chargeAttackState { get; private set; }
+
 
     public List<PlayerAbilityState> abilityStates { get; private set; }
     #endregion
@@ -76,6 +80,9 @@ public class Player : Entity
         deadState = new PlayerDeadState(this, "dead");
         cureState = new PlayerCureState(this, "cure");
 
+        whirlwindState = new PlayerWhirlwindState(this, "whirlwind"); // added variables
+        rangedAttackState = new PlayerRangedAttackState(this, "rangedAttack");
+        chargeAttackState = new PlayerChargeAttackState(this, "chargeAttack");
 
         abilityStates = new List<PlayerAbilityState>();
         IEnumerable<PropertyInfo> abilityStateProperties = GetType()

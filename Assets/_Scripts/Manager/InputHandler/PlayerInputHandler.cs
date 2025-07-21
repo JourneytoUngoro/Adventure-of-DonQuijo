@@ -22,6 +22,10 @@ public class PlayerInputHandler : MonoBehaviour
     public int normInputY { get; private set; }
     public bool itemInputPressed { get; private set; }
 
+    public bool whirlwindInputPressed { get; private set; }
+    public bool rangedAttackInputPressed { get; private set; }
+    public bool chargedAttackInputPressed { get; private set; }
+
     public bool confirmInputPressed { get; private set; }
     public bool cancelInputPressed { get; private set; }
     public bool toggleMenuPressed { get; private set; }
@@ -143,18 +147,37 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
-/*    public void OnToggleMenu(InputAction.CallbackContext context)
+    public void OnUseSkill(InputAction.CallbackContext context)
     {
+        var control = context.control;
+
         if (context.started)
         {
-            toggleMenuPressed = true;
+            switch (control.name)
+            {
+                case "q": rangedAttackInputPressed = true; break;
+                case "w": chargedAttackInputPressed = true; break;
+                case "e": whirlwindInputPressed = true; break;
+            }
         }
+
         if (context.canceled)
         {
-            toggleMenuPressed = false;
+            switch (control.name)
+            {
+                case "q": rangedAttackInputPressed = false; break;
+                case "w": chargedAttackInputPressed = false; break;
+                case "e": whirlwindInputPressed = false; break;
+            }
         }
-    }*/
 
+        if (disableCharacterControl)
+        {
+            rangedAttackInputPressed = false;
+            chargedAttackInputPressed = false;
+            whirlwindInputPressed = false;
+        }
+    }
 
     public void LockMoveInput(Vector2 direction, float duration)
     {

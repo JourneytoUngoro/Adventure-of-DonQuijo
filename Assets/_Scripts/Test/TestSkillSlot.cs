@@ -1,33 +1,68 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
 
-public class TestSkillSlot : MonoBehaviour
-{
-    void Start()
-    {
-        
-    }
+//public class TestSkillSlot : MonoBehaviour
+//{
+//    public Player player;
 
-    void Update()
-    {
-        
-    }
+//    void Start()
+//    {
+//        if (player == null) { player = FindAnyObjectByType<Player>(); }
+//    }
 
-    public void UseSkilQ()
-    {
+//    void Update()
+//    {
+//        if (Manager.Instance.inputHandler.rangedAttackInputPressed)
+//        {
+//            player.playerStateMachine.ChangeState(player.rangedAttackState);
+//            Debug.Log($"PlayerRangedAttackState pressed, changed, cool down time is {player.rangedAttackState.abilityCoolDownTimer.GetLeftTime()}");
 
-    }
+//        }
+//        else if (Manager.Instance.inputHandler.chargedAttackInputPressed)
+//        {
+//            player.playerStateMachine.ChangeState(player.chargeAttackState);
+//            Debug.Log($"PlayerChargeAttackState pressed, changed, cool down time is {player.chargeAttackState.abilityCoolDownTimer.GetLeftTime()}");
 
-    public void UseSkillW()
-    {
+//        }
+//        else if ( Manager.Instance.inputHandler.whirlwindInputPressed)
+//        {
+//            player.playerStateMachine.ChangeState(player.whirlwindState);
+//            Debug.Log($"PlayerWhirlwindState pressed, changed, cool down time is {player.whirlwindState.abilityCoolDownTimer.GetLeftTime()}");
 
-    }
-
-    public void UseSkillE()
-    {
-
-    }
+//        }
 
 
-}
+
+//        //if (player.playerStateMachine.currentState.GetType() == typeof(PlayerRangedAttackState))
+//        //{
+//        //    UseSkillQ();
+//        //}
+//        //else if (player.playerStateMachine.currentState.GetType() == typeof(PlayerChargeAttackState))
+//        //{
+//        //    UseSkillW();
+//        //}
+//        //else if (player.playerStateMachine.currentState.GetType() == typeof(PlayerWhirlwindState))
+//        //{
+//        //    UseSkillW();
+//        //}
+
+//    }
+
+//    public void UseSkillQ()
+//    {
+
+//    }
+
+//    public void UseSkillW()
+//    {
+
+//    }
+
+//    public void UseSkillE()
+//    {
+
+//    }
+
+
+//}

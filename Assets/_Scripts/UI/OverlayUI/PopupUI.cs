@@ -16,6 +16,8 @@ public class PopupUI : UIBase
     [HideInInspector] public Button confirmButton; // Confirm Button
     [HideInInspector] public Button cancelButton; // Cancel Button
 
+    public Action onActivated;
+
     // Starting Popup으로 씬 상에 미리 생성되어 있는 팝업창
 
     protected override void AllowmentComponent()
@@ -29,18 +31,29 @@ public class PopupUI : UIBase
     public override void ShowUI()
     {
         base.ShowUI();
-        Manager.Instance.uiManager.OpenPopupUI();
+
+        if (onActivated != null) onActivated();
+
         Manager.Instance.uiManager.activatedPopups.Push(this);
+        Manager.Instance.uiManager.BeforeShowPopupUI();
     }
 
     public override void HideUI()
     {
         base.HideUI();
         Manager.Instance.uiManager.activatedPopups.TryPop(out _);
+
+        // 최상단 팝업이 사라지면, ClickBlocker는 두 번째 상단 팝업의 밑으로 이동해야 한다.
+        if (Manager.Instance.uiManager.activatedPopups.Count > 0)
+        {
+            Manager.Instance.uiManager.AfterHidePopupUI();
+        }
     }
 
     public override void ShowAndHideUI(float waitTime)
     {
+        if (onActivated != null) onActivated();
+
         base.ShowAndHideUI(waitTime);
     }
 
@@ -128,6 +141,10 @@ public class PopupUI : UIBase
         infoTMP.text = info;
     }
 
+    public void SetOnActivated(Action onActivated)
+    {
+        this.onActivated = onActivated;
+    }
 }
 
 // Starting Popup이 아닌 동적으로 생성할 때 필요한 데이터 클래스

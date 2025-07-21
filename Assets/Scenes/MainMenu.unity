@@ -1824,22 +1824,6 @@ MonoBehaviour:
     m_ActionId: 58b61811-db2b-459f-b782-41ed92816ea0
     m_ActionName: CharacterControl/Return[/Keyboard/x]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1242574148}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnPauseMenu
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 2891114b-29ad-460f-9f7c-10ab8d5ef33d
-    m_ActionName: CharacterControl/Pause/Menu[/Keyboard/escape]
-  - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 7c0a1817-012e-4aa7-969c-5f84f0927723
     m_ActionName: CharacterControl/Equipment[/Keyboard/e]
@@ -1871,6 +1855,38 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f84289c8-4e4b-4abd-8098-4c3674a81498
     m_ActionName: CharacterControl/StrongAttack[/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3dcb4f7b-08fa-4fc0-90d5-10122733967c
+    m_ActionName: CharacterControl/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1242574148}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnUseSkill
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 58a413cb-d21e-41b6-9555-14de2b174c3c
+    m_ActionName: CharacterControl/Skills[/Keyboard/q,/Keyboard/w,/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 46a5626e-e01b-4587-bf09-feb862fb19e9
+    m_ActionName: UIControl/Confirm[/Keyboard/z]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a49aec27-0f60-4506-a1d9-3b8e8d49907e
+    m_ActionName: UIControl/Cancel[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6f6b3a1a-212e-460d-9e9b-d0fb65aceb59
+    m_ActionName: UIControl/ToggleMenu[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: CharacterControl
@@ -3012,9 +3028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b87f45a7f8cf24ea5f2ce7fb1753e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupPrefab: {fileID: 1203774757604747321, guid: 96ec64f393253fb49a5abb489bd03e8a, type: 3}
-  textInfoPrefab: {fileID: 8397104400056502976, guid: bc934adb9ea1664499fdb887a513fba6, type: 3}
-  imagePrefab: {fileID: -388096200361407989, guid: 54e48e103ea77bc4b95393d6d58fed59, type: 3}
+  isIngame: 0
 --- !u!1 &1874516276
 GameObject:
   m_ObjectHideFlags: 0
@@ -6009,6 +6023,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6099563741183335473, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099563741183335473, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6121756837784186349, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -6127,6 +6149,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7756894607223104917, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7824508304767050918, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7824508304767050918, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7824508304767050918, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8160082134205052238, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}

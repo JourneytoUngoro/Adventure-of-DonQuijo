@@ -10,10 +10,9 @@ public class SaveSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 {
     public bool isNull { get; set; } = true;
     public string profileId { get; set;  }
-    public float mentality {  get; set; }
     public string lastPlayTime { get; set; }
-    public float totalPlayTime { get; set; }
-    public string stage { get; set; }
+    public string playerHP { get; set; }
+    public string memoryFragment { get; set; }
 
     [HideInInspector] public Button saveSlotButton;
     [HideInInspector] public Button deleteButton;
@@ -23,8 +22,6 @@ public class SaveSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     LoadGameUI loadGameUI;
     TextInfoUI textInfo;
-/*    Outline outline;
-*/
 
     private void Start()
     {
@@ -33,8 +30,7 @@ public class SaveSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         saveSlotButton = GetComponent<Button>();
         deleteButton = transform.Find("Delete Button").GetComponent<Button>();
         textInfo = GetComponentInChildren<TextInfoUI>();
-/*        outline = GetComponent<Outline>();
-*/
+
         deleteButton.gameObject.SetActive(false);
 
         SetEvents();
@@ -54,11 +50,9 @@ public class SaveSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (data != null)
         {
             isNull = false;
-
-            mentality = data.mentality;
+            playerHP = data.currentHealth.ToString();
+            memoryFragment = data.questsData.questDatas[0].currentProgress.ToString(); 
             lastPlayTime = data.displayedLastPlayTime;
-            totalPlayTime = data.totalPlayTime;
-            stage = data.currentScene;
         }
         else
         {
@@ -74,7 +68,7 @@ public class SaveSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         {
             saveSlotButton.enabled = true;
             textInfo.SetDynamicTextInfo(new TextInfoData(
-                $"정신력 : {mentality}\n마지막 플레이 시간 : {lastPlayTime}\n총 플레이 시간 : {totalPlayTime}\n현재 스테이지 : {stage}\n  "));
+                $"수정하시오 "));
         }
         else
         {

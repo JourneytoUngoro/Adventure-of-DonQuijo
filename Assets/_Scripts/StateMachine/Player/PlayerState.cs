@@ -20,6 +20,10 @@ public class PlayerState : EntityState
     protected bool strongAttackInputPressed;
     protected bool dodgeInputPressed;
 
+    protected bool whirlwindInputPressed; // added 
+    protected bool rangedAttackPressed;
+    protected bool chargeAttackPressed;
+
     protected bool itemInputPressed;
     #endregion
 
@@ -63,6 +67,11 @@ public class PlayerState : EntityState
         attackInputPressed = Manager.Instance.inputHandler.attackInputPressed;
         strongAttackInputPressed = Manager.Instance.inputHandler.strongAttackInputPressed;
         dodgeInputPressed = Manager.Instance.inputHandler.dodgeInputPressed;
+        
+        whirlwindInputPressed = Manager.Instance.inputHandler.whirlwindInputPressed;
+        rangedAttackPressed = Manager.Instance.inputHandler.rangedAttackInputPressed;
+        chargeAttackPressed = Manager.Instance.inputHandler.chargedAttackInputPressed;
+
         itemInputPressed = Manager.Instance.inputHandler.itemInputPressed;
     }
 

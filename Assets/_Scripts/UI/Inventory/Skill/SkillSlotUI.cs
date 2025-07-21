@@ -25,34 +25,27 @@ public class SkillSlotUI : MonoBehaviour
 
     private void Start()
     {
-        #region Test
-        TestTimer();
-        #endregion
-
-        // GetSkillStateByState();
-        // coolDownTimer = abilitySkillState.abilityCoolDownTimer;
-        // coolTime = coolDownTimer.duration;
-        // abilitySkillState.
+        SetSkillStateByState();
+        coolDownTimer = abilitySkillState.abilityCoolDownTimer;
+        coolTime = coolDownTimer.duration;
 
         coolDownImage = transform.Find("Timer Sprite").GetComponent<Image>();
-        coolDownImage.fillAmount = 0;
+        coolDownImage.fillAmount = 0; // Top -> Bottom 
 
         hasStarted = false;
-
-        Debug.Assert(coolDownImage != null, "cool down image is null!");
     }
 
-    private void GetSkillStateByState()
-    {
+    private void SetSkillStateByState()
+    { 
         abilitySkillState = skillState switch
         {
-            SkillState.ChargeAttack => FindAnyObjectByType<Player>().abilityStates.Find(x => x.GetType().Name == "PlayerWhirlwindState"),
-            SkillState.RangedAttack => FindAnyObjectByType<Player>().abilityStates.Find(x => x.GetType().Name == "PlayerChargeAttackState"),
-            SkillState.Whirlwind => FindAnyObjectByType<Player>().abilityStates.Find(x => x.GetType().Name == "PlayerRangedAttackState"),
+            SkillState.ChargeAttack => FindAnyObjectByType<Player>().abilityStates.Find(x => x.GetType() == typeof(PlayerChargeAttackState)),
+            SkillState.RangedAttack => FindAnyObjectByType<Player>().abilityStates.Find(x => x.GetType() == typeof(PlayerRangedAttackState)),
+            SkillState.Whirlwind => FindAnyObjectByType<Player>().abilityStates.Find(x => x.GetType() == typeof(PlayerWhirlwindState)),
             _ => null
         }; 
         
-        Debug.Assert(abilitySkillState != null, "skill slot is null!");
+        // Debug.Log($"{transform.gameObject.name} slot related to {abilitySkillState} ({skillState.ToString()})");
     }
 
     private void Update()
@@ -63,7 +56,7 @@ public class SkillSlotUI : MonoBehaviour
             StartSkillCoolDown();
         }
 
-        if (hasStarted)
+        if (hasStarted) // Skill coolDownTimer is running...
         {
             float fillAmount = coolDownTimer.GetLeftTime() / coolTime;
             coolDownImage.fillAmount = fillAmount;
@@ -77,25 +70,13 @@ public class SkillSlotUI : MonoBehaviour
 
     private void StartSkillCoolDown()
     {
-        coolDownImage.fillAmount = 1;
+        coolDownImage.fillAmount = 1.0f;
         hasStarted = true;
     }
 
     private void FinishSkillCoolDown()
     {
-        coolDownImage.fillAmount = 0;
+        coolDownImage.fillAmount = 0f;
         hasStarted = false;
     }
-
-    private void TestTimer()
-    {
-        coolDownTimer = new Timer(7f);
-        coolTime = coolDownTimer.duration;
-    }
-
-    public void ExecuteTestTimer()
-    {
-        coolDownTimer.StartSingleUseTimer();
-    }
-
 }

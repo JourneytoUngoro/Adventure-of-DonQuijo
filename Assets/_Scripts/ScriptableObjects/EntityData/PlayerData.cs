@@ -35,11 +35,11 @@ public class PlayerData : EntityData
     [field: SerializeField] public float attackStrokeTime { get; private set; } = 2.0f;
 
     [field: Header("Whirlwind State")]
-    [field: SerializeField] public float whirlwindCoolDownTime { get; private set; } = 1.0f;
+    [field: SerializeField] public float whirlwindCoolDownTime { get; private set; } = 7.0f;
 
     [field: Header("ChargeAttack State")]
-    [field: SerializeField] public float chargeAttackCoolDownTime { get; private set; } = 1.0f;
+    [field: SerializeField] public float chargeAttackCoolDownTime { get; private set; } = 8.0f;
 
     [field: Header("RangedAttack State")]
-    [field: SerializeField] public float rangedAttackCoolDownTime { get; private set; } = 1.0f;
+    [field: SerializeField] public float rangedAttackCoolDownTime { get; private set; } = 9.0f;
 }

@@ -125,6 +125,24 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""3dcb4f7b-08fa-4fc0-90d5-10122733967c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Skills"",
+                    ""type"": ""Button"",
+                    ""id"": ""58a413cb-d21e-41b6-9555-14de2b174c3c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -314,6 +332,50 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""StrongAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4cc6db1d-3472-4dd3-be2f-10fda565f917"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af5ec2f3-fd99-4438-9f3e-33a0400b86b0"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skills"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06efacd3-ee5c-4a28-85b2-5bd5ea8e98c4"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skills"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5b2a7f34-0a08-4cd6-be1d-b85a48de13b3"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skills"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -418,6 +480,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_CharacterControl_UseItem = m_CharacterControl.FindAction("UseItem", throwIfNotFound: true);
         m_CharacterControl_Dodge = m_CharacterControl.FindAction("Dodge", throwIfNotFound: true);
         m_CharacterControl_StrongAttack = m_CharacterControl.FindAction("StrongAttack", throwIfNotFound: true);
+        m_CharacterControl_Newaction = m_CharacterControl.FindAction("New action", throwIfNotFound: true);
+        m_CharacterControl_Skills = m_CharacterControl.FindAction("Skills", throwIfNotFound: true);
         // UIControl
         m_UIControl = asset.FindActionMap("UIControl", throwIfNotFound: true);
         m_UIControl_Confirm = m_UIControl.FindAction("Confirm", throwIfNotFound: true);
@@ -501,6 +565,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControl_UseItem;
     private readonly InputAction m_CharacterControl_Dodge;
     private readonly InputAction m_CharacterControl_StrongAttack;
+    private readonly InputAction m_CharacterControl_Newaction;
+    private readonly InputAction m_CharacterControl_Skills;
     public struct CharacterControlActions
     {
         private @Controls m_Wrapper;
@@ -516,6 +582,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @UseItem => m_Wrapper.m_CharacterControl_UseItem;
         public InputAction @Dodge => m_Wrapper.m_CharacterControl_Dodge;
         public InputAction @StrongAttack => m_Wrapper.m_CharacterControl_StrongAttack;
+        public InputAction @Newaction => m_Wrapper.m_CharacterControl_Newaction;
+        public InputAction @Skills => m_Wrapper.m_CharacterControl_Skills;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -558,6 +626,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @StrongAttack.started += instance.OnStrongAttack;
             @StrongAttack.performed += instance.OnStrongAttack;
             @StrongAttack.canceled += instance.OnStrongAttack;
+            @Newaction.started += instance.OnNewaction;
+            @Newaction.performed += instance.OnNewaction;
+            @Newaction.canceled += instance.OnNewaction;
+            @Skills.started += instance.OnSkills;
+            @Skills.performed += instance.OnSkills;
+            @Skills.canceled += instance.OnSkills;
         }
 
         private void UnregisterCallbacks(ICharacterControlActions instance)
@@ -595,6 +669,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @StrongAttack.started -= instance.OnStrongAttack;
             @StrongAttack.performed -= instance.OnStrongAttack;
             @StrongAttack.canceled -= instance.OnStrongAttack;
+            @Newaction.started -= instance.OnNewaction;
+            @Newaction.performed -= instance.OnNewaction;
+            @Newaction.canceled -= instance.OnNewaction;
+            @Skills.started -= instance.OnSkills;
+            @Skills.performed -= instance.OnSkills;
+            @Skills.canceled -= instance.OnSkills;
         }
 
         public void RemoveCallbacks(ICharacterControlActions instance)
@@ -696,6 +776,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnUseItem(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
         void OnStrongAttack(InputAction.CallbackContext context);
+        void OnNewaction(InputAction.CallbackContext context);
+        void OnSkills(InputAction.CallbackContext context);
     }
     public interface IUIControlActions
     {

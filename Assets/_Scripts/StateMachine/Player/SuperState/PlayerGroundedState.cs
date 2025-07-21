@@ -32,7 +32,8 @@ public class PlayerGroundedState : PlayerState
             {
                 stateMachine.ChangeState(player.jumpState);
             }
-            else */if (dodgeInputPressed && player.dodgeState.available)
+            else */
+            if (dodgeInputPressed && player.dodgeState.available)
             {
                 stateMachine.ChangeState(player.dodgeState);
             }
@@ -62,6 +63,21 @@ public class PlayerGroundedState : PlayerState
             else if (strongAttackInputPressed && !(stateMachine.currentState.Equals(player.moveState) && player.moveState.isDashing))
             {
                 stateMachine.ChangeState(player.strongAttackState);
+            }
+            else if (rangedAttackPressed && player.rangedAttackState.available)
+            {
+                stateMachine.ChangeState(player.rangedAttackState);
+                Debug.Log($"changed state to rangedAttack");
+            }
+            else if (chargeAttackPressed && player.chargeAttackState.available)
+            {
+                stateMachine.ChangeState(player.chargeAttackState);
+                Debug.Log($"changed state to chargeAttack");
+            }
+            else if (whirlwindInputPressed && player.whirlwindState.available)
+            {
+                stateMachine.ChangeState(player.whirlwindState);
+                Debug.Log($"changed state to whirlWindAttack");
             }
         }
 

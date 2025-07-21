@@ -23,6 +23,7 @@ MonoBehaviour:
   <knockbackReboundThresholdSpeed>k__BackingField: 300
   <wallKnockbackReboundThresholdAngle>k__BackingField: 30
   <decelerationRatio>k__BackingField: 0.7
+  <waitTimeAfterDeath>k__BackingField: 2
   <dashInputBufferTime>k__BackingField: 0.5
   <dashMaintainTime>k__BackingField: 0.2
   <jumpInputBufferTime>k__BackingField: 0.2
@@ -39,3 +40,6 @@ MonoBehaviour:
   <backstepTime>k__BackingField: 0.2
   <shieldParryCoolDownTime>k__BackingField: 0
   <attackStrokeTime>k__BackingField: 2
+  <whirlwindCoolDownTime>k__BackingField: 4
+  <chargeAttackCoolDownTime>k__BackingField: 5
+  <rangedAttackCoolDownTime>k__BackingField: 6

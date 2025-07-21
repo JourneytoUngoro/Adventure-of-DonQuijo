@@ -20,7 +20,6 @@ public class TextInfoUI : UIBase
         backgroundImage = GetComponent<Image>();
 
         canOverlap = false;
-        Debug.Log($"canOverlap -> {canOverlap}");
     }
 
     public override void ShowUI()

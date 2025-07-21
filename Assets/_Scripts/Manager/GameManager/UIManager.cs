@@ -1,10 +1,14 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.WSA;
 
 public class UIManager : MonoBehaviour
 {
     public static Dictionary<UIType, UIBase> startingUIDictionary = new Dictionary<UIType, UIBase>();
+
+    public bool isIngame;
 
     private PopupUI popupPrefab;
     private TextInfoUI textInfoPrefab;
@@ -35,6 +39,7 @@ public class UIManager : MonoBehaviour
         pool = GameObject.Find("Pooled Objects")?.transform;
         InCaseTestScene();
 
+        isIngame = false;
         toggleMenuPressed = false;
         popupOpened = false;
 
@@ -157,11 +162,24 @@ public class UIManager : MonoBehaviour
         if (popupOpened)
         {
             // Debug.Log($"activated popup : {activatedPopups.Count}, {activatedPopups.Peek().name}");
-            activatedPopups.Peek().HideUI();
+            PopupUI hidedPopup = activatedPopups.Peek();
+            hidedPopup.HideUI();
+
+            // If the pause menu is closed, resume the game
+            if (hidedPopup.type == UIType.pausePopup) { Manager.Instance.gameManager.ResumeGame(); }
         }
         else
         {
-            startingUIDictionary[UIType.settingPopup].ShowUI();
+            if (isIngame)
+            {
+                // InGame -> Pause Popup Menu
+                startingUIDictionary[UIType.pausePopup].ShowUI();
+            }
+            else
+            {
+                // else, -> Setting Popup
+                startingUIDictionary[UIType.settingPopup].ShowUI();
+            }
         }
     }
 
@@ -180,12 +198,9 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void OpenPopupUI()
-    {
-        clickBlockImageUI.ShowUI();
-        clickBlockImageUI.transform.SetSiblingIndex(Mathf.Max(clickBlockImageUI.transform.parent.childCount - 2, 0));
-    }
-       
+    // 최상단 팝업 아래 이미지를 깔아 이외 클릭을 막는 함수 BeforeShowPopupUI(), AfterHidePopupUI()
+    public void BeforeShowPopupUI() => SetClockBlockerTransform(activatedPopups.Peek().transform);
+    public void AfterHidePopupUI() => SetClockBlockerTransform(activatedPopups.Peek().transform);
 
     public void OpenTextInfoUI(TextInfoUI textInfo) => currentTextInfoUI = textInfo;
 
@@ -201,7 +216,17 @@ public class UIManager : MonoBehaviour
         currentTextInfoUI = null;
     }
 
+    private void SetClockBlockerTransform(Transform topPopup)
+    {
+        Transform parent = topPopup.transform.parent;
+        int siblingIndex = topPopup.transform.GetSiblingIndex();
 
+        // Positioned directly below the peek popup
+        clickBlockImageUI.ShowUI();
+
+        clickBlockImageUI.transform.SetParent(parent);
+        clickBlockImageUI.transform.SetSiblingIndex(siblingIndex - 1);
+    }
 
     #region Test 이후 삭제
     void InCaseTestScene()
