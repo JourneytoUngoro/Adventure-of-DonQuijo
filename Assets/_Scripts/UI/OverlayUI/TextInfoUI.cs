@@ -24,7 +24,7 @@ public class TextInfoUI : UIBase
 
     public override void ShowUI()
     {
-        // Only one text ui should be displayed
+        // Show the new text and hide the previous one (only one should be visible at a time)
         if (!canOverlap)
         {
             Manager.Instance.uiManager.HideCurrentTextInfoUI();
@@ -37,6 +37,7 @@ public class TextInfoUI : UIBase
 
     public override void HideUI()
     {
+        // if this text is current one, UIManager should know it will be hidden
         if (Manager.Instance.uiManager.CheckCurrentTextInfo(this))
         {
             Manager.Instance.uiManager.HideCurrentTextInfoUI();
@@ -54,11 +55,6 @@ public class TextInfoUI : UIBase
         Manager.Instance.uiManager.OpenTextInfoUI(this);
 
         base.ShowAndHideUI(waitTime);
-    }
-
-    public override void Move(Vector2 direction, bool ease)
-    {
-        base.Move(direction, ease);
     }
 
     /// <summary>

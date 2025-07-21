@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using TMPro;
 using UnityEngine;
@@ -28,7 +29,7 @@ public class PopupUI : UIBase
         cancelButton = transform.Find ("Cancel Button")?.GetComponent<Button>();
     }
 
-    public override void ShowUI()
+    public override void ShowUI(TweenCallback onFadeInComplete = null)
     {
         base.ShowUI();
 
@@ -38,9 +39,10 @@ public class PopupUI : UIBase
         Manager.Instance.uiManager.BeforeShowPopupUI();
     }
 
-    public override void HideUI()
+    public override void HideUI(TweenCallback onFadeOutComplete = null)
     {
-        base.HideUI();
+        base.HideUI(onFadeOutComplete);
+
         Manager.Instance.uiManager.activatedPopups.TryPop(out _);
 
         // 최상단 팝업이 사라지면, ClickBlocker는 두 번째 상단 팝업의 밑으로 이동해야 한다.
@@ -55,12 +57,6 @@ public class PopupUI : UIBase
         if (onActivated != null) onActivated();
 
         base.ShowAndHideUI(waitTime);
-    }
-
-    public override void Move(Vector2 direction, bool ease)
-    {
-        // TODO : 패널 움직이는 기능 구현 
-        base.Move(direction, ease);
     }
 
     /// <summary>

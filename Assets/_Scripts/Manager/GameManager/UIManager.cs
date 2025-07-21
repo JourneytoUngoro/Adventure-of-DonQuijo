@@ -116,6 +116,11 @@ public class UIManager : MonoBehaviour
         return startingUIDictionary[type];
     }
 
+    public T GetUI<T>(UIType type) where T : UIBase
+    {
+        return startingUIDictionary[type] as T;
+    }
+
     public PopupUI ShowDynamicPopup(PopupData data)
     {
         PopupUI popup = popupPool.Get();
@@ -245,7 +250,7 @@ public class UIManager : MonoBehaviour
 
             GameObject pooledObject = new GameObject("Pooled Objects");
             pool = pooledObject.transform;
-            pooledObject.transform.SetParent(pool);
+            pooledObject.transform.SetParent(uiCanvas);
         }
     }
     #endregion

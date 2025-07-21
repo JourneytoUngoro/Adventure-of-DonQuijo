@@ -8,26 +8,36 @@ public class SceneConnectorInteraction : InteractBase
 
     [SerializeField] private Direction direction;
     [SerializeField] private SceneField targetScene;
+    [SerializeField] private Transform destinationPosition;
 
     public override void Interact()
     {
+        canInteract = false;
+
         switch (direction)
         {
             case Direction.None:
                 return;
             case Direction.Up:
-                if (Manager.Instance.gameManager.player.movement.currentVelocity.y <= 0) return; break;
+                if (Manager.Instance.player.movement.currentVelocity.y < 0) return; break;
             case Direction.Down:
-                if (Manager.Instance.gameManager.player.movement.currentVelocity.y >= 0) return; break;
+                if (Manager.Instance.player.movement.currentVelocity.y > 0) return; break;
             case Direction.Left:
-                if (Manager.Instance.gameManager.player.movement.currentVelocity.x >= 0) return; break;
+                if (Manager.Instance.player.movement.currentVelocity.x > 0) return; break;
             case Direction.Right:
-                if (Manager.Instance.gameManager.player.movement.currentVelocity.x <= 0) return; break;
+                if (Manager.Instance.player.movement.currentVelocity.x < 0) return; break;
             case Direction.All:
                 break;
             default: return;
         }
 
-        // Manager.Instance.sceneTransitionManager.SceneTransition(targetScene, direction);
+        if (destinationPosition == null)
+        {
+            Manager.Instance.sceneTransitionManager.SceneTransition(targetScene, direction);
+        }
+        else
+        {
+            Manager.Instance.sceneTransitionManager.SceneTransition(targetScene, destinationPosition);
+        }
     }
 }
