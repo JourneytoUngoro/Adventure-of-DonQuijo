@@ -11,14 +11,12 @@ public class MainMenuUI : MonoBehaviour
     [Header("Main Menu Buttons")]
     public Button newGameButton;
     public Button loadGameButton;
-    public Button creditButton;
     public Button exitGameButton;
     public Button settingButton;
 
     [Header("Main Menu Panels")]
     public GameObject newGamePanel;
     public GameObject loadGamePanel;
-    public GameObject creditPanel;
     public GameObject exitGamePanel;
 
     #endregion
@@ -45,7 +43,6 @@ public class MainMenuUI : MonoBehaviour
         // Popup 스크립트 할당
         newGamePopup = newGamePanel.GetComponent<PopupUI>();
         loadGamePopup = loadGamePanel.GetComponent<PopupUI>();
-        creditPopup = creditPanel.GetComponent<PopupUI>();
         exitGamePopup = exitGamePanel.GetComponent<PopupUI>();
 
         // 패널 컨트롤 스크립트 할당
@@ -54,7 +51,6 @@ public class MainMenuUI : MonoBehaviour
         // 이벤트 할당
         newGameButton.onClick.AddListener(OnClickNewGameButton);
         loadGameButton.onClick.AddListener(OnClickLoadGameButton);
-        creditButton.onClick.AddListener(OnClickCreditButton);
         exitGameButton.onClick.AddListener(OnClickExitGameButton);
         settingButton.onClick.AddListener(OnClickSettingButton);
     }
@@ -69,11 +65,6 @@ public class MainMenuUI : MonoBehaviour
     {
         loadGameUI.ShowLoadGamePanel();
         loadGamePopup.ShowUI();
-    }
-
-    public void OnClickCreditButton()
-    {
-        creditPopup.ShowUI();
     }
 
     public void OnClickExitGameButton()

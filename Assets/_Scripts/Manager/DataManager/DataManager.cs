@@ -95,18 +95,18 @@ public class DataManager : MonoBehaviour
         Debug.Log("New data created");
     }
 
-    public void SaveGame()
+    public bool SaveGame()
     {
         if (IsExcludedScene())
         {
             Debug.Log("Excluded Scene");
-            return;
+            return false;
         }
 
         if (this.gameData == null)
         {
             Debug.LogWarning("No data was found. A new game needs to be started before data can be saved.");
-            return;
+            return false;
         }
 
         foreach (IDataPersistance dataPersistanceObject in dataPersistanceObjects)
@@ -114,10 +114,11 @@ public class DataManager : MonoBehaviour
             dataPersistanceObject.SaveData(gameData);
         }
 
-        gameData.displayedLastPlayTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        gameData.displayedLastPlayTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
         gameData.lastPlayTime = DateTime.Now.Ticks;
 
-        dataHandler.Save(gameData, selectedProfileId);
+        bool saved = dataHandler.Save(gameData, selectedProfileId);
+        return saved;
     }
 
     public void LoadGame()

@@ -36,12 +36,9 @@ public class SoundUIConnect : MonoBehaviour
 
     private const float minValue = 0.0001f;
     private float epsilon = 0.001f;
-    private float distance;
 
     private void Start()
     {
-        distance = 1f - (minValue);
-
         AddListnersToUI();
         InitializeUIValue();
     }

@@ -13,6 +13,7 @@ public class PauseMenuUI : MonoBehaviour
     private Button continueButton;       // Continue Button
     private Button settingPopupButton; // Setting Popup Button
     private Button saveButton;            // Save Button
+    private Button mainMenuButton;      // Main Menu Button
 
     private PopupUI pauseMenuPopup;
 
@@ -36,6 +37,7 @@ public class PauseMenuUI : MonoBehaviour
         continueButton = buttonsTransform.Find("Continue Button").GetComponent<Button>();
         settingPopupButton = buttonsTransform.Find("Setting Popup Button").GetComponent<Button>();
         saveButton = buttonsTransform.Find("Save Button").GetComponent<Button>();
+        mainMenuButton = buttonsTransform.Find("Main Menu Button").GetComponent<Button>();
     }
 
     private void RegisterAcivatedEvent()
@@ -52,10 +54,12 @@ public class PauseMenuUI : MonoBehaviour
         continueButton.onClick.RemoveAllListeners();
         settingPopupButton.onClick.RemoveAllListeners();
         saveButton.onClick.RemoveAllListeners();
+        mainMenuButton.onClick.RemoveAllListeners();
 
         continueButton.onClick.AddListener(OnClickContinueButton);
         settingPopupButton.onClick.AddListener(OnClickSettingPopupButton);
         saveButton.onClick.AddListener(OnClickSaveButton);
+        mainMenuButton.onClick.AddListener(OnClickMainMenuButton);
     }
 
     private void OnClickContinueButton()
@@ -70,16 +74,37 @@ public class PauseMenuUI : MonoBehaviour
 
     private void OnClickSaveButton()
     {
-        Manager.Instance.dataManager.SaveGame();
-        // TODO : 저장 잘 된 경우를 알아내는 로직 추가 
-/*        // if (success)
+        Manager.Instance.gameManager.PauseGame();
+        SaveCurrentGame();
+        Manager.Instance.gameManager.ResumeGame();
+    }
+
+    private void OnClickMainMenuButton()
+    {
+        Manager.Instance.gameManager.PauseGame();
+        SaveCurrentGame();
+
+        // TODO : TransitionSceneManager를 이용해야 한다 
+        Debug.Log("메인 메뉴로 돌아가기 시도");
+    }
+
+    private void SaveCurrentGame()
+    {
+        bool saved = Manager.Instance.dataManager.SaveGame();
+        TextInfoUI guideText;
+        if (saved)
         {
-            Manager.Instance.uiManager.ShowDynamicTextInfo( new TextInfoData("성공적으로 저장됐습니다."));
+            guideText = Manager.Instance.uiManager.ShowDynamicTextInfo(
+                new TextInfoData("저장에 성공했습니다."));
         }
-        // else 
+        else
         {
-            Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData("저장에 실패했습니다."));
-        }*/
+            guideText = Manager.Instance.uiManager.ShowDynamicTextInfo(
+                new TextInfoData("저장에 실패했습니다."));
+        }
+        guideText.SetAnchoredPositioin(0, -400); // bottom of screen
+        guideText.ShowAndHideUI(2f);
+
     }
 
 }

@@ -13,12 +13,15 @@ public class LoadGameUI : MonoBehaviour
     [Tooltip("must be assigned in Inspector")]
     public Button[] saveSlotButtons;
     public Button editButton;
+    public Sprite editSprtie;
+    public Sprite saveSprtie;
+    private Image editStateImage;
 
     public string nowProfileId = string.Empty;
     public string deleteProfileId = string.Empty;
 
     SaveSlotUI[] saveSlotUI;
-    PopupUI popup;
+    PopupUI loadPopup;
     PopupUI guidePopup;
 
     Dictionary<string, GameData> allProfilesGameData;
@@ -28,8 +31,9 @@ public class LoadGameUI : MonoBehaviour
 
     private void Awake()
     {
-        popup = GetComponent<PopupUI>();
+        loadPopup = GetComponent<PopupUI>();
         isFirstPlay = false;
+        editStateImage = editButton.GetComponent<Image>();
     }
 
     private void Start()
@@ -43,8 +47,7 @@ public class LoadGameUI : MonoBehaviour
         for (int i = 0; i < saveSlotButtons.Length; i++)
         {
             saveSlotUI[i] = saveSlotButtons[i].GetComponent<SaveSlotUI>();
-/*            saveSlotUI[i].SetOutline(false);
-*/            saveSlotUI[i].profileId = GenerateSlotId(i);
+            saveSlotUI[i].profileId = GenerateSlotId(i);
         }
 
         AssginGameData();
@@ -55,7 +58,7 @@ public class LoadGameUI : MonoBehaviour
 
     void SetEvents()
     {
-        popup.SetDynamicPopupEvent(null, OnClickCancelButton);
+        loadPopup.SetDynamicPopupEvent(null, OnClickCancelButton);
 
         editButton.onClick.AddListener(OnClickEditButton);
     }
@@ -67,7 +70,7 @@ public class LoadGameUI : MonoBehaviour
 
     void OnClickCancelButton()
     {
-        popup.HideUI();
+        loadPopup.HideUI();
     }
 
     public void AssginGameData()
@@ -90,12 +93,6 @@ public class LoadGameUI : MonoBehaviour
 
     public void OnClickSlotButton(int index)
     {
-/*        for (int i = 0; i < saveSlotUI.Length; i++)
-        {
-            saveSlotUI[i].SetOutline(false);
-        }
-        saveSlotUI[index].SetOutline(true);*/
-
         LoadOrNewGame(index);
     }
 
@@ -105,12 +102,12 @@ public class LoadGameUI : MonoBehaviour
         if (saveSlotUI[index].isNull)
         {
             guidePopup = Manager.Instance.uiManager.ShowDynamicPopup(new PopupData(
-                                "", $"슬롯 {index + 1}에서 새 게임을 시작하겠습니까?", "확인", ""));
+                                "", $"슬롯 {index + 1}에서 새 게임을 시작하겠습니까?", "", ""));
         }
         else
         {
             guidePopup = Manager.Instance.uiManager.ShowDynamicPopup(new PopupData(
-                                    "", $"슬롯 {index + 1}에서 게임을 불러오겠습니까?", "확인", ""));
+                                    "", $"슬롯 {index + 1}에서 게임을 불러오겠습니까?", "", ""));
         }
 
         nowProfileId = saveSlotUI[index].profileId;
@@ -128,7 +125,7 @@ public class LoadGameUI : MonoBehaviour
             if (saveSlotUI[i].isNull) continue;
             saveSlotUI[i].deleteButton.gameObject.SetActive(editing);
         }
-        editButton.GetComponentInChildren<TextMeshProUGUI>().text = editing ? "저장하기" : "편집하기";
+        editStateImage.sprite = editing ? saveSprtie : editSprtie;
     }
 
     public void OnClickDeleteButton(int index)
@@ -136,7 +133,7 @@ public class LoadGameUI : MonoBehaviour
         deleteProfileId = saveSlotUI[index].profileId;
 
         guidePopup = Manager.Instance.uiManager.ShowDynamicPopup(new PopupData(
-                            "", $"슬롯 {index + 1}에 저장된 데이터를 삭제하겠습니까?", "확인", ""));
+                            "", $"슬롯 {index + 1}에 저장된 데이터를 삭제하겠습니까?", "", ""));
         guidePopup.ShowUI();
 
         guidePopup.SetDynamicPopupEvent(DeleteGameWithSlot, () => guidePopup.HideUI());
@@ -155,7 +152,7 @@ public class LoadGameUI : MonoBehaviour
 
             StartCoroutine(LoadCurrentScene());
         }
-        popup.HideUI();
+        loadPopup.HideUI();
     }
 
     IEnumerator LoadCurrentScene()

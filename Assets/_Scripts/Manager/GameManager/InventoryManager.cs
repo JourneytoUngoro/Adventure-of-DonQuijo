@@ -20,7 +20,7 @@ public class InventoryManager : MonoBehaviour
         {
             SetupInGameScene();
         }
-        // SetupInGameScene();
+         SetupInGameScene();
     }
 
     public void SetupInGameScene()
@@ -31,6 +31,7 @@ public class InventoryManager : MonoBehaviour
 
         Debug.Assert(inventory != null, "item manager inventory null");
         Debug.Assert(player != null, "item manager player null!");
+        Debug.Assert(controller() != null, "item manager controller null");
     }
 
     public void AcquireItem(Item item)

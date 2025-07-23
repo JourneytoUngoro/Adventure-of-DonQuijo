@@ -161,7 +161,7 @@ public class UIManager : MonoBehaviour
     {
         if (popupOpened)
         {
-            // Debug.Log($"activated popup : {activatedPopups.Count}, {activatedPopups.Peek().name}");
+            // Debug.Log($"activated loadPopup : {activatedPopups.Count}, {activatedPopups.Peek().name}");
             activatedPopups.Peek().HideUI();
         }
         else
@@ -217,7 +217,7 @@ public class UIManager : MonoBehaviour
         Transform parent = topPopup.transform.parent;
         int siblingIndex = topPopup.transform.GetSiblingIndex();
 
-        // Positioned directly below the peek popup
+        // Positioned directly below the peek loadPopup
         clickBlockImageUI.ShowUI();
 
         clickBlockImageUI.transform.SetParent(parent);

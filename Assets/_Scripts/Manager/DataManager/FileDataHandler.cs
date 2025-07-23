@@ -69,9 +69,9 @@ public class FileDataHandler
         return loadedData;
     }
 
-    public void Save(GameData data, string profileId)
+    public bool Save(GameData data, string profileId)
     {
-        if (profileId == null) return;
+        if (profileId == null) return false;
 
         string fullPath = Path.Combine(dataDirPath, profileId, dataFileName);
 
@@ -101,6 +101,7 @@ public class FileDataHandler
             if (verifiedGameData != null)
             {
                 File.Copy(fullPath, backupFilePath, true);
+                return true;
             }
             else
             {
@@ -110,6 +111,7 @@ public class FileDataHandler
         catch (Exception e)
         {
             Debug.LogError("Error occured when trying to save data to file: " + fullPath + "\n" + e);
+            return false;
         }
     }
 
