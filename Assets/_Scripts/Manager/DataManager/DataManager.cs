@@ -31,7 +31,7 @@ public class DataManager : MonoBehaviour
     [SerializeField] private List<SceneField> excludedScenesForData; // 
 
     [SerializeField] private float autoSaveTimeSeconds = 60f;
-    // Coroutine AutoSaveCoroutine = null;
+    Coroutine AutoSaveCoroutine = null;
 
     private void Awake()
     {
@@ -43,6 +43,9 @@ public class DataManager : MonoBehaviour
         this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
 
         InitializeSelectedProfileId();
+
+        bool autoSaveValue = PlayerPrefs.GetInt(EnvironmentController.AUTO_SAVE, 1) == 1;
+        SetAutoSaveDisable(!autoSaveValue);
     }
 
     private void OnEnable()
@@ -62,7 +65,7 @@ public class DataManager : MonoBehaviour
         this.dataPersistanceObjects = FindAllDataPersistenceObjects();
         LoadGame();
 
-        // AutoSaveCoroutine = StartCoroutine(AutoSave());
+        if (!disableAutoSaving) { AutoSaveCoroutine = StartCoroutine(AutoSave()); }
     }
 
     public void ChangeSelectedProfileId(string newProfileId)
@@ -181,6 +184,24 @@ public class DataManager : MonoBehaviour
     {
         string currentScene = SceneManager.GetActiveScene().name;
         return excludedScenesForData.Any(sceneField => sceneField.SceneName == currentScene);
+    }
+
+    public void SetAutoSaveDisable(bool disable)
+    {
+        disableAutoSaving = disable;
+        Debug.Log(disableAutoSaving ? "disable auto save" : "enable auto save");
+
+
+        if (AutoSaveCoroutine != null)
+        {
+            StopCoroutine(AutoSaveCoroutine);
+            AutoSaveCoroutine = null;
+        }
+
+        if (!disableAutoSaving) // auto-save enabled
+        {
+            AutoSaveCoroutine = StartCoroutine(AutoSave());
+        }
     }
 
     private IEnumerator AutoSave()

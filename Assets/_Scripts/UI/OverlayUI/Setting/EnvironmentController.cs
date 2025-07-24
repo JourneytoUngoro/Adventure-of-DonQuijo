@@ -1,52 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EnvironmentController : MonoBehaviour
 {
     public Toggle tutorialSkipToggle; // default : false
-    public Toggle autoSaveToggle; // default : false
+    public Toggle autoSaveToggle;    // default : true
+    public Toggle cutsceneSkip;       // default : false
 
-
-
-    public const string TUTORIAL_SKIP = "tutorialSkip";
-    public const string AUTO_SAVE = "autoSave";
+    public static string TUTORIAL_SKIP = "tutorialSkip";
+    public static string AUTO_SAVE = "autoSave";
+    public static string CUTSCENE_SKIP = "cutsceneSkip";
 
     private void Start()
     {
         InitializeToggles();
+
+        AddListenerToUI();
     }
 
     private void InitializeToggles()
     {
         // default value is false
         tutorialSkipToggle.isOn = PlayerPrefs.GetInt(TUTORIAL_SKIP, 0) == 0 ? false : true;
-        autoSaveToggle.isOn = PlayerPrefs.GetInt(AUTO_SAVE, 0) == 0 ? false : true;
+        autoSaveToggle.isOn = PlayerPrefs.GetInt(AUTO_SAVE, 1) == 0 ? false : true;
+        cutsceneSkip.isOn = PlayerPrefs.GetInt(CUTSCENE_SKIP, 0) == 0 ? false : true;
     }
 
     private void AddListenerToUI()
     {
         tutorialSkipToggle.onValueChanged.AddListener(isOn => SetTutorialSkipEnabled(isOn));
         autoSaveToggle.onValueChanged.AddListener(isOn => SetAutoSaveEnabled(isOn));
+        cutsceneSkip.onValueChanged.AddListener(isOn => SetCutsceneSkipEnabled(isOn));
     }
 
-
-    //===================================================== TODO ===========================================================================
     private void SetTutorialSkipEnabled(bool isOn)
     {
-        // 얘는 굳이 할 필요 있나? LoadGameUI에서 해당 키 참조해서 PlayerPrefs로 , bool 확인 후 ?? 튜토리얼 끄든가 하면 될듯 
+        int isOnValue = isOn ? 1 : 0;
+        PlayerPrefs.SetInt(TUTORIAL_SKIP, isOnValue);
     }
 
     private void SetAutoSaveEnabled(bool isOn)
     {
-        // TODO : DataManager의 자동저장 역할 로직 구현해야 하는데 이따 하기
-        // 
+        int isOnValue = isOn ? 1 : 0;
+        PlayerPrefs.SetInt(AUTO_SAVE, isOnValue);
+
+        // isOn means Enable
+        Manager.Instance.dataManager.SetAutoSaveDisable(!isOn);
+
+        Debug.Log($"toggle {isOn}, set value {isOnValue}");
+
     }
-    //=========================================================================================================================================
 
-
-
-
-
+    private void SetCutsceneSkipEnabled(bool isOn)
+    {
+        int isOnValue = isOn ? 1 : 0;
+        PlayerPrefs.SetInt(CUTSCENE_SKIP, isOnValue);
+    }
 }
