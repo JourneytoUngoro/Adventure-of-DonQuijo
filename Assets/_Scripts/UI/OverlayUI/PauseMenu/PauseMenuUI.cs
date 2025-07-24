@@ -16,6 +16,7 @@ public class PauseMenuUI : MonoBehaviour
     private Button mainMenuButton;      // Main Menu Button
 
     private PopupUI pauseMenuPopup;
+    private PopupUI guidePopup;
 
     private void Start()
     {
@@ -23,7 +24,6 @@ public class PauseMenuUI : MonoBehaviour
         RegisterAcivatedEvent();
         RegisterButtonEvents();
     }
-
 
     private void InitializeReferences()
     {
@@ -81,11 +81,12 @@ public class PauseMenuUI : MonoBehaviour
 
     private void OnClickMainMenuButton()
     {
-        Manager.Instance.gameManager.PauseGame();
-        SaveCurrentGame();
+        guidePopup = Manager.Instance.uiManager.ShowDynamicPopup(
+            new PopupData("", "게임을 저장하고\n메인 화면으로 돌아가시겠습니까?", "", ""));
 
-        // TODO : TransitionSceneManager를 이용해야 한다 
-        Debug.Log("메인 메뉴로 돌아가기 시도");
+        // set event
+        guidePopup.SetDynamicPopupEvent(ConfirmReturnToMainMenu, CancelReturnToMainMenu);
+        guidePopup.ShowUI();
     }
 
     private void SaveCurrentGame()
@@ -107,4 +108,31 @@ public class PauseMenuUI : MonoBehaviour
 
     }
 
+    private void ConfirmReturnToMainMenu()
+    {
+        SaveCurrentGame();
+
+        // close popup
+        guidePopup.HideUI();
+        pauseMenuPopup.HideUI();
+
+        // Scene Transition
+        Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("mainMenu"), true, true);
+
+        guidePopup = null;
+
+        Debug.Log("메인 메뉴로 돌아가기 시도");
+    }
+
+    private void CancelReturnToMainMenu()
+    {
+        // close popup
+        guidePopup.HideUI();
+        pauseMenuPopup.HideUI();
+
+        guidePopup = null;
+
+        Debug.Log("메인 메뉴로 돌아가기 취소");
+
+    }
 }

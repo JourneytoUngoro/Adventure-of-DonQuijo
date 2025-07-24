@@ -68,7 +68,7 @@ public class PopupUI : UIBase
         }
         else
         {
-            Debug.Log("cannot find confirm button");
+            // Debug.Log("cannot find confirm button");
         }
 
         // 취소 버튼 

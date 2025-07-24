@@ -27,12 +27,11 @@ public class LoadGameUI : MonoBehaviour
     Dictionary<string, GameData> allProfilesGameData;
 
     bool editing;
-    bool isFirstPlay;
+    bool playOpening;
 
     private void Awake()
     {
         loadPopup = GetComponent<PopupUI>();
-        isFirstPlay = false;
         editStateImage = editButton.GetComponent<Image>();
     }
 
@@ -53,7 +52,7 @@ public class LoadGameUI : MonoBehaviour
         AssginGameData();
 
         editing = false;
-        isFirstPlay = CheckFirstPlay();
+        playOpening = CheckPlayOpeningWithNewSlot();
     }
 
     void SetEvents()
@@ -63,9 +62,11 @@ public class LoadGameUI : MonoBehaviour
         editButton.onClick.AddListener(OnClickEditButton);
     }
 
-    private bool CheckFirstPlay()
+    private bool CheckPlayOpeningWithNewSlot()
     {
-        return Manager.Instance.dataManager.AllProfilesCount() > 0 ? false : true;
+        bool play = PlayerPrefs.GetInt(EnvironmentController.CUTSCENE_SKIP, 0) == 0 ? false : true;
+
+        return play;
     }
 
     void OnClickCancelButton()
@@ -108,6 +109,7 @@ public class LoadGameUI : MonoBehaviour
         {
             guidePopup = Manager.Instance.uiManager.ShowDynamicPopup(new PopupData(
                                     "", $"슬롯 {index + 1}에서 게임을 불러오겠습니까?", "", ""));
+            playOpening = false;
         }
 
         nowProfileId = saveSlotUI[index].profileId;
@@ -165,16 +167,16 @@ public class LoadGameUI : MonoBehaviour
         yield return null;
 
         // TODO : Save-Load 시 저장된 씬 불러와야 한다 
-        if (isFirstPlay)
+        if (playOpening)
         {
             // TODO : cutscene01 재생으로 바꿔야 한다
-            // SceneManager.LoadScene("SampleScene");
+            Debug.Log("Play Opening Cutscene");
             Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("SampleScene"), true, false);
             Manager.Instance.soundManager.PlayBGM("battleBGM");
         }
         else
         {
-            // SceneManager.LoadScene("SampleScene");
+            Debug.Log("Don't Play Opening Cutscene");
             Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("SampleScene"), true, true);
             Manager.Instance.soundManager.PlayBGM("battleBGM");
         }

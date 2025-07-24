@@ -2524,15 +2524,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13c0b47ec3034014f9d7365d179fad43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingImage: {fileID: 1559174931}
-  buttonsToActivate:
-  - {fileID: 2101331256}
-  - {fileID: 141417940}
-  - {fileID: 0}
-  - {fileID: 142473642}
-  targetAnchoredPosition: {x: 0, y: 300}
-  moveDuration: 2
-  delayTime: 0.2
 --- !u!1 &1559174930
 GameObject:
   m_ObjectHideFlags: 0
@@ -5114,6 +5105,10 @@ PrefabInstance:
     - target: {fileID: 3749889053354997725, guid: dfdc780215c66c849b19a9ac22c0396e, type: 3}
       propertyPath: orthographic size
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217783853800310920, guid: dfdc780215c66c849b19a9ac22c0396e, type: 3}
+      propertyPath: autoSaveTimeSeconds
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6501863103636223680, guid: dfdc780215c66c849b19a9ac22c0396e, type: 3}
       propertyPath: m_LocalPosition.x

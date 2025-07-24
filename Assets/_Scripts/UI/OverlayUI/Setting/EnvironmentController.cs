@@ -49,14 +49,11 @@ public class EnvironmentController : MonoBehaviour
 
         // isOn means Enable
         Manager.Instance.dataManager.SetAutoSaveDisable(!isOn);
-
-        Debug.Log($"toggle {isOn}, set value {isOnValue}");
-
     }
 
     private void SetCutsceneSkipEnabled(bool isOn)
     {
-        int isOnValue = isOn ? 1 : 0;
-        PlayerPrefs.SetInt(CUTSCENE_SKIP, isOnValue);
+        int skip = isOn ? 1 : 0;
+        PlayerPrefs.SetInt(CUTSCENE_SKIP, skip);
     }
 }

@@ -115,7 +115,7 @@ public abstract class UIBase : MonoBehaviour
         group.blocksRaycasts = true;
         group.DOFade(1, fadeTime).SetUpdate(true).OnComplete(onFadeInComplete);
 
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSecondsRealtime(waitTime);
 
         group.DOFade(0, fadeTime).SetUpdate(true).OnComplete(onFadeOutComplete);
 

@@ -35,6 +35,7 @@ public class DataManager : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("DataManager.Awake() executed!");
         if (disableAutoSaving)
         {
             Debug.LogWarning("Auto saving is currently disabled. No auto save supported when you leave the game.");
@@ -47,6 +48,11 @@ public class DataManager : MonoBehaviour
         bool autoSaveValue = PlayerPrefs.GetInt(EnvironmentController.AUTO_SAVE, 1) == 1;
         SetAutoSaveDisable(!autoSaveValue);
     }
+    private void OnDestroy()
+    {
+        Debug.Log($"DataManager : Destroyed at scene: {SceneManager.GetActiveScene().name}");
+    }
+
 
     private void OnEnable()
     {
@@ -70,6 +76,7 @@ public class DataManager : MonoBehaviour
 
     public void ChangeSelectedProfileId(string newProfileId)
     {
+        Debug.Log("DataManager.ChangeSelectedProfileId() excuted!");
         this.selectedProfileId = newProfileId;
         LoadGame();
     }
@@ -83,6 +90,7 @@ public class DataManager : MonoBehaviour
 
     private void InitializeSelectedProfileId()
     {
+        Debug.Log("DataManager.InitializeSelectedProfileId() excuted!");
         this.selectedProfileId = dataHandler.GetMostRecentlyUpdatedProfileId();
 
         if (overrideSelectedProfileId)
@@ -133,6 +141,8 @@ public class DataManager : MonoBehaviour
         }
 
         this.gameData = dataHandler.Load(selectedProfileId);
+
+        Debug.Log($"selected profile id : {selectedProfileId}");
 
         if (this.gameData == null && initializeDataIfNull)
         {

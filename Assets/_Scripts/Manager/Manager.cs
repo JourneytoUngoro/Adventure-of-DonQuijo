@@ -22,18 +22,22 @@ public class Manager : MonoBehaviour
     private void Awake()
     {
         #region Singleton
-        Instance = this;
-        /*if (Instance == null)
+        // Instance = this;
+        if (Instance == null)
         {
             Instance = this;
         }
         else if (Instance != this)
         {
             Destroy(gameObject);
+            Debug.Log($"{Instance.gameObject.name}이 있어서 {gameObject.name}이 파괴됨");
+            return; // 얘 추가 돼야 할듯?
         }
 
-        DontDestroyOnLoad(gameObject);*/
+        DontDestroyOnLoad(gameObject);
         #endregion
+
+        Debug.Log($"{gameObject.name} 하이염");
 
         inputHandler = GetComponentInChildren<PlayerInputHandler>();
         gameManager = GetComponentInChildren<GameManager>();
@@ -47,6 +51,8 @@ public class Manager : MonoBehaviour
         questManager = GetComponentInChildren<QuestManager>();
         stageManager = GetComponentInChildren<StageManager>();
         sceneTransitionManager = GetComponentInChildren<SceneTransitionManager>();
+
+        Debug.Log($"{gameObject.name} 두 번 실행되는가?");
     }
 
     #region Test
