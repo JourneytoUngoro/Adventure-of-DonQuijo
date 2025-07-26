@@ -7,6 +7,7 @@ public class PlayerData : EntityData
 {
     [field: Header("System Data")]
     [field: SerializeField] public float waitTimeAfterDeath { get; private set; } = 2.0f;
+    [field: SerializeField] public int statPointsPerLevel { get; private set; } = 3;
 
     [field: Header("Control Data")]
     [field: SerializeField] public float dashInputBufferTime { get; private set; } = 0.5f;

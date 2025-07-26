@@ -147,131 +147,31 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
         }
     }
 
-    public async void SceneTransition(SceneField targetScene, DoorTriggerInteraction.DoorToSpawnAt doorToSpawnAt, bool useFadeInOut = false, bool useLoadingBar = false)
+    public void SceneTransition(SceneField targetScene, DoorTriggerInteraction.DoorToSpawnAt doorToSpawnAt, bool useFadeInOut = false, bool useLoadingBar = false)
     {
         this.doorToSpawnAt = doorToSpawnAt;
         this.direction = SceneConnectorInteraction.Direction.None;
         this.destinationTransform = null;
 
-        if (useFadeInOut)
+        if (sceneTransitionCoroutine != null)
         {
-            FadeOut(useLoadingBar, targetScene.SceneName);
+            StopCoroutine(sceneTransitionCoroutine);
         }
-
-        // if scene is not in SceneManager, it means that the scene is neither loaded nor currently loading
-        if (!IsLoadingScene(targetScene.SceneName))
-        {
-            Debug.Log("Scene was not loaded. Start Loading the target scene: " + targetScene.SceneName);
-            currentAsyncOperationDictionary.Add(targetScene.SceneName, SceneManager.LoadSceneAsync(targetScene, LoadSceneMode.Additive));
-        }
-
-        if (!SceneManager.GetSceneByName(targetScene).isLoaded)
-        {
-            Debug.Log($"Target scene \"{targetScene.SceneName}\" is not done loading.");
-            Manager.Instance.gameManager.PauseGame();
-            while (!currentAsyncOperationDictionary[targetScene.SceneName].isDone)
-            {
-                await Task.Delay(100);
-            }
-            Manager.Instance.gameManager.ResumeGame();
-            Debug.Log($"Target scene \"{targetScene.SceneName}\" is done loading. Set as active scene.");
-            currentActiveScene = targetScene;
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(targetScene.SceneName));
-        }
-        else
-        {
-            currentActiveScene = targetScene;
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(targetScene.SceneName));
-        }
-
-        this.useLoadingBar = useLoadingBar;
-        if (useLoadingBar)
-        {
-            LoadingBar(targetScene.SceneName);
-        }
-
-        currentActiveScene = targetScene;
+        sceneTransitionCoroutine = StartCoroutine(SceneTransitionCoroutine(targetScene, useFadeInOut, useLoadingBar));
     }
 
-    public async void SceneTransition(SceneField targetScene, SceneConnectorInteraction.Direction direction, bool useFadeInOut = false, bool useLoadingBar = false)
+    public void SceneTransition(SceneField targetScene, SceneConnectorInteraction.Direction direction, bool useFadeInOut = false, bool useLoadingBar = false)
     {
         this.doorToSpawnAt = DoorTriggerInteraction.DoorToSpawnAt.None;
         this.direction = direction;
         this.destinationTransform = null;
 
-        if (useFadeInOut)
+        if (sceneTransitionCoroutine != null)
         {
-            FadeOut(useLoadingBar, targetScene.SceneName);
+            StopCoroutine(sceneTransitionCoroutine);
         }
-
-        // if scene is not in SceneManager, it means that the scene is neither loaded nor currently loading
-        if (!IsLoadingScene(targetScene.SceneName))
-        {
-            Debug.Log("Scene was not loaded. Start Loading the target scene: " + targetScene.SceneName);
-            currentAsyncOperationDictionary.Add(targetScene.SceneName, SceneManager.LoadSceneAsync(targetScene, LoadSceneMode.Additive));
-        }
-
-        if (!SceneManager.GetSceneByName(targetScene).isLoaded)
-        {
-            Debug.Log($"Target scene \"{targetScene.SceneName}\" is not done loading.");
-            Manager.Instance.gameManager.PauseGame();
-            while (!currentAsyncOperationDictionary[targetScene.SceneName].isDone)
-            {
-                await Task.Delay(100);
-            }
-
-            if (!useFadeInOut)
-            {
-                Manager.Instance.gameManager.ResumeGame();
-            }
-            Debug.Log($"Target scene \"{targetScene.SceneName}\" is done loading. Set as active scene.");
-            currentActiveScene = targetScene;
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(targetScene.SceneName));
-        }
-        else
-        {
-            currentActiveScene = targetScene;
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(targetScene.SceneName));
-        }
+        sceneTransitionCoroutine = StartCoroutine(SceneTransitionCoroutine(targetScene, useFadeInOut, useLoadingBar));
     }
-
-    /*public async void SceneTransition(SceneField targetScene, Transform destinationTransform, bool useFadeInOut = false, bool useLoadingBar = false)
-    {
-        this.doorToSpawnAt = DoorTriggerInteraction.DoorToSpawnAt.None;
-        this.direction = SceneConnectorInteraction.Direction.None;
-        this.destinationTransform = destinationTransform;
-
-        // if scene is not in SceneManager, it means that the scene is neither loaded nor currently loading
-        if (!IsLoadingScene(targetScene.SceneName))
-        {
-            Debug.Log("Scene was not loaded. Start Loading the target scene: " + targetScene.SceneName);
-            currentAsyncOperationDictionary.Add(targetScene.SceneName, SceneManager.LoadSceneAsync(targetScene, LoadSceneMode.Additive));
-        }
-
-        if (useFadeInOut)
-        {
-            FadeOut(useLoadingBar, targetScene.SceneName);
-        }
-
-        if (!SceneManager.GetSceneByName(targetScene).isLoaded)
-        {
-            Debug.Log($"Target scene \"{targetScene.SceneName}\" is not done loading.");
-            Manager.Instance.gameManager.PauseGame();
-            while (!currentAsyncOperationDictionary[targetScene.SceneName].isDone)
-            {
-                await Task.Delay(100);
-            }
-            Manager.Instance.gameManager.ResumeGame();
-            Debug.Log($"Target scene \"{targetScene.SceneName}\" is done loading. Set as active scene.");
-            currentActiveScene = targetScene;
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(targetScene.SceneName));
-        }
-        else
-        {
-            currentActiveScene = targetScene;
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(targetScene.SceneName));
-        }
-    }*/
 
     public void SceneTransition(SceneField targetScene, bool useFadeInOut = false, bool useLoadingBar = false)
     {
@@ -284,36 +184,6 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
             StopCoroutine(sceneTransitionCoroutine);
         }
         sceneTransitionCoroutine = StartCoroutine(SceneTransitionCoroutine(targetScene, useFadeInOut, useLoadingBar));
-
-        /*if (useFadeInOut)
-        {
-            FadeOut(useLoadingBar, targetScene.SceneName);
-        }
-
-        if (!IsLoadingScene(targetScene.SceneName))
-        {
-            Debug.Log("Scene was not loaded. Start Loading the target scene: " + targetScene.SceneName);
-            currentAsyncOperationDictionary.Add(targetScene.SceneName, SceneManager.LoadSceneAsync(targetScene, LoadSceneMode.Additive));
-        }
-
-        if (!SceneManager.GetSceneByName(targetScene).isLoaded)
-        {
-            Debug.Log($"Target scene \"{targetScene.SceneName}\" is not done loading.");
-            Manager.Instance.gameManager.PauseGame();
-            while (!currentAsyncOperationDictionary[targetScene.SceneName].isDone)
-            {
-                await Task.Delay(100);
-            }
-            Manager.Instance.gameManager.ResumeGame();
-            Debug.Log($"Target scene \"{targetScene.SceneName}\" is done loading. Set as active scene.");
-            currentActiveScene = targetScene;
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(targetScene.SceneName));
-        }
-        else
-        {
-            currentActiveScene = targetScene;
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(targetScene.SceneName));
-        }*/
     }
 
     public void SceneTransition(SceneField targetScene, Transform destinationTransform, bool useFadeInOut = false, bool useLoadingBar = false)
@@ -359,42 +229,17 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(targetScene.SceneName));
     }
 
-    public async void SceneTransition(string targetScene, bool useFadeInOut = false, bool useLoadingBar = false)
+    public void SceneTransition(string targetScene, bool useFadeInOut = false, bool useLoadingBar = false)
     {
         this.doorToSpawnAt = DoorTriggerInteraction.DoorToSpawnAt.None;
         this.direction = SceneConnectorInteraction.Direction.None;
         this.destinationTransform = null;
 
-        // if scene is not in SceneManager, it means that the scene is neither loaded nor currently loading
-        if (!IsLoadingScene(targetScene))
+        if (sceneTransitionCoroutine != null)
         {
-            Debug.Log("Scene was not loaded. Start Loading the target scene: " + targetScene);
-            currentAsyncOperationDictionary.Add(targetScene, SceneManager.LoadSceneAsync(targetScene, LoadSceneMode.Additive));
+            StopCoroutine(sceneTransitionCoroutine);
         }
-
-        if (useFadeInOut)
-        {
-            StartCoroutine(FadeOut(useLoadingBar, targetScene));
-        }
-
-        if (!SceneManager.GetSceneByName(targetScene).isLoaded)
-        {
-            Debug.Log($"Target scene \"{targetScene}\" is not done loading.");
-            Manager.Instance.gameManager.PauseGame();
-            while (!currentAsyncOperationDictionary[targetScene].isDone)
-            {
-                await Task.Delay(100);
-            }
-            Manager.Instance.gameManager.ResumeGame();
-            Debug.Log($"Target scene \"{targetScene}\" is done loading. Set as active scene.");
-            currentActiveScene = new SceneField(targetScene);
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(targetScene));
-        }
-        else
-        {
-            currentActiveScene = new SceneField(targetScene);
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(targetScene));
-        }
+        sceneTransitionCoroutine = StartCoroutine(SceneTransitionCoroutine(new SceneField(targetScene), useFadeInOut, useLoadingBar));
     }
 
     // called when scene transition is complete
@@ -507,18 +352,8 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
         Manager.Instance.player.movement.SetPosition(destinationTranfrom.position);
     }
 
-    private async void OnActiveSceneChanged(Scene current, Scene next)
+    private void OnActiveSceneChanged(Scene current, Scene next)
     {
-        while (isFadingOut)
-        {
-            await Task.Delay(100);
-        }
-
-        /*while (Manager.Instance.gameManager.player == null)
-        {
-            await Task.Delay(10);
-        }*/
-
         Debug.Log($"Active scene changed from \"{current.name}\" to \"{next.name}\"");
         LoadAndUnloadScenes();
         FindDoor(doorToSpawnAt);
@@ -531,6 +366,8 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
             cinemachineVirtualCamera.ForceCameraPosition(Manager.Instance.player.transform.position + Vector3.up * 25.0f, Quaternion.identity);
             cinemachineVirtualCamera.GetComponent<CinemachineConfiner>().m_BoundingShape2D = next.GetRootGameObjects().Where(gameObject => gameObject.name.Equals("Camera Boundary")).FirstOrDefault()?.GetComponent<PolygonCollider2D>();
         }
+
+        Manager.Instance.dataManager.SaveGame();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)

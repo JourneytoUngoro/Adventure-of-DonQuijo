@@ -258,8 +258,8 @@ public abstract class Detection : CoreComponent
     public void SetPosition(Vector3 position)
     {
         workSpace.Set(position.x, position.y + position.z, position.z);
-        currentScreenPosition = workSpace; // orthogonal rigidbody's screen position: (x, y + z, z)
-        currentSpacePosition = position; // orthogonal rigidbody's position in space: (x, y, z)
+        currentScreenPosition = workSpace;
+        currentSpacePosition = position;
         entity.entityRigidbody.position = position;
         workSpace.Set(0, position.z, position.z);
         entity.orthogonalRigidbody.transform.localPosition = workSpace;

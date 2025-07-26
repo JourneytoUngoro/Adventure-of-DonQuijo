@@ -35,7 +35,7 @@ public abstract class Movement : CoreComponent
             }
             else
             {
-                workSpace.Set(velocity * entity.entityStats.speedLevel.currentValue, entity.entityRigidbody.velocity.y, 0.0f);
+                workSpace.Set(velocity * entity.entityStats.agility.currentValue, entity.entityRigidbody.velocity.y, 0.0f);
             }
         }
         else
@@ -46,7 +46,7 @@ public abstract class Movement : CoreComponent
             }
             else
             {
-                workSpace.Set(velocity * entity.entityStats.speedLevel.currentValue, entity.entityRigidbody.velocity.y, 0.0f);
+                workSpace.Set(velocity * entity.entityStats.agility.currentValue, entity.entityRigidbody.velocity.y, 0.0f);
             }
         }
         
@@ -56,7 +56,7 @@ public abstract class Movement : CoreComponent
 
     public virtual void SetVelocityY(float velocity)
     {
-        workSpace.Set(entity.entityRigidbody.velocity.x, velocity * entity.entityStats.speedLevel.currentValue, 0.0f);
+        workSpace.Set(entity.entityRigidbody.velocity.x, velocity * entity.entityStats.agility.currentValue, 0.0f);
         entity.entityRigidbody.velocity = workSpace;
         synchronizeValues?.Invoke();
     }

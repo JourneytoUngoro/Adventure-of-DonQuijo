@@ -9,12 +9,12 @@ public class StrongAttackEffect : ItemEffect
     public override void ApplyEffect(Player target)
     {
 
-        float currentPostureLevel = target.stats.postureLevel.currentValue;
+        float currentPostureLevel = target.stats.power.currentValue;
 
         if (currentPostureLevel < (float)maxLevel)
         {
-            target.stats.postureLevel.SetCurrentValue(currentPostureLevel + 1);
-            Debug.Log($"current postureLevel : {target.stats.postureLevel.currentValue}");
+            target.stats.power.SetCurrentValue(currentPostureLevel + 1);
+            Debug.Log($"current postureLevel : {target.stats.power.currentValue}");
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class PlayerDetection : Detection, IDataPersistance
 {
@@ -33,13 +34,12 @@ public class PlayerDetection : Detection, IDataPersistance
 
     public void LoadData(GameData data)
     {
-        /*currentSpacePosition = data.lastPlayerPosition;
-        currentProjectedPosition = currentSpacePosition;
-        currentEntityHeight = currentSpacePosition.z;
-        currentGroundHeight = currentSpacePosition.z;
-        player.transform.position = new Vector3(currentSpacePosition.x, currentSpacePosition.y, 0.0f);
-        player.orthogonalRigidbody.transform.localPosition = new Vector3(0.0f, currentEntityHeight, currentEntityHeight);
-        currentScreenPosition = player.orthogonalRigidbody.transform.position;*/
+        workSpace.Set(data.lastPlayerPosition.x, data.lastPlayerPosition.y + data.lastPlayerPosition.z, data.lastPlayerPosition.z);
+        currentScreenPosition = workSpace;
+        currentSpacePosition = data.lastPlayerPosition;
+        entity.entityRigidbody.position = data.lastPlayerPosition;
+        workSpace.Set(0, data.lastPlayerPosition.z, data.lastPlayerPosition.z);
+        entity.orthogonalRigidbody.transform.localPosition = workSpace;
     }
 
     public void SaveData(GameData data)
