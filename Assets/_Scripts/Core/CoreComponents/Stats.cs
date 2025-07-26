@@ -7,12 +7,12 @@ using UnityEngine;
 
 public abstract class Stats : CoreComponent
 {
+    [field: SerializeField] public StatComponent level { get; protected set; }
     [field: SerializeField] public StatComponent health { get; protected set; }
     [field: SerializeField] public StatComponent posture { get; protected set; }
-    [field: SerializeField] public StatComponent healthLevel { get; protected set; }
-    [field: SerializeField] public StatComponent postureLevel { get; protected set; }
-    [field: SerializeField] public StatComponent speedLevel { get; protected set; }
     [field: SerializeField] public StatComponent durability { get; protected set; }
+    [field: SerializeField] public StatComponent power { get; protected set; }
+    [field: SerializeField] public StatComponent agility { get; protected set; }
     [field: SerializeField] public StatComponent givenDamageMultiplier { get; protected set; }
     [field: SerializeField] public StatComponent takenDamageMultiplier { get; protected set; }
 
@@ -75,13 +75,11 @@ public abstract class Stats : CoreComponent
 
     protected virtual void Start()
     {
-        health.SetMaxValue(healthLevel.graph.incrementPerLevel.Evaluate(healthLevel.currentValue));
-
-        posture.SetMaxValue(posture.graph.accumulationPerLevel.Evaluate(postureLevel.currentValue));
-        posture.SetCurrentValue(posture.graph.accumulationPerLevel.Evaluate(postureLevel.currentValue));
-
-        // Debug.Log($"health max : {health.maxValue}, health : {health.currentValue}, health lv : {healthLevel.currentValue}");
-        // Debug.Log($"posture max : {posture.maxValue}, posture : {posture.currentValue}, posture lv : {postureLevel.currentValue}");
+        health.SetMaxValue(health.graph.accumulationPerLevel.Evaluate(durability.currentValue));
+        health.SetCurrentValue(health.graph.accumulationPerLevel.Evaluate(durability.currentValue));
+        posture.SetMaxValue(posture.graph.accumulationPerLevel.Evaluate(durability.currentValue));
+        posture.SetCurrentValue(posture.graph.accumulationPerLevel.Evaluate(durability.currentValue));
+        durability.OnCurrentValueChange += () => health.SetMaxValue(health.graph.accumulationPerLevel.Evaluate(durability.currentValue), true, true);
     }
 
     protected virtual void Update()

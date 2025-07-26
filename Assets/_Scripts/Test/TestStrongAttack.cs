@@ -14,7 +14,7 @@ public class TestStrongAttack : MonoBehaviour
         DamageComponent damageComponent = (DamageComponent) strongAttack.combatAbilityComponents[0];
 
         // 25 -> 30 -> 36 -> 43.2
-        float postureDamage = damageComponent.postureDamage.accumulationPerLevel.Evaluate(player.stats.postureLevel.currentValue);
-        Debug.Log($"postureDamage lv {player.stats.postureLevel.currentValue} : {postureDamage}");
+        float postureDamage = damageComponent.postureDamage.accumulationPerLevel.Evaluate(player.stats.power.currentValue);
+        Debug.Log($"postureDamage lv {player.stats.power.currentValue} : {postureDamage}");
     }
 }

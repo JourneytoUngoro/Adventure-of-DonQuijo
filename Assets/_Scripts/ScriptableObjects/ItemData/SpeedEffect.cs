@@ -9,12 +9,12 @@ public class SpeedEffect : ItemEffect
     public override void ApplyEffect(Player target)
     {
         // Increases player's max speedLevel by 15%
-        float currentSpeedValue = target.stats.speedLevel.currentValue;
-        float speedAmount = target.stats.speedLevel.currentValue * percentage;
+        float currentSpeedValue = target.stats.agility.currentValue;
+        float speedAmount = target.stats.agility.currentValue * percentage;
 
         // Used up to 3 times; exceeds won't break max value, but max must be adjusted if usage increases.
-        target.stats.speedLevel.IncreaseCurrentValue(speedAmount);
+        target.stats.agility.IncreaseCurrentValue(percentage);
 
-        Debug.Log($"apply speed effect :{currentSpeedValue} + {speedAmount}  = {target.stats.speedLevel.currentValue} ");
+        // Debug.Log($"apply speed effect :{currentSpeedValue} + {speedAmount}  = {target.stats.agility.currentValue} ");
     }
 }

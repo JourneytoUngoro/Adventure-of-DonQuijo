@@ -9,10 +9,12 @@ public class PermanentHealEffect : ItemEffect
     public override void ApplyEffect(Player target)
     {
         float prevHealthMax = target.stats.health.maxValue;
-        float currentHealLevel = target.stats.healthLevel.currentValue ;
+        float currentHealLevel = target.stats.durability.currentValue;
 
-        target.stats.healthLevel.SetCurrentValue(currentHealLevel + 1f);
+        target.stats.health.graph.incrementPerLevel.Evaluate(target.stats.durability.currentValue);
+        target.stats.durability.IncreaseCurrentValue(percentage);
+        // target.stats.durability.SetCurrentValue(currentHealLevel + 1f);
 
-        Debug.Log($"[Permanent Heal Effect] current healthLevel : {target.stats.healthLevel.currentValue}, max health : {prevHealthMax} -> {target.stats.health.maxValue} ");
+        // Debug.Log($"[Permanent Heal Effect] current healthLevel : {target.stats.durability.currentValue}, max health : {prevHealthMax} -> {target.stats.health.maxValue} ");
     }
 }

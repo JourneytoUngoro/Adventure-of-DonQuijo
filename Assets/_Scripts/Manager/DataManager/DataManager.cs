@@ -54,6 +54,11 @@ public class DataManager : MonoBehaviour
     }
 
 
+    private void Start()
+    {
+        InvokeRepeating("SaveGame", 60.0f, 60.0f);
+    }
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;

@@ -15,6 +15,7 @@ public class StatComponent
     public event Action OnCurrentValueMin;
     public event Action OnCurrentValueMax;
     public event Action OnCurrentValueChange;
+    public event Action OnMaxValueChange;
 
     [SerializeField] private bool reverseSlider;
     [SerializeField] private Slider slider;
@@ -77,14 +78,24 @@ public class StatComponent
         }
     }
 
-    public void IncreaseCurrentValue(float amount, bool allowMaxValue = true)
+    public void IncreaseCurrentValue(float amount, bool allowMaxValue = true, bool resetRecovery = false, bool invoke = true)
     {
         if (currentValue < maxValue)
         {
             currentValue += amount;
             currentValue = allowMaxValue ? Mathf.Clamp(currentValue, minValue, maxValue) : Mathf.Clamp(currentValue, minValue, maxValue - epsilon);
             SetSliderValue();
-            OnCurrentValueChange?.Invoke();
+
+            if (invoke)
+            {
+                OnCurrentValueChange?.Invoke();
+            }
+
+            if (resetRecovery)
+            {
+                onRecovery = false;
+                recoveryStartTimer.StartSingleUseTimer();
+            }
 
             if (currentValue == maxValue)
             {
@@ -93,16 +104,24 @@ public class StatComponent
         }
     }
 
-    public void DecreaseCurrentValue(float amount, bool allowMinValue = true)
+    public void DecreaseCurrentValue(float amount, bool allowMinValue = true, bool resetRecovery = true, bool invoke = true)
     {
         if (currentValue > minValue)
         {
-            currentValue -= amount;
+            currentValue -= Mathf.Abs(amount);
             currentValue = allowMinValue ? Mathf.Clamp(currentValue, minValue, maxValue) : Mathf.Clamp(currentValue, minValue + epsilon, maxValue);
             SetSliderValue();
-            OnCurrentValueChange?.Invoke();
-            onRecovery = false;
-            recoveryStartTimer.StartSingleUseTimer();
+            
+            if (invoke)
+            {
+                OnCurrentValueChange?.Invoke();
+            }
+
+            if (resetRecovery)
+            {
+                onRecovery = false;
+                recoveryStartTimer.StartSingleUseTimer();
+            }
 
             if (currentValue == minValue)
             {
@@ -111,12 +130,34 @@ public class StatComponent
         }
     }
 
-    public void SetCurrentValue(float value)
+    public void SetCurrentValue(float value, bool allowExtremeValues = true, bool? resetRecovery = null, bool invoke = true)
     {
-        // Debug.Log($"Set {name} to {value}.");
-        currentValue = Mathf.Clamp(value, minValue, maxValue);
+        currentValue = allowExtremeValues ? Mathf.Clamp(value, minValue, maxValue) : Mathf.Clamp(value, minValue + epsilon, maxValue - epsilon);
         SetSliderValue();
-        OnCurrentValueChange?.Invoke();
+
+        if (invoke)
+        {
+            OnCurrentValueChange?.Invoke();
+        }
+
+        if (resetRecovery.HasValue)
+        {
+            onRecovery = !resetRecovery.Value;
+
+            if (resetRecovery.Value)
+            {
+                recoveryStartTimer.StartSingleUseTimer();
+            }
+        }
+        else
+        {
+            onRecovery = value < currentValue;
+
+            if (!onRecovery)
+            {
+                recoveryStartTimer.StartSingleUseTimer();
+            }
+        }
 
         if (currentValue == maxValue)
         {
@@ -129,24 +170,84 @@ public class StatComponent
         }
     }
 
-    public void SetMaxValue(float value)
+    public void SetMaxValue(float value, bool maxValueChangeInvoke = true, bool influenceCurrentValue = false, bool allowExtremeValues = true, bool? resetRecovery = null, bool currentValueInvoke = true)
     {
+        if (influenceCurrentValue)
+        {
+            float diffValue = value - currentValue;
+
+            if (diffValue < 0)
+            {
+                if (resetRecovery.HasValue)
+                {
+                    DecreaseCurrentValue(diffValue, allowExtremeValues, resetRecovery.Value, currentValueInvoke);
+                }
+                else
+                {
+                    DecreaseCurrentValue(diffValue, allowExtremeValues, true, currentValueInvoke);
+                }
+            }
+            else if (diffValue > 0)
+            {
+                if (resetRecovery.HasValue)
+                {
+                    IncreaseCurrentValue(diffValue, allowExtremeValues, resetRecovery.Value, currentValueInvoke);
+                }
+                else
+                {
+                    IncreaseCurrentValue(diffValue, allowExtremeValues, false, currentValueInvoke);
+                }
+            }
+        }
+
         maxValue = value;
         SetSliderValue();
-        OnCurrentValueChange?.Invoke();
+
+        if (maxValueChangeInvoke)
+        {
+            OnMaxValueChange?.Invoke();
+        }
     }
 
-    public void IncreaseMaxValue(float amount)
+    public void IncreaseMaxValue(float amount, bool maxValueChangeInvoke = true, bool influenceCurrentValue = false, bool allowExtremeValues = true, bool resetRecovery = false, bool currentValueInvoke = true)
     {
         maxValue += amount;
+
+        if (influenceCurrentValue)
+        {
+            IncreaseCurrentValue(amount, allowExtremeValues, resetRecovery, currentValueInvoke);
+        }
+
         SetSliderValue();
+
+        if (maxValueChangeInvoke)
+        {
+            OnMaxValueChange?.Invoke();
+        }
     }
 
-    public void DecreaseMaxValue(float amount)
+    public void DecreaseMaxValue(float amount, bool maxValueChangeInvoke = true, bool influenceCurrentValue = false, bool allowExtremeValues = true, bool resetRecovery = true, bool currentValueInvoke = true)
     {
         maxValue -= amount;
+
+        if (influenceCurrentValue)
+        {
+            DecreaseCurrentValue(amount, allowExtremeValues, resetRecovery, currentValueInvoke);
+        }
+
         Mathf.Clamp(currentValue, 0.0f, maxValue);
+
         SetSliderValue();
+
+        if (maxValueChangeInvoke)
+        {
+            OnMaxValueChange?.Invoke();
+        }
+
+        if (currentValueInvoke && currentValue == maxValue)
+        {
+            OnCurrentValueMax?.Invoke();
+        }
     }
 
     private void SetSliderValue()
