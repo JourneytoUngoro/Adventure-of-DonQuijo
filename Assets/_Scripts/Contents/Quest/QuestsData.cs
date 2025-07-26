@@ -27,7 +27,7 @@ public class QuestsData
     {
         for (int i = 0; i < questDatas.Length; i++)
         {
-            if (questDatas[i].id == id) return questDatas[i];
+            if (questDatas[i] != null && questDatas[i].id == id) return questDatas[i];
         }
 
         return null;

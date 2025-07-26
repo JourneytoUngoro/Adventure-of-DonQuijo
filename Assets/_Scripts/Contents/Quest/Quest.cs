@@ -13,6 +13,7 @@ public class Quest
 
     public Quest(QuestInfoSO questInfo)
     {
+        // When the quest is first created
         this.questInfo = questInfo;
 
         this.state = QuestState.CanStart;

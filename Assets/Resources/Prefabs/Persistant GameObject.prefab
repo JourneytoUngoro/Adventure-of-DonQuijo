@@ -116,7 +116,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 162.5
+  orthographic size: 147
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -468,6 +468,7 @@ Transform:
   - {fileID: 194492454844736950}
   - {fileID: 8814948007939202062}
   - {fileID: 4252026337898171789}
+  - {fileID: 2951834899820185081}
   m_Father: {fileID: 6501863103636223680}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &656315689678926488
@@ -485,6 +486,50 @@ MonoBehaviour:
   scenesToInitialize:
   - m_SceneAsset: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
     m_SceneName: SampleScene
+--- !u!1 &3390278240780751593
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 911824099286248601}
+  - component: {fileID: 2728632726911433994}
+  m_Layer: 0
+  m_Name: QuestManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &911824099286248601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3390278240780751593}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2951834899820185081}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2728632726911433994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3390278240780751593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a916367ce6d7743825984876ee6d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3738732673344722820
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,10 +633,7 @@ MonoBehaviour:
       - m_SceneAsset: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
         m_SceneName: SampleScene
   cinemachineVirtualCamera: {fileID: 3150379449806478827}
-  fadeInOutImage: {fileID: 0}
-  fadeOutTime: 1
-  fadeInTime: 1
-  currentColor: {r: 0, g: 0, b: 0, a: 0}
+  minDuration: 0
   loadingBar: {fileID: 0}
   loadingBarText: {fileID: 0}
   loadingText: []
@@ -639,9 +681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b87f45a7f8cf24ea5f2ce7fb1753e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupPrefab: {fileID: 1203774757604747321, guid: 96ec64f393253fb49a5abb489bd03e8a, type: 3}
-  textInfoPrefab: {fileID: 8397104400056502976, guid: bc934adb9ea1664499fdb887a513fba6, type: 3}
-  imagePrefab: {fileID: -388096200361407989, guid: 54e48e103ea77bc4b95393d6d58fed59, type: 3}
+  isIngame: 0
 --- !u!1 &6449983722859846835
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,6 +801,38 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 0}
   m_ConfineScreenEdges: 1
   m_Damping: 0
+--- !u!1 &6477916318339082308
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2951834899820185081}
+  m_Layer: 0
+  m_Name: Content Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2951834899820185081
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6477916318339082308}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 911824099286248601}
+  m_Father: {fileID: 2446785845364409436}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7489548374160614122
 GameObject:
   m_ObjectHideFlags: 0

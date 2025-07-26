@@ -125,6 +125,7 @@ public class QuestManager : MonoBehaviour, IDataPersistance
 
         questsData = data.questsData;
 
+        // New GameData created
         bool isNew = questsData.questDatas == null || questsData.questCount == 0;
 
         if (isNew)
@@ -139,8 +140,12 @@ public class QuestManager : MonoBehaviour, IDataPersistance
         foreach (Quest quest in questDict.Values)
         {
             QuestData questData = questsData.GetQuestData(quest.questInfo.id);
-            quest.currentProgress = questData.currentProgress;
-            quest.state = questData.state;
+            if (questData != null)
+            {
+                quest.currentProgress = questData.currentProgress;
+                quest.state = questData.state;
+            }
+
         }
     }
 

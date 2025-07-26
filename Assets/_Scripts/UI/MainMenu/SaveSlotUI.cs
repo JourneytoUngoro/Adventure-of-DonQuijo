@@ -68,7 +68,7 @@ public class SaveSlotUI : MonoBehaviour
             }
             else
             {
-                memoryFragment = "0";
+                memoryFragment = "-1"; // TODO : change to 0
             }
             lastPlayTime = data.displayedLastPlayTime;
         }
