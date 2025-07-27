@@ -24,7 +24,7 @@ public enum UIType
 [RequireComponent(typeof(CanvasGroup))]
 public abstract class UIBase : MonoBehaviour
 {
-    public UIType type;
+    [field: SerializeField] public UIType type { get; set; }
 
     [SerializeField, Min(0.0f)] private float fadeTime;
     [SerializeField, Min(0.0f)] private float delayTime;
@@ -62,21 +62,17 @@ public abstract class UIBase : MonoBehaviour
 
         if (showCoroutine != null)
         {
-            // Manager.Instance.uiManager.StopCoroutine(showCoroutine);
             StopCoroutine(showCoroutine);
         }
         
         rectTransform.SetAsLastSibling();
-
-        // showCoroutine = Manager.Instance.uiManager.StartCoroutine(ShowUICoroutine(delayTime));
         showCoroutine = StartCoroutine(ShowUICoroutine(delayTime, onFadeInComplete));
-
         isOpened = true;
     }
 
     private IEnumerator ShowUICoroutine(float delayTime, TweenCallback onFadeInComplete)
     {
-        yield return new WaitForSeconds(delayTime);
+        yield return new WaitForSecondsRealtime(delayTime);
 
         group.blocksRaycasts = true;
         group.DOFade(1, fadeTime).SetUpdate(true).OnComplete(onFadeInComplete);
@@ -84,7 +80,6 @@ public abstract class UIBase : MonoBehaviour
 
     public virtual void HideUI(TweenCallback onFadeOutComplete = null)
     {
-        // Debug.Assert(rectTransform != null, "rectTransform null!");
         rectTransform.SetAsFirstSibling();
 
         group.DOFade(0, fadeTime).SetUpdate(true).OnComplete(onFadeOutComplete);
@@ -101,11 +96,9 @@ public abstract class UIBase : MonoBehaviour
         if (showAndHideCoroutine != null)
         {
             StopCoroutine(showAndHideCoroutine);
-            // Manager.Instance.uiManager.StopCoroutine(showAndHideCoroutine);
         }
 
         rectTransform.SetAsLastSibling();
-        // showAndHideCoroutine = Manager.Instance.uiManager.StartCoroutine(ShowAndHideCoroutine(waitTime));
         showAndHideCoroutine = StartCoroutine(ShowAndHideCoroutine(waitTime, onFadeInComplete, onFadeOutComplete));
     }
 
@@ -164,5 +157,5 @@ public abstract class UIBase : MonoBehaviour
 
     public void SetOnShow(Action onShow) => this.onShow = onShow;
     public void SetOnHide(Action onHide) => this.onHide = onHide;
-
+    public float FadeTime() => fadeTime;
 }

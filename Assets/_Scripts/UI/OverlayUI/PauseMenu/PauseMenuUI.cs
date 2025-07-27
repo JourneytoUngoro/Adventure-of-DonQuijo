@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class PauseMenuUI : MonoBehaviour
 {
+    [SerializeField] private Button temp;
     // Variable names in Scripts            // Object names in Scene Hierarchy
     public Transform buttonsTransform;  // Choice Buttons
 
@@ -37,7 +38,7 @@ public class PauseMenuUI : MonoBehaviour
         continueButton = buttonsTransform.Find("Continue Button").GetComponent<Button>();
         settingPopupButton = buttonsTransform.Find("Setting Popup Button").GetComponent<Button>();
         saveButton = buttonsTransform.Find("Save Button").GetComponent<Button>();
-        mainMenuButton = buttonsTransform.Find("Main Menu Button").GetComponent<Button>();
+        mainMenuButton = temp;// buttonsTransform.Find("Main Menu Button").GetComponent<Button>();
     }
 
     private void RegisterAcivatedEvent()
@@ -103,7 +104,7 @@ public class PauseMenuUI : MonoBehaviour
             guideText = Manager.Instance.uiManager.ShowDynamicTextInfo(
                 new TextInfoData("저장에 실패했습니다."));
         }
-        guideText.SetAnchoredPositioin(0, -400); // bottom of screen
+        guideText.SetAnchoredPosition(0, -400); // bottom of screen
         guideText.ShowAndHideUI(2f);
 
     }
@@ -117,11 +118,9 @@ public class PauseMenuUI : MonoBehaviour
         pauseMenuPopup.HideUI();
 
         // Scene Transition
-        Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("mainMenu"), true, true);
+        Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("MainMenu"), true, true);
 
         guidePopup = null;
-
-        Debug.Log("메인 메뉴로 돌아가기 시도");
     }
 
     private void CancelReturnToMainMenu()

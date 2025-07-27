@@ -48,6 +48,10 @@ public class DataManager : MonoBehaviour
         bool autoSaveValue = PlayerPrefs.GetInt(EnvironmentController.AUTO_SAVE, 1) == 1;
         SetAutoSaveDisable(!autoSaveValue);
     }
+    private void OnDestroy()
+    {
+        Debug.Log($"DataManager : Destroyed at scene: {SceneManager.GetActiveScene().name}");
+    }
 
     private void Start()
     {
@@ -76,7 +80,6 @@ public class DataManager : MonoBehaviour
 
     public void ChangeSelectedProfileId(string newProfileId)
     {
-        Debug.Log("DataManager.ChangeSelectedProfileId() excuted!");
         this.selectedProfileId = newProfileId;
         LoadGame();
     }
@@ -121,6 +124,7 @@ public class DataManager : MonoBehaviour
 
         foreach (IDataPersistance dataPersistanceObject in dataPersistanceObjects)
         {
+            Debug.Log("Save Data of " + dataPersistanceObject.ToString());
             dataPersistanceObject.SaveData(gameData);
         }
 

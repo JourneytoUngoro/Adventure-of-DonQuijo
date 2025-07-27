@@ -97,54 +97,70 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
     }
 
     // called on scene transition
-    private IEnumerator FadeOut(bool useLoadingBar, string loadingScene)
+    private IEnumerator FadeOut(bool useLoadingBar, string targetScene)
     {
         Manager.Instance.gameManager.PauseGame();
 
-        if (Manager.Instance.player?.gameObject.activeSelf == true)
+        if (Player.Instance.gameObject.activeSelf)
         {
             Manager.Instance.inputHandler.playerInput.currentActionMap.Disable();
         }
 
         ImageUI fadeInOutImage = Manager.Instance.uiManager.GetUI<ImageUI>(UIType.FadeImage);
 
+        fadeInOutImage.ShowUI(null);
+
+        yield return new WaitForSecondsRealtime(fadeInOutImage.FadeTime());
+
+        if (!IsLoadingScene(targetScene))
+        {
+            Debug.Log("Scene was not loaded. Start Loading the target scene: " + targetScene);
+            currentAsyncOperationDictionary.Add(targetScene, SceneManager.LoadSceneAsync(targetScene, LoadSceneMode.Additive));
+        }
+
         if (useLoadingBar)
         {
-            fadeInOutImage.ShowUI(() => LoadingBar(loadingScene));
-        }
-        else
-        {
-            fadeInOutImage.ShowUI(null);
+            LoadingBar(targetScene);
         }
 
         yield return new WaitForSecondsRealtime(minDuration);
-        yield return new WaitUntil(() => SceneManager.GetSceneByName(loadingScene).isLoaded);
+
+        loadingBar.gameObject.SetActive(false);
+
+        yield return new WaitUntil(() => SceneManager.GetSceneByName(targetScene).isLoaded);
 
         fadeInOutImage.HideUI(() => Manager.Instance.gameManager.ResumeGame());
     }
 
     public async void LoadingBar(string loadingScene)
     {
+        if (loadingBar == null)
+        {
+            Debug.Log("No Loading Bar exists. Return the function.");
+            return;
+        }
+
         AsyncOperation asyncOperation;
 
+        loadingBar.value = 0.0f;
         loadingBar.gameObject.SetActive(true);
         loadingBarText.text = "Game Tips | " + loadingText.GetRandom();
 
         if (!currentAsyncOperationDictionary.TryGetValue(loadingScene, out asyncOperation))
         {
-            Debug.Log($"Can't find async operation of {loadingScene}. Inactivate loading bar.");
+            Debug.Log($"Can't find async operation of {loadingScene}.");
             currentProgress = 1.0f;
         }
         else
         {
             currentProgress = 0.0f;
-
-            do
-            {
-                currentProgress = asyncOperation.progress;
-                await Task.Delay(100);
-            } while (asyncOperation.progress < 1.0f);
         }
+
+        do
+        {
+            currentProgress = asyncOperation.progress;
+            await Task.Delay(100);
+        } while (loadingBar.value < 1.0f);
     }
 
     public void SceneTransition(SceneField targetScene, DoorTriggerInteraction.DoorToSpawnAt doorToSpawnAt, bool useFadeInOut = false, bool useLoadingBar = false)
@@ -201,12 +217,6 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
 
     private IEnumerator SceneTransitionCoroutine(SceneField targetScene, bool useFadeInOut = false, bool useLoadingBar = false)
     {
-        if (!IsLoadingScene(targetScene))
-        {
-            Debug.Log("Scene was not loaded. Start Loading the target scene: " + targetScene);
-            currentAsyncOperationDictionary.Add(targetScene, SceneManager.LoadSceneAsync(targetScene, LoadSceneMode.Additive));
-        }
-
         if (useFadeInOut)
         {
             if (fadeInOutCoroutine != null)
@@ -214,6 +224,11 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
                 StopCoroutine(fadeInOutCoroutine);
             }
             yield return StartCoroutine(FadeOut(useLoadingBar, targetScene));
+        }
+        else if (!IsLoadingScene(targetScene))
+        {
+            Debug.Log("Scene was not loaded. Start Loading the target scene: " + targetScene);
+            currentAsyncOperationDictionary.Add(targetScene, SceneManager.LoadSceneAsync(targetScene, LoadSceneMode.Additive));
         }
 
         if (!SceneManager.GetSceneByName(targetScene.SceneName).isLoaded)
@@ -319,7 +334,7 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
             {
                 Collider2D doorCollider = doorTriggerInteraction.gameObject.GetComponent<Collider2D>();
                 Vector2 groundPosition = new Vector2(doorCollider.bounds.center.x, doorCollider.bounds.min.y);
-                Manager.Instance.player.movement.SetPosition(groundPosition);
+                Player.Instance.movement.SetPosition(groundPosition);
                 break;
             }
         }
@@ -343,13 +358,13 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
             default: break;
         }
 
-        Manager.Instance.player.movement.SetPosition(targetPosition);
+        Player.Instance.movement.SetPosition(targetPosition);
     }
 
     private void ChangePosition(Transform destinationTranfrom)
     {
         if (destinationTranfrom == null) return;
-        Manager.Instance.player.movement.SetPosition(destinationTranfrom.position);
+        Player.Instance.movement.SetPosition(destinationTranfrom.position);
     }
 
     private void OnActiveSceneChanged(Scene current, Scene next)
@@ -360,11 +375,16 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
         MoveByDirection(direction);
         ChangePosition(destinationTransform);
         
-        if (Manager.Instance.player != null)
+        if (next.name != "MainMenu")
         {
-            cinemachineVirtualCamera.Follow = Manager.Instance.player.transform;
-            cinemachineVirtualCamera.ForceCameraPosition(Manager.Instance.player.transform.position + Vector3.up * 25.0f, Quaternion.identity);
+            Player.Instance.gameObject.SetActive(true);
+            cinemachineVirtualCamera.Follow = Player.Instance.transform;
+            cinemachineVirtualCamera.ForceCameraPosition(Player.Instance.transform.position + Vector3.up * 25.0f, Quaternion.identity);
             cinemachineVirtualCamera.GetComponent<CinemachineConfiner>().m_BoundingShape2D = next.GetRootGameObjects().Where(gameObject => gameObject.name.Equals("Camera Boundary")).FirstOrDefault()?.GetComponent<PolygonCollider2D>();
+        }
+        else
+        {
+            Player.Instance.gameObject.SetActive(false);
         }
 
         Manager.Instance.dataManager.SaveGame();

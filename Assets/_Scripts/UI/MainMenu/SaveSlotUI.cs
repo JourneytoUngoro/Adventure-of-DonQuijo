@@ -93,6 +93,7 @@ public class SaveSlotUI : MonoBehaviour
 
     void OnClickDeleteButton()
     {
+        Debug.Log("OnClickDeleteButtonSaveSlot");
         loadGameUI.OnClickDeleteButton(slotId);
     }
 

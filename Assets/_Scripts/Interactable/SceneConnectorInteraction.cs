@@ -19,13 +19,13 @@ public class SceneConnectorInteraction : InteractBase
             case Direction.None:
                 return;
             case Direction.Up:
-                if (Manager.Instance.player.movement.currentVelocity.y < 0) return; break;
+                if (Player.Instance.movement.currentVelocity.y < 0) return; break;
             case Direction.Down:
-                if (Manager.Instance.player.movement.currentVelocity.y > 0) return; break;
+                if (Player.Instance.movement.currentVelocity.y > 0) return; break;
             case Direction.Left:
-                if (Manager.Instance.player.movement.currentVelocity.x > 0) return; break;
+                if (Player.Instance.movement.currentVelocity.x > 0) return; break;
             case Direction.Right:
-                if (Manager.Instance.player.movement.currentVelocity.x < 0) return; break;
+                if (Player.Instance.movement.currentVelocity.x < 0) return; break;
             case Direction.All:
                 break;
             default: return;
