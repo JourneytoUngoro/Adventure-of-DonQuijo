@@ -64,9 +64,11 @@ public class LoadGameUI : MonoBehaviour
 
     private bool CheckPlayOpeningWithNewSlot()
     {
-        bool play = PlayerPrefs.GetInt(EnvironmentController.CUTSCENE_SKIP, 0) == 0 ? false : true;
+        bool skip = PlayerPrefs.GetInt(EnvironmentController.CUTSCENE_SKIP, 0) == 0 ? false : true;
 
-        return play;
+        Debug.Log($"cutscene skip is {skip}");
+
+        return !skip;
     }
 
     void OnClickCancelButton()
@@ -159,11 +161,6 @@ public class LoadGameUI : MonoBehaviour
 
     IEnumerator LoadCurrentScene()
     {
-        // ImageUI fadeUI = Manager.Instance.uiManager.GetUI(UIType.FadeImage).GetComponent<ImageUI>();
-        // Debug.Assert(fadeUI != null, "fade image is null! ");
-        // fadeUI.ShowAndHideUI(3f);
-
-        // yield return new WaitForSeconds(2.5f);
         yield return null;
 
         // TODO : Save-Load 시 저장된 씬 불러와야 한다 
@@ -177,7 +174,7 @@ public class LoadGameUI : MonoBehaviour
         else
         {
             Debug.Log("Don't Play Opening Cutscene");
-            Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("SampleScene"), true, true);
+            Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("SampleScene"), true, false);
             Manager.Instance.soundManager.PlayBGM("battleBGM");
         }
     }

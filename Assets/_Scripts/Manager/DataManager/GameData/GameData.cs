@@ -82,9 +82,9 @@ public class GameData
         this.currentHealthLevel = 1.0f;
         this.currentPosture = 25.0f;
         this.currentExperience = 0.0f;
-        this.moveSpeed = 1.0f; // Stats.speedLevel
+        this.moveSpeed = 1.0f; // Stats.agility
         this.postureLevel = 1.0f;
-        this.lastPlayerPosition = Vector3.zero;
+        this.lastPlayerPosition = new Vector3(-500, -200, 0);
         this.currentScene = "SampleScene";
         // mapOpened = new Dictionary<string, bool>();
 

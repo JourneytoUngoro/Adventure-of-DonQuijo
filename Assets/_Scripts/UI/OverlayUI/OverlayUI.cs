@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OverlayUI : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class OverlayUI : MonoBehaviour
         #region singleton
         if (Instance != null)
         {
-            Destroy(Instance);
+            Destroy(gameObject);
             return;
         }
 

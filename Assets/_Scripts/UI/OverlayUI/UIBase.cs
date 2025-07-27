@@ -122,8 +122,6 @@ public abstract class UIBase : MonoBehaviour
         ReturnToPool();
         group.blocksRaycasts = false;
         isOpened = false;
-
-        Debug.Log("실행은 된다");
     }
 
     public virtual void ShowAndHideUI(Func<bool> waitUntilCondition, TweenCallback onFadeInComplete = null, TweenCallback onFadeOutComplete = null)

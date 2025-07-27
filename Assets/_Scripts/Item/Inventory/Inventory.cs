@@ -13,8 +13,10 @@ public class Inventory : MonoBehaviour, IDataPersistance
 
     public const int InventorySlotsCount = 3; // 세 개로 고정 
 
-    private void Awake()
+    public void Initialize() // executed by InventoryManager.cs
     {
+        Debug.Log($"Inventory.cs Initialize() executed");
+
         view = GetComponent<InventoryView>();
 
         // view, startingItems를 이용하여 InventoryModel을 생성한 뒤,
@@ -27,7 +29,6 @@ public class Inventory : MonoBehaviour, IDataPersistance
 
     public void LoadData(GameData data)
     {
-        // Save-Load System에서 호출된다
         controller.LoadItemUsageData(data.itemUsageData);
         controller.LoadInventoryData(data.inventoryData);
      }

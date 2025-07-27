@@ -238,4 +238,9 @@ public class PlayerInputHandler : MonoBehaviour
 
     public bool IsUIControlEnabled() => controls.UIControl.enabled;
 
+    private void OnDestroy()
+    {
+        // Prevents memory leaks and performance issues caused by leaving actions enabled.
+        controls.Disable();
+    }
 }

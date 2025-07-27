@@ -30,7 +30,6 @@ public class Manager : MonoBehaviour
         else if (Instance != this)
         {
             Destroy(gameObject);
-            return;
         }
 
         DontDestroyOnLoad(gameObject);
@@ -67,10 +66,9 @@ public class Manager : MonoBehaviour
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+
         if (IsInitializeScene(scene.name))
         {
-            Debug.Log($"{scene.name}");
-
             FindPlayer();
 
             // itemManager.SetupInGameScene();

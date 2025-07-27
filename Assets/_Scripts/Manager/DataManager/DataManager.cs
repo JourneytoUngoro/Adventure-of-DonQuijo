@@ -6,6 +6,7 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using System;
 using Sirenix.OdinInspector;
+using UnityEngine.Rendering;
 
 public class DataManager : MonoBehaviour
 {
@@ -35,7 +36,6 @@ public class DataManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("DataManager.Awake() executed!");
         if (disableAutoSaving)
         {
             Debug.LogWarning("Auto saving is currently disabled. No auto save supported when you leave the game.");
@@ -48,11 +48,6 @@ public class DataManager : MonoBehaviour
         bool autoSaveValue = PlayerPrefs.GetInt(EnvironmentController.AUTO_SAVE, 1) == 1;
         SetAutoSaveDisable(!autoSaveValue);
     }
-    private void OnDestroy()
-    {
-        Debug.Log($"DataManager : Destroyed at scene: {SceneManager.GetActiveScene().name}");
-    }
-
 
     private void Start()
     {
@@ -95,7 +90,6 @@ public class DataManager : MonoBehaviour
 
     private void InitializeSelectedProfileId()
     {
-        Debug.Log("DataManager.InitializeSelectedProfileId() excuted!");
         this.selectedProfileId = dataHandler.GetMostRecentlyUpdatedProfileId();
 
         if (overrideSelectedProfileId)
@@ -146,8 +140,6 @@ public class DataManager : MonoBehaviour
         }
 
         this.gameData = dataHandler.Load(selectedProfileId);
-
-        Debug.Log($"selected profile id : {selectedProfileId}");
 
         if (this.gameData == null && initializeDataIfNull)
         {
@@ -204,8 +196,6 @@ public class DataManager : MonoBehaviour
     public void SetAutoSaveDisable(bool disable)
     {
         disableAutoSaving = disable;
-        Debug.Log(disableAutoSaving ? "disable auto save" : "enable auto save");
-
 
         if (AutoSaveCoroutine != null)
         {

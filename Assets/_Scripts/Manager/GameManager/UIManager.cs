@@ -166,7 +166,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            if (isIngame)
+            if (IsIngame())
             {
                 // InGame -> Pause Popup Menu
                 startingUIDictionary[UIType.pausePopup].ShowUI();
@@ -178,6 +178,8 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+
+    public bool IsIngame() => !SceneManager.GetActiveScene().name.Equals("MainMenu");
 
     public void IsOpenedPopup()
     {

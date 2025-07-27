@@ -113,6 +113,9 @@ public class QuestManager : MonoBehaviour, IDataPersistance
 
     private void OnApplicationQuit()
     {
+        // Start and Quit in MainMenu scene
+        if (questDict == null) return;
+
         foreach (Quest quest in questDict.Values)
         {
             SaveQuest(quest);

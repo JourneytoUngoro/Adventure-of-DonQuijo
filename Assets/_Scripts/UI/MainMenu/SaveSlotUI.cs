@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class SaveSlotUI : MonoBehaviour
@@ -19,6 +14,7 @@ public class SaveSlotUI : MonoBehaviour
     [HideInInspector] public Button deleteButton;
     [HideInInspector] public TextMeshProUGUI hpTMP;             // HP TMP 
     [HideInInspector] public TextMeshProUGUI mfTMP;             // MF TMP
+    [HideInInspector] public Image mfImage;                           // MF Image
     [HideInInspector] public TextMeshProUGUI playTimeTMP;      // PlayTime TMP 
     [HideInInspector] public TextMeshProUGUI emptySlotTMP;    // Empty TMP
     private Transform infoTmps;                                          // Slot Info Tmps
@@ -37,6 +33,7 @@ public class SaveSlotUI : MonoBehaviour
 
         hpTMP = infoTmps.Find("HP TMP").GetComponent<TextMeshProUGUI>();
         mfTMP = infoTmps.Find("MF TMP").GetComponent<TextMeshProUGUI>();
+        mfImage = mfTMP.transform.Find("MF Image").GetComponent<Image>();
         playTimeTMP = infoTmps.Find("PlayTime TMP").GetComponent<TextMeshProUGUI>();
         emptySlotTMP = infoTmps.Find("Empty TMP").GetComponent<TextMeshProUGUI>();
 
@@ -60,17 +57,10 @@ public class SaveSlotUI : MonoBehaviour
         {
             isNull = false;
             playerHP = data.currentHealth.ToString();
-            memoryFragment = "수정해";// data.questsData.questDatas[0].currentProgress.ToString(); 
-
-            if (data.questsData.questCount > 0)
-            {
-                memoryFragment = data.questsData.GetQuestData("collectMemoryFragment").currentProgress.ToString();
-            }
-            else
-            {
-                memoryFragment = "-1"; // TODO : change to 0
-            }
             lastPlayTime = data.displayedLastPlayTime;
+
+            if (data.questsData.questCount > 0) { memoryFragment = data.questsData.GetQuestData("collectMemoryFragment").currentProgress.ToString(); }
+            else { memoryFragment = "0"; }
         }
         else
         {
@@ -86,7 +76,8 @@ public class SaveSlotUI : MonoBehaviour
         {
             saveSlotButton.enabled = true;
             hpTMP.text = $"HP : {playerHP}";
-            mfTMP.text = $"MF : {memoryFragment}";
+            mfTMP.text = $"x {memoryFragment}";
+            mfImage.gameObject.SetActive(true);
             playTimeTMP.text = lastPlayTime;
             emptySlotTMP.text = string.Empty;
         }
@@ -94,6 +85,7 @@ public class SaveSlotUI : MonoBehaviour
         {
             hpTMP.text = string.Empty;
             mfTMP.text = string.Empty;
+            mfImage.gameObject.SetActive(false);
             playTimeTMP.text = string.Empty;
             emptySlotTMP.text = "빈 슬롯";
         }

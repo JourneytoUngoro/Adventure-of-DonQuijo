@@ -1,11 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System;
-using System.Threading.Tasks;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class InventoryView : MonoBehaviour
 {
@@ -16,7 +17,8 @@ public class InventoryView : MonoBehaviour
     private Transform canvasTransform;
     private Transform originalParentTransform;
 
-    public PopupUI guidePopup;
+    [Tooltip("Check if the player want to drop item")]
+    public PopupUI guidePopup; // Ask the player if they want to discard the item by dragging it
 
     private TaskCompletionSource<bool> abandonDecision;
 
@@ -33,24 +35,27 @@ public class InventoryView : MonoBehaviour
 
     private void OnEnable()
     {
+        // Input must be enabled for event registration; restore previous state after setup
         bool enabled = Manager.Instance.inputHandler.IsUIControlEnabled();
         Manager.Instance.inputHandler.SetUIControlEnabled(true);
-        Manager.Instance.inputHandler.controls.UIControl.Confirm.performed += ctx => OnClickGuidePopupConfrimBtn();
-        Manager.Instance.inputHandler.controls.UIControl.Cancel.performed += ctx => OnClickGuidePopupConfrimBtn();
+        Manager.Instance.inputHandler.controls.UIControl.Confirm.performed += ctx => OnClickGuidePopupConfrimBtn(); // Confirm - Z key
+        Manager.Instance.inputHandler.controls.UIControl.Cancel.performed += ctx => OnClickGuidePopupConfrimBtn(); // Cancel - X key
         Manager.Instance.inputHandler.SetUIControlEnabled(enabled);
     }
 
     private void OnDisable()
     {
+        // Input must be enabled for event registration; restore previous state after setup
         bool enabled = Manager.Instance.inputHandler.IsUIControlEnabled();
         Manager.Instance.inputHandler.SetUIControlEnabled(true);
-        Manager.Instance.inputHandler.controls.UIControl.Confirm.performed -= ctx => OnClickGuidePopupConfrimBtn();
-        Manager.Instance.inputHandler.controls.UIControl.Cancel.performed -= ctx => OnClickGuidePopupConfrimBtn();
+        Manager.Instance.inputHandler.controls.UIControl.Confirm.performed -= ctx => OnClickGuidePopupConfrimBtn(); // Confirm - Z key
+        Manager.Instance.inputHandler.controls.UIControl.Cancel.performed -= ctx => OnClickGuidePopupConfrimBtn(); // Cancel - X key
         Manager.Instance.inputHandler.SetUIControlEnabled(enabled);
     }
 
     public IEnumerator InitializeView()
     {
+        // Coroutine used to delay UI initialization by one frame
         inventory = gameObject;
         itemSlots = gameObject.GetComponentsInChildren<ItemSlot>();
         coinTMP = transform.parent.Find("Coin Inventory").GetComponentInChildren<TextMeshProUGUI>();
