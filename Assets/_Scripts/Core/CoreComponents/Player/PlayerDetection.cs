@@ -34,6 +34,7 @@ public class PlayerDetection : Detection, IDataPersistance
 
     public void LoadData(GameData data)
     {
+        Debug.Log("Position Data Loaded: " + data.lastPlayerPosition);
         workSpace.Set(data.lastPlayerPosition.x, data.lastPlayerPosition.y + data.lastPlayerPosition.z, data.lastPlayerPosition.z);
         currentScreenPosition = workSpace;
         currentSpacePosition = data.lastPlayerPosition;
@@ -45,5 +46,6 @@ public class PlayerDetection : Detection, IDataPersistance
     public void SaveData(GameData data)
     {
         data.lastPlayerPosition = lastGroundedPosition;
+        Debug.Log("Position Data Saved: " + data.lastPlayerPosition);
     }
 }

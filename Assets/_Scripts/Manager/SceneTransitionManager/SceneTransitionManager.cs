@@ -97,7 +97,7 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
     }
 
     // called on scene transition
-    private IEnumerator FadeOut(bool useLoadingBar, string loadingScene)
+    private IEnumerator FadeOut(bool useLoadingBar, string targetScene)
     {
         Manager.Instance.gameManager.PauseGame();
 
@@ -108,43 +108,59 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
 
         ImageUI fadeInOutImage = Manager.Instance.uiManager.GetUI<ImageUI>(UIType.FadeImage);
 
+        fadeInOutImage.ShowUI(null);
+
+        yield return new WaitForSecondsRealtime(fadeInOutImage.FadeTime());
+
+        if (!IsLoadingScene(targetScene))
+        {
+            Debug.Log("Scene was not loaded. Start Loading the target scene: " + targetScene);
+            currentAsyncOperationDictionary.Add(targetScene, SceneManager.LoadSceneAsync(targetScene, LoadSceneMode.Additive));
+        }
+
         if (useLoadingBar)
         {
-            fadeInOutImage.ShowUI(() => LoadingBar(loadingScene));
-        }
-        else
-        {
-            fadeInOutImage.ShowUI(null);
+            LoadingBar(targetScene);
         }
 
         yield return new WaitForSecondsRealtime(minDuration);
-        yield return new WaitUntil(() => SceneManager.GetSceneByName(loadingScene).isLoaded);
+
+        loadingBar.gameObject.SetActive(false);
+
+        yield return new WaitUntil(() => SceneManager.GetSceneByName(targetScene).isLoaded);
 
         fadeInOutImage.HideUI(() => Manager.Instance.gameManager.ResumeGame());
     }
 
     public async void LoadingBar(string loadingScene)
     {
+        if (loadingBar == null)
+        {
+            Debug.Log("No Loading Bar exists. Return the function.");
+            return;
+        }
+
         AsyncOperation asyncOperation;
 
+        loadingBar.value = 0.0f;
         loadingBar.gameObject.SetActive(true);
         loadingBarText.text = "Game Tips | " + loadingText.GetRandom();
 
         if (!currentAsyncOperationDictionary.TryGetValue(loadingScene, out asyncOperation))
         {
-            Debug.Log($"Can't find async operation of {loadingScene}. Inactivate loading bar.");
+            Debug.Log($"Can't find async operation of {loadingScene}.");
             currentProgress = 1.0f;
         }
         else
         {
             currentProgress = 0.0f;
-
-            do
-            {
-                currentProgress = asyncOperation.progress;
-                await Task.Delay(100);
-            } while (asyncOperation.progress < 1.0f);
         }
+
+        do
+        {
+            currentProgress = asyncOperation.progress;
+            await Task.Delay(100);
+        } while (loadingBar.value < 1.0f);
     }
 
     public void SceneTransition(SceneField targetScene, DoorTriggerInteraction.DoorToSpawnAt doorToSpawnAt, bool useFadeInOut = false, bool useLoadingBar = false)
@@ -201,12 +217,6 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
 
     private IEnumerator SceneTransitionCoroutine(SceneField targetScene, bool useFadeInOut = false, bool useLoadingBar = false)
     {
-        if (!IsLoadingScene(targetScene))
-        {
-            Debug.Log("Scene was not loaded. Start Loading the target scene: " + targetScene);
-            currentAsyncOperationDictionary.Add(targetScene, SceneManager.LoadSceneAsync(targetScene, LoadSceneMode.Additive));
-        }
-
         if (useFadeInOut)
         {
             if (fadeInOutCoroutine != null)
@@ -214,6 +224,11 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
                 StopCoroutine(fadeInOutCoroutine);
             }
             yield return StartCoroutine(FadeOut(useLoadingBar, targetScene));
+        }
+        else if (!IsLoadingScene(targetScene))
+        {
+            Debug.Log("Scene was not loaded. Start Loading the target scene: " + targetScene);
+            currentAsyncOperationDictionary.Add(targetScene, SceneManager.LoadSceneAsync(targetScene, LoadSceneMode.Additive));
         }
 
         if (!SceneManager.GetSceneByName(targetScene.SceneName).isLoaded)

@@ -3610,7 +3610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f77176332ec6843a868163da6d2918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  <type>k__BackingField: 0
   fadeTime: 0
   delayTime: 0
   <BlockClick>k__BackingField: 0
@@ -3915,7 +3915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f77176332ec6843a868163da6d2918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  <type>k__BackingField: 0
   fadeTime: 0
   delayTime: 0
   <BlockClick>k__BackingField: 0
@@ -4011,7 +4011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f77176332ec6843a868163da6d2918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  <type>k__BackingField: 0
   fadeTime: 0.1
   delayTime: 0
   <BlockClick>k__BackingField: 0
@@ -4287,7 +4287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f77176332ec6843a868163da6d2918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  <type>k__BackingField: 0
   fadeTime: 0.1
   delayTime: 0
   <BlockClick>k__BackingField: 0
@@ -4527,6 +4527,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2616097834506747187, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
+      propertyPath: <type>k__BackingField
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3635683808923792222, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4550,6 +4554,10 @@ PrefabInstance:
     - target: {fileID: 3763481312891406072, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
       propertyPath: m_Value
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4622170247100401842, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
+      propertyPath: <type>k__BackingField
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4681542637279814965, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
       propertyPath: temp

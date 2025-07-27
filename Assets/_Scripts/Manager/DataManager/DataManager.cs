@@ -123,6 +123,7 @@ public class DataManager : MonoBehaviour
 
         foreach (IDataPersistance dataPersistanceObject in dataPersistanceObjects)
         {
+            Debug.Log("Save Data of " + dataPersistanceObject.ToString());
             dataPersistanceObject.SaveData(gameData);
         }
 

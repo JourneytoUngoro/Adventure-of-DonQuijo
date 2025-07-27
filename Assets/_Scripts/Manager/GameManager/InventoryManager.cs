@@ -16,12 +16,12 @@ public class InventoryManager : MonoBehaviour
     private void Awake()
     {
         // this method must be excuted in INGAME
-        if (SceneManager.GetActiveScene().name == "SampleScene")
+        /*if (SceneManager.GetActiveScene().name == "SampleScene")
         {
             SetupInGameScene();
         }
-        
-        SetupInGameScene();
+
+        SetupInGameScene();*/
     }
 
     public void SetupInGameScene()

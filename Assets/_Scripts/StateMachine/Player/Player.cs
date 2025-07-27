@@ -119,4 +119,14 @@ public class Player : Entity
 
         playerStateMachine.Initialize(idleState);
     }
+
+    private void OnEnable()
+    {
+        Manager.Instance.inputHandler.playerInput.currentActionMap.Enable();
+    }
+
+    private void OnDisable()
+    {
+        Manager.Instance.inputHandler.playerInput.currentActionMap.Disable();
+    }
 }

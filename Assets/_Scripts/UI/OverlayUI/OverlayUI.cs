@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OverlayUI : MonoBehaviour
 {
-    public static OverlayUI Instance {  get; private set; }
+    public static OverlayUI Instance { get; private set; }
 
     private void Awake()
     {
@@ -14,8 +14,10 @@ public class OverlayUI : MonoBehaviour
             Destroy(Instance);
             return;
         }
-
-        Instance = this;
+        else
+        {
+            Instance = this;
+        }
         DontDestroyOnLoad(Instance);
         #endregion
 
