@@ -39,7 +39,7 @@ public class VendingMachineController : InteractBase
         if (textUI == null)
         {
             textUI = Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData("Z를 눌러 상호작용하세요."));
-            textUI.SetAnchoredPositioin(0, -400);
+            textUI.SetAnchoredPosition(0, -400);
             textUI.ShowUI();
         }
         // Enable Outline or Interaction Image

@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class Player : Entity
 {
+    public static Player Instance { get; private set; }
+
     #region State Variables
     public PlayerStateMachine playerStateMachine { get; private set; }
 
@@ -47,6 +49,26 @@ public class Player : Entity
     #region Other variables
     public List<InteractBase> interactableGameObjects { get; private set; } = new List<InteractBase>();
     #endregion
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        #region Singleton
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+        gameObject.SetActive(false);
+        #endregion
+    }
 
     protected override void Start()
     {

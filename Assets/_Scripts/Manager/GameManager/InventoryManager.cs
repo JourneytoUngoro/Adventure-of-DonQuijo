@@ -20,7 +20,8 @@ public class InventoryManager : MonoBehaviour
         {
             SetupInGameScene();
         }
-         SetupInGameScene();
+        
+        SetupInGameScene();
     }
 
     public void SetupInGameScene()

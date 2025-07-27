@@ -101,7 +101,7 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
     {
         Manager.Instance.gameManager.PauseGame();
 
-        if (Manager.Instance.player?.gameObject.activeSelf == true)
+        if (Player.Instance.gameObject.activeSelf)
         {
             Manager.Instance.inputHandler.playerInput.currentActionMap.Disable();
         }
@@ -319,7 +319,7 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
             {
                 Collider2D doorCollider = doorTriggerInteraction.gameObject.GetComponent<Collider2D>();
                 Vector2 groundPosition = new Vector2(doorCollider.bounds.center.x, doorCollider.bounds.min.y);
-                Manager.Instance.player.movement.SetPosition(groundPosition);
+                Player.Instance.movement.SetPosition(groundPosition);
                 break;
             }
         }
@@ -343,13 +343,13 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
             default: break;
         }
 
-        Manager.Instance.player.movement.SetPosition(targetPosition);
+        Player.Instance.movement.SetPosition(targetPosition);
     }
 
     private void ChangePosition(Transform destinationTranfrom)
     {
         if (destinationTranfrom == null) return;
-        Manager.Instance.player.movement.SetPosition(destinationTranfrom.position);
+        Player.Instance.movement.SetPosition(destinationTranfrom.position);
     }
 
     private void OnActiveSceneChanged(Scene current, Scene next)
@@ -360,11 +360,16 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
         MoveByDirection(direction);
         ChangePosition(destinationTransform);
         
-        if (Manager.Instance.player != null)
+        if (next.name != "MainMenu")
         {
-            cinemachineVirtualCamera.Follow = Manager.Instance.player.transform;
-            cinemachineVirtualCamera.ForceCameraPosition(Manager.Instance.player.transform.position + Vector3.up * 25.0f, Quaternion.identity);
+            Player.Instance.gameObject.SetActive(true);
+            cinemachineVirtualCamera.Follow = Player.Instance.transform;
+            cinemachineVirtualCamera.ForceCameraPosition(Player.Instance.transform.position + Vector3.up * 25.0f, Quaternion.identity);
             cinemachineVirtualCamera.GetComponent<CinemachineConfiner>().m_BoundingShape2D = next.GetRootGameObjects().Where(gameObject => gameObject.name.Equals("Camera Boundary")).FirstOrDefault()?.GetComponent<PolygonCollider2D>();
+        }
+        else
+        {
+            Player.Instance.gameObject.SetActive(false);
         }
 
         Manager.Instance.dataManager.SaveGame();

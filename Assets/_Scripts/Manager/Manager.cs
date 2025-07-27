@@ -49,45 +49,4 @@ public class Manager : MonoBehaviour
         stageManager = GetComponentInChildren<StageManager>();
         sceneTransitionManager = GetComponentInChildren<SceneTransitionManager>();
     }
-
-    #region Test
-
-    [SerializeField] private List<SceneField> scenesToInitialize;
-    public Player player { get; private set; }
-
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (IsInitializeScene(scene.name))
-        {
-            Debug.Log($"{scene.name}");
-
-            FindPlayer();
-
-            // itemManager.SetupInGameScene();
-        }
-    }
-
-    bool IsInitializeScene(string nextScene)
-    {
-        return scenesToInitialize.Any(SceneField => SceneField ==  nextScene);
-    }
-
-    public void FindPlayer()
-    {
-        player = GameObject.Find("Player").GetComponent<Player>();
-        Debug.Log(player == null ? "can't find player" : "found player");
-        Debug.Assert(player != null, $"can't find player on the {SceneManager.GetActiveScene().name}!");
-    }
-    #endregion
-
 }
