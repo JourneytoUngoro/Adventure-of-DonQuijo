@@ -143,7 +143,6 @@ public class LoadGameUI : MonoBehaviour
         guidePopup.SetDynamicPopupEvent(DeleteGameWithSlot, () => guidePopup.HideUI());
     }
 
-
     public void LoadGameWithSlot()
     {
         if (nowProfileId != string.Empty)
@@ -154,30 +153,42 @@ public class LoadGameUI : MonoBehaviour
 
             nowProfileId = string.Empty;
 
-            StartCoroutine(LoadCurrentScene());
+            if (playOpening)
+            {
+                // TODO : cutscene01 재생으로 바꿔야 한다
+                Debug.Log("Play Opening Cutscene");
+                Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("SampleScene"), true, false);
+                Manager.Instance.soundManager.PlayBGM("battleBGM");
+            }
+            else
+            {
+                Debug.Log("Don't Play Opening Cutscene");
+                Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("SampleScene"), true, true);
+                Manager.Instance.soundManager.PlayBGM("battleBGM");
+            }
         }
         loadPopup.HideUI();
     }
 
-    IEnumerator LoadCurrentScene()
-    {
-        yield return null;
+    // IEnumerator LoadCurrentScene()
+    // {
+    //     yield return null;
 
-        // TODO : Save-Load 시 저장된 씬 불러와야 한다 
-        if (playOpening)
-        {
-            // TODO : cutscene01 재생으로 바꿔야 한다
-            Debug.Log("Play Opening Cutscene");
-            Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("OpeningCutscene"), true, false);
-            Manager.Instance.soundManager.PlayBGM("battleBGM");
-        }
-        else
-        {
-            Debug.Log("Don't Play Opening Cutscene");
-            Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("SampleScene"), true, false);
-            Manager.Instance.soundManager.PlayBGM("battleBGM");
-        }
-    }
+    //     // TODO : Save-Load 시 저장된 씬 불러와야 한다 
+    //     if (playOpening)
+    //     {
+    //         // TODO : cutscene01 재생으로 바꿔야 한다
+    //         Debug.Log("Play Opening Cutscene");
+    //         Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("OpeningCutscene"), true, false);
+    //         Manager.Instance.soundManager.PlayBGM("battleBGM");
+    //     }
+    //     else
+    //     {
+    //         Debug.Log("Don't Play Opening Cutscene");
+    //         Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("SampleScene"), true, false);
+    //         Manager.Instance.soundManager.PlayBGM("battleBGM");
+    //     }
+    // }
 
     void DeleteGameWithSlot()
     {

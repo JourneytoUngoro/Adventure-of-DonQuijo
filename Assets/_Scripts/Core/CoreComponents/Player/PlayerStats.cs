@@ -45,11 +45,11 @@ public class PlayerStats : Stats, IDataPersistance
 
     public void LoadData(GameData data)
     {
-        health.SetCurrentValue(data.currentHealth);
-        durability.SetCurrentValue(data.currentDurability);
-        posture.SetCurrentValue(data.currentPosture);
-        power.SetCurrentValue(data.currentPower);
-        agility.SetCurrentValue(data.currentAgility);
+        health.SetCurrentValue(data.currentHealth, true, false, false);
+        durability.SetCurrentValue(data.currentDurability, true, false, false);
+        posture.SetCurrentValue(data.currentPosture, true, false, false);
+        power.SetCurrentValue(data.currentPower, true, false, false);
+        agility.SetCurrentValue(data.currentAgility, true, false, false);
     }
 
     public void SaveData(GameData data)

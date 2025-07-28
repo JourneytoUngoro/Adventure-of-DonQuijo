@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public enum CheckPositionAxis { Horizontal, Vertical }
 public enum CheckPositionDirection { Front, Back, Heading }
@@ -252,7 +251,10 @@ public abstract class Detection : CoreComponent
 
     private void GetLoadedGrounds(Scene loadedScene, LoadSceneMode loadSceneMode)
     {
-        groundColliders = UtilityFunctions.FindGameObjectsByLayer(whatIsGround, FindObjectsSortMode.None).Select(groundObject => groundObject.GetComponent<Collider2D>()).ToList();
+        if (loadedScene.name != "MainMenu")
+        {
+            groundColliders = UtilityFunctions.FindGameObjectsByLayer(whatIsGround, FindObjectsSortMode.None).Select(groundObject => groundObject.GetComponent<Collider2D>()).ToList();
+        }
     }
 
     public void SetPosition(Vector3 position)
@@ -260,7 +262,8 @@ public abstract class Detection : CoreComponent
         workSpace.Set(position.x, position.y + position.z, position.z);
         currentScreenPosition = workSpace;
         currentSpacePosition = position;
-        entity.entityRigidbody.position = position;
+        // entity.entityRigidbody.position = position;
+        entity.transform.position = position;
         workSpace.Set(0, position.z, position.z);
         entity.orthogonalRigidbody.transform.localPosition = workSpace;
     }

@@ -131,8 +131,5 @@ public class PauseMenuUI : MonoBehaviour
         pauseMenuPopup.HideUI();
 
         guidePopup = null;
-
-        Debug.Log("메인 메뉴로 돌아가기 취소");
-
     }
 }
