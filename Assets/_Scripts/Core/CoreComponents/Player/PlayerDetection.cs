@@ -15,6 +15,19 @@ public class PlayerDetection : Detection, IDataPersistance
         base.Awake();
 
         player = entity as Player;
+        Debug.Log("OnDetectionAwake: " + transform.position);
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+
+        Debug.Log("OnDetectionOnEnable: " + transform.position);
+    }
+
+    protected void Start()
+    {
+        Debug.Log("OnDetectionStart: " + transform.position);
     }
 
     protected override void FixedUpdate()
@@ -35,12 +48,9 @@ public class PlayerDetection : Detection, IDataPersistance
     public void LoadData(GameData data)
     {
         Debug.Log("Position Data Loaded: " + data.lastPlayerPosition);
-        workSpace.Set(data.lastPlayerPosition.x, data.lastPlayerPosition.y + data.lastPlayerPosition.z, data.lastPlayerPosition.z);
-        currentScreenPosition = workSpace;
-        currentSpacePosition = data.lastPlayerPosition;
-        entity.entityRigidbody.position = data.lastPlayerPosition;
-        workSpace.Set(0, data.lastPlayerPosition.z, data.lastPlayerPosition.z);
-        entity.orthogonalRigidbody.transform.localPosition = workSpace;
+        SetPosition(data.lastPlayerPosition);
+        lastGroundedPosition = data.lastPlayerPosition;
+        Debug.Log("Set Position To: " + entity.transform.position);
     }
 
     public void SaveData(GameData data)

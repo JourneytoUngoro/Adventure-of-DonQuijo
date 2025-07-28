@@ -52,11 +52,6 @@ public class DataManager : MonoBehaviour
         Debug.Log($"DataManager : Destroyed at scene: {SceneManager.GetActiveScene().name}");
     }
 
-    private void Start()
-    {
-        InvokeRepeating("SaveGame", 60.0f, 60.0f);
-    }
-
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -69,25 +64,38 @@ public class DataManager : MonoBehaviour
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (IsExcludedScene()) return;
+        // if (IsExcludedScene()) return;
 
         this.dataPersistanceObjects = FindAllDataPersistenceObjects();
-        LoadGame();
+        // LoadGame();
 
-        if (!disableAutoSaving) { AutoSaveCoroutine = StartCoroutine(AutoSave()); }
+        if (!disableAutoSaving)
+        { 
+            StartAutoSave();
+        }
+    }
+
+    public void StartAutoSave()
+    {
+        if (AutoSaveCoroutine != null)
+        {
+            StopCoroutine(AutoSaveCoroutine);
+        }
+        AutoSaveCoroutine = StartCoroutine(AutoSave());
     }
 
     public void ChangeSelectedProfileId(string newProfileId)
     {
         this.selectedProfileId = newProfileId;
-        LoadGame();
+        // LoadGame();
+        // TODO: Loadgame once after scene transition
+        SceneManager.sceneLoaded += LoadGame;
     }
 
     public void DeleteProfileData(string profileId)
     {
         dataHandler.Delete(profileId);
         InitializeSelectedProfileId();
-        LoadGame();
     }
 
     private void InitializeSelectedProfileId()
@@ -121,10 +129,11 @@ public class DataManager : MonoBehaviour
             return false;
         }
 
+        Debug.Log("Save Data of " + String.Join(", ", dataPersistanceObjects.Select(dataPersistanceObject => dataPersistanceObject.ToString())));
+
         foreach (IDataPersistance dataPersistanceObject in dataPersistanceObjects)
         {
-            Debug.Log("Save Data of " + dataPersistanceObject.ToString());
-            dataPersistanceObject.SaveData(gameData);
+            dataPersistanceObject?.SaveData(gameData);
         }
 
         gameData.displayedLastPlayTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
@@ -134,13 +143,13 @@ public class DataManager : MonoBehaviour
         return saved;
     }
 
-    public void LoadGame()
+    public void LoadGame(Scene scene, LoadSceneMode mode)
     {
-        if (IsExcludedScene())
+        /*if (IsExcludedScene())
         {
             Debug.Log("Excluded Scene");
             return;
-        }
+        }*/
 
         this.gameData = dataHandler.Load(selectedProfileId);
 
@@ -159,8 +168,10 @@ public class DataManager : MonoBehaviour
 
         foreach (IDataPersistance dataPersistanceObject in dataPersistanceObjects)
         {
-            dataPersistanceObject.LoadData(gameData);
+            dataPersistanceObject?.LoadData(gameData);
         }
+
+        SceneManager.sceneLoaded -= LoadGame;
     }
 
     private void OnApplicationQuit()

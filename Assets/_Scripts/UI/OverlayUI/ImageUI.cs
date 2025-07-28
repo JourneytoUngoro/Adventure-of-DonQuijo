@@ -7,7 +7,6 @@ public class ImageUI : UIBase
     // 오브젝트                      // 씬 상의 오브젝트 이름
     Image backgroundImage; // Image
 
-
     protected override void AllowmentComponent()
     {
         backgroundImage = transform.Find("Image")?.GetComponent<Image>();

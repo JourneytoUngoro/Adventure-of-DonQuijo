@@ -20,6 +20,7 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
     [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
     [Range(0.1f, 3.0f), SerializeField] private float minDuration;
 
+    [SerializeField] private GameObject statusBar;
     [SerializeField] private Slider loadingBar;
     [SerializeField] private TMP_Text loadingBarText;
     [SerializeField] private List<string> loadingText;
@@ -375,19 +376,20 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
         MoveByDirection(direction);
         ChangePosition(destinationTransform);
         
-        if (next.name != "MainMenu")
+        if (current.name != "" && next.name != "MainMenu")
         {
             Player.Instance.gameObject.SetActive(true);
+            statusBar.SetActive(true);
             cinemachineVirtualCamera.Follow = Player.Instance.transform;
             cinemachineVirtualCamera.ForceCameraPosition(Player.Instance.transform.position + Vector3.up * 25.0f, Quaternion.identity);
             cinemachineVirtualCamera.GetComponent<CinemachineConfiner>().m_BoundingShape2D = next.GetRootGameObjects().Where(gameObject => gameObject.name.Equals("Camera Boundary")).FirstOrDefault()?.GetComponent<PolygonCollider2D>();
+            Manager.Instance.dataManager.SaveGame();
         }
         else
         {
             Player.Instance.gameObject.SetActive(false);
+            statusBar.SetActive(false);
         }
-
-        Manager.Instance.dataManager.SaveGame();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)

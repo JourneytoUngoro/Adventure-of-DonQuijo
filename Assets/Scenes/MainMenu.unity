@@ -122,6 +122,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &4325515 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3210726676411908894, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
+  m_PrefabInstance: {fileID: 8007813823803145521}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &117188644 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3231106636775292840, guid: f29949327a69d9641b9b043607a19734, type: 3}
@@ -2305,6 +2310,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 205046433126017290, guid: e4d442129d5040549878cad154901725, type: 3}
+      propertyPath: disableAutoSaving
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
+      propertyPath: statusBar
+      value: 
+      objectReference: {fileID: 4325515}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: loadingBar
       value: 
@@ -4520,6 +4533,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1910346511516303635, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1910346511516303635, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -4565,7 +4582,7 @@ PrefabInstance:
       objectReference: {fileID: 774150251}
     - target: {fileID: 5481176282386765902, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5697990249542433051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4701,6 +4718,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7824508304767050918, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
       propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8043264440303417591, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8043264440303417591, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8160082134205052238, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
