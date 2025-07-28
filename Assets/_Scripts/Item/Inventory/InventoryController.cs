@@ -22,7 +22,11 @@ public class InventoryController
         view.StartCoroutine(Initialize());
     }
 
-    public void LoadInventoryData(InventoryData data) => model.LoadData(data);
+    public void LoadInventoryData(InventoryData data)
+    {
+        model.LoadData(data);
+        RefreshCoins();
+    }
 
     public InventoryData SaveInventoryData() => model.SaveData();
 
@@ -42,7 +46,6 @@ public class InventoryController
 
         if (this.itemUsageData == null)
         {
-            Debug.Log("InventoryController.itemUsageData is null");
             this.itemUsageData = new ItemUsageData().itemUsageData;
         }
     }
@@ -61,7 +64,6 @@ public class InventoryController
 
         // view.OnDrop += HandleDrop;
         model.OnModelChanged += HandleModelChanged;
-
         RefreshView();
         RefreshCoins();
     }

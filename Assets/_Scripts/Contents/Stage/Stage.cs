@@ -141,15 +141,11 @@ public class Stage
         }
     }
 
-    public void OnEnemyDeath(Transform enemy)
+    public void OnEnemyDeath(EnemyType type, Transform enemy)
     {
         // coin spawn logic
+        RewardCoinsByEnemy(type, enemy);
 
-        // test ======================================================
-        // RewardCoinsByEnemy(EnemyType.PlagueDoctor, enemy);
-        // RewardCoinsByEnemy(EnemyType.VampireBat, enemy);
-        RewardCoinsByEnemy(EnemyType.PrisonGuard, enemy);
-        // =========================================================
         killedEnemyCount++;
 
         // memory fragment spawn logic

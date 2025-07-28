@@ -241,6 +241,6 @@ public class PlayerInputHandler : MonoBehaviour
     private void OnDestroy()
     {
         // Prevents memory leaks and performance issues caused by leaving actions enabled.
-        controls.Disable();
+        // controls.Disable();
     }
 }

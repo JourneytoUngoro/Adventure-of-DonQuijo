@@ -7,6 +7,9 @@ using UnityEngine;
 
 public class OpeningFourthScene : MonoBehaviour, ICutScene
 {
+    [InfoBox("다른 컷으로 넘어가지 않기")]
+    public bool isEditing;
+
     [Header("Fade")]
     public GameObject FadeObj;
     public float fadeDuratoin;
@@ -69,7 +72,7 @@ public class OpeningFourthScene : MonoBehaviour, ICutScene
     [TabGroup("Glass")] [Tooltip("유리 조각 마무리 이동 애니메이션 두트윈 효과")]
     public Ease glassEndEase;
 
-
+    public GameObject endImage;
     public Action onFinish { get ; set; }
 
     public void InitializeScene()
@@ -155,7 +158,7 @@ public class OpeningFourthScene : MonoBehaviour, ICutScene
         Sequence master = DOTween.Sequence();
         master.Append(donSequence);
         master.Join(glassSequence);
-        master.Join(fadeSequence);
+        master.Join(fadeSequence).OnComplete(() => { endImage.SetActive(true); if (!isEditing) onFinish?.Invoke(); });
 
     }
 

@@ -42,7 +42,11 @@ public class InventoryModel
         inventoryData.capacity = capacity;
 
         // ============================= 코인 테스트 용 ===================================
-        inventoryData.coins = inventoryData.coins == 0 ? 500 : inventoryData.coins;
+        inventoryData.coins = data.coins;
+        if (inventoryData.coins <= 0)
+        {
+            inventoryData.coins = 1000;
+        }
         // ===========================================================================
 
         bool isNew = inventoryData.items == null || inventoryData.items.Length == 0;

@@ -38,7 +38,7 @@ public class PauseMenuUI : MonoBehaviour
         continueButton = buttonsTransform.Find("Continue Button").GetComponent<Button>();
         settingPopupButton = buttonsTransform.Find("Setting Popup Button").GetComponent<Button>();
         saveButton = buttonsTransform.Find("Save Button").GetComponent<Button>();
-        mainMenuButton = temp;// buttonsTransform.Find("Main Menu Button").GetComponent<Button>();
+        mainMenuButton = buttonsTransform.Find("Main Menu Button").GetComponent<Button>();
     }
 
     private void RegisterAcivatedEvent()
@@ -82,6 +82,7 @@ public class PauseMenuUI : MonoBehaviour
 
     private void OnClickMainMenuButton()
     {
+        Debug.Log("on click main menu button!");
         guidePopup = Manager.Instance.uiManager.ShowDynamicPopup(
             new PopupData("", "게임을 저장하고\n메인 화면으로 돌아가시겠습니까?", "", ""));
 

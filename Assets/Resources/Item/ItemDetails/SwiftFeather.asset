@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: SwiftFeather
   m_EditorClassIdentifier: 
   <id>k__BackingField: 5
-  <label>k__BackingField: Swift Feather
-  <maxStack>k__BackingField: 2
+  <label>k__BackingField: "\uC2E0\uC18D\uC758 \uAE43\uD138"
+  <maxStack>k__BackingField: 1
   <maxOverlap>k__BackingField: 2
-  <description>k__BackingField: Movement Speed +10%
+  <description>k__BackingField: "\uC18D\uB3C4 +15%"
   <price>k__BackingField: 40
   <effect>k__BackingField: {fileID: 11400000, guid: cdd960586da429a429c4c353400ac645, type: 2}
-  icon: {fileID: 21300000, guid: 2130418f99ddf94448768233ca87ceba, type: 3}
+  icon: {fileID: 21300000, guid: a59500f68fd97354d85f17f248cf784a, type: 3}

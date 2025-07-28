@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandler
+public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public int slotId;
 
@@ -18,8 +18,6 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
     [HideInInspector] public Item item;
 
     private Image backgroundImage;
-    private Sprite originalSprite;
-    public  Sprite chosenlSprite;
 
     private PanelScaler scaler;
     private VendingMachinePopupUI vmUI;
@@ -32,7 +30,6 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
         vmPopup = vmUI.GetComponent<PopupUI>();
 
         backgroundImage = GetComponentInParent<Image>();
-        originalSprite = backgroundImage.sprite;
 
         GetComponent<Button>().onClick.AddListener(OnClickVMSlot);
 
@@ -69,12 +66,10 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
         if (chosen)
         {
             scaler.OnSelectedState();
-            backgroundImage.sprite = chosenlSprite;
         }
         else
         {
             scaler.OnUnSelectedState();
-            backgroundImage.sprite = originalSprite;
         }
     }
 
@@ -82,5 +77,17 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
     {
         vmUI.ShowPurchaseGuide();
         Debug.Log("on click vm slot");
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("Pointer Enter");
+        ChangeSelectedState(true);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Debug.Log("Pointer Exit");
+        ChangeSelectedState(false);
     }
 }

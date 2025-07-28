@@ -9,13 +9,17 @@ public class OpeningController : MonoBehaviour
     public GameObject[] cutObjs;
 
     private ICutScene[] cutscenes;
+    private int cutscenesCount;
     private int currentIndex;
 
+    private GameObject persistentObject;
 
     private void Awake()
     {
         cutscenes = new ICutScene[cutObjs.Length];
-        for (int i = 0; i < cutObjs.Length; i++)
+        cutscenesCount = cutObjs.Length;
+
+        for (int i = 0; i < cutscenesCount; i++)
         {
             cutscenes[i] = cutObjs[i].GetComponent<ICutScene>();
             
@@ -23,7 +27,7 @@ public class OpeningController : MonoBehaviour
             cutObjs[i].SetActive(false);
         }
 
-        for (int i = 0; i < cutscenes.Length - 1; i++)
+        for (int i = 0; i < cutscenesCount - 1; i++)
         {
             cutscenes[i].onFinish += (() =>
             {
@@ -32,7 +36,23 @@ public class OpeningController : MonoBehaviour
             });
         }
 
+        // The last scene of Opening
+        cutscenes[cutscenesCount - 1].onFinish += OnFinishOpening;
+
         currentIndex = 0;
+    }
+
+    private void Start()
+    {
+        persistentObject = GameObject.Find("Persistant GameObject");
+        persistentObject.SetActive(false);
+
+        StartOpeningCutScene();
+    }
+
+    public void StartOpeningCutScene()
+    {
+        PlayNextCut(0);
     }
 
     public void PlayNextCut(int index)
@@ -40,11 +60,6 @@ public class OpeningController : MonoBehaviour
         cutObjs[index].SetActive(true);
         cutscenes[index].InitializeScene();
         cutscenes[index].PlayScene();
-    }
-
-    public void StartOpeningCutScene()
-    {
-        PlayNextCut(0);
     }
 
     public void InitializeAllScene()
@@ -56,4 +71,12 @@ public class OpeningController : MonoBehaviour
         }
         currentIndex = 0;
     }
+
+    private void OnFinishOpening()
+    {
+        Debug.Log("오프닝컷신 끝!");
+        persistentObject.SetActive(true);
+        Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("SampleScene"), true, false);
+    }
+
 }

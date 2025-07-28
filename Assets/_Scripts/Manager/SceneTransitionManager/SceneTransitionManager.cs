@@ -375,7 +375,7 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
         MoveByDirection(direction);
         ChangePosition(destinationTransform);
         
-        if (next.name != "MainMenu")
+        if (next.name != "MainMenu" && next.name != "OpeningCutscene")
         {
             Player.Instance.gameObject.SetActive(true);
             cinemachineVirtualCamera.Follow = Player.Instance.transform;

@@ -46,6 +46,7 @@ public class InventoryManager : MonoBehaviour
         Inventory.Initialize();
     }
 
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -53,47 +54,34 @@ public class InventoryManager : MonoBehaviour
 
     private void OnDisable()
     {
-
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log($" {gameObject.name} : {scene.name}");
+        if (IsExcludedScene(scene.name))
+        {
+            // 인벤토리 off
+            // inventoryUI.SetActive(false);
+            inventoryUI.SetActive(true);
+            inventoryUI.GetComponent<CanvasGroup>().alpha = 0f;
+            inventoryUI.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            inventoryUI.GetComponent<CanvasGroup>().interactable = false;
+        }
+        else
+        {
+            // 인벤토리 on 
+            inventoryUI.SetActive(true);
+            inventoryUI.GetComponent<CanvasGroup>().alpha = 1.0f;
+            inventoryUI.GetComponent<CanvasGroup>().blocksRaycasts = true;
+            inventoryUI.GetComponent<CanvasGroup>().interactable = true;
+        }
     }
 
-    //private void OnEnable()
-    //{
-    //    SceneManager.sceneLoaded += OnSceneLoaded;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    SceneManager.sceneLoaded -= OnSceneLoaded;
-    //}
-
-    //private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    //{
-    //    Debug.Log("======================새씬====================="); // ================================================= 얘 왜 실행 안 되는지? 다른 애들 다 되는데
-    //    //if (IsExcludedScene(scene.name))
-    //    //{
-    //    //    // 인벤토리 off
-    //    //    Debug.Log("꺼짐");
-    //    //    inventoryUI.SetActive(false);
-    //    //}
-    //    //else
-    //    //{
-    //    //    // 인벤토리 on 
-    //    //    Debug.Log("켜짐");
-    //    //    inventoryUI.SetActive(true);
-    //    //    inventoryUI.GetComponent<CanvasGroup>().alpha = 1.0f;
-    //    //}
-    //}
-
-    //private bool IsExcludedScene(string currentScene)
-    //{
-    //    return excludedSceneInventoryUI.Any(sceneField => sceneField.SceneName == currentScene);
-    //}
+    private bool IsExcludedScene(string currentScene)
+    {
+        return excludedSceneInventoryUI.Any(sceneField => sceneField.SceneName == currentScene);
+    }
 
     public void AcquireItem(Item item)
     {

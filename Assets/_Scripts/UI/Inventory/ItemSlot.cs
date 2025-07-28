@@ -7,9 +7,6 @@ using UnityEngine.UI;
 
 public class ItemSlot : Slot<Item>
 {
-    [SerializeField] Sprite nullSprite;
-    [SerializeField] TextMeshProUGUI quantityTMP;
-
     public override void AfterSwapElement(Slot<Item> slot1, Slot<Item> slot2)
     {
         base.AfterSwapElement(slot1, slot2);
@@ -31,8 +28,9 @@ public class ItemSlot : Slot<Item>
     {
         if (item == null || item.id == 0)
         {
-            DraggableElement.elementImage.sprite = nullSprite;
-            quantityTMP.text = string.Empty;
+            Color nullState = DraggableElement.elementImage.color;
+            nullState.a = 0;
+            DraggableElement.elementImage.color = nullState;
             DraggableElement.element = null;
         }
         else
@@ -40,12 +38,14 @@ public class ItemSlot : Slot<Item>
             Debug.Assert(item.details != null, "item details null!");
             Debug.Assert(DraggableElement.elementImage != null, "draggable element image null!");
 
+            Color fillState = DraggableElement.elementImage.color;
+            fillState.a = 1;
+            DraggableElement.elementImage.color = fillState;
+
             DraggableElement.element = item;
             DraggableElement.element.id = item.id;
             DraggableElement.element.details = item.details;
             DraggableElement.elementImage.sprite = item.details.icon;
-
-            quantityTMP.text = item.quantity.ToString();
             // Debug.Log($"{DraggableObject.element.details.name} now count {DraggableObject.element.quantity}, but tmp {quantityTMP.text}");
         }
     }

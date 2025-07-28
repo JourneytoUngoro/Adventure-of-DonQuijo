@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: LifePotion
   m_EditorClassIdentifier: 
   <id>k__BackingField: 2
-  <label>k__BackingField: Life Potion
-  <maxStack>k__BackingField: 5
+  <label>k__BackingField: "\uC0DD\uBA85\uC758 \uBB3C\uC57D"
+  <maxStack>k__BackingField: 1
   <maxOverlap>k__BackingField: 5
-  <description>k__BackingField: Increase Health Capacity
+  <description>k__BackingField: "\uCD5C\uB300 HP +15"
   <price>k__BackingField: 30
   <effect>k__BackingField: {fileID: 11400000, guid: e9914342524d43343b019500fc0ee7c8, type: 2}
-  icon: {fileID: 21300000, guid: cfb0e647272282d45831bbba8201777b, type: 3}
+  icon: {fileID: 21300000, guid: d512d3c817454184dbc21ffda190b038, type: 3}
