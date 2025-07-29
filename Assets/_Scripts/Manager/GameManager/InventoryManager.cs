@@ -35,6 +35,8 @@ public class InventoryManager : MonoBehaviour
 
     private GameObject inventoryUI;
 
+    private static bool sInitialized = false;
+
     private void Awake()
     {
         InitializeInventory();
@@ -42,8 +44,12 @@ public class InventoryManager : MonoBehaviour
 
     private void InitializeInventory()
     {
-        inventoryUI = GameObject.Find("Inventory");
-        Inventory.Initialize();
+        if (!sInitialized)
+        {
+            inventoryUI = GameObject.Find("Inventory");
+            Inventory.Initialize();
+            sInitialized = true;
+        }
     }
 
 

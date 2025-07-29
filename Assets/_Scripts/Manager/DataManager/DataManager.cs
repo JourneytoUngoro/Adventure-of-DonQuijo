@@ -48,10 +48,6 @@ public class DataManager : MonoBehaviour
         bool autoSaveValue = PlayerPrefs.GetInt(EnvironmentController.AUTO_SAVE, 1) == 1;
         SetAutoSaveDisable(!autoSaveValue);
     }
-    private void OnDestroy()
-    {
-        Debug.Log($"DataManager : Destroyed at scene: {SceneManager.GetActiveScene().name}");
-    }
 
     private void OnEnable()
     {
@@ -141,6 +137,7 @@ public class DataManager : MonoBehaviour
         gameData.lastPlayTime = DateTime.Now.Ticks;
 
         bool saved = dataHandler.Save(gameData, selectedProfileId);
+        Debug.Log($"OnApplicationQuit -> Try SaveGame() -> {saved}");
         return saved;
     }
 
@@ -175,6 +172,7 @@ public class DataManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
+        Debug.Log($"OnApplicationQuit -> Try SaveGame()");
         SaveGame();
     }
 

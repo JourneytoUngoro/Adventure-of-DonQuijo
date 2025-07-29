@@ -43,8 +43,10 @@ public class InventoryModel
 
         // ============================= 코인 테스트 용 ===================================
         inventoryData.coins = data.coins;
-        if (inventoryData.coins <= 0)
+        Debug.Log($"set coin to : {inventoryData.coins}");
+        if (data.coins <= 0)
         {
+            Debug.Log("fill coins to 1000 in only test");
             inventoryData.coins = 1000;
         }
         // ===========================================================================
@@ -77,6 +79,7 @@ public class InventoryModel
         }
 
         this.Items.items = inventoryData.items;
+        Debug.Log("current coins : " + coins);
     }
 
     public InventoryData SaveData()

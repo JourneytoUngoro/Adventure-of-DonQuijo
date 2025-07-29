@@ -12,20 +12,28 @@ public class TutorialDialogueController : MonoBehaviour
 
     private bool skipTutorial;
     private bool newGame;
+    private float watiTime = 1.5f;
 
     private void Awake()
     {
         skipTutorial = PlayerPrefs.GetInt(EnvironmentController.TUTORIAL_SKIP, 0) == 0 ? false : true;
         newGame = true; // TODO : 바꿔야 한다
 
-        if (/*skipTutorial && newGame*/ true) PlayTutorialDialogue();
-        // else Destroy(gameObject);
+        if (/*skipTutorial && newGame*/ true) StartCoroutine(PlayTutorialAfterWait());
+         else dialoguePanel.SetActive(false);
+    }
+
+    IEnumerator PlayTutorialAfterWait()
+    {
+        yield return new WaitForSeconds(watiTime);
+
+        PlayTutorialDialogue();
     }
 
     private void PlayTutorialDialogue()
     {
+        dialoguePanel.GetComponent<CanvasGroup>().alpha = 1f;
         Debug.Log("Play Tutorial!" + !skipTutorial);
-        dialoguePanel.SetActive(true);
         DialogueManager.Instance.EnterDialogue(inkJSON, animator, npcSO);
     }
 

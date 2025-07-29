@@ -95,12 +95,12 @@ public class DialogueManager : MonoBehaviour
     {
         if (!isDialoguePlaying) return;
 
-        if (PressedNextLineKey())
+        bool tmp = PressedNextLineKey();
+        if (tmp)
         {
             if (canContinueToNextLine && currentStory.currentChoices.Count == 0)
             {
                 canSkipToNextLine = false;
-                Debug.Log("DialogueManage excutes Update - ContinueStory");
                 ContinueStory();
             }
             else
@@ -139,7 +139,6 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterDialogue(TextAsset inkJSON, Animator anim, NPCDialogueSO npcSO)
     {
-        Debug.Log("DialogueManager - EnterDialogue");
         currentStory = new Story(inkJSON.text);
         this.npcSO = npcSO;
 
@@ -154,8 +153,6 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator ExitDialogue()
     {
-        Debug.Log("DialogueManage excutes ContinueStory");
-
         // prevent duplicate key input over multiple frames
         yield return new WaitForSeconds(0.2f);
 
@@ -173,12 +170,9 @@ public class DialogueManager : MonoBehaviour
 
     private void ContinueStory()
     {
-        Debug.Log("DialogueManage excutes ContinueStory");
-
         // no more prepared dialogues
         if (!currentStory.canContinue)
         {
-            Debug.Log("DialogueManager - CurrentStory.CanContinue = false");
             StartCoroutine(ExitDialogue());
             return;
         }
@@ -191,7 +185,6 @@ public class DialogueManager : MonoBehaviour
 
         if (nextLine.Equals("") && !currentStory.canContinue)
         {
-            Debug.Log("DialogueManager - \"\" && canContinue = false");
             StartCoroutine(ExitDialogue());
         }
         else
@@ -200,7 +193,6 @@ public class DialogueManager : MonoBehaviour
             PlayDialogueSound();
             displayLineCoroutine = StartCoroutine(DisplayLine(nextLine));
         }
-        Debug.Log("DialogueManage completed ContinueStory");
     }
 
     private IEnumerator DisplayLine(string line)
@@ -209,11 +201,9 @@ public class DialogueManager : MonoBehaviour
 
         dialogueTMP.text = line;
         dialogueTMP.maxVisibleCharacters = 0;
-        Debug.Log("DialogueManage excutes DisplayLine()");
-        Debug.Log(line);
 
-        // continueIcon.SetActive(false);
-        // HideChoices();
+        continueIcon.SetActive(false);
+        HideChoices();
 
         canContinueToNextLine = false;
         bool hasRichText = false;

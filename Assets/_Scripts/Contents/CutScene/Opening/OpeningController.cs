@@ -76,7 +76,8 @@ public class OpeningController : MonoBehaviour
     {
         Debug.Log("오프닝컷신 끝!");
         persistentObject.SetActive(true);
-        Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("SampleScene"), true, false);
+        Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("Stage1"), true, false);
+        Manager.Instance.soundManager.PlayBGM("battleBGM");
     }
 
 }

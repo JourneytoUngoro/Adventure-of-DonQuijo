@@ -24,7 +24,6 @@ public class InventoryView : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("InventoryView.Start() executed!");
         guidePopup = transform.parent.Find("Guide Popup")?.GetComponent<PopupUI>();
         canvasTransform = GetComponentInParent<Canvas>().transform;
         originalParentTransform = transform.parent;
@@ -56,7 +55,6 @@ public class InventoryView : MonoBehaviour
 
     public IEnumerator InitializeView()
     {
-        Debug.Log("InventoryView.InitializeView() executed!");
         // Coroutine used to delay UI initialization by one frame
         inventory = gameObject;
         itemSlots = gameObject.GetComponentsInChildren<ItemSlot>();

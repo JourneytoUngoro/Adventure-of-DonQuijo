@@ -2590,6 +2590,18 @@ PrefabInstance:
       propertyPath: disableAutoSaving
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 205046433126017290, guid: e4d442129d5040549878cad154901725, type: 3}
+      propertyPath: excludedScenesForData.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 205046433126017290, guid: e4d442129d5040549878cad154901725, type: 3}
+      propertyPath: excludedScenesForData.Array.data[1].m_SceneName
+      value: OpeningCutscene
+      objectReference: {fileID: 0}
+    - target: {fileID: 205046433126017290, guid: e4d442129d5040549878cad154901725, type: 3}
+      propertyPath: excludedScenesForData.Array.data[1].m_SceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: 126f19c2386a521478c33f7989575d9d, type: 3}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: statusBar
       value: 

@@ -52,7 +52,6 @@ public class LoadGameUI : MonoBehaviour
         AssginGameData();
 
         editing = false;
-        playOpening = CheckPlayOpeningWithNewSlot();
     }
 
     void SetEvents()
@@ -101,6 +100,7 @@ public class LoadGameUI : MonoBehaviour
 
     public void LoadOrNewGame(int index)
     {
+        playOpening = CheckPlayOpeningWithNewSlot();
 
         if (saveSlotUI[index].isNull)
         {
@@ -157,8 +157,8 @@ public class LoadGameUI : MonoBehaviour
             {
                 // TODO : cutscene01 재생으로 바꿔야 한다
                 Debug.Log("Play Opening Cutscene");
-                Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("Stage1"), true, false);
-                Manager.Instance.soundManager.PlayBGM("battleBGM");
+                Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("OpeningCutscene"), true, false);
+                Manager.Instance.soundManager.PlayBGM("cutscene01BGM");
             }
             else
             {
@@ -232,5 +232,4 @@ public class LoadGameUI : MonoBehaviour
             OnClickEditButton();
         }
     }
-
 }

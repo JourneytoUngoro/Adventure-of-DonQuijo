@@ -18,7 +18,6 @@ public class Inventory : MonoBehaviour, IDataPersistance
         Debug.Log($"Inventory.cs Initialize() executed");
 
         view = GetComponent<InventoryView>();
-        Debug.Log($"View is null : {view == null}");
 
         // view, startingItems를 이용하여 InventoryModel을 생성한 뒤,
         // InventoryController에게 view와 model을 할당한다 
