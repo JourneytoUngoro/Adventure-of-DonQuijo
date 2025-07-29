@@ -141,9 +141,18 @@ public class Stage
         }
     }
 
-    public void OnEnemyDeath(EnemyType type, Transform enemy)
+    public EnemyType GetEnemyType(Transform enemy)
+    {
+        // TODO : Implement
+
+        return EnemyType.VampireBat;
+    }
+
+    public void OnEnemyDeath(Transform enemy)
     {
         // coin spawn logic
+
+        EnemyType type = GetEnemyType(enemy);
         RewardCoinsByEnemy(type, enemy);
 
         killedEnemyCount++;
