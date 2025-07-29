@@ -98,6 +98,7 @@ public class UIManager : MonoBehaviour
     void CreatePool()
     {
         if (pool == null) { Debug.Log("Not prepared pool objects in scene"); }
+        if (pool.transform.childCount >= 4) return; 
         popupPool = new UIObjectPool<PopupUI>(popupPrefab, objectCount, pool);
         textInfoPool = new UIObjectPool<TextInfoUI>(textInfoPrefab, objectCount, pool);
         imagePool = new UIObjectPool<ImageUI>(imagePrefab, objectCount, pool);

@@ -23,6 +23,10 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
     private VendingMachinePopupUI vmUI;
     private PopupUI vmPopup;
 
+    private Image buttonSlotImage;
+    private Color normalColor;
+    private Color highlightColor;
+
     private void Start()
     {
         scaler = GetComponent<PanelScaler>();
@@ -32,8 +36,12 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
         backgroundImage = GetComponentInParent<Image>();
 
         GetComponent<Button>().onClick.AddListener(OnClickVMSlot);
+        buttonSlotImage = GetComponent<Image>();
+        normalColor = GetComponent<Button>().colors.normalColor;
+        highlightColor = GetComponent<Button>().colors.highlightedColor;
 
         Debug.Assert(vmUI != null, "VendingMachinePopupUI is null!");
+
     }
 
 
@@ -43,7 +51,7 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
         itemId = item.id;
         itemName.text = item.details.label;
         itemInfo.text = item.details.description;
-        itemPrice.text = "$ "+ item.details.price.ToString();
+        itemPrice.text = item.details.price.ToString();
 
         itemImage.sprite = item.details.icon;
     }
@@ -66,10 +74,12 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
         if (chosen)
         {
             scaler.OnSelectedState();
+            buttonSlotImage.color = highlightColor;
         }
         else
         {
             scaler.OnUnSelectedState();
+            buttonSlotImage.color = normalColor;
         }
     }
 
@@ -81,13 +91,16 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("Pointer Enter");
+        if (!vmPopup.isOpened) return;
+
+        vmUI.SetSelectedSlot(this);
         ChangeSelectedState(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("Pointer Exit");
+        if (!vmPopup.isOpened) return;
+
         ChangeSelectedState(false);
     }
 }

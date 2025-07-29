@@ -1,7 +1,6 @@
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PanelScaler : MonoBehaviour
 {
@@ -37,5 +36,4 @@ public class PanelScaler : MonoBehaviour
 
         currentTweener = transform.DOScale(targetScale, duration).SetEase(Ease.OutBack);
     }
-
 }

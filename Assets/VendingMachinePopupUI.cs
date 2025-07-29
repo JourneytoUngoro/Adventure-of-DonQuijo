@@ -20,6 +20,7 @@ public class VendingMachinePopupUI : MonoBehaviour
         slots = items.GetComponentsInChildren<VendingMachineSlot>();
         vmPopup = GetComponent<PopupUI>();
 
+        selectedSlot = null;
         canOpenGuide = false;
     }
 
@@ -91,7 +92,8 @@ public class VendingMachinePopupUI : MonoBehaviour
 
     public void SetSelectedSlot(VendingMachineSlot slot)
     {
-        selectedSlot = slot;
+        selectedSlot?.ChangeSelectedState(false); // Release prev slot
+        selectedSlot = slot; // Register new slot
     }
 
     public void StartSelectSlotUI(VendingMachineSlot slot)

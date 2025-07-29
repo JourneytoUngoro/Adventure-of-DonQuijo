@@ -5051,7 +5051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f77176332ec6843a868163da6d2918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  <type>k__BackingField: 0
   fadeTime: 0
   delayTime: 0
   <BlockClick>k__BackingField: 0
@@ -10105,7 +10105,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 30
+  m_ScrollSensitivity: 100
   m_Viewport: {fileID: 6513922530033473066}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 8388248102053640471}

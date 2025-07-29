@@ -59,15 +59,12 @@ public class DialogueManager : MonoBehaviour
     private void Awake()
     {
         // 대화 별로 없으면 굳이 살려둬야 하나 싶음 
-        #region Singleton
         if (Instance != null)
         {
             Destroy(gameObject);
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
-        #endregion
 
         dialogueVariables = new DialogueVariables(globalsJSON);
         inkExternalFunction = new InkExternalFunction();
@@ -103,6 +100,7 @@ public class DialogueManager : MonoBehaviour
             if (canContinueToNextLine && currentStory.currentChoices.Count == 0)
             {
                 canSkipToNextLine = false;
+                Debug.Log("DialogueManage excutes Update - ContinueStory");
                 ContinueStory();
             }
             else
@@ -141,6 +139,7 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterDialogue(TextAsset inkJSON, Animator anim, NPCDialogueSO npcSO)
     {
+        Debug.Log("DialogueManager - EnterDialogue");
         currentStory = new Story(inkJSON.text);
         this.npcSO = npcSO;
 
@@ -179,6 +178,7 @@ public class DialogueManager : MonoBehaviour
         // no more prepared dialogues
         if (!currentStory.canContinue)
         {
+            Debug.Log("DialogueManager - CurrentStory.CanContinue = false");
             StartCoroutine(ExitDialogue());
             return;
         }
@@ -191,6 +191,7 @@ public class DialogueManager : MonoBehaviour
 
         if (nextLine.Equals("") && !currentStory.canContinue)
         {
+            Debug.Log("DialogueManager - \"\" && canContinue = false");
             StartCoroutine(ExitDialogue());
         }
         else
@@ -199,6 +200,7 @@ public class DialogueManager : MonoBehaviour
             PlayDialogueSound();
             displayLineCoroutine = StartCoroutine(DisplayLine(nextLine));
         }
+        Debug.Log("DialogueManage completed ContinueStory");
     }
 
     private IEnumerator DisplayLine(string line)
@@ -207,9 +209,11 @@ public class DialogueManager : MonoBehaviour
 
         dialogueTMP.text = line;
         dialogueTMP.maxVisibleCharacters = 0;
+        Debug.Log("DialogueManage excutes DisplayLine()");
+        Debug.Log(line);
 
-        continueIcon.SetActive(false);
-        HideChoices();
+        // continueIcon.SetActive(false);
+        // HideChoices();
 
         canContinueToNextLine = false;
         bool hasRichText = false;
@@ -337,7 +341,7 @@ public class DialogueManager : MonoBehaviour
         /*        const string MainCharacter = "DonQuijo";
                 const string NPC = "NPC";*/
 
-        const string MainCharacter = "Jiyon";
+/*        const string MainCharacter = "Jiyon";
 
         if (speaker == MainCharacter)
         {
@@ -347,7 +351,7 @@ public class DialogueManager : MonoBehaviour
         {
             layoutAnimator.Play("right");
 
-        }
+        }*/
     }
 
 
