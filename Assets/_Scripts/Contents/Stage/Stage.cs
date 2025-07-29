@@ -143,7 +143,12 @@ public class Stage
 
     public EnemyType GetEnemyType(Transform enemy)
     {
-        // TODO : Implement
+        Enemy baseEnemy = enemy.GetComponent<Enemy>();
+        if (baseEnemy is Bat)
+        {
+            Debug.Log("enemy type is bat");
+            return EnemyType.VampireBat;
+        }
 
         return EnemyType.VampireBat;
     }

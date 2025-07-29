@@ -20,7 +20,10 @@ public class EnemyStats : Stats
     {
         base.Start();
 
-        health.OnCurrentValueMin += () => { enemy.enemyStateMachine.ChangeState(enemy.deadState); };
+        health.OnCurrentValueMin += () => {
+            enemy.enemyStateMachine.ChangeState(enemy.deadState);
+            Manager.Instance.stageManager.OnEnemyDeath(transform);
+        };
         // detectionRatio.OnCurrentValueMax += () => { enemy.enemyStateMachine.ChangeState(enemy.targetInDetectionRangeState); };
 
         if (enemy.movement.facingDirection == -1)

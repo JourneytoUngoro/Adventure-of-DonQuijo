@@ -137,7 +137,6 @@ public class DataManager : MonoBehaviour
         gameData.lastPlayTime = DateTime.Now.Ticks;
 
         bool saved = dataHandler.Save(gameData, selectedProfileId);
-        Debug.Log($"OnApplicationQuit -> Try SaveGame() -> {saved}");
         return saved;
     }
 
@@ -172,7 +171,6 @@ public class DataManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        Debug.Log($"OnApplicationQuit -> Try SaveGame()");
         SaveGame();
     }
 

@@ -1,3 +1,4 @@
+using Ink.Parsed;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,15 +12,14 @@ public class TutorialDialogueController : MonoBehaviour
     [Title("Dialogue Panel")] [SerializeField] GameObject dialoguePanel;
 
     private bool skipTutorial;
-    private bool newGame;
-    private float watiTime = 1.5f;
+    public static bool newGame;
+    private float watiTime = 0.3f;
 
     private void Awake()
     {
         skipTutorial = PlayerPrefs.GetInt(EnvironmentController.TUTORIAL_SKIP, 0) == 0 ? false : true;
-        newGame = true; // TODO : 바꿔야 한다
 
-        if (/*skipTutorial && newGame*/ true) StartCoroutine(PlayTutorialAfterWait());
+        if (!skipTutorial && newGame) StartCoroutine(PlayTutorialAfterWait());
          else dialoguePanel.SetActive(false);
     }
 
@@ -36,5 +36,4 @@ public class TutorialDialogueController : MonoBehaviour
         Debug.Log("Play Tutorial!" + !skipTutorial);
         DialogueManager.Instance.EnterDialogue(inkJSON, animator, npcSO);
     }
-
 }

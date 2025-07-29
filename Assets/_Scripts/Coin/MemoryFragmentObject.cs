@@ -25,8 +25,6 @@ public class MemoryFragmentObject : InteractBase
 
     public void Start()
     {
-        transform.parent = GameObject.Find("MemoryFragment Object Pool").transform;
-
         // TODO : Player 의존성 주입 필요
         player = FindAnyObjectByType<Player>();
 

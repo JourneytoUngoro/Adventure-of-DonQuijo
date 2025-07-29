@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseMenuUI : MonoBehaviour
@@ -47,8 +48,17 @@ public class PauseMenuUI : MonoBehaviour
         pauseMenuPopup.SetOnHide(OnPaueMenuInactivated);
     }
 
-    private void OnPauseMenuActivated() => Manager.Instance.gameManager.PauseGame();
-    private void OnPaueMenuInactivated() => Manager.Instance.gameManager.ResumeGame();
+    private void OnPauseMenuActivated()
+    {
+        // Prevent saving during cutscenes
+        saveButton.gameObject.SetActive(!SceneManager.GetActiveScene().name.EndsWith("Cutscene"));
+        Manager.Instance.gameManager.PauseGame();
+    }
+
+    private void OnPaueMenuInactivated()
+    {
+        Manager.Instance.gameManager.ResumeGame();
+    }
 
     private void RegisterButtonEvents()
     {

@@ -139,7 +139,7 @@ public class OpeningFourthScene : MonoBehaviour, ICutScene
         glassSequence.Join(
             GlassObj.transform.DORotate(glassEndRotate, glassEndDuration).SetEase(glassEndEase)
         );
-
+/*
         Sequence fadeSequence = DOTween.Sequence();
 
         fadeSequence.AppendInterval(glassEndDuration - fadeDuratoin);
@@ -154,11 +154,11 @@ public class OpeningFourthScene : MonoBehaviour, ICutScene
                                     1,
                                     fadeDuratoin
             ));
-
+*/
         Sequence master = DOTween.Sequence();
         master.Append(donSequence);
-        master.Join(glassSequence);
-        master.Join(fadeSequence).OnComplete(() => { endImage.SetActive(true); if (!isEditing) onFinish?.Invoke(); });
+        master.Join(glassSequence).OnComplete(() => { endImage.SetActive(true); if (!isEditing) onFinish?.Invoke(); });
+        // master.Join(fadeSequence)
 
     }
 

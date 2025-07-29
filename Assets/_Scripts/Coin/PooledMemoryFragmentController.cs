@@ -23,9 +23,9 @@ public class PooledMemoryFragmentController : MonoBehaviour, IDataPersistance
         // memoryFragmentObject in the Scene disappears after n seconds
         if (activatedMemoryFragmentObjects != null && activatedMemoryFragmentObjects.Count > 0)
         {
-            foreach (MemoryFragmentObject obj in activatedMemoryFragmentObjects)
+            for (int i = activatedMemoryFragmentObjects.Count - 1; i >= 0; i--)
             {
-                obj.timer.Tick();
+                activatedMemoryFragmentObjects[i].timer.Tick();
             }
         }
     }
@@ -38,7 +38,7 @@ public class PooledMemoryFragmentController : MonoBehaviour, IDataPersistance
             {
                 MemoryFragmentObject removeObject = unactivatedMemoryFragmentObjects[i];
                 unactivatedMemoryFragmentObjects.Remove(removeObject);
-                unactivatedMemoryFragmentObjects.Remove(removeObject);
+                activatedMemoryFragmentObjects.Remove(removeObject);
             }
         }
     }
@@ -115,7 +115,6 @@ public class PooledMemoryFragmentController : MonoBehaviour, IDataPersistance
         foreach (MemoryFragmentObject mf in activatedMemoryFragmentObjects)
         {
             mfData.AddMemoryFragmentPositions(mf.transform.position);
-            Debug.Log($"add position {mf.transform.position}");
         }
 
         data.memoryFragmentData = mfData;

@@ -372,6 +372,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8726014970385529054, guid: bc31f25897f6e0d4891d68995bdd097a, type: 3}
+      propertyPath: typingSpeed
+      value: 0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 8786844795894180806, guid: bc31f25897f6e0d4891d68995bdd097a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -392,6 +396,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3423209350076807244, guid: bc31f25897f6e0d4891d68995bdd097a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6436760001802464626}
     - targetCorrespondingSourceObject: {fileID: 7820146055535316471, guid: bc31f25897f6e0d4891d68995bdd097a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 369228378129868341}
@@ -428,6 +435,18 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3423209350076807244, guid: bc31f25897f6e0d4891d68995bdd097a, type: 3}
   m_PrefabInstance: {fileID: 7239000978189531331}
   m_PrefabAsset: {fileID: 0}
+--- !u!225 &6436760001802464626
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5474045965313671311}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &7587259780536046676
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -50,6 +50,9 @@ public class ObjectPoolingManager : MonoBehaviour
                 pooledObject.objectPool.Release(pooledObject.gameObject);
             }
         }
+
+        pooledCoinController = GetComponentInChildren<PooledCoinController>();
+        pooledMemoryFragmentController = GetComponent<PooledMemoryFragmentController>();
     }
 
     private GameObject CreatePooledObject()

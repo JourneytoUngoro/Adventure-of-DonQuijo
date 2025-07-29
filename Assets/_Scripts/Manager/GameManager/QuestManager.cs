@@ -154,6 +154,8 @@ public class QuestManager : MonoBehaviour, IDataPersistance
 
     public void SaveData(GameData data)
     {
+        if (questDict == null) return;
+
         QuestsData quests = new QuestsData();
         quests.questCount = QuestsDatabase.totalQuests;
         quests.questDatas = new QuestData[quests.questCount];

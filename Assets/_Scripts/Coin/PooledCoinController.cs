@@ -22,9 +22,9 @@ public class PooledCoinController : MonoBehaviour, IDataPersistance
         // coinObject in the Scene disappears after n seconds
         if (activatedCoinObjects != null && activatedCoinObjects.Count > 0)
         {
-            foreach (CoinObject obj in activatedCoinObjects)
+            for (int i = activatedCoinObjects.Count - 1; i >= 0; i--)
             {
-                 obj.timer.Tick();
+                activatedCoinObjects[i].timer.Tick();
             }
         }
 
@@ -116,7 +116,6 @@ public class PooledCoinController : MonoBehaviour, IDataPersistance
         foreach (CoinObject coin in activatedCoinObjects)
         {
             coinData.AddCoinPositions(coin.transform.position);
-            // Debug.Log($"add position {coin.transform.position}");
         }
 
         data.coinData = coinData;

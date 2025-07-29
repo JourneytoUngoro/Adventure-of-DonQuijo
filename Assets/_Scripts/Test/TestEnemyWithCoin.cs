@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class TestEnemyWithCoin : MonoBehaviour
 {
-    public EnemyType enemyType;
     public Transform enemy;
 
     public void Test_OnEnemyDeath()
