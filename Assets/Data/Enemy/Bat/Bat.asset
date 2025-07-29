@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce1ae404565639748975a1496320ed46, type: 3}
+  m_Name: Bat
+  m_EditorClassIdentifier: 
+  <entityStature>k__BackingField: 80
+  <gravityScale>k__BackingField: 100
+  <moveSpeed>k__BackingField: {x: 150, y: 75}
+  <dashSpeed>k__BackingField: {x: 300, y: 150}
+  <jumpSpeed>k__BackingField: 500
+  <gotoLandingStateTime>k__BackingField: 3
+  <stunRecoveryTime>k__BackingField: 3
+  <landingRecoveryTime>k__BackingField: 1
+  <knockbackReboundThresholdSpeed>k__BackingField: 300
+  <wallKnockbackReboundThresholdAngle>k__BackingField: 30
+  <decelerationRatio>k__BackingField: 0.7
+  <dazedTime>k__BackingField: 2
+  <stepSize>k__BackingField: 5
+  <chaseDistance>k__BackingField: 60
+  <maxChaseDistance>k__BackingField: 80
+  <minChaseDistance>k__BackingField: 40
+  <targetingDistance>k__BackingField: 200
+  <traverseAroundDistance>k__BackingField: 20
+  <repositionOffsetDistance>k__BackingField: 10
+  <repositioningTime>k__BackingField: 8
+  <repositioningPossibility>k__BackingField: 0.6
+  <maxBlockableCount>k__BackingField: 2
+  <blockCoolDownTime>k__BackingField: 3
+  <blockPossibility>k__BackingField: 0.7
+  <parryGaugeWhenBlocked>k__BackingField: 0.6
+  <maxParryableCount>k__BackingField: 1
+  <blockParryTime>k__BackingField: 0.4
+  <meleeAttack0CoolDown>k__BackingField: 4
+  <meleeAttack1CoolDown>k__BackingField: 10
+  <meleeAttack2CoolDown>k__BackingField: 4
+  <dashAttackCoolDown>k__BackingField: 15
+  <dodgeAttackCoolDown>k__BackingField: 15
+  <wideAttackCoolDown>k__BackingField: 10
+  <canvasDisableTime>k__BackingField: 5
