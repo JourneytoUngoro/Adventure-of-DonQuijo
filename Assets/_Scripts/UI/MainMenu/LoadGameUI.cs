@@ -157,13 +157,13 @@ public class LoadGameUI : MonoBehaviour
             {
                 // TODO : cutscene01 재생으로 바꿔야 한다
                 Debug.Log("Play Opening Cutscene");
-                Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("SampleScene"), true, false);
+                Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("Stage1"), true, false);
                 Manager.Instance.soundManager.PlayBGM("battleBGM");
             }
             else
             {
                 Debug.Log("Don't Play Opening Cutscene");
-                Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("SampleScene"), true, true);
+                Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("Stage1"), true, true);
                 Manager.Instance.soundManager.PlayBGM("battleBGM");
             }
         }

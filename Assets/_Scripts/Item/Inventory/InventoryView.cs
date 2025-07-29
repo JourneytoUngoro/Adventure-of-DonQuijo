@@ -71,7 +71,7 @@ public class InventoryView : MonoBehaviour
 
     public void RefreshCoins(int amount)
     {
-        coinTMP.text = $"COIN : {amount}";
+        coinTMP.text = $" {amount}";
     }
 
     public async Task<bool> CheckAbandonItem(Item item)

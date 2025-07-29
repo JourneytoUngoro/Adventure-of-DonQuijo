@@ -10,7 +10,7 @@ public class TestEnemyWithCoin : MonoBehaviour
 
     public void Test_OnEnemyDeath()
     {
-        Manager.Instance.stageManager.OnEnemyDeath(enemyType, enemy);
+        Manager.Instance.stageManager.OnEnemyDeath(enemy);
     }
 
 

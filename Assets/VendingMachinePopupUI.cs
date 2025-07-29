@@ -125,7 +125,7 @@ public class VendingMachinePopupUI : MonoBehaviour
     {
         PopupData data = new PopupData
         (
-            string.Empty, $"아이템을\n구매하시겠습니까?", "예 (Z)", "아니오 (X)"
+            string.Empty, $"아이템을\n구매하시겠습니까?", "", ""
         );
 
         guidePopup.SetDynamicPopup(data);

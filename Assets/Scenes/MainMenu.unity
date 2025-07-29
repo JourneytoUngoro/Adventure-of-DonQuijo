@@ -2620,28 +2620,32 @@ PrefabInstance:
       objectReference: {fileID: 102900000, guid: 9990e03c20d31a34e992fa6f781bd427, type: 3}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: adjacentScene._serializedList.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: adjacentScene._serializedList.Array.data[1].Key.m_SceneName
-      value: OpeningCutscene
+      value: Stage1
       objectReference: {fileID: 0}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: adjacentScene._serializedList.Array.data[2].Key.m_SceneName
-      value: SampleScene
+      value: OpeningCutscene
       objectReference: {fileID: 0}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: adjacentScene._serializedList.Array.data[3].Key.m_SceneName
-      value: TransitionTestSceneLeft
+      value: SampleScene
       objectReference: {fileID: 0}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: adjacentScene._serializedList.Array.data[4].Key.m_SceneName
+      value: TransitionTestSceneLeft
+      objectReference: {fileID: 0}
+    - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
+      propertyPath: adjacentScene._serializedList.Array.data[5].Key.m_SceneName
       value: TransitionTestSceneRight
       objectReference: {fileID: 0}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: adjacentScene._serializedList.Array.data[1].Key.m_SceneAsset
       value: 
-      objectReference: {fileID: 102900000, guid: 126f19c2386a521478c33f7989575d9d, type: 3}
+      objectReference: {fileID: 102900000, guid: b2ceeace8e03cd944bafec8aca6121d4, type: 3}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: adjacentScene._serializedList.Array.data[1].Value.Array.size
       value: 0
@@ -2649,21 +2653,33 @@ PrefabInstance:
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: adjacentScene._serializedList.Array.data[2].Key.m_SceneAsset
       value: 
-      objectReference: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
+      objectReference: {fileID: 102900000, guid: 126f19c2386a521478c33f7989575d9d, type: 3}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: adjacentScene._serializedList.Array.data[2].Value.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: adjacentScene._serializedList.Array.data[3].Key.m_SceneAsset
       value: 
-      objectReference: {fileID: 102900000, guid: af968ec0879b2334f9a0e459784e432a, type: 3}
+      objectReference: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
+    - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
+      propertyPath: adjacentScene._serializedList.Array.data[3].Value.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: adjacentScene._serializedList.Array.data[4].Key.m_SceneAsset
       value: 
-      objectReference: {fileID: 102900000, guid: 54c9c0768e317a2449384bc156118230, type: 3}
+      objectReference: {fileID: 102900000, guid: af968ec0879b2334f9a0e459784e432a, type: 3}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: adjacentScene._serializedList.Array.data[4].Value.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
+      propertyPath: adjacentScene._serializedList.Array.data[5].Key.m_SceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: 54c9c0768e317a2449384bc156118230, type: 3}
+    - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
+      propertyPath: adjacentScene._serializedList.Array.data[5].Value.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
@@ -2675,7 +2691,19 @@ PrefabInstance:
       value: TransitionTestSceneRight
       objectReference: {fileID: 0}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
+      propertyPath: adjacentScene._serializedList.Array.data[3].Value.Array.data[0].m_SceneName
+      value: TransitionTestSceneLeft
+      objectReference: {fileID: 0}
+    - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
+      propertyPath: adjacentScene._serializedList.Array.data[3].Value.Array.data[1].m_SceneName
+      value: TransitionTestSceneRight
+      objectReference: {fileID: 0}
+    - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: adjacentScene._serializedList.Array.data[4].Value.Array.data[0].m_SceneName
+      value: SampleScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
+      propertyPath: adjacentScene._serializedList.Array.data[5].Value.Array.data[0].m_SceneName
       value: SampleScene
       objectReference: {fileID: 0}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
@@ -2687,7 +2715,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 102900000, guid: 54c9c0768e317a2449384bc156118230, type: 3}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
+      propertyPath: adjacentScene._serializedList.Array.data[3].Value.Array.data[0].m_SceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: af968ec0879b2334f9a0e459784e432a, type: 3}
+    - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
+      propertyPath: adjacentScene._serializedList.Array.data[3].Value.Array.data[1].m_SceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: 54c9c0768e317a2449384bc156118230, type: 3}
+    - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: adjacentScene._serializedList.Array.data[4].Value.Array.data[0].m_SceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
+    - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
+      propertyPath: adjacentScene._serializedList.Array.data[5].Value.Array.data[0].m_SceneAsset
       value: 
       objectReference: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
     - target: {fileID: 8459663485916472798, guid: e4d442129d5040549878cad154901725, type: 3}
