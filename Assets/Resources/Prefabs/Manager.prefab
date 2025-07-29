@@ -385,7 +385,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df479ebac5ec95f4ca88827a0ce1e312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  excludedSceneInventoryUI:
+  - m_SceneAsset: {fileID: 102900000, guid: 9990e03c20d31a34e992fa6f781bd427, type: 3}
+    m_SceneName: MainMenu
+  - m_SceneAsset: {fileID: 102900000, guid: 126f19c2386a521478c33f7989575d9d, type: 3}
+    m_SceneName: OpeningCutscene
+  _inventory: {fileID: 0}
 --- !u!1 &4905941599733910925
 GameObject:
   m_ObjectHideFlags: 0
