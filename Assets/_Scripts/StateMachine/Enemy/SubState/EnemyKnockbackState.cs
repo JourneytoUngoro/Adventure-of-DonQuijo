@@ -87,7 +87,7 @@ public class EnemyKnockbackState : EnemyState
                     {
                         if (isTargetInDetectionRange)
                         {
-                            stateMachine.ChangeState(enemy.targetInDetectionRangeState);
+                            stateMachine.ChangeState((enemy as Bat).targetInDetectionRangeState);
                         }
                         else
                         {

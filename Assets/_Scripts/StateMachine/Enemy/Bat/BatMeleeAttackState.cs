@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class BatMeleeAttackState : EnemyAbilityState
 {
+    private Bat bat;
+
     public BatMeleeAttackState(Enemy enemy, string animBoolName) : base(enemy, animBoolName)
     {
+        bat = enemy as Bat;
         available = true;
         abilityCoolDownTimer.ChangeDuration(enemyData.meleeAttack0CoolDown);
     }
@@ -14,7 +17,7 @@ public class BatMeleeAttackState : EnemyAbilityState
     {
         base.AnimationActionTrigger(index);
 
-        enemy.combat.DoAttack(enemy.combat.meleeAttack0[index]);
+        enemy.combat.DoAttack(bat.batCombat.meleeAttack[index]);
         enemy.combat.damagedTargets.Clear();
     }
 
@@ -31,7 +34,8 @@ public class BatMeleeAttackState : EnemyAbilityState
 
         available = false;
         enemy.movement.SetVelocityZero();
-        enemy.animator.SetInteger("typeIndex", 0);
+        bat.animator.SetBool("idle", false);
+        Debug.Log("BatMeleeAttackEnter");
     }
 
     public override void Exit()
@@ -54,7 +58,7 @@ public class BatMeleeAttackState : EnemyAbilityState
                 {
                     if (isTargetInDetectionRange)
                     {
-                        stateMachine.ChangeState(enemy.targetInDetectionRangeState);
+                        stateMachine.ChangeState(bat.targetInDetectionRangeState);
                     }
                     else
                     {
@@ -62,7 +66,7 @@ public class BatMeleeAttackState : EnemyAbilityState
                         {
                             enemy.movement.Flip();
                         }
-                        stateMachine.ChangeState(enemy.idleState);
+                        stateMachine.ChangeState(bat.idleState);
                     }
                 }
                 else

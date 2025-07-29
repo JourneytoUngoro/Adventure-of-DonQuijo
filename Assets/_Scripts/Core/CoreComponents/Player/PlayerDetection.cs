@@ -15,19 +15,6 @@ public class PlayerDetection : Detection, IDataPersistance
         base.Awake();
 
         player = entity as Player;
-        Debug.Log("OnDetectionAwake: " + transform.position);
-    }
-
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-
-        Debug.Log("OnDetectionOnEnable: " + transform.position);
-    }
-
-    protected void Start()
-    {
-        Debug.Log("OnDetectionStart: " + transform.position);
     }
 
     protected override void FixedUpdate()

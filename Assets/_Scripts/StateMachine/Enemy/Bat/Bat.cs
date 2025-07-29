@@ -6,20 +6,23 @@ using UnityEngine;
 
 public class Bat : Enemy
 {
+    public BatIdleState idleState { get; private set; }
     public BatMeleeAttackState meleeAttackState { get; private set; }
+    public BatTargetInDetectionRangeState targetInDetectionRangeState { get; private set; }
 
     public BatCombat batCombat { get; private set; }
 
     protected override void Start()
     {
         base.Start();
-        Debug.Log("Bat");
+        
         batCombat = entityCombat as BatCombat;
 
+        idleState = new BatIdleState(this, "idle");
+        targetInDetectionRangeState = new BatTargetInDetectionRangeState(this, "move");
         meleeAttackState = new BatMeleeAttackState(this, "meleeAttack");
 
-        abilityStates = new List<EnemyAbilityState>();
-        IEnumerable<PropertyInfo> abilityStateProperties = GetType()
+        /*IEnumerable<PropertyInfo> abilityStateProperties = GetType()
             .GetProperties(BindingFlags.Public | BindingFlags.Instance)
             .Where(property => property.PropertyType.IsSubclassOf(typeof(EnemyAbilityState)));
 
@@ -27,6 +30,8 @@ public class Bat : Enemy
         {
             EnemyAbilityState abilityState = property.GetValue(this) as EnemyAbilityState;
             abilityStates.Add(abilityState);
-        }
+        }*/
+
+        enemyStateMachine.Initialize(idleState);
     }
 }

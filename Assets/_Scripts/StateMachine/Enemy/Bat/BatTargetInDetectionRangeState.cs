@@ -10,6 +10,14 @@ public class BatTargetInDetectionRangeState : EnemyTargetInDetectionRangeState
 
     public BatTargetInDetectionRangeState(Enemy enemy, string animBoolName) : base(enemy, animBoolName)
     {
+        bat = enemy as Bat;
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        bat.animator.SetBool("idle", false);
     }
 
     public override void DoChecks()
@@ -23,7 +31,7 @@ public class BatTargetInDetectionRangeState : EnemyTargetInDetectionRangeState
     {
         base.LateLogicUpdate();
 
-        /*if (!onStateExit)
+        if (!onStateExit)
         {
             if (isGrounded)
             {
@@ -33,12 +41,12 @@ public class BatTargetInDetectionRangeState : EnemyTargetInDetectionRangeState
                     {
                         enemy.movement.Flip();
                     }
-                    // enemy.detection.currentTarget?.entityCombat.targetedBy.Remove(enemy);
-                    stateMachine.ChangeState(enemy.idleState);
+
+                    stateMachine.ChangeState(bat.idleState);
                 }
                 else if (enemy.movement.navMeshAgentState != NavMeshAgentState.TraverseAround)
                 {
-                    if (enemy.status[(int)CurrentStatus.Alerted])
+                    /*if (enemy.status[(int)CurrentStatus.Alerted])
                     {
                         if (enemy.combat.currentParryStack > 0)
                         {
@@ -52,78 +60,12 @@ public class BatTargetInDetectionRangeState : EnemyTargetInDetectionRangeState
                         {
                             stateMachine.ChangeState(enemy.blockParryState);
                         }
-                    }
-                    else if (isTargetInWideAttackRange && enemy.wideAttackState.available)
-                    {
-                        stateMachine.ChangeState(enemy.wideAttackState);
-                    }
-                    else if (isTargetInDashAttackRange && enemy.dashAttackState.available)
-                    {
-                        stateMachine.ChangeState(enemy.dashAttackState);
-                    }
-                    else if (isTargetInWideAttackRange && enemy.wideAttackState.available)
-                    {
-                        stateMachine.ChangeState(enemy.wideAttackState);
-                    }
-                    else
-                    {
-                        meleeAttacks[0] = isTargetInMeleeAttack0Range && enemy.meleeAttack0State.available;
-                        meleeAttacks[1] = isTargetInMeleeAttack1Range && enemy.meleeAttack1State.available;
-                        meleeAttacks[2] = isTargetInMeleeAttack2Range && enemy.meleeAttack2State.available;
+                    }*/
 
-                        int? meleeAttackType = UtilityFunctions.RandomTrueIndex(meleeAttacks);
-
-                        if (meleeAttackType.HasValue)
-                        {
-                            switch (meleeAttackType.Value)
-                            {
-                                case 0:
-                                    stateMachine.ChangeState(enemy.meleeAttack0State); break;
-                                case 1:
-                                    stateMachine.ChangeState(enemy.meleeAttack1State); break;
-                                case 2:
-                                    stateMachine.ChangeState(enemy.meleeAttack2State); break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
-                }
-            }
-        }*/
-
-        if (!onStateExit)
-        {
-            if (!isTargetInDetectionRange)
-            {
-                if (enemy.detection.currentTargetLastVelocity.x * facingDirection < 0)
-                {
-                    enemy.movement.Flip();
-                }
-                // enemy.detection.currentTarget?.entityCombat.targetedBy.Remove(enemy);
-                stateMachine.ChangeState(enemy.idleState);
-            }
-            else if (enemy.movement.navMeshAgentState != NavMeshAgentState.TraverseAround)
-            {
-                /*if (enemy.status[(int)CurrentStatus.Alerted])
-                {
-                    if (enemy.combat.currentParryStack > 0)
+                    if (isTargetInMeleeAttackRange && bat.meleeAttackState.available)
                     {
-                        stateMachine.ChangeState(enemy.blockParryState);
+                        stateMachine.ChangeState(bat.meleeAttackState);
                     }
-                    else if (enemy.dodgeAttackState.available)
-                    {
-                        stateMachine.ChangeState(enemy.dodgeAttackState);
-                    }
-                    else if (enemy.combat.currentBlockStack > 0)
-                    {
-                        stateMachine.ChangeState(enemy.blockParryState);
-                    }
-                }*/
-                
-                if (isTargetInMeleeAttackRange)
-                {
-                    stateMachine.ChangeState(bat.meleeAttackState);
                 }
             }
         }

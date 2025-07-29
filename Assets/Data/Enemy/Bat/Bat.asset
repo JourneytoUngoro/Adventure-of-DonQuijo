@@ -25,10 +25,10 @@ MonoBehaviour:
   <decelerationRatio>k__BackingField: 0.7
   <dazedTime>k__BackingField: 2
   <stepSize>k__BackingField: 5
-  <chaseDistance>k__BackingField: 60
-  <maxChaseDistance>k__BackingField: 80
-  <minChaseDistance>k__BackingField: 40
-  <targetingDistance>k__BackingField: 200
+  <chaseDistance>k__BackingField: 30
+  <maxChaseDistance>k__BackingField: 100
+  <minChaseDistance>k__BackingField: 20
+  <targetingDistance>k__BackingField: 100
   <traverseAroundDistance>k__BackingField: 20
   <repositionOffsetDistance>k__BackingField: 10
   <repositioningTime>k__BackingField: 8

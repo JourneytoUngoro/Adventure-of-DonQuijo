@@ -12,10 +12,10 @@ public class Enemy : Entity
     #region State Variables
     public EnemyStateMachine enemyStateMachine { get; private set; }
 
-    public EnemyIdleState idleState { get; private set; }
+    public EnemyIdleState idleState { get; protected set; }
     public EnemyKnockbackState knockbackState { get; private set; }
     public EnemyStunnedState stunnedState { get; private set; }
-    public EnemyTargetInDetectionRangeState targetInDetectionRangeState { get; private set; }
+    public EnemyTargetInDetectionRangeState targetInDetectionRangeState { get; protected set; }
     // public EnemyRangedAttckState rangedAttckState { get; private set; }
     public EnemyBlockParryState blockParryState { get; private set; }
     public EnemyDeadState deadState { get; private set; }
@@ -53,15 +53,11 @@ public class Enemy : Entity
         enemyStateMachine = new EnemyStateMachine();
         entityStateMachine = enemyStateMachine;
 
-        idleState = new EnemyIdleState(this, "idle");
         stunnedState = new EnemyStunnedState(this, "stunned");
         knockbackState = new EnemyKnockbackState(this, "knockback");
         deadState = new EnemyDeadState(this, "dead");
 
-        targetInDetectionRangeState = new EnemyTargetInDetectionRangeState(this, "move");
-
-        enemyStateMachine.Initialize(idleState);
-
+        abilityStates = new List<EnemyAbilityState>();
         /*jumpState = new PlayerJumpState(this, "inAir");
         inAirState = new PlayerInAirState(this, "inAir");
         dodgeState = new PlayerDodgeState(this, "dodge");

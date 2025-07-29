@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3fdaa975aba770740a74052ea28c2832
+guid: d42a0d2910847b447a7b83f6446061a8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Enemy_Bat_0
+      name: Enemy-Bat_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 244
+        y: 333
         width: 69
-        height: 61
+        height: 111
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 270bb207701721d4995386c2a3eaf4a4
-      internalID: -666337654
+      spriteID: a196fac3929bea4438325e3681b163f9
+      internalID: -1521442540
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Bat_1
+      name: Enemy-Bat_1
       rect:
         serializedVersion: 2
         x: 69
-        y: 244
+        y: 333
         width: 69
-        height: 61
+        height: 111
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d831d393d3bd1504f872d1455714ef96
-      internalID: -1886351238
+      spriteID: 57855394c42b0de4793dc28b83a5dc88
+      internalID: -1495951986
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Bat_2
+      name: Enemy-Bat_2
       rect:
         serializedVersion: 2
         x: 138
-        y: 244
+        y: 333
         width: 69
-        height: 61
+        height: 111
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +153,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39fb395a81560c64293864102401ec71
-      internalID: 713694655
+      spriteID: 1b2abeb380a7eef4299411d6e42d1d25
+      internalID: 937328713
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Bat_3
+      name: Enemy-Bat_3
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 333
+        width: 69
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe8ba4ef0f6a99b4b9dc9599f41e9d55
+      internalID: -2046517133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy-Bat_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 183
+        y: 222
         width: 69
-        height: 61
+        height: 111
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,20 +195,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b17c65a0ff578f24c9af62192667cd23
-      internalID: -814688402
+      spriteID: fc9d2788d8b62cc498a3dd61cb197510
+      internalID: -555505009
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Bat_4
+      name: Enemy-Bat_5
       rect:
         serializedVersion: 2
         x: 69
-        y: 183
+        y: 222
         width: 69
-        height: 61
+        height: 111
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,20 +216,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67cad609b4405b04ea34d163db7eddc1
-      internalID: 1346496174
+      spriteID: e85800c9bf0855b4a880e7662f959603
+      internalID: 169240181
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Bat_5
+      name: Enemy-Bat_6
       rect:
         serializedVersion: 2
         x: 138
-        y: 183
+        y: 222
         width: 69
-        height: 61
+        height: 111
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,20 +237,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa66789043b1df14b8f3ee2f03dfe76b
-      internalID: -1284366640
+      spriteID: 1a80f8d20a6726d4db8659a653e3bbdf
+      internalID: -1910673743
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Bat_6
+      name: Enemy-Bat_7
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 222
+        width: 69
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4bf3bab57e316b47850763b5837aa0b
+      internalID: -1696013324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy-Bat_8
       rect:
         serializedVersion: 2
         x: 0
-        y: 122
+        y: 111
         width: 69
-        height: 61
+        height: 111
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,20 +279,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: adda83dd29f395e408bc6dbbe4085a88
-      internalID: -1495753394
+      spriteID: a9296c4f3007963428d347ba3e982afc
+      internalID: 813021808
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Bat_7
+      name: Enemy-Bat_9
       rect:
         serializedVersion: 2
         x: 69
-        y: 122
+        y: 111
         width: 69
-        height: 61
+        height: 111
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,20 +300,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f12c341142004424fbb8a015b0a7238b
-      internalID: 907238511
+      spriteID: 24381236dcc27b944ab03139c9a0e357
+      internalID: -1917402273
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Bat_8
+      name: Enemy-Bat_10
       rect:
         serializedVersion: 2
         x: 138
-        y: 122
+        y: 111
         width: 69
-        height: 61
+        height: 111
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,20 +321,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d4e5b3caf506b44bab36f8ff4ee29e6
-      internalID: -449807878
+      spriteID: 58708354660b6e648a00e9433a221b90
+      internalID: -827197804
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Bat_9
+      name: Enemy-Bat_11
       rect:
         serializedVersion: 2
-        x: 0
-        y: 61
+        x: 207
+        y: 111
         width: 69
-        height: 61
+        height: 111
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -300,62 +342,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9901b0e84d435b44d9e0733b591dac63
-      internalID: -218606635
+      spriteID: 12b52c428e1a0fa478f30845121725b1
+      internalID: -723245713
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Bat_10
-      rect:
-        serializedVersion: 2
-        x: 69
-        y: 61
-        width: 69
-        height: 61
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4ba914efa5f6615439d68487ddbf344d
-      internalID: -1120289748
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Enemy_Bat_11
-      rect:
-        serializedVersion: 2
-        x: 138
-        y: 61
-        width: 69
-        height: 61
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 73f6acbcdbb42e04fb806460789d49a2
-      internalID: -1107177782
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Enemy_Bat_12
+      name: Enemy-Bat_12
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 69
-        height: 61
+        height: 111
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -363,20 +363,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a23e5485d917c2a4787271f4e2f2eb63
-      internalID: 1407686154
+      spriteID: dc363457888a7b84fa99fb61adefef34
+      internalID: -1885125376
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Bat_13
+      name: Enemy-Bat_13
       rect:
         serializedVersion: 2
         x: 69
         y: 0
         width: 69
-        height: 61
+        height: 111
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -384,8 +384,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2cc0173d4541964694dd64c52be44af
-      internalID: 1947317151
+      spriteID: 432446aeda3e1eb4c8b9c618d1c5f185
+      internalID: 1606556856
       vertices: []
       indices: 
       edges: []
@@ -401,20 +401,20 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Enemy_Bat_0: -666337654
-      Enemy_Bat_1: -1886351238
-      Enemy_Bat_10: -1120289748
-      Enemy_Bat_11: -1107177782
-      Enemy_Bat_12: 1407686154
-      Enemy_Bat_13: 1947317151
-      Enemy_Bat_2: 713694655
-      Enemy_Bat_3: -814688402
-      Enemy_Bat_4: 1346496174
-      Enemy_Bat_5: -1284366640
-      Enemy_Bat_6: -1495753394
-      Enemy_Bat_7: 907238511
-      Enemy_Bat_8: -449807878
-      Enemy_Bat_9: -218606635
+      Enemy-Bat_0: -1521442540
+      Enemy-Bat_1: -1495951986
+      Enemy-Bat_10: -827197804
+      Enemy-Bat_11: -723245713
+      Enemy-Bat_12: -1885125376
+      Enemy-Bat_13: 1606556856
+      Enemy-Bat_2: 937328713
+      Enemy-Bat_3: -2046517133
+      Enemy-Bat_4: -555505009
+      Enemy-Bat_5: 169240181
+      Enemy-Bat_6: -1910673743
+      Enemy-Bat_7: -1696013324
+      Enemy-Bat_8: 813021808
+      Enemy-Bat_9: -1917402273
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -17,17 +17,4 @@ public class EnemyIdleState : EnemyState
         enemy.movement.SetVelocityZero();
         enemy.SetCurrentEntityStature(enemy.enemyData.entityStature);
     }
-
-    public override void LogicUpdate()
-    {
-        base.LogicUpdate();
-
-        if (!onStateExit)
-        {
-            if (isTargetInDetectionRange && !enemy.detection.currentTarget.isDead)
-            {
-                stateMachine.ChangeState(enemy.targetInDetectionRangeState);
-            }
-        }
-    }
 }
