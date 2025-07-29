@@ -23,16 +23,14 @@ public class EnemyTargetInDetectionRangeState : EnemyState
     public EnemyTargetInDetectionRangeState(Enemy enemy, string animBoolName) : base(enemy, animBoolName)
     {
         repositioningTimer = new Timer(enemyData.repositioningTime);
+
         repositioningTimer.timerAction += () =>
         {
-            Debug.Log("TraverseTimer");
-
             if (UtilityFunctions.RandomSuccess(enemy.enemyData.repositioningPossibility))
             {
                 traverseAroundFlag = false;
                 enemy.navMeshAgent.enabled = true;
                 enemy.movement.ChangeNavMeshAgentState(NavMeshAgentState.TraverseAround);
-                Debug.Log("Traverse!");
 
                 positionOffset = Random.insideUnitCircle * enemy.enemyData.repositionOffsetDistance;
                 baseDestinationPosition = enemy.detection.currentTarget.entityDetection.currentProjectedPosition;
@@ -68,11 +66,11 @@ public class EnemyTargetInDetectionRangeState : EnemyState
     {
         base.DoChecks();
 
-        isTargetInMeleeAttack0Range = enemy.combat.IsTargetInRangeOf(enemy.combat.meleeAttack0[0]);
+        /*isTargetInMeleeAttack0Range = enemy.combat.IsTargetInRangeOf(enemy.combat.meleeAttack0[0]);
         isTargetInMeleeAttack1Range = enemy.combat.IsTargetInRangeOf(enemy.combat.meleeAttack1[0]);
         isTargetInMeleeAttack2Range = enemy.combat.IsTargetInRangeOf(enemy.combat.meleeAttack2[0]);
         isTargetInDashAttackRange = enemy.detection.currentTarget != null && Vector3.Distance(enemy.detection.currentProjectedPosition, enemy.detection.currentTarget.entityDetection.currentProjectedPosition) < 400.0f;
-        isTargetInWideAttackRange = enemy.combat.IsTargetInRangeOf(enemy.combat.wideRangeAttack);
+        isTargetInWideAttackRange = enemy.combat.IsTargetInRangeOf(enemy.combat.wideRangeAttack);*/
     }
 
     public override void LogicUpdate()
@@ -81,8 +79,6 @@ public class EnemyTargetInDetectionRangeState : EnemyState
 
         if (!onStateExit)
         {
-            
-
             repositioningTimer.Tick();
         }
     }
@@ -91,7 +87,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
     {
         base.LateLogicUpdate();
 
-        if (!onStateExit)
+        /*if (!onStateExit)
         {
             if (isGrounded)
             {
@@ -106,7 +102,7 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                 }
                 else if (enemy.movement.navMeshAgentState != NavMeshAgentState.TraverseAround)
                 {
-                    /*if (enemy.status[(int)CurrentStatus.Alerted])
+                    if (enemy.status[(int)CurrentStatus.Alerted])
                     {
                         if (enemy.combat.currentParryStack > 0)
                         {
@@ -155,10 +151,10 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                                     break;
                             }
                         }
-                    }*/
+                    }
                 }
             }
-        }
+        }*/
     }
 
     public override void PhysicsUpdate()
