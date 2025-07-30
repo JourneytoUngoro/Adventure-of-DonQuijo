@@ -16,6 +16,7 @@ public class PlayerIdleState : PlayerGroundedState
     {
         base.Enter();
 
+        player.SetCurrentEntityStature(player.playerData.entityStature);
         player.movement.SetVelocityZero();
         dashMaintainTimer.StartSingleUseTimer();
     }

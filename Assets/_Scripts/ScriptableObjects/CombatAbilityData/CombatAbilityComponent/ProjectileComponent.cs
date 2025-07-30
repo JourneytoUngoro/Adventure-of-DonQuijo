@@ -15,7 +15,7 @@ public class ProjectileComponent : CombatAbilityComponent
 
     public override void ApplyCombatAbility(Collider2D target, OverlapCollider[] overlapColliders)
     {
-        Transform projectileFireBaseTransform = overlapColliders.Select(overlapCollider => overlapCollider.angleCheckBaseTransform).FirstOrDefault();
+        /*Transform projectileFireBaseTransform = overlapColliders.Select(overlapCollider => overlapCollider.angleCheckBaseTransform).FirstOrDefault();
         Transform[] projectileFireTransforms = projectileFireBaseTransform.GetComponentsInChildren<Transform>().Skip(1).ToArray();
 
         if (projectileFireTransforms.Count() == 0)
@@ -30,7 +30,12 @@ public class ProjectileComponent : CombatAbilityComponent
                 // Vector2 direction = new Vector2(Mathf.Cos(deg2Rad), Mathf.Sin(deg2Rad));
                 FireProjectile(projectileFireTransform);
             }
-        }
+        }*/
+        // GameObject projectileGameObject = Manager.Instance.objectPoolingManager.GetGameObject(projectilePrefab.name);
+        GameObject projectileGameObject = Object.Instantiate(projectilePrefab);
+        projectileGameObject.transform.position = target.transform.position;
+        Debug.Log("TargetPosition: " + target.transform.position);
+        Debug.Log("ProjectilePosition: " + projectileGameObject.transform.position);
     }
 
     private void FireProjectile(Transform projectileFireTransform)
@@ -48,7 +53,8 @@ public class ProjectileComponent : CombatAbilityComponent
             case ProjectileDirection.Targeted:
                 if (pertainedCombatAbility.sourceEntity.entityDetection.currentTarget != null)
                 {
-                    direction = (pertainedCombatAbility.sourceEntity.entityDetection.currentTarget.transform.position - projectileFireTransform.position).normalized;
+                    direction = (pertainedCombatAbility.sourceEntity.entityDetection.currentTarget.entityDetection.currentSpacePosition - projectileFireTransform.position).normalized;
+                    projectile.transform.position = projectileFireTransform.position;
                     projectile.FireProjectile(pertainedCombatAbility.sourceEntity, pertainedCombatAbility.sourceEntity.entityDetection.currentTarget, projectilePlaneSpeed, direction, projectileOrthogonalSpeed);
                 }
                 else

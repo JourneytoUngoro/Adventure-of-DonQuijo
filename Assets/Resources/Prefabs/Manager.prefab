@@ -61,7 +61,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8038998662044724239
 Transform:
   m_ObjectHideFlags: 0
@@ -97,6 +97,10 @@ MonoBehaviour:
     - Key:
         m_SceneAsset: {fileID: 102900000, guid: 9990e03c20d31a34e992fa6f781bd427, type: 3}
         m_SceneName: MainMenu
+      Value: []
+    - Key:
+        m_SceneAsset: {fileID: 102900000, guid: b2ceeace8e03cd944bafec8aca6121d4, type: 3}
+        m_SceneName: Stage1
       Value: []
     - Key:
         m_SceneAsset: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
@@ -534,7 +538,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fade571fdbf26345b5c28b36151ad2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <objectInfos>k__BackingField: []
+  <objectInfos>k__BackingField:
+  - objectName: 
+    prefab: {fileID: 2272011668388919783, guid: ea471ef404fbf3141a18d5e7a1284949, type: 3}
+    defaultCapacity: 0
+  - objectName: 
+    prefab: {fileID: 2272011668388919783, guid: 8c0a1fa40eac865438dc7f030c012510, type: 3}
+    defaultCapacity: 0
 --- !u!1 &8552151664642170731
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,7 +570,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8552151664642170731}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

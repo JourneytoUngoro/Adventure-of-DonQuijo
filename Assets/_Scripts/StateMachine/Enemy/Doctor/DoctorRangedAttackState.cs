@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoliceMeleeAttackState : EnemyAbilityState
+public class DoctorRangedAttackState : EnemyAbilityState
 {
-    private Police police;
+    private Doctor doctor;
 
-    public PoliceMeleeAttackState(Enemy enemy, string animBoolName) : base(enemy, animBoolName)
+    public DoctorRangedAttackState(Enemy enemy, string animBoolName) : base(enemy, animBoolName)
     {
-        police = enemy as Police;
+        doctor = enemy as Doctor;
         available = true;
         abilityCoolDownTimer.ChangeDuration(enemyData.meleeAttack0CoolDown);
     }
@@ -17,7 +17,7 @@ public class PoliceMeleeAttackState : EnemyAbilityState
     {
         base.AnimationActionTrigger(index);
 
-        enemy.combat.DoAttack(police.policeCombat.meleeAttack[index]);
+        enemy.combat.DoAttack(doctor.doctorCombat.rangedAttack[index]);
         enemy.combat.damagedTargets.Clear();
     }
 
@@ -34,7 +34,7 @@ public class PoliceMeleeAttackState : EnemyAbilityState
 
         available = false;
         enemy.movement.SetVelocityZero();
-        police.animator.SetBool("idle", false);
+        doctor.animator.SetBool("idle", false);
     }
 
     public override void Exit()
@@ -57,7 +57,7 @@ public class PoliceMeleeAttackState : EnemyAbilityState
                 {
                     if (isTargetInDetectionRange)
                     {
-                        stateMachine.ChangeState(police.targetInDetectionRangeState);
+                        stateMachine.ChangeState(doctor.targetInDetectionRangeState);
                     }
                     else
                     {
@@ -65,7 +65,7 @@ public class PoliceMeleeAttackState : EnemyAbilityState
                         {
                             enemy.movement.Flip();
                         }
-                        stateMachine.ChangeState(police.idleState);
+                        stateMachine.ChangeState(doctor.idleState);
                     }
                 }
                 else
