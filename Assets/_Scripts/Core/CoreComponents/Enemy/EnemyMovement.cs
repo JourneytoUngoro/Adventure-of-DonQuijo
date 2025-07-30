@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum NavMeshAgentState { Halt, Chase, InDistance, TraverseAround }
+public enum NavMeshAgentState { Run, Chase, InDistance, TraverseAround }
 
 public class EnemyMovement : Movement
 {

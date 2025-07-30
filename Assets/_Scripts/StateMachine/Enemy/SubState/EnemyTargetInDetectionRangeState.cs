@@ -33,13 +33,13 @@ public class EnemyTargetInDetectionRangeState : EnemyState
                 enemy.navMeshAgent.enabled = true;
                 enemy.movement.ChangeNavMeshAgentState(NavMeshAgentState.TraverseAround);
 
-                positionOffset = Random.insideUnitCircle * enemy.enemyData.repositionOffsetDistance;
+                /*positionOffset = Random.insideUnitCircle * enemy.enemyData.repositionOffsetDistance;
                 baseDestinationPosition = enemy.detection.currentTarget.entityDetection.currentProjectedPosition;
 
                 traverseDirection = baseDestinationPosition.x > enemy.detection.currentProjectedPosition.x ? 1 : -1;
                 currentDestination = baseDestinationPosition + (Vector3)positionOffset;
                 currentDestination += UtilityFunctions.RandomSuccess(0.5f) ? Vector3.up * enemy.enemyData.repositionOffsetDistance : Vector3.down * enemy.enemyData.repositionOffsetDistance;
-                enemy.navMeshAgent.SetDestination(currentDestination);
+                enemy.navMeshAgent.SetDestination(currentDestination);*/
             }
         };
     }

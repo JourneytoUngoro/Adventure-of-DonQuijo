@@ -55,5 +55,13 @@ public class EnemyState : EntityState
         {
             (enemy as Bat).meleeAttackState.abilityCoolDownTimer.Tick();
         }
+        else if (enemy.GetType() == typeof(Police))
+        {
+            (enemy as Police).meleeAttackState.abilityCoolDownTimer.Tick();
+        }
+        else if (enemy.GetType() == typeof(Doctor))
+        {
+            (enemy as Doctor).rangedAttackState.abilityCoolDownTimer.Tick();
+        }
     }
 }

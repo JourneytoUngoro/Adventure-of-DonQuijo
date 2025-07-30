@@ -34,8 +34,6 @@ public class ProjectileComponent : CombatAbilityComponent
         // GameObject projectileGameObject = Manager.Instance.objectPoolingManager.GetGameObject(projectilePrefab.name);
         GameObject projectileGameObject = Object.Instantiate(projectilePrefab);
         projectileGameObject.transform.position = target.transform.position;
-        Debug.Log("TargetPosition: " + target.transform.position);
-        Debug.Log("ProjectilePosition: " + projectileGameObject.transform.position);
     }
 
     private void FireProjectile(Transform projectileFireTransform)

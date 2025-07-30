@@ -122,13 +122,12 @@ public abstract class Combat : CoreComponent
                 damageTargets = damageTargets
                     .Union(detectedDamageTargets.Where(target => {
                         if (target == null) return false;
-                        else return true;
-                        /*Entity targetEntity = target.GetComponentInParent<Entity>();
+                        Entity targetEntity = target.GetComponentInParent<Entity>();
                         float targetEntityFeetHeight = targetEntity.entityDetection.currentEntityHeight;
                         float targetEntityHeadHeight = targetEntityFeetHeight + targetEntity.currentEntityStature;
                         float colliderBottomHeight = overlapCollider.collider.gameObject.transform.position.z + entity.entityDetection.currentEntityHeight;
                         float colliderTopHeight = colliderBottomHeight + overlapCollider.height;
-                        return !(targetEntityHeadHeight <= colliderBottomHeight || colliderTopHeight <= targetEntityFeetHeight);*/
+                        return !(targetEntityHeadHeight < colliderBottomHeight || colliderTopHeight < targetEntityFeetHeight);
                     })).ToList();
             }
 

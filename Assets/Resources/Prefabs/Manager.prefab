@@ -61,7 +61,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8038998662044724239
 Transform:
   m_ObjectHideFlags: 0
@@ -102,26 +102,6 @@ MonoBehaviour:
         m_SceneAsset: {fileID: 102900000, guid: b2ceeace8e03cd944bafec8aca6121d4, type: 3}
         m_SceneName: Stage1
       Value: []
-    - Key:
-        m_SceneAsset: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
-        m_SceneName: SampleScene
-      Value:
-      - m_SceneAsset: {fileID: 102900000, guid: af968ec0879b2334f9a0e459784e432a, type: 3}
-        m_SceneName: TransitionTestSceneLeft
-      - m_SceneAsset: {fileID: 102900000, guid: 54c9c0768e317a2449384bc156118230, type: 3}
-        m_SceneName: TransitionTestSceneRight
-    - Key:
-        m_SceneAsset: {fileID: 102900000, guid: af968ec0879b2334f9a0e459784e432a, type: 3}
-        m_SceneName: TransitionTestSceneLeft
-      Value:
-      - m_SceneAsset: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
-        m_SceneName: SampleScene
-    - Key:
-        m_SceneAsset: {fileID: 102900000, guid: 54c9c0768e317a2449384bc156118230, type: 3}
-        m_SceneName: TransitionTestSceneRight
-      Value:
-      - m_SceneAsset: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
-        m_SceneName: SampleScene
   cinemachineVirtualCamera: {fileID: 0}
   minDuration: 0.1
   statusBar: {fileID: 0}

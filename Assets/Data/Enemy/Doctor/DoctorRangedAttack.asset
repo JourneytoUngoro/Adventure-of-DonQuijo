@@ -31,7 +31,7 @@ MonoBehaviour:
       data:
         name: ProjectileComponent
         <pertainedCombatAbility>k__BackingField: {fileID: 11400000}
-        <projectilePrefab>k__BackingField: {fileID: 2272011668388919783, guid: ea471ef404fbf3141a18d5e7a1284949, type: 3}
+        <projectilePrefab>k__BackingField: {fileID: 2272011668388919783, guid: 8c0a1fa40eac865438dc7f030c012510, type: 3}
         <whatIsDamageable>k__BackingField:
           serializedVersion: 2
           m_Bits: 64

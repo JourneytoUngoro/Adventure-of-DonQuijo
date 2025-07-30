@@ -46,7 +46,7 @@ public class Explosion : PooledObject
 
     public override void ReleaseObject()
     {
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
         /*base.ReleaseObject();
 
         sourceEntity = null;
@@ -100,6 +100,8 @@ public class Explosion : PooledObject
             if (damagedTargets.Contains(damageTarget)) continue;
             if (damageTarget.CompareTag("Invinsible")) continue;
             if (combatAbilityWithColliders.combatAbilityData.canBeDodged && damageTarget.CompareTag("Dodge")) continue;
+
+            Debug.Log(damageTarget);
 
             foreach (CombatAbilityComponent combatAbilityComponent in combatAbilityWithColliders.combatAbilityData.combatAbilityComponents)
             {

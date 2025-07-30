@@ -67,7 +67,7 @@ public class Player : Entity
         }
 
         DontDestroyOnLoad(gameObject);
-        // gameObject.SetActive(false);
+        gameObject.SetActive(false);
         #endregion
     }
 
