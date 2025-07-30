@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce1ae404565639748975a1496320ed46, type: 3}
-  m_Name: Bat
+  m_Name: Police
   m_EditorClassIdentifier: 
   <entityStature>k__BackingField: 80
   <gravityScale>k__BackingField: 100
-  <moveSpeed>k__BackingField: {x: 150, y: 75}
-  <dashSpeed>k__BackingField: {x: 300, y: 150}
+  <moveSpeed>k__BackingField: {x: 100, y: 50}
+  <dashSpeed>k__BackingField: {x: 200, y: 100}
   <jumpSpeed>k__BackingField: 500
   <gotoLandingStateTime>k__BackingField: 3
   <stunRecoveryTime>k__BackingField: 3
@@ -25,10 +25,10 @@ MonoBehaviour:
   <decelerationRatio>k__BackingField: 0.7
   <dazedTime>k__BackingField: 2
   <stepSize>k__BackingField: 5
-  <chaseDistance>k__BackingField: 30
-  <maxChaseDistance>k__BackingField: 100
-  <minChaseDistance>k__BackingField: 20
-  <targetingDistance>k__BackingField: 100
+  <chaseDistance>k__BackingField: 60
+  <maxChaseDistance>k__BackingField: 80
+  <minChaseDistance>k__BackingField: 40
+  <targetingDistance>k__BackingField: 200
   <traverseAroundDistance>k__BackingField: 20
   <repositionOffsetDistance>k__BackingField: 10
   <repositioningTime>k__BackingField: 8

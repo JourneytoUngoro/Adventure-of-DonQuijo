@@ -2,29 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BatTargetInDetectionRangeState : EnemyTargetInDetectionRangeState
+public class PoliceTargetInDetectionRangeState : EnemyTargetInDetectionRangeState
 {
-    public Bat bat { get; private set; }
+    public Police police { get; private set; }
 
     private bool isTargetInMeleeAttackRange;
 
-    public BatTargetInDetectionRangeState(Enemy enemy, string animBoolName) : base(enemy, animBoolName)
+    public PoliceTargetInDetectionRangeState(Enemy enemy, string animBoolName) : base(enemy, animBoolName)
     {
-        bat = enemy as Bat;
+        police = enemy as Police;
     }
 
     public override void Exit()
     {
         base.Exit();
 
-        bat.animator.SetBool("idle", false);
+        police.animator.SetBool("idle", false);
     }
 
     public override void DoChecks()
     {
         base.DoChecks();
 
-        isTargetInMeleeAttackRange = enemy.combat.IsTargetInRangeOf(bat.batCombat.meleeAttack);
+        isTargetInMeleeAttackRange = enemy.combat.IsTargetInRangeOf(police.policeCombat.meleeAttack);
     }
 
     public override void LateLogicUpdate()
@@ -42,7 +42,7 @@ public class BatTargetInDetectionRangeState : EnemyTargetInDetectionRangeState
                         enemy.movement.Flip();
                     }
 
-                    stateMachine.ChangeState(bat.idleState);
+                    stateMachine.ChangeState(police.idleState);
                 }
                 else if (enemy.movement.navMeshAgentState != NavMeshAgentState.TraverseAround)
                 {
@@ -62,9 +62,9 @@ public class BatTargetInDetectionRangeState : EnemyTargetInDetectionRangeState
                         }
                     }*/
 
-                    if (isTargetInMeleeAttackRange && bat.meleeAttackState.available)
+                    if (isTargetInMeleeAttackRange && police.meleeAttackState.available)
                     {
-                        stateMachine.ChangeState(bat.meleeAttackState);
+                        stateMachine.ChangeState(police.meleeAttackState);
                     }
                 }
             }

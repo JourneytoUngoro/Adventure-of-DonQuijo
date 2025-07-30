@@ -298,7 +298,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -1040,7 +1040,7 @@ MonoBehaviour:
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: dbb1736a7ce762f45aa0c4c3a4081319, type: 2}
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <collider>k__BackingField: {fileID: 0}
+    - <collider>k__BackingField: {fileID: 5809313670041095413}
       <height>k__BackingField: 57
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 0}
@@ -1053,7 +1053,7 @@ MonoBehaviour:
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: ed95777e820ffc04d866753536ffc808, type: 2}
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <collider>k__BackingField: {fileID: 0}
+    - <collider>k__BackingField: {fileID: 3504652149920837184}
       <height>k__BackingField: 57
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 0}
@@ -1063,7 +1063,7 @@ MonoBehaviour:
   <meleeAttack>k__BackingField:
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <collider>k__BackingField: {fileID: 0}
+    - <collider>k__BackingField: {fileID: 5458711366921619934}
       <height>k__BackingField: 50
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 8112206183060325947}
@@ -1072,7 +1072,7 @@ MonoBehaviour:
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: af954c9c6565acb45af7490fa333777b, type: 2}
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <collider>k__BackingField: {fileID: 0}
+    - <collider>k__BackingField: {fileID: 4046467397515056728}
       <height>k__BackingField: 50
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 8112206183060325947}
@@ -1081,7 +1081,7 @@ MonoBehaviour:
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: af954c9c6565acb45af7490fa333777b, type: 2}
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <collider>k__BackingField: {fileID: 0}
+    - <collider>k__BackingField: {fileID: 6452093027887784453}
       <height>k__BackingField: 100
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 8112206183060325947}
@@ -1101,9 +1101,9 @@ MonoBehaviour:
   <whirlwind>k__BackingField: []
   <chargeAttack>k__BackingField: []
   <strongAttack>k__BackingField:
-    <visualize>k__BackingField: 1
+    <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <collider>k__BackingField: {fileID: 0}
+    - <collider>k__BackingField: {fileID: 3504652149920837184}
       <height>k__BackingField: 50
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 5766139505601935323}
@@ -1111,9 +1111,9 @@ MonoBehaviour:
       <counterClockwiseAngle>k__BackingField: 0
     <combatAbilityData>k__BackingField: {fileID: 11400000, guid: 033f1bf5bad24364dbf65020f623b992, type: 2}
   <blockParry>k__BackingField:
-    <visualize>k__BackingField: 1
+    <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
-    - <collider>k__BackingField: {fileID: 0}
+    - <collider>k__BackingField: {fileID: 1505429247821388167}
       <height>k__BackingField: 80
       <limitAngle>k__BackingField: 1
       <angleCheckBaseTransform>k__BackingField: {fileID: 763563044805143361}

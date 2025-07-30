@@ -47,6 +47,8 @@ public class EnemyMovement : Movement
     {
         base.FixedUpdate();
 
+        if (!enemy.enemyStateMachine.currentState.GetType().IsSubclassOf(typeof(EnemyTargetInDetectionRangeState))) return;
+
         enemy.animator.SetBool("move", navMeshAgent.enabled);
         enemy.animator.SetBool("idle", !navMeshAgent.enabled);
 
@@ -71,13 +73,13 @@ public class EnemyMovement : Movement
 
                             if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance && !enemy.navMeshAgent.hasPath)
                             {
-                                Debug.Log("Destination Arrived NavMeshAgent Disabled");
+                                Debug.Log("Destination Arrived. NavMeshAgent Disabled.");
                                 navMeshAgent.enabled = false;
                             }
                         }
                         else
                         {
-                            Debug.Log("Invalid Position");
+                            Debug.LogWarning($"Invalid Position for {enemy.name}. Disable NavMeshAgent.");
                             navMeshAgent.enabled = false;
                         }
                         break;
@@ -118,7 +120,7 @@ public class EnemyMovement : Movement
                     navMeshAgent.speed = enemy.animator.GetBool("dash") ? Mathf.Abs(chaseDirection.x) * enemy.enemyData.dashSpeed.x + Mathf.Abs(chaseDirection.y) * enemy.enemyData.dashSpeed.y : Mathf.Abs(chaseDirection.x) * enemy.enemyData.moveSpeed.x + Mathf.Abs(chaseDirection.y) * enemy.enemyData.moveSpeed.y;
                 }
             }
-            else if (Vector3.Distance(currentProjectedPosition, targetProjectedPosition) > 200)
+            else if (Vector3.Distance(currentProjectedPosition, targetProjectedPosition) > enemy.enemyData.maxChaseDistance)
             {
                 positionOffset = Random.insideUnitCircle * enemy.enemyData.repositionOffsetDistance;
                 ChangeNavMeshAgentState(NavMeshAgentState.Chase);
@@ -204,7 +206,7 @@ public class EnemyMovement : Movement
         // 2. 목표 지점까지의 거리 계산
         float distanceToTargetPoint = totalPathLength - remainingDistance;
 
-        // 남은 거리가 전체 경로 길이보다 길거나 0보다 작으면 경로의 시작 또는 끝 지점을 반환합니다.
+        // 남은 거리가 전체 경로 길이보다 길거나 0보다 작으면 경로의 시작 또는 끝 지점을 반환
         if (distanceToTargetPoint <= 0)
         {
             return navMeshAgent.path.corners[0];
@@ -220,7 +222,7 @@ public class EnemyMovement : Movement
         {
             float segmentLength = Vector3.Distance(navMeshAgent.path.corners[i], navMeshAgent.path.corners[i + 1]);
 
-            // 목표 지점이 현재 세그먼트 내에 있는지 확인합니다.
+            // 목표 지점이 현재 세그먼트 내에 있는지 확인
             if (cumulativeDistance + segmentLength >= distanceToTargetPoint)
             {
                 // 4. 정확한 위치 보간
@@ -232,7 +234,7 @@ public class EnemyMovement : Movement
             cumulativeDistance += segmentLength;
         }
 
-        // 예외적인 경우, 경로의 마지막 지점을 반환합니다.
+        // 예외적인 경우, 경로의 마지막 지점을 반환
         return navMeshAgent.path.corners[^1];
     }
 

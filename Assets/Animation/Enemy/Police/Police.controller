@@ -41,7 +41,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bat_Move
+  m_Name: Police_Move
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -55,7 +55,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: c6ec5873498b10d4487d5ef5580b6cbc, type: 2}
+  m_Motion: {fileID: 7400000, guid: f9be73de22b8bfc418661b34506c5efd, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -93,7 +93,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bat_MeleeAttack
+  m_Name: Police_MeleeAttack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -107,7 +107,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 9656f1342ed228e41aab36ca0aa31ace, type: 2}
+  m_Motion: {fileID: 7400000, guid: a134a2c9a846108459ad210e964329bb, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -204,7 +204,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bat_Stunned
+  m_Name: Police_Stunned
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -272,7 +272,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bat
+  m_Name: Police
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: idle
@@ -386,7 +386,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bat_Idle
+  m_Name: Police_Idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -400,7 +400,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 5069b0c4300ca5840a322526623604ab, type: 2}
+  m_Motion: {fileID: 7400000, guid: c92e02cbaaae68d4f9135fd0c5825b36, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -430,7 +430,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bat_Dead
+  m_Name: Police_Dead
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -444,7 +444,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 4408e81931f17ab4a844c5cc9b46f3c1, type: 2}
+  m_Motion: {fileID: 7400000, guid: 6b2c2db88c2a8ce4cabdd0a509665fd9, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -504,7 +504,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bat_gotHit
+  m_Name: Police_gotHit
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -518,7 +518,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 5677f28c1757c5f4b86275dbcc621414, type: 2}
+  m_Motion: {fileID: 7400000, guid: 028175ef6aa5b7947b1e33d569c172f6, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

@@ -503,7 +503,7 @@ RectTransform:
   m_Father: {fileID: 3653280444562948358}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -618,7 +618,7 @@ Transform:
   m_GameObject: {fileID: 2304231271472009865}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.2, y: 0, z: 0}
+  m_LocalPosition: {x: -24, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -652,7 +652,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3392088090830544643}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -661,7 +661,7 @@ Transform:
   - {fileID: 4938779303581548780}
   - {fileID: 3707916639025413748}
   m_Father: {fileID: 5216127325269421449}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!212 &5229707910835734581
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -703,12 +703,12 @@ SpriteRenderer:
   m_SortingLayerID: -1356729977
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -666337654, guid: 3fdaa975aba770740a74052ea28c2832, type: 3}
+  m_Sprite: {fileID: -1521442540, guid: d42a0d2910847b447a7b83f6446061a8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 51.2, y: 51.2}
+  m_Size: {x: 69, y: 111}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -779,7 +779,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3707916639025413748
 RectTransform:
   m_ObjectHideFlags: 0
@@ -798,7 +798,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 6.8}
+  m_AnchoredPosition: {x: 0, y: 29.8}
   m_SizeDelta: {x: 200, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5377158057126374297
@@ -1201,8 +1201,8 @@ MonoBehaviour:
   detectionRangeEllipseRadius: {x: 500, y: 200}
   detectionRangeCollider: {fileID: 1032491821444589725}
   detectionAngleCheckTransform: {fileID: 4556085703947847476}
-  detectionClockwiseAngle: 100
-  detectionCounterclockwiseAngle: 100
+  detectionClockwiseAngle: 80
+  detectionCounterclockwiseAngle: 80
   chaseRangeEllipseRadius: {x: 0, y: 0}
   chaseRangeCollider: {fileID: 0}
   constantlyFollowPlayer: 0
@@ -1239,7 +1239,7 @@ RectTransform:
   m_Father: {fileID: 146817369398302057}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1494,7 +1494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <shadow>k__BackingField: {fileID: 1270033314967843663}
   <entityData>k__BackingField: {fileID: 11400000, guid: 675bacc113fb2df43b68c2603f45ea55, type: 2}
-  <printStateChange>k__BackingField: 0
+  <printStateChange>k__BackingField: 1
   <entityLevel>k__BackingField: 1
 --- !u!195 &6806183476803910454
 NavMeshAgent:
@@ -1564,10 +1564,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <whatIsDamageable>k__BackingField:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   <whatIsChaseTarget>k__BackingField:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   <meleeAttack0>k__BackingField: []
   <meleeAttack1>k__BackingField: []
   <meleeAttack2>k__BackingField: []
@@ -1585,7 +1585,16 @@ MonoBehaviour:
     <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField: []
     <combatAbilityData>k__BackingField: {fileID: 0}
-  <meleeAttack>k__BackingField: []
+  <meleeAttack>k__BackingField:
+  - <visualize>k__BackingField: 0
+    <overlapColliders>k__BackingField:
+    - <collider>k__BackingField: {fileID: 1494416632529781196}
+      <height>k__BackingField: 60
+      <limitAngle>k__BackingField: 0
+      <angleCheckBaseTransform>k__BackingField: {fileID: 0}
+      <clockwiseAngle>k__BackingField: 0
+      <counterClockwiseAngle>k__BackingField: 0
+    <combatAbilityData>k__BackingField: {fileID: 11400000, guid: b6cfbe0040bbf03479ae4e29108f672d, type: 2}
 --- !u!1 &8274612886040969363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1732,7 +1741,7 @@ Transform:
   m_GameObject: {fileID: 8687136533813733872}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 30, y: 0, z: 0}
+  m_LocalPosition: {x: 10, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1781,5 +1790,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 30, y: 20}
   m_EdgeRadius: 0
