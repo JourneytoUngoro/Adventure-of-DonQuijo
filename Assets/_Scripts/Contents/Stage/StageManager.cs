@@ -67,7 +67,8 @@ public class StageManager : MonoBehaviour, IDataPersistance
 
     public void SaveData(GameData data)
     {
-        data.stageData = nowStage.GetStageData();
+        if (nowStage != null && nowStage.GetStageData() != null) 
+            data.stageData = nowStage.GetStageData();
     }
 
     public void OnEnemyDeath(Transform enemy) => nowStage.OnEnemyDeath(enemy);

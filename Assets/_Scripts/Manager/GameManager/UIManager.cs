@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     private TextInfoUI currentTextInfoUI;
     private ImageUI clickBlockImageUI;
 
+
     #region UI Object Pool
     public UIObjectPool<PopupUI> popupPool;
     public UIObjectPool<TextInfoUI> textInfoPool;
@@ -56,7 +57,6 @@ public class UIManager : MonoBehaviour
 
         if (toggleMenuPressed)
         {
-            Debug.Log("Esc Key pressed");
             EscPressed();
         }
 
@@ -74,12 +74,15 @@ public class UIManager : MonoBehaviour
 
     private void LoadUIPrefabs()
     {
+        if (pool.transform.childCount >= 4) return;
+
         popupPrefab = Resources.Load<PopupUI>("Prefabs/UI/PopupPrefab");
         textInfoPrefab = Resources.Load<TextInfoUI>("Prefabs/UI/TextInfoPrefab");
         imagePrefab = Resources.Load<ImageUI>("Prefabs/UI/ImagePrefab");
 
         clickBlockImageUI = Object.Instantiate(Resources.Load<GameObject>("Prefabs/UI/ClickBlocker")).GetComponent<ImageUI>();
         clickBlockImageUI.transform.SetParent(uiCanvas, false);
+
     }
 
     private void RegisterUIObjects()
@@ -97,7 +100,6 @@ public class UIManager : MonoBehaviour
 
     void CreatePool()
     {
-        if (pool == null) { Debug.Log("Not prepared pool objects in scene"); }
         if (pool.transform.childCount >= 4) return; 
         popupPool = new UIObjectPool<PopupUI>(popupPrefab, objectCount, pool);
         textInfoPool = new UIObjectPool<TextInfoUI>(textInfoPrefab, objectCount, pool);

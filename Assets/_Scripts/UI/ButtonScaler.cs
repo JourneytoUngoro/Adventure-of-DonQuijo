@@ -8,6 +8,7 @@ public class ButtonScaler : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] private float hoverScale = 1.07f;
     [SerializeField] private float clickScale = 0.9f;
     [SerializeField] private float duration = 0.2f;
+    public bool printDebug = false;
 
     private Vector3 originalScale;
     private Tweener currentTween;
@@ -20,6 +21,10 @@ public class ButtonScaler : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void OnPointerEnter(PointerEventData eventData)
     {
         AnimateScale(originalScale * hoverScale);
+        if (printDebug)
+        {
+            Debug.Log($"Hover : {originalScale} * {hoverScale} -> {transform.localScale}");
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -30,6 +35,13 @@ public class ButtonScaler : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void OnPointerDown(PointerEventData eventData)
     {
         AnimateScale(originalScale * clickScale);
+
+        if (printDebug)
+        {
+            Debug.Log($"Clicked : {originalScale} -> {transform.localScale}");
+        }
+
+
         Manager.Instance.soundManager.PlayUI("buttonSFX");
     }
 
@@ -42,10 +54,13 @@ public class ButtonScaler : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     private void AnimateScale(Vector3 targetScale)
     {
         if (currentTween != null && currentTween.IsActive())
-        {
             currentTween.Kill();
-        }
 
-        currentTween = transform.DOScale(targetScale, duration).SetEase(Ease.OutBack);
+        currentTween = transform.DOScale(targetScale, duration)
+            .SetEase(Ease.OutBack)
+            .SetUpdate(true); // Time.timeScale 이 0이어도 작동
     }
+
+
+
 }

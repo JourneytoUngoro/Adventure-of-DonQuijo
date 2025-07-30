@@ -50,6 +50,12 @@ public class OpeningController : MonoBehaviour
         StartOpeningCutScene();
     }
 
+    private void OnDestroy()
+    {
+        // Disabled objects during the cutscene should be re-enabled after the cutscene ends.
+        if (persistentObject != null && !persistentObject.activeSelf) persistentObject?.SetActive(true);
+    }
+
     public void StartOpeningCutScene()
     {
         PlayNextCut(0);
@@ -74,7 +80,6 @@ public class OpeningController : MonoBehaviour
 
     private void OnFinishOpening()
     {
-        Debug.Log("오프닝컷신 끝!");
         persistentObject.SetActive(true);
         Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("Stage1"), true, false);
         Manager.Instance.soundManager.PlayBGM("battleBGM");

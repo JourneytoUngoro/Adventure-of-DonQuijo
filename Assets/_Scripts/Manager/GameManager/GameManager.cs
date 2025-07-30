@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
+        if (Time.timeScale == 0.0f) { Debug.Log("Already paused"); return; }
+
         Debug.Log("Game Paused");
         originalTimeScale = Time.timeScale;
         isPaused = true;
@@ -27,5 +29,13 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = timeScale;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
+    }
+
+    // ==================== TODO : TEST CODE 삭제해 ====================
+    public bool PRINT = false;
+    private void Update()
+    {
+        if (PRINT)
+            Debug.Log($"Time.timeScale : {Time.timeScale}, OriginalTimeScale : {originalTimeScale}, isPaused : {isPaused}");
     }
 }
