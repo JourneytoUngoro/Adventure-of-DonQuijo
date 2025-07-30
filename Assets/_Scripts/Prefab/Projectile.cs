@@ -34,6 +34,8 @@ public class Projectile : PooledObject
 
     private Vector3 workSpace;
 
+    private bool collided;
+
     protected const int maxDetectionCount = 10;
 
     private void Awake()
@@ -59,6 +61,7 @@ public class Projectile : PooledObject
 
     protected virtual void OnEnable()
     {
+        collided = false;
         CancelInvoke("ReleaseObject");
         Invoke("ReleaseObject", autoDestructionTime);
     }
@@ -80,8 +83,10 @@ public class Projectile : PooledObject
         Physics2D.OverlapBoxNonAlloc(currentProjectedPosition, projectileCollider.size, 0.0f, projectedPositionColliders, whatIsGround);
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D collider)
+    protected virtual void OnTriggerStay2D(Collider2D collider)
     {
+        if (collided) return;
+
         bool isTouchedTarget = UtilityFunctions.IsInLayerMask(collider.gameObject.layer, whatIsDamageable);
         bool isTouchedGround = UtilityFunctions.IsInLayerMask(collider.gameObject.layer, whatIsGround);
 
@@ -94,7 +99,7 @@ public class Projectile : PooledObject
             float targetEntityFeetHeight = targetEntity.entityDetection.currentEntityHeight;
             float targetEntityHeadHeight = targetEntityFeetHeight + targetEntity.currentEntityStature;
             
-            if (!(targetEntityHeadHeight <= projectileBottomHeight || projectileTopHeight <= targetEntityFeetHeight))
+            if (!(targetEntityHeadHeight < projectileBottomHeight || projectileTopHeight < targetEntityFeetHeight))
             {
                 OnCollision(collider);
 
@@ -110,7 +115,7 @@ public class Projectile : PooledObject
             float groundBottomHeight = collider.transform.position.z;
             float groundTopHeight = collider.GetComponent<HeightData>().height + groundBottomHeight;
             
-            if (!(groundTopHeight <= projectileBottomHeight || projectileTopHeight <= groundBottomHeight))
+            if (!(groundTopHeight < projectileBottomHeight || projectileTopHeight < groundBottomHeight))
             {
                 OnCollision(collider);
 
@@ -128,9 +133,12 @@ public class Projectile : PooledObject
 
     protected virtual void OnCollision(Collider2D collider)
     {
+        collided = true;
+
         if (combatAbilityWithColliders.combatAbilityData == null)
         {
             Explode();
+            ReleaseObject();
         }
         else
         {
@@ -159,7 +167,7 @@ public class Projectile : PooledObject
     {
         GameObject projectileExplosion = Manager.Instance.objectPoolingManager.GetGameObject(gameObject.name.Replace("(Clone)", "") + "Explosion");
         Explosion explosion = projectileExplosion.GetComponent<Explosion>();
-        projectileExplosion.transform.position = transform.position;
+        explosion.SetExplosion(this);
     }
 
     public void FireProjectile(Entity sourceEntity, Entity targetEntity, float planeSpeed, Vector2 planeDirection, float orthogonalSpeed)

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a116ec577bf193c43aacd470d7b7e9d8, type: 3}
+  m_Name: DoctorRangedAttack
+  m_EditorClassIdentifier: 
+  <combatAbilityIcon>k__BackingField: {fileID: 0}
+  <combatAbilityName>k__BackingField: Default Combat Ability Name
+  <threatLevel>k__BackingField: 1
+  <combatAbilityDescription>k__BackingField: Default Combat Ability Description
+  <canBeDodged>k__BackingField: 1
+  <canBeBlocked>k__BackingField: 1
+  <canBeParried>k__BackingField: 1
+  <stanceWhenParried>k__BackingField: 0
+  <getDazed>k__BackingField: 0
+  <combatAbilityComponents>k__BackingField:
+  - rid: 1587927475048153090
+  references:
+    version: 2
+    RefIds:
+    - rid: 1587927475048153090
+      type: {class: ProjectileComponent, ns: , asm: Assembly-CSharp}
+      data:
+        name: ProjectileComponent
+        <pertainedCombatAbility>k__BackingField: {fileID: 11400000}
+        <projectilePrefab>k__BackingField: {fileID: 2272011668388919783, guid: ea471ef404fbf3141a18d5e7a1284949, type: 3}
+        <whatIsDamageable>k__BackingField:
+          serializedVersion: 2
+          m_Bits: 64
+        <projectilePlaneSpeed>k__BackingField: 100
+        <projectileOrthogonalSpeed>k__BackingField: -10
+        <projectileType>k__BackingField: 1

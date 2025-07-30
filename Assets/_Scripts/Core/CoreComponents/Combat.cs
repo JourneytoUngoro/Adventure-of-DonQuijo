@@ -104,10 +104,6 @@ public abstract class Combat : CoreComponent
                 case BlockParryComponent blockParryComponent:
                     blockParryComponent.ApplyCombatAbility(null, combatAbilityWithColliders.overlapColliders);
                     break;
-                case ProjectileComponent projectileComponent:
-                    
-                    projectileComponent.ApplyCombatAbility(null, combatAbilityWithColliders.overlapColliders);
-                    break;
                 /*case ProjectileComponent projectileComponent:
                     Transform[] projectileFireTransforms = combatAbilityWithColliders.overlapColliders.Where(overlapCollider => !overlapCollider.overlapBox && !overlapCollider.overlapCircle).Select(overlapCollider => overlapCollider.centerTransform).ToArray();
                     projectileComponent.ApplyCombatAbility(damageTargets, projectileFireTransforms, null);
@@ -126,12 +122,13 @@ public abstract class Combat : CoreComponent
                 damageTargets = damageTargets
                     .Union(detectedDamageTargets.Where(target => {
                         if (target == null) return false;
-                        Entity targetEntity = target.GetComponentInParent<Entity>();
+                        else return true;
+                        /*Entity targetEntity = target.GetComponentInParent<Entity>();
                         float targetEntityFeetHeight = targetEntity.entityDetection.currentEntityHeight;
                         float targetEntityHeadHeight = targetEntityFeetHeight + targetEntity.currentEntityStature;
                         float colliderBottomHeight = overlapCollider.collider.gameObject.transform.position.z + entity.entityDetection.currentEntityHeight;
                         float colliderTopHeight = colliderBottomHeight + overlapCollider.height;
-                        return !(targetEntityHeadHeight <= colliderBottomHeight || colliderTopHeight <= targetEntityFeetHeight);
+                        return !(targetEntityHeadHeight <= colliderBottomHeight || colliderTopHeight <= targetEntityFeetHeight);*/
                     })).ToList();
             }
 
@@ -161,6 +158,9 @@ public abstract class Combat : CoreComponent
                         case KnockbackComponent knockbackComponent:
                             hitTarget = true;
                             knockbackComponent.ApplyCombatAbility(damageTarget, combatAbilityWithColliders.overlapColliders);
+                            break;
+                        case ProjectileComponent projectileComponent:
+                            projectileComponent.ApplyCombatAbility(damageTarget, combatAbilityWithColliders.overlapColliders);
                             break;
                         /*case StatusEffectComponent statusEffectComponent:
                             statusEffectComponent.ApplyCombatAbility(damageTarget, combatAbilityWithTransforms.overlapColliders);

@@ -46,11 +46,12 @@ public class Explosion : PooledObject
 
     public override void ReleaseObject()
     {
-        base.ReleaseObject();
+        Destroy(gameObject);
+        /*base.ReleaseObject();
 
         sourceEntity = null;
         sourceProjectile = null;
-        damagedTargets.Clear();
+        damagedTargets.Clear();*/
     }
 
     public void SetExplosion(Entity sourceEntity)
@@ -68,6 +69,7 @@ public class Explosion : PooledObject
     {
         this.sourceProjectile = sourceProjectile;
         this.sourceEntity = sourceProjectile.sourceEntity;
+        transform.position = sourceProjectile.transform.position;
 
         foreach (CombatAbilityWithColliders combatAbilityWithColliders in combatAbilityWithCollidersList)
         {
