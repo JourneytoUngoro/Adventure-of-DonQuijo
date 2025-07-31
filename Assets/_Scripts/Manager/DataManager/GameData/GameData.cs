@@ -12,8 +12,10 @@ public class GameData
     public long lastPlayTime;
 
     // player attributes
+    public float maxHealth;
     public float currentHealth;
     public float currentDurability;
+    public float maxPosture;
     public float currentPosture;
     public float currentPower;
     public float currentExperience;
@@ -76,13 +78,15 @@ public class GameData
     {
         this.displayedLastPlayTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
         this.lastPlayTime = DateTime.Now.Ticks;
+        this.maxHealth = 100.0f;
         this.currentHealth = 100.0f;
+        this.maxPosture = 100.0f;
         this.currentPosture = 100.0f;
         this.currentPower = 1.0f;
         this.currentDurability = 1.0f;
         this.currentExperience = 0.0f;
         this.currentAgility = 1.0f; // Stats.speedLevel
-        this.lastPlayerPosition = new Vector3(-350.0f, -100f, 0.0f);
+        this.lastPlayerPosition = new Vector3(-600.0f, -100.0f, 0.0f);
         this.currentScene = "SampleScene";
         // mapOpened = new Dictionary<string, bool>();
 

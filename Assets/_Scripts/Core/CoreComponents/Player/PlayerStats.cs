@@ -32,21 +32,24 @@ public class PlayerStats : Stats, IDataPersistance
 
         durability.OnCurrentValueChange += () =>
         {
+            Debug.Log("DURABILITY CHANGED");
             health.SetMaxValue(health.graph.accumulationPerLevel.Evaluate(durability.currentValue));
             health.IncreaseCurrentValue(health.graph.incrementPerLevel.Evaluate(durability.currentValue));
         };
 
-        power.OnCurrentValueChange += () =>
+        /*power.OnCurrentValueChange += () =>
         {
             posture.IncreaseMaxValue(posture.graph.incrementPerLevel.Evaluate(power.currentValue));
             posture.IncreaseCurrentValue(posture.graph.incrementPerLevel.Evaluate(power.currentValue));
-        };
+        };*/
     }
 
     public void LoadData(GameData data)
     {
+        health.SetMaxValue(data.maxHealth, false);
         health.SetCurrentValue(data.currentHealth, true, false, false);
         durability.SetCurrentValue(data.currentDurability, true, false, false);
+        posture.SetMaxValue(data.maxPosture, false);
         posture.SetCurrentValue(data.currentPosture, true, false, false);
         power.SetCurrentValue(data.currentPower, true, false, false);
         agility.SetCurrentValue(data.currentAgility, true, false, false);

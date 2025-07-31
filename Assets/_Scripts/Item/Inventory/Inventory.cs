@@ -35,6 +35,8 @@ public class Inventory : MonoBehaviour, IDataPersistance
 
     public void SaveData(GameData data)
     {
+        if (controller == null) return;
+
         data.itemUsageData = controller.SaveItemUsageData();
         data.inventoryData = controller.SaveInventoryData();
     }

@@ -90,6 +90,7 @@ public abstract class Detection : CoreComponent
             currentTargetLastVelocity = currentTarget.entityMovement.currentVelocity;
         }
 
+        groundColliders = UtilityFunctions.FindGameObjectsByLayer(whatIsGround, FindObjectsSortMode.None).Select(groundObject => groundObject.GetComponent<Collider2D>()).ToList();
         foreach (Collider2D groundCollider in groundColliders)
         {
             if (groundCollider != null)
@@ -251,9 +252,9 @@ public abstract class Detection : CoreComponent
 
     private void GetLoadedGrounds(Scene loadedScene, LoadSceneMode loadSceneMode)
     {
-        if (loadedScene.name != "MainMenu")
+        if (loadedScene.name != "MainMenu" && loadedScene.name != "OpeningCutscene")
         {
-            groundColliders = UtilityFunctions.FindGameObjectsByLayer(whatIsGround, FindObjectsSortMode.None).Select(groundObject => groundObject.GetComponent<Collider2D>()).ToList();
+            groundColliders = UtilityFunctions.FindGameObjectsByLayer(whatIsGround, FindObjectsSortMode.None).Select(groundObject => groundObject.GetComponent<Collider2D>()).ToList();    
         }
     }
 
@@ -263,9 +264,10 @@ public abstract class Detection : CoreComponent
         currentScreenPosition = workSpace;
         currentSpacePosition = position;
         // entity.entityRigidbody.position = position;
-        entity.transform.position = position;
+        // entity.transform.position = position;
+        Player.Instance.transform.position = position;
         workSpace.Set(0, position.z, position.z);
-        entity.orthogonalRigidbody.transform.localPosition = workSpace;
+        // entity.orthogonalRigidbody.transform.localPosition = workSpace;
     }
 
     // Below function is called when the currentTarget changes abruptly(ex. gets hit)

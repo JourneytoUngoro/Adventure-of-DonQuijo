@@ -87,7 +87,18 @@ public class EnemyKnockbackState : EnemyState
                     {
                         if (isTargetInDetectionRange)
                         {
-                            stateMachine.ChangeState((enemy as Bat).targetInDetectionRangeState);
+                            if (enemy.GetType().Equals(typeof(Bat)))
+                            {
+                                stateMachine.ChangeState((enemy as Bat).targetInDetectionRangeState);
+                            }
+                            else if (enemy.GetType().Equals(typeof(Police)))
+                            {
+                                stateMachine.ChangeState((enemy as Police).targetInDetectionRangeState);
+                            }
+                            else if (enemy.GetType().Equals(typeof(Doctor)))
+                            {
+                                stateMachine.ChangeState((enemy as Doctor).targetInDetectionRangeState);
+                            }
                         }
                         else
                         {

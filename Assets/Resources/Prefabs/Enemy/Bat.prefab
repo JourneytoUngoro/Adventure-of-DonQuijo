@@ -1198,7 +1198,7 @@ MonoBehaviour:
   <whatIsChaseTarget>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
-  detectionRangeEllipseRadius: {x: 500, y: 200}
+  detectionRangeEllipseRadius: {x: 600, y: 250}
   detectionRangeCollider: {fileID: 1032491821444589725}
   detectionAngleCheckTransform: {fileID: 4556085703947847476}
   detectionClockwiseAngle: 80

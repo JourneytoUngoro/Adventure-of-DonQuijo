@@ -37,7 +37,7 @@ public class PlayerDetection : Detection, IDataPersistance
         Debug.Log("Position Data Loaded: " + data.lastPlayerPosition);
         SetPosition(data.lastPlayerPosition);
         lastGroundedPosition = data.lastPlayerPosition;
-        Debug.Log("Set Position To: " + entity.transform.position);
+        // Debug.Log("Set Position To: " + entity.transform.position);
     }
 
     public void SaveData(GameData data)
