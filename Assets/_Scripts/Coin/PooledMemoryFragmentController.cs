@@ -55,8 +55,8 @@ public class PooledMemoryFragmentController : MonoBehaviour, IDataPersistance
         SetTimer(obj);
 
         // set drop effect
-        Vector3 startPos = enemy.GetComponentInChildren<SpriteRenderer>().bounds.center;
-        Vector3 endPos = enemy.GetComponentInChildren<Detection>().currentProjectedPosition;
+        Vector3 startPos = enemy.parent.parent.GetComponentInChildren<SpriteRenderer>().bounds.center;
+        Vector3 endPos = enemy.parent.GetComponentInChildren<EnemyDetection>().currentProjectedPosition;
 
         // drop mf in Scene
         obj.GetComponent<DropEffect>().PlayDropEffect(startPos, endPos);
