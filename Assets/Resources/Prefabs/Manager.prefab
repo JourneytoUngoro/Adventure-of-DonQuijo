@@ -99,9 +99,31 @@ MonoBehaviour:
         m_SceneName: MainMenu
       Value: []
     - Key:
+        m_SceneAsset: {fileID: 102900000, guid: 126f19c2386a521478c33f7989575d9d, type: 3}
+        m_SceneName: OpeningCutscene
+      Value:
+      - m_SceneAsset: {fileID: 0}
+        m_SceneName: 
+    - Key:
         m_SceneAsset: {fileID: 102900000, guid: b2ceeace8e03cd944bafec8aca6121d4, type: 3}
         m_SceneName: Stage1
-      Value: []
+      Value:
+      - m_SceneAsset: {fileID: 102900000, guid: 496c4178864eb50469175874e48c683e, type: 3}
+        m_SceneName: Stage2
+    - Key:
+        m_SceneAsset: {fileID: 102900000, guid: 496c4178864eb50469175874e48c683e, type: 3}
+        m_SceneName: Stage2
+      Value:
+      - m_SceneAsset: {fileID: 102900000, guid: b2ceeace8e03cd944bafec8aca6121d4, type: 3}
+        m_SceneName: Stage1
+      - m_SceneAsset: {fileID: 102900000, guid: 17e0f369f76f4fb4ea8790a0c7761fd1, type: 3}
+        m_SceneName: Stage3
+    - Key:
+        m_SceneAsset: {fileID: 102900000, guid: 17e0f369f76f4fb4ea8790a0c7761fd1, type: 3}
+        m_SceneName: Stage3
+      Value:
+      - m_SceneAsset: {fileID: 102900000, guid: 496c4178864eb50469175874e48c683e, type: 3}
+        m_SceneName: Stage2
   cinemachineVirtualCamera: {fileID: 0}
   minDuration: 0.1
   statusBar: {fileID: 0}
@@ -420,6 +442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <player>k__BackingField: {fileID: 0}
+  PRINT: 0
 --- !u!1 &5225713252320322654
 GameObject:
   m_ObjectHideFlags: 0
