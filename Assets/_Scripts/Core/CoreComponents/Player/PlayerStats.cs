@@ -32,7 +32,6 @@ public class PlayerStats : Stats, IDataPersistance
 
         durability.OnCurrentValueChange += () =>
         {
-            Debug.Log("DURABILITY CHANGED");
             health.SetMaxValue(health.graph.accumulationPerLevel.Evaluate(durability.currentValue));
             health.IncreaseCurrentValue(health.graph.incrementPerLevel.Evaluate(durability.currentValue));
         };

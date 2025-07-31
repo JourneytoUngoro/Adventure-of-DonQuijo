@@ -35,7 +35,6 @@ public class BatMeleeAttackState : EnemyAbilityState
         available = false;
         enemy.movement.SetVelocityZero();
         bat.animator.SetBool("idle", false);
-        Debug.Log("BatMeleeAttackEnter");
     }
 
     public override void Exit()
