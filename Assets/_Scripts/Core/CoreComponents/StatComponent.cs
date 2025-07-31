@@ -49,17 +49,20 @@ public class StatComponent
 
     public void Recovery()
     {
-        recoveryStartTimer.Tick();
-
-        if (recoveryDuration != -1 && onRecovery && currentValue < maxValue)
+        if (enableRecovery)
         {
-            if (recoveryDuration == 0)
+            recoveryStartTimer.Tick();
+
+            if (recoveryDuration != -1 && onRecovery && currentValue < maxValue)
             {
-                IncreaseCurrentValue(recoveryValue * Time.deltaTime);
-            }
-            else
-            {
-                recoveryTimer.Tick();
+                if (recoveryDuration == 0)
+                {
+                    IncreaseCurrentValue(recoveryValue * Time.deltaTime);
+                }
+                else
+                {
+                    recoveryTimer.Tick();
+                }
             }
         }
     }

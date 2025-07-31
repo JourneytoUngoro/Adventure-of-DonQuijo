@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum NavMeshAgentState { Run, Chase, InDistance, TraverseAround }
+public enum NavMeshAgentState { Flee, Chase, InDistance, TraverseAround }
 
 public class EnemyMovement : Movement
 {
@@ -336,6 +336,10 @@ public class EnemyMovement : Movement
 
             navMeshAgent.SetDestination(currentDestinationPosition);
             onTraverseFlag = true;
+        }
+        else if (navMeshAgentState == NavMeshAgentState.Flee)
+        {
+
         }
 
         this.navMeshAgentState = navMeshAgentState;
