@@ -82,7 +82,7 @@ public class GameData
         this.currentDurability = 1.0f;
         this.currentExperience = 0.0f;
         this.currentAgility = 1.0f; // Stats.speedLevel
-        this.lastPlayerPosition = new Vector3(-200f, -50f, 0.0f);
+        this.lastPlayerPosition = new Vector3(-350.0f, -100f, 0.0f);
         this.currentScene = "SampleScene";
         // mapOpened = new Dictionary<string, bool>();
 
