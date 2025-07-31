@@ -198,8 +198,16 @@ public class UIManager : MonoBehaviour
     }
 
     // 최상단 팝업 아래 이미지를 깔아 이외 클릭을 막는 함수 BeforeShowPopupUI(), AfterHidePopupUI()
-    public void BeforeShowPopupUI() => SetClockBlockerTransform(activatedPopups.Peek().transform);
-    public void AfterHidePopupUI() => SetClockBlockerTransform(activatedPopups.Peek().transform);
+    public void BeforeShowPopupUI()
+    {
+        SetClockBlockerTransform(activatedPopups.Peek().transform);
+    }
+
+    public void AfterHidePopupUI()
+    {
+        SetClockBlockerTransform(activatedPopups.Peek().transform);
+    }
+
 
     public void OpenTextInfoUI(TextInfoUI textInfo) => currentTextInfoUI = textInfo;
 
@@ -225,6 +233,7 @@ public class UIManager : MonoBehaviour
 
         clickBlockImageUI.transform.SetParent(parent);
         clickBlockImageUI.transform.SetSiblingIndex(siblingIndex - 1);
+        Debug.Log($"clickblocker should be index {siblingIndex}");
     }
 
     private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;

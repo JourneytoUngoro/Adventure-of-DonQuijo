@@ -1,11 +1,8 @@
+using DG.Tweening;
 using Sirenix.OdinInspector;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public enum SoundCategory
 {
@@ -165,6 +162,37 @@ public class SoundManager : MonoBehaviour
         bgmSource.loop = true;
         bgmSource.Play();
     }
+
+
+    public void PlayBGMTransition(string key, float fadeOutTime, float stopTime, float fadeInTime)
+    {
+        AudioClip clip = GetClip(key);
+
+        Sequence fadeBGM = DOTween.Sequence().SetUpdate(true); 
+
+        fadeBGM.Append(DOTween.To(() => bgmSource.volume,
+                                  x => bgmSource.volume = x,
+                                  0,
+                                  fadeOutTime).SetUpdate(true));
+
+        fadeBGM.AppendInterval(stopTime);
+
+        fadeBGM.AppendCallback(() =>
+        {
+            bgmSource.clip = clip;
+            bgmSource.outputAudioMixerGroup = bgmGroup;
+            bgmSource.loop = true;
+            bgmSource.volume = 0f;
+            bgmSource.Play();
+        });
+
+        fadeBGM.Append(DOTween.To(() => bgmSource.volume,
+                                  x => bgmSource.volume = x,
+                                  1,
+                                  fadeInTime).SetUpdate(true));
+    }
+
+
 
     public AudioClip GetClip(string key)
     {

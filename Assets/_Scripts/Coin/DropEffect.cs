@@ -12,6 +12,8 @@ public class DropEffect : MonoBehaviour
     public float fallDuration = 0.4f;
     public float bounceDuration = 0.5f;
 
+    public bool isCoin;
+
     [Header("Ease Settings")]
     public Ease jumpEffect = Ease.OutQuad;
     public Ease fallHorizontalEffect = Ease.Linear;
@@ -58,7 +60,10 @@ public class DropEffect : MonoBehaviour
         dropSequence.Join(transform.DOMoveX(finalPos.x, bounceDuration).SetEase(fallHorizontalEffect));
 
         dropSoundPlayer = null;
-        Manager.Instance.soundManager.PlaySoundFXClip(out dropSoundPlayer, "coinDropSFX", transform);
+        if (isCoin)
+            Manager.Instance.soundManager.PlaySoundFXClip(out dropSoundPlayer, "coinDropSFX", transform);
+        else
+            Manager.Instance.soundManager.PlaySoundFXClip(out dropSoundPlayer, "mfDropSFX", transform);
 
     }
 }

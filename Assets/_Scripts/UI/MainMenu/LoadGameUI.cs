@@ -1,9 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LoadGameUI : MonoBehaviour
@@ -158,15 +154,14 @@ public class LoadGameUI : MonoBehaviour
             if (playOpening)
             {
                 // TODO : cutscene01 재생으로 바꿔야 한다
-                Debug.Log("Play Opening Cutscene");
+                Manager.Instance.soundManager.PlayBGMTransition("cutscene01BGM", 0.3f, 0.03f, 0.5f);
                 Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("OpeningCutscene"), true, false);
-                Manager.Instance.soundManager.PlayBGM("cutscene01BGM");
             }
             else
             {
                 Debug.Log("Don't Play Opening Cutscene");
+                Manager.Instance.soundManager.PlayBGMTransition("battleBGM", 0.3f, 0.03f, 0.5f);
                 Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("Stage1"), true, true);
-                Manager.Instance.soundManager.PlayBGM("battleBGM");
             }
         }
         loadPopup.HideUI();

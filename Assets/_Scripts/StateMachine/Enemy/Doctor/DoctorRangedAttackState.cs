@@ -19,6 +19,9 @@ public class DoctorRangedAttackState : EnemyAbilityState
 
         enemy.combat.DoAttack(doctor.doctorCombat.rangedAttack[index]);
         enemy.combat.damagedTargets.Clear();
+
+        Manager.Instance.soundManager.PlaySoundFXClip("doctorAttackSFX", enemy.transform);
+
     }
 
     public override void AnimationFinishTrigger(int index)

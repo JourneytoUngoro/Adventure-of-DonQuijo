@@ -30,6 +30,7 @@ public class MemoryFragmentObject : InteractBase
 
         pooledObject = GetComponent<PooledObject>();
         dropEffect = GetComponent<DropEffect>();
+        dropEffect.isCoin = false;
 
         isChasingPlayer = false;
         questId = relatedQuest.id;
@@ -78,7 +79,7 @@ public class MemoryFragmentObject : InteractBase
         }
 
         // TODO : change audioClip to  "memoryCollectSFX"
-        Manager.Instance.soundManager.PlaySoundFXClip("coinCollectSFX", transform);
+        Manager.Instance.soundManager.PlaySoundFXClip("mfCollectSFX", transform);
 
         OnObtainMemoryFragment();
  

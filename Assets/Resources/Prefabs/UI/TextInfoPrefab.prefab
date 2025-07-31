@@ -196,15 +196,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
+  m_Color: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 0.6431373}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 81ad8f5c4852d41e191916940d12b456, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 149c2987df3ab0746a754684559b77fe, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -225,11 +225,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9cb2eeeef8e500449d80696597a5b7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
+  <type>k__BackingField: 0
   fadeTime: 0
   delayTime: 0
   <BlockClick>k__BackingField: 0
-  position: {x: 200, y: -130}
+  <position>k__BackingField: {x: 0, y: 0}
+  canOverlap: 0
 --- !u!225 &4742477299028297944
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -238,7 +239,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4552327766814014558}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -256,4 +257,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 453435210240103704}
   tmpText: {fileID: 4945250941377379927}
-  padding: {x: 30, y: 30}
+  padding: {x: 70, y: 30}
