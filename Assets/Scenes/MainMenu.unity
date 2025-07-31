@@ -4451,11 +4451,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5938222223518203740, guid: dfdc780215c66c849b19a9ac22c0396e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -322
+      value: -400
       objectReference: {fileID: 0}
     - target: {fileID: 5938222223518203740, guid: dfdc780215c66c849b19a9ac22c0396e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -88.9
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 6217783853800310920, guid: dfdc780215c66c849b19a9ac22c0396e, type: 3}
       propertyPath: autoSaveTimeSeconds
