@@ -29,6 +29,7 @@ public class Inventory : MonoBehaviour, IDataPersistance
 
     public void LoadData(GameData data)
     {
+        if (controller == null) return; // // Singleton InventoryManager instance that is about to be destroyed is accessed here
         controller.LoadItemUsageData(data.itemUsageData);
         controller.LoadInventoryData(data.inventoryData);
      }

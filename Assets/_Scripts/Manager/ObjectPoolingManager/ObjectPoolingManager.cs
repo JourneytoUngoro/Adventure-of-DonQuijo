@@ -52,7 +52,7 @@ public class ObjectPoolingManager : MonoBehaviour
         }
 
         pooledCoinController = GetComponentInChildren<PooledCoinController>();
-        pooledMemoryFragmentController = GetComponent<PooledMemoryFragmentController>();
+        pooledMemoryFragmentController = GetComponentInChildren<PooledMemoryFragmentController>();
     }
 
     private GameObject CreatePooledObject()
