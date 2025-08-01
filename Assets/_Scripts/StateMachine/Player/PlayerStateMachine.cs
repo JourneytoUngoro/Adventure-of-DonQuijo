@@ -28,6 +28,7 @@ public class PlayerStateMachine : EntityStateMachine
         currentState = nextState as PlayerState;
 
         currentState.Enter();
+        
 
         if (currentState.player.printStateChange)
         {

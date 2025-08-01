@@ -96,7 +96,7 @@ public class Stage
     {
         collectedMemoryFragmentCount += amount;
         // Debug.Log($"player collected mf : {collectedMemoryFragmentCount} ");
-
+        Manager.Instance.stageManager.UpdateMFTMP(collectedMemoryFragmentCount);
         UpdateCurrentProbability();
     }
 

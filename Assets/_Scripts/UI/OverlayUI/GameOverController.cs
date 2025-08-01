@@ -26,19 +26,17 @@ public class GameOverController : MonoBehaviour
 
         if (index != -1) // player has mf
         {
-            // 플레이어 살려
             bool success = Manager.Instance.itemManager.UseItem(index);
-            Debug.Log("기억의 조각있어용");
+            Player.Instance.playerStateMachine.ChangeState(Player.Instance.deadState);
+            Player.Instance.deadState.Enter();
+            Debug.Log($"Current State : {Player.Instance.playerStateMachine.currentState} ");
+            // 전환 안 되는 중 
         }
         else
         {
             // 아니면 이제 그냥 있는거 버튼 선택하게 해.
             gameOverPopup.ShowUI();
-
-
         }
-
-
     }
 
 
@@ -61,10 +59,6 @@ public class GameOverController : MonoBehaviour
         // 해준님 함수 호출
 
         gameOverPopup.HideUI();
-        Debug.Log($"return to Stage1 : " + Manager.Instance.uiManager.activatedPopups.Count);
-        Debug.Log($"return to Stage1 : " + Manager.Instance.inputHandler.IsCharacterControlEnabled());
-        Debug.Log($"return to Stage1 : " + Manager.Instance.inputHandler.IsUIControlEnabled());
-
 
         Player.Instance.Revive();
         Manager.Instance.sceneTransitionManager.SceneTransition("Stage1", true, false);
@@ -77,10 +71,6 @@ public class GameOverController : MonoBehaviour
         // 정보 저장 -> 아니 근데 죽었는데 메인 가면 먼 정보를 저장해야 하니? 
 
         gameOverPopup.HideUI();
-        Debug.Log($"return to Stage1 : " + Manager.Instance.uiManager.activatedPopups.Count);
-        Debug.Log($"return to Stage1 : " + Manager.Instance.inputHandler.IsCharacterControlEnabled());
-        Debug.Log($"return to Stage1 : " + Manager.Instance.inputHandler.IsUIControlEnabled());
-
 
         Player.Instance.Revive();
         Manager.Instance.sceneTransitionManager.SceneTransition("MainMenu", true, true);

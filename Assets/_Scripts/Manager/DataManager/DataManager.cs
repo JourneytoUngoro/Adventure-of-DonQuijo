@@ -170,6 +170,7 @@ public class DataManager : MonoBehaviour
         }
 
         SceneManager.sceneLoaded -= LoadGame;
+        Manager.Instance.itemManager.ForceInitialize();
     }
 
     private void OnApplicationQuit()

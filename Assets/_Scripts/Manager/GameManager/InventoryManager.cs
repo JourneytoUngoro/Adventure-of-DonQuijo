@@ -35,7 +35,7 @@ public class InventoryManager : MonoBehaviour
 
     private GameObject inventoryUI;
 
-    private static bool sInitialized = false;
+    public static bool sInitialized = false;
 
     private void Awake()
     {
@@ -82,6 +82,12 @@ public class InventoryManager : MonoBehaviour
             inventoryUI.GetComponent<CanvasGroup>().blocksRaycasts = true;
             inventoryUI.GetComponent<CanvasGroup>().interactable = true;
         }
+    }
+
+    public void ForceInitialize()
+    {
+        controller().RefreshView();
+        controller().RefreshCoins();
     }
 
     private bool IsExcludedScene(string currentScene)
