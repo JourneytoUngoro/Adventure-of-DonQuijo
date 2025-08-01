@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -257,7 +258,8 @@ public class StatComponent
     {
         if (slider != null)
         {
-            slider.value = reverseSlider ? 1.0f - currentValue / maxValue : currentValue / maxValue;
+            float targetValue = reverseSlider ? 1.0f - currentValue / maxValue : currentValue / maxValue;
+            slider.DOValue(targetValue, 0.2f).SetEase(Ease.OutCubic);
         }
     }
 }

@@ -7,7 +7,7 @@ public class ImageCropper : MonoBehaviour
     public Image image;
 
 
-    void Start()
+    void Awake()
     {
         ScaleImage();
     }

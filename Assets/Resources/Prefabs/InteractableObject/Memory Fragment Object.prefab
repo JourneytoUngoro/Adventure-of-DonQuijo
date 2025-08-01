@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7501577999477470019}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9ea4bcb58554f9f40bd638b6e60e2a80, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 78330a0efd09037408c5bd784ae71fef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -139,6 +139,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   relatedQuest: {fileID: 11400000, guid: 2ef76d0428a67ce458697ab894beaecd, type: 2}
+  mfLifeTime: 4
   moveSpeed: 2
   epsilon: 2
 --- !u!114 &6087498623338046745
@@ -159,6 +160,7 @@ MonoBehaviour:
   horizontalmultiplier: 2
   fallDuration: 0.5
   bounceDuration: 0.4
+  isCoin: 0
   jumpEffect: 6
   fallHorizontalEffect: 1
   bounceEffect: 30
