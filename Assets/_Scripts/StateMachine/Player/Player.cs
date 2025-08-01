@@ -136,6 +136,7 @@ public class Player : Entity
         gameObject.tag = "Idle";
         stats.health.SetCurrentValue(stats.health.maxValue);
         stats.posture.SetCurrentValue(stats.posture.maxValue);
+        stats.posture.ControlRecoveryTimer(TimerControl.Start);
         playerStateMachine.Initialize(idleState);
     }
 }

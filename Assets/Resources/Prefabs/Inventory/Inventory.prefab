@@ -137,6 +137,7 @@ MonoBehaviour:
   hoverScale: 1.1
   clickScale: 0.9
   duration: 0.2
+  printDebug: 0
 --- !u!1 &2363958065791305771
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +351,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0
+  m_Spacing: 5
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -432,7 +433,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3232912777825060872}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -744,6 +745,7 @@ MonoBehaviour:
   hoverScale: 1.1
   clickScale: 0.9
   duration: 0.2
+  printDebug: 0
 --- !u!1 &6549904147278639185
 GameObject:
   m_ObjectHideFlags: 0
