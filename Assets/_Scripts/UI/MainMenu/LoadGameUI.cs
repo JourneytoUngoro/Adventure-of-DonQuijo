@@ -153,21 +153,18 @@ public class LoadGameUI : MonoBehaviour
             guidePopup.HideUI();
             guidePopup = null;
 
-            nowProfileId = string.Empty;
-
             if (playOpening)
             {
-                // TODO : cutscene01 재생으로 바꿔야 한다
-                Debug.Log("Play Opening Cutscene");
                 Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("OpeningCutscene"), true, false);
                 Manager.Instance.soundManager.PlayBGM("cutscene01BGM");
             }
             else
             {
-                Debug.Log("Don't Play Opening Cutscene");
-                Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("Stage1"), true, true);
+                Manager.Instance.sceneTransitionManager.SceneTransition(allProfilesGameData[nowProfileId].currentScene, true, true);
                 Manager.Instance.soundManager.PlayBGM("battleBGM");
             }
+
+            nowProfileId = string.Empty;
         }
         loadPopup.HideUI();
     }

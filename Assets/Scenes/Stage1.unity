@@ -5546,6 +5546,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2685521731621313269, guid: d35c26b26bd993d49a330137c186f56f, type: 3}
+      propertyPath: <posture>k__BackingField.<graph>k__BackingField.<incrementPerLevel>k__BackingField.m_Curve.Array.data[0].value
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2685521731621313269, guid: d35c26b26bd993d49a330137c186f56f, type: 3}
+      propertyPath: <posture>k__BackingField.<graph>k__BackingField.<accumulationPerLevel>k__BackingField.m_Curve.Array.data[0].value
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2685521731621313269, guid: d35c26b26bd993d49a330137c186f56f, type: 3}
+      propertyPath: <posture>k__BackingField.<graph>k__BackingField.<accumulationPerLevel>k__BackingField.m_Curve.Array.data[1].value
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4196642822497740318, guid: d35c26b26bd993d49a330137c186f56f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1

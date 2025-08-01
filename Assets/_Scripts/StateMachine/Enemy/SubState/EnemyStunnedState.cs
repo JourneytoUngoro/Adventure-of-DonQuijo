@@ -43,11 +43,33 @@ public class EnemyStunnedState : EnemyState
                 {
                     if (isTargetInDetectionRange)
                     {
-                        stateMachine.ChangeState(enemy.targetInDetectionRangeState);
+                        if (enemy.GetType().Equals(typeof(Bat)))
+                        {
+                            stateMachine.ChangeState((enemy as Bat).targetInDetectionRangeState);
+                        }
+                        else if (enemy.GetType().Equals(typeof(Police)))
+                        {
+                            stateMachine.ChangeState((enemy as Police).targetInDetectionRangeState);
+                        }
+                        else if (enemy.GetType().Equals(typeof(Doctor)))
+                        {
+                            stateMachine.ChangeState((enemy as Doctor).targetInDetectionRangeState);
+                        }
                     }
                     else
                     {
-                        stateMachine.ChangeState(enemy.idleState);
+                        if (enemy.GetType().Equals(typeof(Bat)))
+                        {
+                            stateMachine.ChangeState((enemy as Bat).idleState);
+                        }
+                        else if (enemy.GetType().Equals(typeof(Police)))
+                        {
+                            stateMachine.ChangeState((enemy as Police).idleState);
+                        }
+                        else if (enemy.GetType().Equals(typeof(Doctor)))
+                        {
+                            stateMachine.ChangeState((enemy as Doctor).idleState);
+                        }
                     }
                 }
             }

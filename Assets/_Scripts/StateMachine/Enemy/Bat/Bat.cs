@@ -34,4 +34,11 @@ public class Bat : Enemy
 
         enemyStateMachine.Initialize(idleState);
     }
+
+    public override void Revive()
+    {
+        base.Revive();
+
+        enemyStateMachine.Initialize(idleState);
+    }
 }

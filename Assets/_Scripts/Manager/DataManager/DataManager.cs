@@ -89,6 +89,11 @@ public class DataManager : MonoBehaviour
         SceneManager.sceneLoaded += LoadGame;
     }
 
+    public string GetCurrentScene()
+    {
+        return gameData == null ? "Stage1" : this.gameData.currentScene;
+    }
+
     public void DeleteProfileData(string profileId)
     {
         dataHandler.Delete(profileId);

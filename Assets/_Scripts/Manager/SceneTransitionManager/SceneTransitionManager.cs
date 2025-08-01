@@ -375,14 +375,21 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
         FindDoor(doorToSpawnAt);
         MoveByDirection(direction);
         ChangePosition(destinationTransform);
+
+        Enemy[] activeSceneEnemies = FindObjectsByType<Enemy>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+        /*foreach (Enemy enemy in activeSceneEnemies)
+        {
+            enemy.Revive();
+        }*/
         
         if (current.name != "" && next.name != "MainMenu" && next.name != "OpeningCutscene")
         {
             Player.Instance.gameObject.SetActive(true);
             statusBar.SetActive(true);
             cinemachineVirtualCamera.Follow = Player.Instance.transform;
-            cinemachineVirtualCamera.ForceCameraPosition(Player.Instance.transform.position + Vector3.up * 25.0f, Quaternion.identity);
-            cinemachineVirtualCamera.GetComponent<CinemachineConfiner>().m_BoundingShape2D = next.GetRootGameObjects().Where(gameObject => gameObject.name.Equals("Camera Boundary")).FirstOrDefault()?.GetComponent<PolygonCollider2D>();
+            cinemachineVirtualCamera.ForceCameraPosition(Player.Instance.transform.position + Vector3.up * 50.0f, Quaternion.identity);
+            cinemachineVirtualCamera.GetComponent<CinemachineConfiner>().m_BoundingShape2D = next.GetRootGameObjects().Where(gameObject => gameObject.name.Equals("Camera Boundary") && gameObject.scene.name.Equals(next.name)).FirstOrDefault()?.GetComponent<PolygonCollider2D>();
             Manager.Instance.dataManager.SaveGame();
         }
         else

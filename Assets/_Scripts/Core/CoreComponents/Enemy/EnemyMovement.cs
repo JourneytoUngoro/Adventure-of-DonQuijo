@@ -339,6 +339,7 @@ public class EnemyMovement : Movement
         }
         else if (navMeshAgentState == NavMeshAgentState.Flee)
         {
+            Vector2 direction = (currentProjectedPosition - targetProjectedPosition).normalized;
 
         }
 

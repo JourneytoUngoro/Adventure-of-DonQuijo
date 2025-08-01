@@ -31,6 +31,8 @@ public class Enemy : Entity
     public NavMeshAgent navMeshAgent { get; private set; }
     #endregion
 
+    private Transform initialTransform;
+
     protected override void Awake()
     {
         base.Awake();
@@ -38,6 +40,7 @@ public class Enemy : Entity
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
+        initialTransform = transform;
     }
 
     protected override void Start()
@@ -65,5 +68,12 @@ public class Enemy : Entity
         
         landingState = new PlayerLandingState(this, "landing");
         */
+    }
+
+    public virtual void Revive()
+    {
+        transform.position = initialTransform.position;
+        stats.health.SetCurrentValue(stats.health.maxValue);
+        stats.posture.SetCurrentValue(stats.posture.maxValue);
     }
 }
