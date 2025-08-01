@@ -1496,6 +1496,7 @@ MonoBehaviour:
   <entityData>k__BackingField: {fileID: 11400000, guid: 675bacc113fb2df43b68c2603f45ea55, type: 2}
   <printStateChange>k__BackingField: 1
   <entityLevel>k__BackingField: 1
+  <statusCanvas>k__BackingField: {fileID: 3713927635560936099}
 --- !u!195 &6806183476803910454
 NavMeshAgent:
   m_ObjectHideFlags: 0
