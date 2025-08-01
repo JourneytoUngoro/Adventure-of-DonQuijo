@@ -27,8 +27,8 @@ public class NewGameUI : MonoBehaviour
     {
         if (Manager.Instance.dataManager.AllProfilesCount() < 3)
         {
-            loadGamePanel.GetComponent<PopupUI>().ShowUI();
             popup.HideUI();
+            loadGamePanel.GetComponent<PopupUI>().ShowUI();
         }
         else
         {

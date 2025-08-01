@@ -113,6 +113,12 @@ public class InventoryManager : MonoBehaviour
         return use;
     }
 
+    public int HasItem(string itemLabel)
+    {
+        int has = controller().HasItem(itemLabel);
+        return has;
+    }
+
     public void SwapItems(int index1, int index2)
     {
         controller().SwapItems(index1, index2);

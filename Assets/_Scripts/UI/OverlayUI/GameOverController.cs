@@ -22,9 +22,21 @@ public class GameOverController : MonoBehaviour
 
     public void HasMemoryFragment()
     {
-        // In case, player has memory fragment(another life)
-        // 이건 제가 추가하겠습니닥 
-        // 여기다가 구현 안 할지도 
+        int index = Manager.Instance.itemManager.HasItem("기억의 조각");
+
+        if (index != -1) // player has mf
+        {
+            // 플레이어 살려
+            bool success = Manager.Instance.itemManager.UseItem(index);
+            // 자동으로 유아이 뜰듯? 확인 필요
+            Manager.Instance.uiManager.GetUI(UIType.GameOver).HideUI();
+
+        }
+        else
+        {
+            // 아니면 이제 그냥 있는거 버튼 선택하게 해.
+        }
+
 
     }
 
@@ -59,8 +71,6 @@ public class GameOverController : MonoBehaviour
         // 정보 저장 -> 아니 근데 죽었는데 메인 가면 먼 정보를 저장해야 하니? 
 
         gameOverPopup.HideUI();
-
-
 
     }
 

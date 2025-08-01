@@ -4,17 +4,9 @@ using UnityEngine;
 
 public class TestInventory : MonoBehaviour
 {
-    [SerializeField] InventoryView view;
-    [SerializeField] Inventory inventory;
-    InventoryData inventoryData;
-
-    [SerializeField] static List<ItemDetails> testStartItems;
-
-
-    public static List<ItemDetails> LoadInventory()
+    public string itemId;
+    public void hasitemsldfkjslkdjfadjsfk()
     {
-
-        return testStartItems;
+        Manager.Instance.itemManager.HasItem(itemId);
     }
-
 }
