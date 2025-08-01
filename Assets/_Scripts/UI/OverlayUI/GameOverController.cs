@@ -25,7 +25,6 @@ public class GameOverController : MonoBehaviour
         // In case, player has memory fragment(another life)
         // 이건 제가 추가하겠습니닥 
         // 여기다가 구현 안 할지도 
-
     }
 
 
@@ -49,8 +48,9 @@ public class GameOverController : MonoBehaviour
 
         gameOverPopup.HideUI();
 
-        Manager.Instance.sceneTransitionManager.SceneTransition("Stage1", true, true);
         Player.Instance.Revive();
+        Manager.Instance.sceneTransitionManager.SceneTransition("Stage1", true, false);
+        Manager.Instance.inputHandler.SetCharacterControlEnabled(true);
     }
 
     private void OnClickMainMenuButton()
@@ -60,7 +60,7 @@ public class GameOverController : MonoBehaviour
 
         gameOverPopup.HideUI();
 
-        Player.Instance.transform.position = new Vector3(-600.0f, -100.0f, 0.0f);
+        Player.Instance.Revive();
         Manager.Instance.sceneTransitionManager.SceneTransition("MainMenu", true, true);
     }
 
