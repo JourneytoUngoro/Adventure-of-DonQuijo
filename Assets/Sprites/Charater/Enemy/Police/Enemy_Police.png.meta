@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c7675f129e96bdc4aa58e6937b1b5ecf
+guid: 75abe273cdadcc24d8f76a9424bf6417
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Enemy_Policet_0
+      name: Enemy_Police_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: be9c6fc226b0429459588b74cb9c4cf5
-      internalID: -867011792
+      spriteID: 6a5a4969d53653041974e6db237485ad
+      internalID: 1854007804
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Policet_1
+      name: Enemy_Police_1
       rect:
         serializedVersion: 2
         x: 173
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09a412d49423da546b22effdf4f95aee
-      internalID: -1801651688
+      spriteID: abd9b756627cd9d4ba2ed5fc28fb39ae
+      internalID: 103394081
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Policet_2
+      name: Enemy_Police_2
       rect:
         serializedVersion: 2
         x: 346
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2522fb738c42e3f46a317d47ba17d1ac
-      internalID: 1687468167
+      spriteID: 2c70f92b844aed943b5458a0c04b85b6
+      internalID: -1599407991
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Policet_3
+      name: Enemy_Police_3
       rect:
         serializedVersion: 2
         x: 519
@@ -174,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1cfd847f0c286b94b9fe1459681cd6cc
-      internalID: 1960952588
+      spriteID: 6615e37f13365db4cb420a89d6772c85
+      internalID: 1354325006
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Policet_4
+      name: Enemy_Police_4
       rect:
         serializedVersion: 2
         x: 692
@@ -195,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c966adcedb08600448dd72d5895b97c4
-      internalID: 1797700189
+      spriteID: 30f39d660901767498ee01db4b6ad967
+      internalID: -1900383122
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Policet_5
+      name: Enemy_Police_5
       rect:
         serializedVersion: 2
         x: 0
@@ -216,14 +216,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c6d48ca6e30999b42ae1c416c3435697
-      internalID: 660090020
+      spriteID: 0e151e13eb3598f46b698c8a3acbbdef
+      internalID: 321678739
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Policet_6
+      name: Enemy_Police_6
       rect:
         serializedVersion: 2
         x: 173
@@ -237,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5fa3799f766846f47aed484a3a71884f
-      internalID: -304883002
+      spriteID: 387a6ce064574b94ea187fd02e0375a0
+      internalID: 1230822021
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Policet_7
+      name: Enemy_Police_7
       rect:
         serializedVersion: 2
         x: 346
@@ -258,14 +258,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d5a0947e8cb3b04fabe4c048160af58
-      internalID: 809476570
+      spriteID: a3de575b889eb754daa09fa891953841
+      internalID: 1630166410
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Policet_8
+      name: Enemy_Police_8
       rect:
         serializedVersion: 2
         x: 519
@@ -279,14 +279,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0314ae6321ff6943a47a7c3f2bed5dc
-      internalID: -536882395
+      spriteID: 7ec7e72a02f33344fb071141afdb7974
+      internalID: -982944998
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Policet_9
+      name: Enemy_Police_9
       rect:
         serializedVersion: 2
         x: 692
@@ -300,14 +300,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 157171dcff48c0c4a874ec56521ebbb0
-      internalID: -1374662507
+      spriteID: 35abbd87981580d4a9fb9331807b8f47
+      internalID: 2085710980
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Policet_10
+      name: Enemy_Police_10
       rect:
         serializedVersion: 2
         x: 0
@@ -321,14 +321,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db5c586a818585043baa17467e676d30
-      internalID: 360366017
+      spriteID: 68a1ff1cf930b4a4f8879a6c576f3795
+      internalID: 303851679
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Policet_11
+      name: Enemy_Police_11
       rect:
         serializedVersion: 2
         x: 173
@@ -342,14 +342,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6cae008a2af04a4caa13aba64cc91f0
-      internalID: -962830525
+      spriteID: 552a308178ab42a4ab697c3170510f74
+      internalID: 586467987
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Policet_12
+      name: Enemy_Police_12
       rect:
         serializedVersion: 2
         x: 346
@@ -363,14 +363,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21d03725f9b475a429f6a2d22b6445cd
-      internalID: 817155509
+      spriteID: 0d2eac60dd520ad4ca68c1f4ae5077d6
+      internalID: -1744951701
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Policet_13
+      name: Enemy_Police_13
       rect:
         serializedVersion: 2
         x: 519
@@ -384,14 +384,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9be48b8afdc5c7a4294d06a72dc0f3e9
-      internalID: -1794643662
+      spriteID: 519b8cc029311fb42882efae630c0d4a
+      internalID: 1774549847
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Policet_14
+      name: Enemy_Police_14
       rect:
         serializedVersion: 2
         x: 692
@@ -405,14 +405,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3a4602ff2e2e184d8d4bd1ca7b08a2e
-      internalID: -103403005
+      spriteID: af646c0fefc12f7429a2bac990a51e30
+      internalID: -1712994561
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Policet_15
+      name: Enemy_Police_15
       rect:
         serializedVersion: 2
         x: 0
@@ -426,14 +426,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88f181d4aa72b5e4e9cb14fd4cb1aa26
-      internalID: 1860362288
+      spriteID: 4c0d4bd7ac7f0e04d9f222ebcf79b81a
+      internalID: 941165315
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Policet_16
+      name: Enemy_Police_16
       rect:
         serializedVersion: 2
         x: 173
@@ -447,14 +447,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8bcb0f5902135ff4ab3b1ffa66c5bf3b
-      internalID: 294589532
+      spriteID: a34d46adcacea8045a867d1b9b450b33
+      internalID: -1756769474
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Policet_17
+      name: Enemy_Police_17
       rect:
         serializedVersion: 2
         x: 346
@@ -468,14 +468,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9adb4ed013fd1c444afe0471228e6cd8
-      internalID: -664072814
+      spriteID: 4e73a44ffcc55364781a70cc611f89a8
+      internalID: -1467570514
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Enemy_Policet_18
+      name: Enemy_Police_18
       rect:
         serializedVersion: 2
         x: 519
@@ -489,8 +489,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a125a7a846c1ecc429f39f0e5f00793e
-      internalID: -799063351
+      spriteID: 878aa70b5eab7d441bc2eee684ed8f9b
+      internalID: -1689723520
       vertices: []
       indices: 
       edges: []
@@ -506,25 +506,25 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Enemy_Policet_0: -867011792
-      Enemy_Policet_1: -1801651688
-      Enemy_Policet_10: 360366017
-      Enemy_Policet_11: -962830525
-      Enemy_Policet_12: 817155509
-      Enemy_Policet_13: -1794643662
-      Enemy_Policet_14: -103403005
-      Enemy_Policet_15: 1860362288
-      Enemy_Policet_16: 294589532
-      Enemy_Policet_17: -664072814
-      Enemy_Policet_18: -799063351
-      Enemy_Policet_2: 1687468167
-      Enemy_Policet_3: 1960952588
-      Enemy_Policet_4: 1797700189
-      Enemy_Policet_5: 660090020
-      Enemy_Policet_6: -304883002
-      Enemy_Policet_7: 809476570
-      Enemy_Policet_8: -536882395
-      Enemy_Policet_9: -1374662507
+      Enemy_Police_0: 1854007804
+      Enemy_Police_1: 103394081
+      Enemy_Police_10: 303851679
+      Enemy_Police_11: 586467987
+      Enemy_Police_12: -1744951701
+      Enemy_Police_13: 1774549847
+      Enemy_Police_14: -1712994561
+      Enemy_Police_15: 941165315
+      Enemy_Police_16: -1756769474
+      Enemy_Police_17: -1467570514
+      Enemy_Police_18: -1689723520
+      Enemy_Police_2: -1599407991
+      Enemy_Police_3: 1354325006
+      Enemy_Police_4: -1900383122
+      Enemy_Police_5: 321678739
+      Enemy_Police_6: 1230822021
+      Enemy_Police_7: 1630166410
+      Enemy_Police_8: -982944998
+      Enemy_Police_9: 2085710980
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

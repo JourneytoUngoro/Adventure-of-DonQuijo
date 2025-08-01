@@ -245,7 +245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &22670569
 Transform:
   m_ObjectHideFlags: 0
@@ -398,7 +398,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &94154430
 Transform:
   m_ObjectHideFlags: 0
@@ -1197,7 +1197,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &308828001
 Transform:
   m_ObjectHideFlags: 0
@@ -1323,7 +1323,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &330819961
 Transform:
   m_ObjectHideFlags: 0
@@ -1903,7 +1903,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &432201502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2233,7 +2233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &449929091
 Transform:
   m_ObjectHideFlags: 0
@@ -3286,6 +3286,7 @@ MonoBehaviour:
   <entityData>k__BackingField: {fileID: 11400000, guid: 0b9bde2239662ee418e64b3ccd88ef98, type: 2}
   <printStateChange>k__BackingField: 0
   <entityLevel>k__BackingField: 0
+  <statusCanvas>k__BackingField: {fileID: 0}
 --- !u!61 &693722043
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4714,7 +4715,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &974054496
 Transform:
   m_ObjectHideFlags: 0
@@ -5548,7 +5549,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1158368064
 Transform:
   m_ObjectHideFlags: 0
@@ -6630,7 +6631,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1407329732
 Transform:
   m_ObjectHideFlags: 0
@@ -6666,15 +6667,15 @@ PrefabInstance:
       objectReference: {fileID: 1502738979}
     - target: {fileID: 3749889053354997725, guid: dfdc780215c66c849b19a9ac22c0396e, type: 3}
       propertyPath: orthographic size
-      value: 146.25
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 5938222223518203740, guid: dfdc780215c66c849b19a9ac22c0396e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -390
+      value: -330
       objectReference: {fileID: 0}
     - target: {fileID: 5938222223518203740, guid: dfdc780215c66c849b19a9ac22c0396e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -103.75
+      value: -70
       objectReference: {fileID: 0}
     - target: {fileID: 6143200767060349005, guid: dfdc780215c66c849b19a9ac22c0396e, type: 3}
       propertyPath: m_IsActive
@@ -6732,6 +6733,14 @@ PrefabInstance:
       propertyPath: currentActiveScene.m_SceneAsset
       value: 
       objectReference: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
+    - target: {fileID: 7261595679001456920, guid: dfdc780215c66c849b19a9ac22c0396e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -485
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261595679001456920, guid: dfdc780215c66c849b19a9ac22c0396e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -141
+      objectReference: {fileID: 0}
     - target: {fileID: 7489548374160614122, guid: dfdc780215c66c849b19a9ac22c0396e, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -6811,7 +6820,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1471184028
 Transform:
   m_ObjectHideFlags: 0
@@ -8031,6 +8040,7 @@ MonoBehaviour:
   <entityData>k__BackingField: {fileID: 11400000, guid: 0b9bde2239662ee418e64b3ccd88ef98, type: 2}
   <printStateChange>k__BackingField: 1
   <entityLevel>k__BackingField: 0
+  <statusCanvas>k__BackingField: {fileID: 0}
 --- !u!61 &1588174376
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8270,10 +8280,10 @@ MonoBehaviour:
   - {fileID: 449929090}
   - {fileID: 330819960}
   - {fileID: 1158368063}
-  - {fileID: 2001338144}
-  - {fileID: 1623708669}
   - {fileID: 631895682}
   - {fileID: 1755078826}
+  - {fileID: 1860871655}
+  - {fileID: 1192330236}
 --- !u!114 &1599374161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8320,7 +8330,7 @@ MonoBehaviour:
   m_BuildHeightMesh: 0
   m_MinRegionArea: 0
   m_HideEditorLogs: 0
-  m_NavMeshData: {fileID: 23800000, guid: 1d434c014b44b2142a43faa7824a0c15, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: e8b48e212e5b06b4daaba844656b3a72, type: 2}
 --- !u!1 &1610252419
 GameObject:
   m_ObjectHideFlags: 0
@@ -10091,7 +10101,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1807720524
 Transform:
   m_ObjectHideFlags: 0
