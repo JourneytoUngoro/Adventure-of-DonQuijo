@@ -130,4 +130,12 @@ public class Player : Entity
     {
         Manager.Instance.inputHandler.playerInput.currentActionMap.Disable();
     }
+
+    public void Revive()
+    {
+        gameObject.tag = "Idle";
+        stats.health.SetCurrentValue(stats.health.maxValue);
+        stats.posture.SetCurrentValue(stats.posture.maxValue);
+        playerStateMachine.Initialize(idleState);
+    }
 }
