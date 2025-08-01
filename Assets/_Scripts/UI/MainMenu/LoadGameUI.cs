@@ -107,6 +107,7 @@ public class LoadGameUI : MonoBehaviour
             guidePopup = Manager.Instance.uiManager.ShowDynamicPopup(new PopupData(
                                 "", $"슬롯 {index + 1}에서 새 게임을 시작하겠습니까?", "", ""));
             TutorialDialogueController.newGame = true;
+            TutorialDialogueController.tutorialPlayed = false;
         }
         else
         {
@@ -114,6 +115,7 @@ public class LoadGameUI : MonoBehaviour
                                     "", $"슬롯 {index + 1}에서 게임을 불러오겠습니까?", "", ""));
             playOpening = false;
             TutorialDialogueController.newGame = false;
+            TutorialDialogueController.tutorialPlayed = true;
         }
 
         nowProfileId = saveSlotUI[index].profileId;
