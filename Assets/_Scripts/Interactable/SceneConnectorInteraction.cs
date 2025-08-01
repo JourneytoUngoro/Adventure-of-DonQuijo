@@ -11,9 +11,11 @@ public class SceneConnectorInteraction : InteractBase
     [SerializeField] private Transform destinationPosition;
 
     private Direction initialDirection;
+    private SpriteRenderer spriteRenderer;
 
     private void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         initialDirection = direction;
     }
 
@@ -68,6 +70,7 @@ public class SceneConnectorInteraction : InteractBase
             }
         }
 
+        spriteRenderer.enabled = activate;
         direction = activate ? initialDirection : Direction.None;
     }
 }
