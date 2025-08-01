@@ -143,7 +143,10 @@ public class PlayerInputHandler : MonoBehaviour
 
             if (itemIndex == -1) return;
 
-            Manager.Instance.itemManager.UseItem(itemIndex);
+            if (Manager.Instance.itemManager.UseItem(itemIndex))
+            {
+                Manager.Instance.soundManager.PlaySoundFXClip("playerUseItemSFX", transform);
+            }
         }
     }
 

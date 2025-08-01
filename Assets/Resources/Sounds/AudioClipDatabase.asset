@@ -57,3 +57,21 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: ce67402fbcf52434dbdda26ac4a06175, type: 3}
   - key: coinDropSFX
     clip: {fileID: 8300000, guid: 9b1d0404800a4b24f90851ffa68fa77d, type: 3}
+  - key: mfCollectSFX
+    clip: {fileID: 8300000, guid: a4a78b32255575543b3f99c0d26316ba, type: 3}
+  - key: mfDropSFX
+    clip: {fileID: 8300000, guid: a1c60d2ebb1cd024496d056df6f15a21, type: 3}
+  - key: batAttackSFX
+    clip: {fileID: 8300000, guid: 35c18f7fde211ce4f8795905f52995ac, type: 3}
+  - key: policeAttackSFX
+    clip: {fileID: 8300000, guid: b2526aa64a74f0941b9bf22ed66a7560, type: 3}
+  - key: doctorAttackSFX
+    clip: {fileID: 8300000, guid: fb5a0f5ab7dda7a41ae974af35877133, type: 3}
+  - key: gameOverSFX
+    clip: {fileID: 8300000, guid: e0c28e0c0a426b54bb64854c4fee3b2d, type: 3}
+  - key: gameWinSFX
+    clip: {fileID: 8300000, guid: c846d9a9b9382c5439b8c4e7fd798f6c, type: 3}
+  - key: playerUseItemSFX
+    clip: {fileID: 8300000, guid: 1ad0b66af3b71b94db5db349ea367d8e, type: 3}
+  - key: vendingMachinSlotSFX
+    clip: {fileID: 8300000, guid: 9f4d11742c8bab34ea895756eab447a8, type: 3}

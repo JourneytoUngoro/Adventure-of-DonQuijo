@@ -115,6 +115,12 @@ public class PopupUI : UIBase
         }
     }
 
+    public void ClearDynamicPopupEvent()
+    {
+        confirmButton?.onClick.RemoveAllListeners();
+        cancelButton?.onClick.RemoveAllListeners();
+    }
+
     protected override void ReturnToPool()
     {
         if (type == UIType.DynamicPopup)

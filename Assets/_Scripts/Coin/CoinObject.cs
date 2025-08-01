@@ -30,6 +30,7 @@ public class CoinObject : InteractBase
 
         pooledObject = GetComponent<PooledObject>();
         dropEffect = GetComponent<DropEffect>();
+        dropEffect.isCoin = true;
 
         isChasingPlayer = false;
     }

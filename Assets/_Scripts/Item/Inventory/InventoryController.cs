@@ -94,7 +94,7 @@ public class InventoryController
             if (model.PlusQuantity(indexIfExist, item, quantity))
             {
                 // 추가 성공
-                string text = $"인벤토리에 추가됐습니다. \n현재 수량 : {model.Quantity(item)} 개";
+                string text = $"인벤토리에 추가됐습니다.";
                 SetInventoryTextInfo(text);
                 return true;
             }
@@ -112,14 +112,14 @@ public class InventoryController
             if (model.Add(item))
             {
                 // 인벤토리 추가 성공
-                string text = $"인벤토리에 추가됐습니다. \n현재 수량 : {model.Quantity(item)} 개";
+                string text = $"인벤토리에 추가됐습니다";
                 SetInventoryTextInfo(text);
                 return true;
             }
             else
             {
                 // 인벤토리 용량 초과로 추가 실패
-                string text = $"인벤토리가 꽉 찼습니다.";
+                string text = $"인벤토리가 가득 찼습니다.";
                 SetInventoryTextInfo(text);
                 return false;
 

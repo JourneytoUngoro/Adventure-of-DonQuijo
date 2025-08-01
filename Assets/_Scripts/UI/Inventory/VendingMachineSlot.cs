@@ -19,7 +19,7 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
 
     private Image backgroundImage;
 
-    private PanelScaler scaler;
+    private VendingMachineSlotEffect effect;
     private VendingMachinePopupUI vmUI;
     private PopupUI vmPopup;
 
@@ -29,7 +29,7 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
 
     private void Start()
     {
-        scaler = GetComponent<PanelScaler>();
+        effect = GetComponent<VendingMachineSlotEffect>();
         vmUI = GetComponentInParent<VendingMachinePopupUI>();
         vmPopup = vmUI.GetComponent<PopupUI>();
 
@@ -73,12 +73,12 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
     {
         if (chosen)
         {
-            scaler.OnSelectedState();
+            effect.OnSelectedState();
             buttonSlotImage.color = highlightColor;
         }
         else
         {
-            scaler.OnUnSelectedState();
+            effect.OnUnSelectedState();
             buttonSlotImage.color = normalColor;
         }
     }

@@ -19,6 +19,8 @@ public class PoliceMeleeAttackState : EnemyAbilityState
 
         enemy.combat.DoAttack(police.policeCombat.meleeAttack[index]);
         enemy.combat.damagedTargets.Clear();
+
+        Manager.Instance.soundManager.PlaySoundFXClip("policeAttackSFX", enemy.transform);
     }
 
     public override void AnimationFinishTrigger(int index)
