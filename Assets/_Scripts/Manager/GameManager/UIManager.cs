@@ -1,12 +1,12 @@
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    [ShowInInspector]
     public static Dictionary<UIType, UIBase> startingUIDictionary = new Dictionary<UIType, UIBase>();
-
-    public bool isIngame;
 
     private PopupUI popupPrefab;
     private TextInfoUI textInfoPrefab;
@@ -38,7 +38,6 @@ public class UIManager : MonoBehaviour
         pool = GameObject.Find("Pooled Objects")?.transform;
         InCaseTestScene();
 
-        isIngame = false;
         toggleMenuPressed = false;
         popupOpened = false;
 
