@@ -133,7 +133,10 @@ public class Player : Entity
 
     public void Revive()
     {
+        isDead = false;
+        animator.SetBool("dead", false);
         gameObject.tag = "Idle";
+        detection.SetPosition(new Vector3(-600.0f, -100.0f, 0.0f));
         stats.health.SetCurrentValue(stats.health.maxValue);
         stats.posture.SetCurrentValue(stats.posture.maxValue);
         stats.posture.ControlRecoveryTimer(TimerControl.Start);

@@ -66,8 +66,9 @@ public class GameOverController : MonoBehaviour
         Debug.Log($"return to Stage1 : " + Manager.Instance.inputHandler.IsUIControlEnabled());
 
 
-        Manager.Instance.sceneTransitionManager.SceneTransition("Stage1", true, true);
         Player.Instance.Revive();
+        Manager.Instance.sceneTransitionManager.SceneTransition("Stage1", true, false);
+        Manager.Instance.inputHandler.SetCharacterControlEnabled(true);
     }
 
     private void OnClickMainMenuButton()
@@ -81,7 +82,7 @@ public class GameOverController : MonoBehaviour
         Debug.Log($"return to Stage1 : " + Manager.Instance.inputHandler.IsUIControlEnabled());
 
 
-        Player.Instance.transform.position = new Vector3(-600.0f, -100.0f, 0.0f);
+        Player.Instance.Revive();
         Manager.Instance.sceneTransitionManager.SceneTransition("MainMenu", true, true);
     }
 

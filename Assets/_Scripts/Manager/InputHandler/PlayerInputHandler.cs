@@ -69,7 +69,7 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
-        
+        Debug.Log("moveInput");
         if (!movementLocked)
         {
             normInputX = Mathf.RoundToInt(movementInput.x);

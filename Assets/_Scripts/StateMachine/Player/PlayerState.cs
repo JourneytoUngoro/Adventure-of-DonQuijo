@@ -60,6 +60,7 @@ public class PlayerState : EntityState
     {
         inputX = Manager.Instance.inputHandler.normInputX;
         inputY = Manager.Instance.inputHandler.normInputY;
+        Debug.Log("inputX: " + inputX + ", inputY: " + inputY);
         jumpInputHolding = Manager.Instance.inputHandler.jumpInputHolding;
         jumpInputPressed = Manager.Instance.inputHandler.jumpInputPressed;
         blockParryInputHolding = Manager.Instance.inputHandler.blockParryInputHolding;
