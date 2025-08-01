@@ -13,7 +13,9 @@ public class PlayerDeadState : PlayerState
         waitTimer = new Timer(player.playerData.waitTimeAfterDeath);
         waitTimer.timerAction += () =>
         { 
-            Manager.Instance.uiManager.GetUI(UIType.GameOver).ShowUI();
+            // Manager.Instance.uiManager.GetUI(UIType.GameOver).ShowUI();
+            Manager.Instance.uiManager.GetUI(UIType.GameOver).GetComponent<GameOverController>().HasMemoryFragment();
+
         };
     }
 

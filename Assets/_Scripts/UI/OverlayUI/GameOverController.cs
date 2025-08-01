@@ -28,13 +28,14 @@ public class GameOverController : MonoBehaviour
         {
             // 플레이어 살려
             bool success = Manager.Instance.itemManager.UseItem(index);
-            // 자동으로 유아이 뜰듯? 확인 필요
-            Manager.Instance.uiManager.GetUI(UIType.GameOver).HideUI();
-
+            Debug.Log("기억의 조각있어용");
         }
         else
         {
             // 아니면 이제 그냥 있는거 버튼 선택하게 해.
+            gameOverPopup.ShowUI();
+
+
         }
 
 
@@ -60,6 +61,10 @@ public class GameOverController : MonoBehaviour
         // 해준님 함수 호출
 
         gameOverPopup.HideUI();
+        Debug.Log($"return to Stage1 : " + Manager.Instance.uiManager.activatedPopups.Count);
+        Debug.Log($"return to Stage1 : " + Manager.Instance.inputHandler.IsCharacterControlEnabled());
+        Debug.Log($"return to Stage1 : " + Manager.Instance.inputHandler.IsUIControlEnabled());
+
 
         Manager.Instance.sceneTransitionManager.SceneTransition("Stage1", true, true);
         Player.Instance.Revive();
@@ -71,11 +76,14 @@ public class GameOverController : MonoBehaviour
         // 정보 저장 -> 아니 근데 죽었는데 메인 가면 먼 정보를 저장해야 하니? 
 
         gameOverPopup.HideUI();
+        Debug.Log($"return to Stage1 : " + Manager.Instance.uiManager.activatedPopups.Count);
+        Debug.Log($"return to Stage1 : " + Manager.Instance.inputHandler.IsCharacterControlEnabled());
+        Debug.Log($"return to Stage1 : " + Manager.Instance.inputHandler.IsUIControlEnabled());
+
 
         Player.Instance.transform.position = new Vector3(-600.0f, -100.0f, 0.0f);
         Manager.Instance.sceneTransitionManager.SceneTransition("MainMenu", true, true);
     }
-
 
 
 
