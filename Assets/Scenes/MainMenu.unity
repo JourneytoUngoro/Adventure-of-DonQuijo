@@ -3208,7 +3208,7 @@ GameObject:
   - component: {fileID: 1556909680}
   - component: {fileID: 1556909684}
   m_Layer: 5
-  m_Name: Restet
+  m_Name: Reset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6919,8 +6919,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7342848751942251859, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7342848751942251859, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7342848751942251859, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7342848751942251859, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7342848751942251859, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
       propertyPath: m_AnchorMin.y
@@ -6928,19 +6940,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7342848751942251859, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -1765.4137
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7342848751942251859, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -869.1671
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7342848751942251859, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -851.44995
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 7342848751942251859, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -376.5624
+      value: 335
       objectReference: {fileID: 0}
     - target: {fileID: 7357477938123498745, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
       propertyPath: m_Name

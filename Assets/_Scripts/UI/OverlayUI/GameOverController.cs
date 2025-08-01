@@ -72,6 +72,8 @@ public class GameOverController : MonoBehaviour
 
         gameOverPopup.HideUI();
 
+        Player.Instance.transform.position = new Vector3(-600.0f, -100.0f, 0.0f);
+        Manager.Instance.sceneTransitionManager.SceneTransition("MainMenu", true, true);
     }
 
 

@@ -131,8 +131,6 @@ public class DataManager : MonoBehaviour
             return false;
         }
 
-        Debug.Log("Save Data of " + String.Join(", ", dataPersistanceObjects.Select(dataPersistanceObject => dataPersistanceObject.ToString())));
-
         foreach (IDataPersistance dataPersistanceObject in dataPersistanceObjects)
         {
             dataPersistanceObject?.SaveData(gameData);

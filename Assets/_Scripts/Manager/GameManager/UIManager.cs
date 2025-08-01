@@ -46,6 +46,8 @@ public class UIManager : MonoBehaviour
         LoadUIPrefabs();
         RegisterUIObjects();
         CreatePool();
+
+        PopupUI gameOver = Manager.Instance.uiManager.GetUI(UIType.GameOver);
     }
 
     private void Update()

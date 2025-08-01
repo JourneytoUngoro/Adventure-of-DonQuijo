@@ -158,14 +158,29 @@ public class LoadGameUI : MonoBehaviour
             if (playOpening)
             {
                 Manager.Instance.soundManager.PlayBGMTransition("cutscene01BGM", 0.3f, 0.03f, 0.5f);
-                Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("OpeningCutscene"), true, false);
+                Manager.Instance.sceneTransitionManager.SceneTransition("OpeningCutscene", true, false);
             }
             else
             {
                 Manager.Instance.soundManager.PlayBGMTransition("battleBGM", 0.3f, 0.03f, 0.5f);
 
-                string sceneName = allProfilesGameData.ContainsKey(nowProfileId) ? allProfilesGameData[nowProfileId].currentScene : "Stage1";
-                Manager.Instance.sceneTransitionManager.SceneTransition(sceneName, true, true);
+                if (allProfilesGameData.ContainsKey(nowProfileId))
+                {
+                    string sceneName = allProfilesGameData[nowProfileId].currentScene;
+
+                    if (sceneName.Equals("MainMenu"))
+                    {
+                        Manager.Instance.sceneTransitionManager.SceneTransition("Stage1", true, true);
+                    }
+                    else
+                    {
+                        Manager.Instance.sceneTransitionManager.SceneTransition(sceneName, true, true);
+                    }
+                }
+                else
+                {
+                    Manager.Instance.sceneTransitionManager.SceneTransition("Stage1", true, true);
+                }
             }
 
             nowProfileId = string.Empty;
