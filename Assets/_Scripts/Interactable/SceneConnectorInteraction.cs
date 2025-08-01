@@ -10,6 +10,13 @@ public class SceneConnectorInteraction : InteractBase
     [SerializeField] private SceneField targetScene;
     [SerializeField] private Transform destinationPosition;
 
+    private Direction initialDirection;
+
+    private void Awake()
+    {
+        initialDirection = direction;
+    }
+
     public override void Interact()
     {
         canInteract = false;
@@ -39,5 +46,28 @@ public class SceneConnectorInteraction : InteractBase
         {
             Manager.Instance.sceneTransitionManager.SceneTransition(targetScene, destinationPosition);
         }
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        bool activate = true;
+
+        Enemy[] currentSceneEnemies = FindObjectsByType<Enemy>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+
+        foreach (Enemy enemy in currentSceneEnemies)
+        {
+            if (enemy.gameObject.scene.Equals(gameObject.scene))
+            {
+                if (!enemy.isDead)
+                {
+                    activate = false;
+                    break;
+                }
+            }
+        }
+
+        direction = activate ? initialDirection : Direction.None;
     }
 }
