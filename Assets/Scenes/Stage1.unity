@@ -377,10 +377,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5474045965313671311, guid: 05eb4a7e6e7d15c44b627351f013f15e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5523578490701914535, guid: 05eb4a7e6e7d15c44b627351f013f15e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -401,10 +397,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Map1_Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 5950988806358308208, guid: 05eb4a7e6e7d15c44b627351f013f15e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6719767584389726632, guid: 05eb4a7e6e7d15c44b627351f013f15e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -422,7 +414,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 9070634965692280189, guid: 05eb4a7e6e7d15c44b627351f013f15e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05eb4a7e6e7d15c44b627351f013f15e, type: 3}
@@ -1461,6 +1454,7 @@ MonoBehaviour:
   <entityData>k__BackingField: {fileID: 11400000, guid: 0b9bde2239662ee418e64b3ccd88ef98, type: 2}
   <printStateChange>k__BackingField: 0
   <entityLevel>k__BackingField: 0
+  <statusCanvas>k__BackingField: {fileID: 0}
 --- !u!61 &693722043
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2824,7 +2818,7 @@ PrefabInstance:
       objectReference: {fileID: 147240220}
     - target: {fileID: 3749889053354997725, guid: dfdc780215c66c849b19a9ac22c0396e, type: 3}
       propertyPath: orthographic size
-      value: 180
+      value: 265.5
       objectReference: {fileID: 0}
     - target: {fileID: 5938222223518203740, guid: dfdc780215c66c849b19a9ac22c0396e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5150,7 +5144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6962991718640895132, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 395.77972
       objectReference: {fileID: 0}
     - target: {fileID: 7249542355209647051, guid: 4523544ff82631e48be6dedd000f0c3f, type: 3}
       propertyPath: m_Pivot.x

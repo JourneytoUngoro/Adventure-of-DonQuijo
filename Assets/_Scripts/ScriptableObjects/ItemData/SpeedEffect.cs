@@ -15,6 +15,6 @@ public class SpeedEffect : ItemEffect
         // Used up to 3 times; exceeds won't break max value, but max must be adjusted if usage increases.
         target.stats.agility.IncreaseCurrentValue(percentage);
 
-        // Debug.Log($"apply speed effect :{currentSpeedValue} + {speedAmount}  = {target.stats.agility.currentValue} ");
+        Debug.Log($"apply speed effect :{currentSpeedValue} + {speedAmount}  = {target.stats.agility.currentValue} ");
     }
 }

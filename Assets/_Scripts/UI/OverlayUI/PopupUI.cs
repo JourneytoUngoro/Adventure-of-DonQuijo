@@ -46,6 +46,13 @@ public class PopupUI : UIBase
         {
             Manager.Instance.uiManager.AfterHidePopupUI();
         }
+        else
+        {
+            if (!Manager.Instance.inputHandler.IsCharacterControlEnabled())
+            {
+                Manager.Instance.inputHandler.SetCharacterControlEnabled(true);
+            }
+        }
     }
 
     /// <summary>

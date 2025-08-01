@@ -35,9 +35,13 @@ public class DisplayController : MonoBehaviour
 
     private const float cMaxAlpha = 255f;
 
+    private static bool isInitialized = false;
 
     private void Awake()
     {
+        if (isInitialized) return;
+        fullScreenToggle.onValueChanged.RemoveAllListeners();
+
         Initialize();
 
         // get all resolutions of player
@@ -46,6 +50,8 @@ public class DisplayController : MonoBehaviour
         InitResolutionDrop();
         InitFrameDrop();
         AddListenerToUI();
+
+        isInitialized = true;
     }
 
     private void Initialize()

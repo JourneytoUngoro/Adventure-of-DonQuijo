@@ -15,6 +15,6 @@ public class PermanentHealEffect : ItemEffect
         target.stats.durability.IncreaseCurrentValue(percentage);
         // target.stats.durability.SetCurrentValue(currentHealLevel + 1f);
 
-        // Debug.Log($"[Permanent Heal Effect] current healthLevel : {target.stats.durability.currentValue}, max health : {prevHealthMax} -> {target.stats.health.maxValue} ");
+        Debug.Log($"[Permanent Heal Effect] current healthLevel : {target.stats.durability.currentValue}, max health : {prevHealthMax} -> {target.stats.health.maxValue} ");
     }
 }

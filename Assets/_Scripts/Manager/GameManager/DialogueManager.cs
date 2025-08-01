@@ -109,6 +109,11 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
+        if (isDialoguePlaying && Manager.Instance.inputHandler.IsCharacterControlEnabled())
+        {
+            Manager.Instance.inputHandler.SetCharacterControlEnabled(false);
+        }
+
     }
 
     private bool PressedNextLineKey()
@@ -139,6 +144,9 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterDialogue(TextAsset inkJSON, Animator anim, NPCDialogueSO npcSO)
     {
+        Manager.Instance.inputHandler.SetCharacterControlEnabled(false);
+
+
         currentStory = new Story(inkJSON.text);
         this.npcSO = npcSO;
 
@@ -147,7 +155,6 @@ public class DialogueManager : MonoBehaviour
 
         dialogueVariables.StartListening(currentStory);
         inkExternalFunction.Bind(currentStory, anim);
-
         ContinueStory();
     }
 
@@ -155,7 +162,6 @@ public class DialogueManager : MonoBehaviour
     {
         // prevent duplicate key input over multiple frames
         yield return new WaitForSeconds(0.2f);
-
         dialogueVariables.StopListening(currentStory);
         inkExternalFunction.Unbind(currentStory);
 
@@ -164,8 +170,8 @@ public class DialogueManager : MonoBehaviour
         isDialoguePlaying = false;
         dialoguePanel.SetActive(false);
         dialogueTMP.text = "";
-
         SetCurrentAudioClip(defaultAudioClip);
+        Manager.Instance.inputHandler.SetCharacterControlEnabled(true);
     }
 
     private void ContinueStory()

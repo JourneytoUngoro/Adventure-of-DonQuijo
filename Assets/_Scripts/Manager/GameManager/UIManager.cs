@@ -64,10 +64,10 @@ public class UIManager : MonoBehaviour
         {
             Manager.Instance.inputHandler.SetCharacterControlEnabled(false);
         }
-        else if (!popupOpened && !Manager.Instance.inputHandler.IsCharacterControlEnabled())
+/*        else if (!popupOpened && !Manager.Instance.inputHandler.IsCharacterControlEnabled())
         {
             Manager.Instance.inputHandler.SetCharacterControlEnabled(true);
-        }
+        }*/
     }
 
     private void LoadUIPrefabs()
@@ -192,7 +192,7 @@ public class UIManager : MonoBehaviour
         {
             popupOpened = false;
             clickBlockImageUI?.HideUI();
-        }
+         }
         // Debug.Log(Manager.Instance.uiManager.activatedPopups.Count + " popups activated");
 
     }
