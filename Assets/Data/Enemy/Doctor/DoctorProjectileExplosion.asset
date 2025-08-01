@@ -21,7 +21,38 @@ MonoBehaviour:
   <canBeParried>k__BackingField: 1
   <stanceWhenParried>k__BackingField: 0
   <getDazed>k__BackingField: 0
-  <combatAbilityComponents>k__BackingField: []
+  <combatAbilityComponents>k__BackingField:
+  - rid: 1620886884119478273
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 1620886884119478273
+      type: {class: KnockbackComponent, ns: , asm: Assembly-CSharp}
+      data:
+        name: KnockbackComponent
+        <pertainedCombatAbility>k__BackingField: {fileID: 11400000}
+        <airborne>k__BackingField: 0
+        <directionBase>k__BackingField: 0
+        <knockbackDirection>k__BackingField: {x: -1, y: 0}
+        <knockbackSpeed>k__BackingField: 100
+        <knockbackTime>k__BackingField: 0.5
+        <easeFunction>k__BackingField: 3
+        <orthogonalVelocity>k__BackingField: 0
+        <bounceWhenGrounded>k__BackingField: 0
+        <bounceDirection>k__BackingField: {x: 0, y: 0}
+        <bounceSpeed>k__BackingField: 0
+        <bounceWhenWall>k__BackingField: 0
+        <knockbackDirectionWhenBlocked>k__BackingField: {x: 0, y: 0}
+        <knockbackSpeedWhenBlocked>k__BackingField: 0
+        <knockbackTimeWhenBlocked>k__BackingField: 0
+        <easeFunctionWhenBlocked>k__BackingField: 0
+        <knockbackDirectionWhenParried>k__BackingField: {x: 0, y: 0}
+        <knockbackSpeedWhenParried>k__BackingField: 0
+        <knockbackTimeWhenParried>k__BackingField: 0
+        <easeFunctionWhenParried>k__BackingField: 0
+        <counterProtrudedWhenParried>k__BackingField: 0
+        <counterKnockbackDirectionWhenParried>k__BackingField: {x: 0, y: 0}
+        <counterKnockbackSpeedWhenParried>k__BackingField: 0
+        <counterKnockbackTimeWhenParried>k__BackingField: 0
+        <counterEaseFunctionWhenParried>k__BackingField: 0
+        <counterOrthogonalVelocityWhenParried>k__BackingField: 0
