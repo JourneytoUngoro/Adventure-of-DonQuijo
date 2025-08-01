@@ -31,6 +31,8 @@ public class Enemy : Entity
     public NavMeshAgent navMeshAgent { get; private set; }
     #endregion
 
+    [field: SerializeField] public GameObject statusCanvas { get; protected set; }
+
     private Transform initialTransform;
 
     protected override void Awake()
