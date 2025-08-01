@@ -20,6 +20,11 @@ public class EnemyStats : Stats
     {
         base.Start();
 
+        health.SetMaxValue(health.graph.accumulationPerLevel.Evaluate(durability.currentValue));
+        health.SetCurrentValue(health.graph.accumulationPerLevel.Evaluate(durability.currentValue));
+        posture.SetMaxValue(posture.graph.accumulationPerLevel.Evaluate(durability.currentValue));
+        posture.SetCurrentValue(posture.graph.accumulationPerLevel.Evaluate(durability.currentValue));
+
         health.OnCurrentValueMin += () => {
             enemy.enemyStateMachine.ChangeState(enemy.deadState);
             Manager.Instance.stageManager.OnEnemyDeath(transform);

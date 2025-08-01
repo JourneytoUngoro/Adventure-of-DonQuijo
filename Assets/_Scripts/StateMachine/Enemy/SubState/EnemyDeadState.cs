@@ -19,6 +19,7 @@ public class EnemyDeadState : EnemyState
     {
         base.Enter();
 
+        enemy.isDead = true;
         enemy.gameObject.tag = "Invinsible";
         enemy.stateMachineToAnimator.state = this;
         enemy.movement.StopVelocityChangeOverTime();
