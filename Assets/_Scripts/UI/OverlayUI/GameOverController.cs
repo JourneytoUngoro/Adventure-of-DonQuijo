@@ -27,10 +27,7 @@ public class GameOverController : MonoBehaviour
         if (index != -1) // player has mf
         {
             bool success = Manager.Instance.itemManager.UseItem(index);
-            Player.Instance.playerStateMachine.ChangeState(Player.Instance.deadState);
-            Player.Instance.deadState.Enter();
-            Debug.Log($"Current State : {Player.Instance.playerStateMachine.currentState} ");
-            // 전환 안 되는 중 
+            Player.Instance.Revive();
         }
         else
         {

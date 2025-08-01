@@ -17,6 +17,6 @@ MonoBehaviour:
   <maxStack>k__BackingField: 1
   <maxOverlap>k__BackingField: 3
   <description>k__BackingField: "\uAC15\uACF5\uACA9 \uD53C\uD574\uB7C9 +20%"
-  <price>k__BackingField: 50
+  <price>k__BackingField: 20
   <effect>k__BackingField: {fileID: 11400000, guid: 933c78d751033e1489d80bf7e2c48d1a, type: 2}
   icon: {fileID: 21300000, guid: 2dc600dc40a824643996321017de77b9, type: 3}

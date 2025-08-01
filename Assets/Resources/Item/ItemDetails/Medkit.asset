@@ -17,6 +17,6 @@ MonoBehaviour:
   <maxStack>k__BackingField: 1
   <maxOverlap>k__BackingField: 99999
   <description>k__BackingField: "HP \uC989\uC2DC +30%"
-  <price>k__BackingField: 20
+  <price>k__BackingField: 10
   <effect>k__BackingField: {fileID: 11400000, guid: 832a63a38ae11544ebe6353f724d4d2e, type: 2}
   icon: {fileID: 21300000, guid: 4812e41162ae7004fab3ba967873cecd, type: 3}
