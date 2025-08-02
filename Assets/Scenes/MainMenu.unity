@@ -4262,7 +4262,7 @@ PrefabInstance:
       objectReference: {fileID: 102900000, guid: 9990e03c20d31a34e992fa6f781bd427, type: 3}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: adjacentScene._serializedList.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: adjacentScene._serializedList.Array.data[1].Key.m_SceneName
@@ -4279,6 +4279,10 @@ PrefabInstance:
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: adjacentScene._serializedList.Array.data[4].Key.m_SceneName
       value: Stage3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
+      propertyPath: adjacentScene._serializedList.Array.data[5].Key.m_SceneName
+      value: Stage4
       objectReference: {fileID: 0}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: adjacentScene._serializedList.Array.data[1].Key.m_SceneAsset
@@ -4312,6 +4316,10 @@ PrefabInstance:
       propertyPath: adjacentScene._serializedList.Array.data[4].Value.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
+      propertyPath: adjacentScene._serializedList.Array.data[5].Key.m_SceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: 0424e5deb270fa4488ba1bae71d8900a, type: 3}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: adjacentScene._serializedList.Array.data[2].Value.Array.data[0].m_SceneName
       value: Stage2
