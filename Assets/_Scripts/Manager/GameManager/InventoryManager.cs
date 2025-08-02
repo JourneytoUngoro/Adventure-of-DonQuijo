@@ -35,7 +35,7 @@ public class InventoryManager : MonoBehaviour
 
     private GameObject inventoryUI;
 
-    private static bool sInitialized = false;
+    public static bool sInitialized = false;
 
     private void Awake()
     {
@@ -84,6 +84,12 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    public void ForceInitialize()
+    {
+        controller().RefreshView();
+        controller().RefreshCoins();
+    }
+
     private bool IsExcludedScene(string currentScene)
     {
         return excludedSceneInventoryUI.Any(sceneField => sceneField.SceneName == currentScene);
@@ -111,6 +117,12 @@ public class InventoryManager : MonoBehaviour
     {
         bool use = controller().UseItem(index, Player);
         return use;
+    }
+
+    public int HasItem(string itemLabel)
+    {
+        int has = controller().HasItem(itemLabel);
+        return has;
     }
 
     public void SwapItems(int index1, int index2)

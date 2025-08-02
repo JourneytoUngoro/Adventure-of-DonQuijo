@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class StageManager : MonoBehaviour, IDataPersistance
 {
     private Dictionary<string, Stage> stageDict;
-
+    public TextMeshProUGUI mfTMP; // 인스펙터 할당 
     public Stage nowStage {  get; private set; }
 
     private void Awake()
@@ -54,13 +55,16 @@ public class StageManager : MonoBehaviour, IDataPersistance
         {
             // Debug.Log("is new ");
             // Considier adding logic to load the first stage automatically
-            nowStage = stageDict["FirstStage"];            
+            nowStage = stageDict["FirstStage"];
+            mfTMP.text = "0";
         }
         else
         {
             nowStage = GetStageById(data.stageData.id);
             nowStage.SetData(stageData);
             nowStage.Initialize();
+
+            mfTMP.text = nowStage.collectedMemoryFragmentCount.ToString();
         }
         // Debug.Log($"loaded stage {nowStage.stageInfo.stageName}");
     }
@@ -72,4 +76,9 @@ public class StageManager : MonoBehaviour, IDataPersistance
     }
 
     public void OnEnemyDeath(Transform enemy) => nowStage.OnEnemyDeath(enemy);
+
+    public void UpdateMFTMP(int count)
+    {
+        mfTMP.text = count.ToString();
+    }
 }

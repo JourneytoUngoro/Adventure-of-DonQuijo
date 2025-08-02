@@ -41,15 +41,12 @@ public class InventoryModel
         inventoryData = data;
         inventoryData.capacity = capacity;
 
-        // ============================= 코인 테스트 용 ===================================
         inventoryData.coins = data.coins;
         Debug.Log($"set coin to : {inventoryData.coins}");
         if (data.coins <= 0)
         {
-            Debug.Log("fill coins to 1000 in only test");
-            inventoryData.coins = 1000;
+            inventoryData.coins = 50;
         }
-        // ===========================================================================
 
         bool isNew = inventoryData.items == null || inventoryData.items.Length == 0;
 

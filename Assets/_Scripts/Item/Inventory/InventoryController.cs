@@ -70,7 +70,7 @@ public class InventoryController
 
     void HandleModelChanged(Item[] item) => RefreshView();
 
-    void RefreshView()
+    public void RefreshView()
     {
         for (int i = 0; i < capacity; i++)
         {
@@ -223,6 +223,19 @@ public class InventoryController
             if (model.Get(i) == item) return i;
         }
         return -1;
+    }
+
+    public int HasItem(string itemLabel)
+    {
+        int index = -1;
+        for (int i = 0; i < capacity; i++)
+        {
+            Item item = model.Get(i);
+
+            if (item != null && itemLabel.Equals(item.details.label)) { return i + 1; }
+        }
+        // player doesn't have 
+        return  index;
     }
 
     public bool IsUnderMaxOverlap(Item item)

@@ -59,7 +59,7 @@ public class SaveSlotUI : MonoBehaviour
             playerHP = data.currentHealth.ToString();
             lastPlayTime = data.displayedLastPlayTime;
 
-            if (data.questsData.questCount > 0) { memoryFragment = data.questsData.GetQuestData("collectMemoryFragment").currentProgress.ToString(); }
+            if (data.stageData.collectedFragmentCount > 0) { memoryFragment = data.stageData.collectedFragmentCount.ToString(); }
             else { memoryFragment = "0"; }
         }
         else

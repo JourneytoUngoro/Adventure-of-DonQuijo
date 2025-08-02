@@ -22,9 +22,18 @@ public class GameOverController : MonoBehaviour
 
     public void HasMemoryFragment()
     {
-        // In case, player has memory fragment(another life)
-        // 이건 제가 추가하겠습니닥 
-        // 여기다가 구현 안 할지도 
+        int index = Manager.Instance.itemManager.HasItem("기억의 조각");
+
+        if (index != -1) // player has mf
+        {
+            bool success = Manager.Instance.itemManager.UseItem(index);
+            Player.Instance.ReviveWithMemoryFragment();
+        }
+        else
+        {
+            // 아니면 이제 그냥 있는거 버튼 선택하게 해.
+            gameOverPopup.ShowUI();
+        }
     }
 
 
@@ -63,7 +72,6 @@ public class GameOverController : MonoBehaviour
         Player.Instance.Revive(true);
         Manager.Instance.sceneTransitionManager.SceneTransition("MainMenu", true, true);
     }
-
 
 
 

@@ -11,7 +11,12 @@ public class PlayerDeadState : PlayerState
     public PlayerDeadState(Player player, string animBoolName) : base(player, animBoolName)
     {
         waitTimer = new Timer(player.playerData.waitTimeAfterDeath);
-        waitTimer.timerAction += () => { Manager.Instance.uiManager.GetUI(UIType.GameOver).ShowUI(); };
+        waitTimer.timerAction += () =>
+        { 
+            // Manager.Instance.uiManager.GetUI(UIType.GameOver).ShowUI();
+            Manager.Instance.uiManager.GetUI(UIType.GameOver).GetComponent<GameOverController>().HasMemoryFragment();
+
+        };
     }
 
     public override void Enter()
