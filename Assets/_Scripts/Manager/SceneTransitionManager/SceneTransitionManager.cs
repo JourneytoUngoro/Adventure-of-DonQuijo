@@ -387,9 +387,7 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
         {
             Player.Instance.gameObject.SetActive(true);
             statusBar.SetActive(true);
-            cinemachineVirtualCamera.Follow = Player.Instance.transform;
-            cinemachineVirtualCamera.ForceCameraPosition(Player.Instance.transform.position + Vector3.up * 50.0f, Quaternion.identity);
-            cinemachineVirtualCamera.GetComponent<CinemachineConfiner>().m_BoundingShape2D = next.GetRootGameObjects().Where(gameObject => gameObject.name.Equals("Camera Boundary") && gameObject.scene.name.Equals(next.name)).FirstOrDefault()?.GetComponent<PolygonCollider2D>();
+            ChangeVirtualCameraConfinement(next);
             Manager.Instance.dataManager.SaveGame();
         }
         else
@@ -428,5 +426,12 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
             data.currentScene = currentActiveScene.SceneName;
             // data system saves the game before loading the game
         }
+    }
+
+    public void ChangeVirtualCameraConfinement(Scene next)
+    {
+        cinemachineVirtualCamera.Follow = Player.Instance.transform;
+        cinemachineVirtualCamera.ForceCameraPosition(Player.Instance.transform.position + Vector3.up * 50.0f, Quaternion.identity);
+        cinemachineVirtualCamera.GetComponent<CinemachineConfiner>().m_BoundingShape2D = next.GetRootGameObjects().Where(gameObject => gameObject.name.Equals("Camera Boundary") && gameObject.scene.name.Equals(next.name)).FirstOrDefault()?.GetComponent<PolygonCollider2D>();
     }
 }

@@ -33,6 +33,7 @@ public class ProjectileComponent : CombatAbilityComponent
         }*/
         // GameObject projectileGameObject = Manager.Instance.objectPoolingManager.GetGameObject(projectilePrefab.name);
         GameObject projectileGameObject = Object.Instantiate(projectilePrefab);
+        projectileGameObject.GetComponentInChildren<Explosion>().SetExplosion(pertainedCombatAbility.sourceEntity);
         projectileGameObject.transform.position = target.transform.position;
     }
 

@@ -587,7 +587,7 @@ MonoBehaviour:
         m_Curve:
         - serializedVersion: 3
           time: 1
-          value: 150
+          value: 100
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -611,7 +611,7 @@ MonoBehaviour:
         m_Curve:
         - serializedVersion: 3
           time: 1
-          value: 150
+          value: 100
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -620,7 +620,7 @@ MonoBehaviour:
           outWeight: 0
         - serializedVersion: 3
           time: 2
-          value: 150
+          value: 100
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -1179,7 +1179,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6845083430746137220}
-  - component: {fileID: 9036005390109168627}
   - component: {fileID: 2581868421378160730}
   m_Layer: 8
   m_Name: Combat
@@ -1203,51 +1202,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 9095380225269192286}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9036005390109168627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6536294947713694121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67ffbae40abea6a49879b0796a608ce6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <whatIsDamageable>k__BackingField:
-    serializedVersion: 2
-    m_Bits: 64
-  <whatIsChaseTarget>k__BackingField:
-    serializedVersion: 2
-    m_Bits: 64
-  <meleeAttack0>k__BackingField: []
-  <meleeAttack1>k__BackingField: []
-  <meleeAttack2>k__BackingField: []
-  <dodgeAttack>k__BackingField: []
-  <dashAttack>k__BackingField: []
-  <wideRangeAttack>k__BackingField:
-    <visualize>k__BackingField: 0
-    <overlapColliders>k__BackingField: []
-    <combatAbilityData>k__BackingField: {fileID: 0}
-  <block>k__BackingField:
-    <visualize>k__BackingField: 0
-    <overlapColliders>k__BackingField: []
-    <combatAbilityData>k__BackingField: {fileID: 0}
-  <parry>k__BackingField:
-    <visualize>k__BackingField: 0
-    <overlapColliders>k__BackingField: []
-    <combatAbilityData>k__BackingField: {fileID: 0}
-  <meleeAttack>k__BackingField:
-  - <visualize>k__BackingField: 0
-    <overlapColliders>k__BackingField:
-    - <collider>k__BackingField: {fileID: 2886856029381584681}
-      <height>k__BackingField: 60
-      <limitAngle>k__BackingField: 0
-      <angleCheckBaseTransform>k__BackingField: {fileID: 0}
-      <clockwiseAngle>k__BackingField: 0
-      <counterClockwiseAngle>k__BackingField: 0
-    <combatAbilityData>k__BackingField: {fileID: 11400000, guid: 553aa6beee795844a96935c2e009f47d, type: 2}
 --- !u!114 &2581868421378160730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1292,7 +1246,7 @@ MonoBehaviour:
       <angleCheckBaseTransform>k__BackingField: {fileID: 0}
       <clockwiseAngle>k__BackingField: 0
       <counterClockwiseAngle>k__BackingField: 0
-    <combatAbilityData>k__BackingField: {fileID: 0}
+    <combatAbilityData>k__BackingField: {fileID: 11400000, guid: 553aa6beee795844a96935c2e009f47d, type: 2}
 --- !u!1 &7111376595821153189
 GameObject:
   m_ObjectHideFlags: 0

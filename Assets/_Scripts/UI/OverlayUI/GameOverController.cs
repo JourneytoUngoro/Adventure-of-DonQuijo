@@ -48,8 +48,8 @@ public class GameOverController : MonoBehaviour
 
         gameOverPopup.HideUI();
 
-        Player.Instance.Revive();
         Manager.Instance.sceneTransitionManager.SceneTransition("Stage1", true, false);
+        Player.Instance.Revive(true);
         Manager.Instance.inputHandler.SetCharacterControlEnabled(true);
     }
 
@@ -60,7 +60,7 @@ public class GameOverController : MonoBehaviour
 
         gameOverPopup.HideUI();
 
-        Player.Instance.Revive();
+        Player.Instance.Revive(true);
         Manager.Instance.sceneTransitionManager.SceneTransition("MainMenu", true, true);
     }
 

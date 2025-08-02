@@ -22,31 +22,11 @@ MonoBehaviour:
   <stanceWhenParried>k__BackingField: 1
   <getDazed>k__BackingField: 0
   <combatAbilityComponents>k__BackingField:
-  - rid: 2124230397695361027
   - rid: 2124230397695361028
   - rid: 2124230397695361029
   references:
     version: 2
     RefIds:
-    - rid: 2124230397695361027
-      type: {class: MovementComponent, ns: , asm: Assembly-CSharp}
-      data:
-        name: MovementComponent
-        <pertainedCombatAbility>k__BackingField: {fileID: 11400000}
-        <isDashAttack>k__BackingField: 0
-        <attackTime>k__BackingField: 0
-        <planeDirection>k__BackingField: {x: 0, y: 0}
-        <planeVelocity>k__BackingField: 0
-        <moveTime>k__BackingField: 0
-        <easeFunction>k__BackingField: 0
-        <animationCurve>k__BackingField:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        <slowDown>k__BackingField: 0
-        <orthogonalVelocity>k__BackingField: 0
     - rid: 2124230397695361028
       type: {class: DamageComponent, ns: , asm: Assembly-CSharp}
       data:
@@ -55,26 +35,170 @@ MonoBehaviour:
         <healthDamage>k__BackingField:
           <incrementPerLevel>k__BackingField:
             serializedVersion: 2
-            m_Curve: []
+            m_Curve:
+            - serializedVersion: 3
+              time: 1
+              value: 25
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 2
+              value: 15
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 3
+              value: 15
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 4
+              value: 15
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 4
           <accumulationPerLevel>k__BackingField:
             serializedVersion: 2
-            m_Curve: []
+            m_Curve:
+            - serializedVersion: 3
+              time: 1
+              value: 25
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 2
+              value: 40
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 3
+              value: 55
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 4
+              value: 70
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 4
         <postureDamage>k__BackingField:
           <incrementPerLevel>k__BackingField:
             serializedVersion: 2
-            m_Curve: []
+            m_Curve:
+            - serializedVersion: 3
+              time: 1
+              value: 25
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 2
+              value: 15
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 3
+              value: 15
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 4
+              value: 15
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 4
           <accumulationPerLevel>k__BackingField:
             serializedVersion: 2
-            m_Curve: []
+            m_Curve:
+            - serializedVersion: 3
+              time: 1
+              value: 25
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 2
+              value: 40
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 3
+              value: 55
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 4
+              value: 70
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 4
@@ -92,18 +216,18 @@ MonoBehaviour:
       data:
         name: KnockbackComponent
         <pertainedCombatAbility>k__BackingField: {fileID: 11400000}
-        <airborne>k__BackingField: 1
+        <airborne>k__BackingField: 0
         <directionBase>k__BackingField: 0
-        <knockbackDirection>k__BackingField: {x: 0, y: 0}
-        <knockbackSpeed>k__BackingField: 0
-        <knockbackTime>k__BackingField: 0
-        <easeFunction>k__BackingField: 0
+        <knockbackDirection>k__BackingField: {x: 1, y: 0}
+        <knockbackSpeed>k__BackingField: 200
+        <knockbackTime>k__BackingField: 0.4
+        <easeFunction>k__BackingField: 3
         <orthogonalVelocity>k__BackingField: 0
         <bounceWhenGrounded>k__BackingField: 0
         <bounceDirection>k__BackingField: {x: 0, y: 0}
         <bounceSpeed>k__BackingField: 0
         <bounceWhenWall>k__BackingField: 0
-        <knockbackDirectionWhenBlocked>k__BackingField: {x: 0, y: 0}
+        <knockbackDirectionWhenBlocked>k__BackingField: {x: 1, y: 0}
         <knockbackSpeedWhenBlocked>k__BackingField: 0
         <knockbackTimeWhenBlocked>k__BackingField: 0
         <easeFunctionWhenBlocked>k__BackingField: 0

@@ -108,6 +108,9 @@ public abstract class Combat : CoreComponent
                     Transform[] projectileFireTransforms = combatAbilityWithColliders.overlapColliders.Where(overlapCollider => !overlapCollider.overlapBox && !overlapCollider.overlapCircle).Select(overlapCollider => overlapCollider.centerTransform).ToArray();
                     projectileComponent.ApplyCombatAbility(damageTargets, projectileFireTransforms, null);
                     break;*/
+                case ProjectileComponent projectileComponent:
+                    projectileComponent.ApplyCombatAbility(entity.entityDetection.currentTarget.entityCollider, combatAbilityWithColliders.overlapColliders);
+                    break;
                 default:
                     break;
             }
