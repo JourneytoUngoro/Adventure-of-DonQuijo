@@ -142,4 +142,15 @@ public class Player : Entity
         stats.posture.ControlRecoveryTimer(TimerControl.Start);
         playerStateMachine.Initialize(idleState);
     }
+
+    public void ReviveWithMemoryFragment()
+    {
+        isDead = false;
+        animator.SetBool("dead", false);
+        gameObject.tag = "Idle";
+        stats.health.SetCurrentValue(stats.health.maxValue);
+        stats.posture.SetCurrentValue(stats.posture.maxValue);
+        stats.posture.ControlRecoveryTimer(TimerControl.Start);
+        playerStateMachine.Initialize(idleState);
+    }
 }
