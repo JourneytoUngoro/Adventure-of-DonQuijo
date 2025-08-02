@@ -15,8 +15,8 @@ MonoBehaviour:
   id: FirstStage
   stageName: "\uC694\uC591\uC6D0"
   coinValuePer: 3
-  memoryFragmentCount: 8
-  totalEnemyCount: 8
+  memoryFragmentCount: 7
+  totalEnemyCount: 20
   probabilityCheckPoint: 5
   stageEnemyTypes:
   - enemyName: "\uC5ED\uBCD1 \uC758\uC0AC"
