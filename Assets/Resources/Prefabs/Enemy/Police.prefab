@@ -1032,7 +1032,7 @@ GameObject:
   - component: {fileID: 8192560113332972203}
   - component: {fileID: 5814279264762317131}
   - component: {fileID: 7371558744880958543}
-  - component: {fileID: 2175155957358751694}
+  - component: {fileID: 4837456147305120189}
   - component: {fileID: 1728973849345840522}
   m_Layer: 8
   m_Name: Police
@@ -1131,7 +1131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 15}
   m_EdgeRadius: 0
---- !u!114 &2175155957358751694
+--- !u!114 &4837456147305120189
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1140,12 +1140,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6510757111589751203}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd46e6d8bbade384499d15918cae566f, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f8e97beec9e11e4d9f8ef3ba6ae217e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <shadow>k__BackingField: {fileID: 2520000268988987772}
   <entityData>k__BackingField: {fileID: 11400000, guid: d1058c681b19815438aa7771997c2256, type: 2}
-  <printStateChange>k__BackingField: 1
+  <printStateChange>k__BackingField: 0
   <entityLevel>k__BackingField: 1
   <statusCanvas>k__BackingField: {fileID: 1301897314349219630}
 --- !u!195 &1728973849345840522

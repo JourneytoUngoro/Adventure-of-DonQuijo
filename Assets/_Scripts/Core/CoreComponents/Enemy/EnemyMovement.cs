@@ -196,17 +196,17 @@ public class EnemyMovement : Movement
             return null;
         }
 
-        // 1. ÀüÃ¼ °æ·Î ±æÀÌ °è»ê
+        // 1. ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         float totalPathLength = 0f;
         for (int i = 0; i < navMeshAgent.path.corners.Length - 1; i++)
         {
             totalPathLength += Vector3.Distance(navMeshAgent.path.corners[i], navMeshAgent.path.corners[i + 1]);
         }
 
-        // 2. ¸ñÇ¥ ÁöÁ¡±îÁöÀÇ °Å¸® °è»ê
+        // 2. ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½
         float distanceToTargetPoint = totalPathLength - remainingDistance;
 
-        // ³²Àº °Å¸®°¡ ÀüÃ¼ °æ·Î ±æÀÌº¸´Ù ±æ°Å³ª 0º¸´Ù ÀÛÀ¸¸é °æ·ÎÀÇ ½ÃÀÛ ¶Ç´Â ³¡ ÁöÁ¡À» ¹ÝÈ¯
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½ï¿½Å³ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
         if (distanceToTargetPoint <= 0)
         {
             return navMeshAgent.path.corners[0];
@@ -216,16 +216,16 @@ public class EnemyMovement : Movement
             return navMeshAgent.path.corners[^1];
         }
 
-        // 3. °æ·Î ¼øÈ¸ ¹× ÁöÁ¡ Ã£±â
+        // 3. ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½
         float cumulativeDistance = 0f;
         for (int i = 0; i < navMeshAgent.path.corners.Length - 1; i++)
         {
             float segmentLength = Vector3.Distance(navMeshAgent.path.corners[i], navMeshAgent.path.corners[i + 1]);
 
-            // ¸ñÇ¥ ÁöÁ¡ÀÌ ÇöÀç ¼¼±×¸ÕÆ® ³»¿¡ ÀÖ´ÂÁö È®ÀÎ
+            // ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½×¸ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½
             if (cumulativeDistance + segmentLength >= distanceToTargetPoint)
             {
-                // 4. Á¤È®ÇÑ À§Ä¡ º¸°£
+                // 4. ï¿½ï¿½È®ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
                 float distanceIntoSegment = distanceToTargetPoint - cumulativeDistance;
                 float t = distanceIntoSegment / segmentLength;
                 return Vector3.Lerp(navMeshAgent.path.corners[i], navMeshAgent.path.corners[i + 1], t);
@@ -234,7 +234,7 @@ public class EnemyMovement : Movement
             cumulativeDistance += segmentLength;
         }
 
-        // ¿¹¿ÜÀûÀÎ °æ¿ì, °æ·ÎÀÇ ¸¶Áö¸· ÁöÁ¡À» ¹ÝÈ¯
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
         return navMeshAgent.path.corners[^1];
     }
 

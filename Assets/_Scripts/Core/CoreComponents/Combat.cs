@@ -24,7 +24,10 @@ public abstract class Combat : CoreComponent
         base.Awake();
 
         damagedTargets = new List<Collider2D>();
+    }
 
+    protected virtual void OnEnable()
+    {
         IEnumerable<PropertyInfo> combatAbilityProperties = GetType()
             .GetProperties(BindingFlags.Public | BindingFlags.Instance)
             .Where(property => property.PropertyType.Equals(typeof(List<CombatAbilityWithColliders>)));
