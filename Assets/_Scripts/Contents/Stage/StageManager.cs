@@ -75,6 +75,15 @@ public class StageManager : MonoBehaviour, IDataPersistance
             data.stageData = nowStage.GetStageData();
     }
 
+    public void DisplayStageClear()
+    {
+        PopupUI stageClearPopup = Object.Instantiate(Resources.Load<GameObject>("Prefabs/UI/Stage Clear")).GetComponent<PopupUI>();
+        Debug.Assert(stageClearPopup != null, "can't find Stage Clear Popup");
+        stageClearPopup.transform.SetParent(Manager.Instance.uiManager.GetUICanvasTransfrom(), false);
+        stageClearPopup.ShowUI();
+        stageClearPopup.gameObject.GetComponent<GameClearController>().ShowPlayInfo();
+    }
+
     public void OnEnemyDeath(Transform enemy) => nowStage.OnEnemyDeath(enemy);
 
     public void UpdateMFTMP(int count)

@@ -78,6 +78,8 @@ public class GameData
     {
         this.displayedLastPlayTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
         this.lastPlayTime = DateTime.Now.Ticks;
+        this.totalPlayTime = 0;
+
         this.maxHealth = 100.0f;
         this.currentHealth = 100.0f;
         this.maxPosture = 100.0f;

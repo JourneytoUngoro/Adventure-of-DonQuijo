@@ -65,7 +65,6 @@ public class PlayerState : EntityState
         blockParryInputHolding = Manager.Instance.inputHandler.blockParryInputHolding;
         blockParryInputPressed = Manager.Instance.inputHandler.blockParryInputPressed;
         attackInputPressed = Manager.Instance.inputHandler.attackInputPressed;
-        Debug.Log("AttackInputPressed: " + attackInputPressed);
         strongAttackInputPressed = Manager.Instance.inputHandler.strongAttackInputPressed;
         dodgeInputPressed = Manager.Instance.inputHandler.dodgeInputPressed;
         
