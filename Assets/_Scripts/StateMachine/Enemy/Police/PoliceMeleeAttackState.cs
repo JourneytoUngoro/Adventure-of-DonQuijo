@@ -19,6 +19,7 @@ public class PoliceMeleeAttackState : EnemyAbilityState
 
         enemy.combat.DoAttack(police.policeCombat.meleeAttack[index]);
 
+
         Manager.Instance.soundManager.PlaySoundFXClip("policeAttackSFX", enemy.transform);
     }
 
