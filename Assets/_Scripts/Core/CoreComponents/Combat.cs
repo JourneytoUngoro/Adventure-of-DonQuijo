@@ -1,3 +1,4 @@
+using Cinemachine;
 using DG.Tweening;
 using System;
 using System.Collections;
@@ -18,12 +19,14 @@ public abstract class Combat : CoreComponent
     protected const int maxDetectionCount = 10;
     protected Collider2D[] detectedDamageTargets = new Collider2D[maxDetectionCount];
     private ContactFilter2D blockParryContactFilter;
+    private CinemachineImpulseSource impulseSource;
 
     protected override void Awake()
     {
         base.Awake();
 
         damagedTargets = new List<Collider2D>();
+        impulseSource = GetComponentInParent<CinemachineImpulseSource>();
     }
 
     protected virtual void OnEnable()
@@ -308,6 +311,11 @@ public abstract class Combat : CoreComponent
                     }
                     else
                     {
+                        Manager.Instance.gameManager.PauseGame(damageComponent.pauseTimeWhenHit);
+                        if (impulseSource != null)
+                        {
+                            Manager.Instance.gameManager.CameraShake(impulseSource);
+                        }
                         entity.SetStatusValues(CurrentStatus.HealthDamage);
                         // entity.animator.SetTrigger("gotHit");
                         entity.entityStats.health.DecreaseCurrentValue(healthDamage);
@@ -315,6 +323,11 @@ public abstract class Combat : CoreComponent
                 }
                 else
                 {
+                    Manager.Instance.gameManager.PauseGame(damageComponent.pauseTimeWhenHit);
+                    if (impulseSource != null)
+                    {
+                        Manager.Instance.gameManager.CameraShake(impulseSource);
+                    }
                     entity.SetStatusValues(CurrentStatus.HealthDamage);
                     // entity.animator.SetTrigger("gotHit");
                     entity.entityStats.health.DecreaseCurrentValue(healthDamage);
@@ -332,6 +345,11 @@ public abstract class Combat : CoreComponent
             }
             else
             {
+                Manager.Instance.gameManager.PauseGame(damageComponent.pauseTimeWhenHit);
+                if (impulseSource != null)
+                {
+                    Manager.Instance.gameManager.CameraShake(impulseSource);
+                }
                 entity.SetStatusValues(CurrentStatus.gotHit);
                 // entity.animator.SetTrigger("gotHit");
                 entity.entityStats.health.DecreaseCurrentValue(healthDamage);
@@ -339,6 +357,11 @@ public abstract class Combat : CoreComponent
         }
         else
         {
+            Manager.Instance.gameManager.PauseGame(damageComponent.pauseTimeWhenHit);
+            if (impulseSource != null)
+            {
+                Manager.Instance.gameManager.CameraShake(impulseSource);
+            }
             entity.SetStatusValues(CurrentStatus.gotHit);
             // entity.animator.SetTrigger("gotHit");
             entity.entityStats.health.DecreaseCurrentValue(healthDamage);

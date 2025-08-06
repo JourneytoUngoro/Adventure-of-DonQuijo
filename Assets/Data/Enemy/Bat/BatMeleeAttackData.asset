@@ -130,7 +130,7 @@ MonoBehaviour:
             m_PreInfinity: 2
             m_PostInfinity: 2
             m_RotationOrder: 4
-        <pauseTimeWhenHit>k__BackingField: 0
+        <pauseTimeWhenHit>k__BackingField: 2
         <healthDamageShieldRate>k__BackingField: 1
         <postureDamageShieldRate>k__BackingField: 0.5
         <pauseTimeWhenShielded>k__BackingField: 0

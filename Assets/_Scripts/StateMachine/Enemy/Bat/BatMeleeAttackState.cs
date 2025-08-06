@@ -18,7 +18,6 @@ public class BatMeleeAttackState : EnemyAbilityState
         base.AnimationActionTrigger(index);
 
         enemy.combat.DoAttack(bat.batCombat.meleeAttack[index]);
-        enemy.combat.damagedTargets.Clear();
 
         Manager.Instance.soundManager.PlaySoundFXClip("batAttackSFX", enemy.transform);
     }

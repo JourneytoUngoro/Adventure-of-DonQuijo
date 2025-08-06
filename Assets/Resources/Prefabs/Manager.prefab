@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b87f45a7f8cf24ea5f2ce7fb1753e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isIngame: 0
 --- !u!1 &474694710477659630
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,7 +124,7 @@ MonoBehaviour:
       - m_SceneAsset: {fileID: 102900000, guid: 496c4178864eb50469175874e48c683e, type: 3}
         m_SceneName: Stage2
   cinemachineVirtualCamera: {fileID: 0}
-  minDuration: 0.1
+  minDuration: 2
   statusBar: {fileID: 0}
   loadingBar: {fileID: 0}
   loadingBarText: {fileID: 0}
@@ -442,7 +441,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <player>k__BackingField: {fileID: 0}
-  PRINT: 0
 --- !u!1 &5225713252320322654
 GameObject:
   m_ObjectHideFlags: 0

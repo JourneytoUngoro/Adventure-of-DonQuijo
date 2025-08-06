@@ -65,6 +65,7 @@ public class Entity : MonoBehaviour
 
     protected virtual void Update()
     {
+        // entityStateMachine.entityCurrentState.PhysicsUpdate();
         entityStateMachine.entityCurrentState.LogicUpdate();
     }
 

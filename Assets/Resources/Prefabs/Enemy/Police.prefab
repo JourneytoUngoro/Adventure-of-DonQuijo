@@ -1241,7 +1241,7 @@ MonoBehaviour:
   - <visualize>k__BackingField: 0
     <overlapColliders>k__BackingField:
     - <collider>k__BackingField: {fileID: 2886856029381584681}
-      <height>k__BackingField: 0
+      <height>k__BackingField: 80
       <limitAngle>k__BackingField: 0
       <angleCheckBaseTransform>k__BackingField: {fileID: 0}
       <clockwiseAngle>k__BackingField: 0
