@@ -67,11 +67,12 @@ public class Entity : MonoBehaviour
     {
         // entityStateMachine.entityCurrentState.PhysicsUpdate();
         entityStateMachine.entityCurrentState.LogicUpdate();
+        entityStateMachine.entityCurrentState.PhysicsUpdate();
     }
 
     protected virtual void FixedUpdate()
     {
-        entityStateMachine.entityCurrentState.PhysicsUpdate();
+        // entityStateMachine.entityCurrentState.PhysicsUpdate();
     }
 
     protected virtual void LateUpdate()

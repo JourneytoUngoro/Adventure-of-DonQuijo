@@ -83,7 +83,6 @@ public class PauseMenuUI : MonoBehaviour
     {
         Manager.Instance.gameManager.PauseGame();
         SaveCurrentGame();
-        Manager.Instance.gameManager.ResumeGame();
     }
 
     private void OnClickMainMenuButton()

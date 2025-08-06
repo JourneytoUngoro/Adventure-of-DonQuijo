@@ -31,7 +31,6 @@ public class GameOverController : MonoBehaviour
         }
         else
         {
-            // 아니면 이제 그냥 있는거 버튼 선택하게 해.
             gameOverPopup.ShowUI();
         }
     }
@@ -51,28 +50,17 @@ public class GameOverController : MonoBehaviour
 
     private void OnClickStage1Button()
     {
-        // 캐릭터 초기화
-        // 씬 전환
-        // 해준님 함수 호출
-
         gameOverPopup.HideUI();
 
         Manager.Instance.sceneTransitionManager.SceneTransition("Stage1", true, false);
         Player.Instance.Revive(true);
-        Manager.Instance.inputHandler.SetCharacterControlEnabled(true);
     }
 
     private void OnClickMainMenuButton()
     {
-        // 씬 전환
-        // 정보 저장 -> 아니 근데 죽었는데 메인 가면 먼 정보를 저장해야 하니? 
-
         gameOverPopup.HideUI();
 
         Player.Instance.Revive(true);
         Manager.Instance.sceneTransitionManager.SceneTransition("MainMenu", true, true);
     }
-
-
-
 }

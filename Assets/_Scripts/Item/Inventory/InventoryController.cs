@@ -263,7 +263,7 @@ public class InventoryController
     {
         TextInfoUI textInfo = Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(info));
         textInfo.SetAnchoredPosition(0, -400);
-        textInfo.ShowAndHideUI(3f);
+        textInfo.ShowAndHideUI(2f);
     }
 
 

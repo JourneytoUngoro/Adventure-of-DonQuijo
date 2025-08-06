@@ -14,7 +14,7 @@ public class TutorialDialogueController : MonoBehaviour
     private bool skipTutorial;
     public static bool newGame;
     public static bool tutorialPlayed;
-    private float watiTime = 0.3f;
+    private float watiTime = 0.1f;
 
     private void Awake()
     {

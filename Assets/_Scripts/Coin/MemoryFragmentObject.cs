@@ -23,6 +23,8 @@ public class MemoryFragmentObject : InteractBase
 
     public Action<MemoryFragmentObject> onRelease;
 
+    private Coroutine chasingPlayerCoroutine;
+
     public void Start()
     {
         // TODO : Player 의존성 주입 필요
@@ -34,6 +36,8 @@ public class MemoryFragmentObject : InteractBase
 
         isChasingPlayer = false;
         questId = relatedQuest.id;
+
+        chasingPlayerCoroutine = null;
     }
 
     public void SetTimer()
@@ -50,7 +54,20 @@ public class MemoryFragmentObject : InteractBase
 
         if (isChasingPlayer) { return; }
 
+        if (chasingPlayerCoroutine != null) { chasingPlayerCoroutine = null; }
         StartCoroutine(NearToPlayer());
+    }
+    protected override void OnTriggerExit2D(Collider2D collision)
+    {
+        base.OnTriggerExit2D(collision);
+
+        if (isChasingPlayer || chasingPlayerCoroutine != null)
+        {
+            isChasingPlayer = false;
+            StopCoroutine(chasingPlayerCoroutine);
+            chasingPlayerCoroutine = null;
+        }
+
     }
 
     private IEnumerator NearToPlayer()

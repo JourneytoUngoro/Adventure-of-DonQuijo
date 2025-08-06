@@ -104,7 +104,8 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
 
         if (Player.Instance.gameObject.activeSelf)
         {
-            Manager.Instance.inputHandler.playerInput.currentActionMap.Disable();
+            Manager.Instance.inputHandler.SetCharacterControlEnabled(false);
+            // Manager.Instance.inputHandler.playerInput.currentActionMap.Disable();
         }
 
         ImageUI fadeInOutImage = Manager.Instance.uiManager.GetUI<ImageUI>(UIType.FadeImage);
@@ -131,6 +132,7 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
         yield return new WaitUntil(() => SceneManager.GetSceneByName(targetScene).isLoaded);
 
         fadeInOutImage.HideUI(() => Manager.Instance.gameManager.ResumeGame());
+        Manager.Instance.inputHandler.SetCharacterControlEnabled(true);
     }
 
     public async void LoadingBar(string loadingScene)

@@ -21,6 +21,8 @@ public class CoinObject : InteractBase
     public DropEffect dropEffect { get; private set; }
 
     public Action<CoinObject> onRelease;
+
+    private Coroutine chasingPlayerCoroutine;
     
 
     public void Start()
@@ -51,7 +53,21 @@ public class CoinObject : InteractBase
 
         if (isChasingPlayer) { return; }
 
-        StartCoroutine(NearToPlayer());
+        if (chasingPlayerCoroutine != null) { chasingPlayerCoroutine = null; }
+        chasingPlayerCoroutine = StartCoroutine(NearToPlayer());
+    }
+
+    protected override void OnTriggerExit2D(Collider2D collision)
+    {
+        base.OnTriggerExit2D(collision);
+
+        if (isChasingPlayer || chasingPlayerCoroutine != null)
+        {
+            isChasingPlayer = false;
+            StopCoroutine(chasingPlayerCoroutine);
+            chasingPlayerCoroutine = null;
+        }
+
     }
 
     private IEnumerator NearToPlayer()

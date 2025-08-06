@@ -64,9 +64,6 @@ public class PlayerInputHandler : MonoBehaviour
         confirmInputPressed = controls.UIControl.Confirm.WasPressedThisFrame();
         cancelInputPressed = controls.UIControl.Cancel.WasPressedThisFrame();
         toggleMenuPressed = controls.UIControl.ToggleMenu.WasPressedThisFrame();
-
-
-        if (!disableCharacterControl && !playerInput.actions["Movement"].enabled) { playerInput.actions["Movement"].Enable(); }
     }
 
     public void OnMoveInput(InputAction.CallbackContext context)
