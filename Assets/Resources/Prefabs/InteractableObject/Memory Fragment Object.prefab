@@ -139,9 +139,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   relatedQuest: {fileID: 11400000, guid: 2ef76d0428a67ce458697ab894beaecd, type: 2}
-  mfLifeTime: 4
-  moveSpeed: 2
-  epsilon: 2
+  mfLifeTime: 7
+  moveSpeed: 3
+  epsilon: 2.5
 --- !u!114 &6087498623338046745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,8 +197,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.56854224, y: 2.0653887}
-  m_Size: {x: 85.50095, y: 42.79444}
+  m_Offset: {x: -0.29173523, y: 1.0298635}
+  m_Size: {x: 38.72933, y: 34.215137}
   m_Direction: 1
 --- !u!114 &-157961625697691282
 MonoBehaviour:

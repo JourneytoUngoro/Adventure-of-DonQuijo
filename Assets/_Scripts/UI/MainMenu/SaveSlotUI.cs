@@ -18,6 +18,8 @@ public class SaveSlotUI : MonoBehaviour
     [HideInInspector] public TextMeshProUGUI playTimeTMP;      // PlayTime TMP 
     [HideInInspector] public TextMeshProUGUI emptySlotTMP;    // Empty TMP
     private Transform infoTmps;                                          // Slot Info Tmps
+    [HideInInspector] public ButtonScaler buttonsScaler;
+
     [Tooltip("slot id : 0, 1, 2 ...")]
     [field: SerializeField] public int slotId { get; set; }
 
@@ -36,6 +38,8 @@ public class SaveSlotUI : MonoBehaviour
         mfImage = mfTMP.transform.Find("MF Image").GetComponent<Image>();
         playTimeTMP = infoTmps.Find("PlayTime TMP").GetComponent<TextMeshProUGUI>();
         emptySlotTMP = infoTmps.Find("Empty TMP").GetComponent<TextMeshProUGUI>();
+
+        buttonsScaler = GetComponent<ButtonScaler>();
 
         deleteButton.gameObject.SetActive(false);
 
@@ -99,6 +103,13 @@ public class SaveSlotUI : MonoBehaviour
 
     void OnClickSaveSlotButton()
     {
-        loadGameUI.OnClickSlotButton(slotId);
+        if (loadGameUI.editing)
+        {
+            loadGameUI.OnClickDeleteButton(slotId);
+        }
+        else
+        {
+            loadGameUI.OnClickSlotButton(slotId);
+        }
     }
 }

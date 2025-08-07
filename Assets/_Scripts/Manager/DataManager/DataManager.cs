@@ -136,6 +136,8 @@ public class DataManager : MonoBehaviour
             dataPersistanceObject?.SaveData(gameData);
         }
 
+        gameData.totalPlayTime += (float)(TimeSpan.FromTicks(DateTime.Now.Ticks - gameData.lastPlayTime).TotalSeconds);
+
         gameData.displayedLastPlayTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
         gameData.lastPlayTime = DateTime.Now.Ticks;
 
@@ -171,6 +173,8 @@ public class DataManager : MonoBehaviour
 
         SceneManager.sceneLoaded -= LoadGame;
         Manager.Instance.itemManager.ForceInitialize();
+
+        gameData.lastPlayTime = DateTime.Now.Ticks;
     }
 
     private void OnApplicationQuit()

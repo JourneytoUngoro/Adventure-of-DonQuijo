@@ -235,6 +235,8 @@ public class UIManager : MonoBehaviour
         Debug.Log($"clickblocker should be index {siblingIndex}");
     }
 
+    public Transform GetUICanvasTransfrom() => uiCanvas;
+
     private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
 
     private void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
