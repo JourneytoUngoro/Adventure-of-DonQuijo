@@ -10,7 +10,7 @@ using UnityEngine;
 public abstract class Combat : CoreComponent
 {
     [field: SerializeField] public LayerMask whatIsDamageable { get; protected set; }
-    public List<Collider2D> damagedTargets { get; private set; } = new List<Collider2D>();
+    public HashSet<Collider2D> damagedTargets { get; private set; } = new HashSet<Collider2D>();
     public HashSet<Entity> surroundedBy { get; private set; } = new HashSet<Entity>();
     public HashSet<Entity> targetedBy { get; private set; } = new HashSet<Entity>();
     // public Coroutine dashAttackCoroutine { get; protected set; }
@@ -25,7 +25,6 @@ public abstract class Combat : CoreComponent
     {
         base.Awake();
 
-        damagedTargets = new List<Collider2D>();
         impulseSource = GetComponentInParent<CinemachineImpulseSource>();
     }
 
@@ -161,10 +160,12 @@ public abstract class Combat : CoreComponent
                     {
                         case DamageComponent damageComponent:
                             hitTarget = true;
+                            damagedTargets.Add(damageTarget);
                             damageComponent.ApplyCombatAbility(damageTarget, combatAbilityWithColliders.overlapColliders);
                             break;
                         case KnockbackComponent knockbackComponent:
                             hitTarget = true;
+                            damagedTargets.Add(damageTarget);
                             knockbackComponent.ApplyCombatAbility(damageTarget, combatAbilityWithColliders.overlapColliders);
                             break;
                         case ProjectileComponent projectileComponent:
@@ -173,11 +174,10 @@ public abstract class Combat : CoreComponent
                         /*case StatusEffectComponent statusEffectComponent:
                             statusEffectComponent.ApplyCombatAbility(damageTarget, combatAbilityWithTransforms.overlapColliders);
                             break;*/
-                        default: break;
+                        default:
+                            break;
                     }
                 }
-
-                damagedTargets.Add(damageTarget);
             }
         }
 
@@ -268,7 +268,7 @@ public abstract class Combat : CoreComponent
         bool isParrying = damageComponent.pertainedCombatAbility.canBeParried ? IsParrying(sourceEntity, overlapColliders) : false;
         bool isBlocking = damageComponent.pertainedCombatAbility.canBeBlocked ? IsBlocking(sourceEntity, overlapColliders) : false;
 
-        Debug.Log("isParrying: " + isParrying + ", isBlocking: " + isBlocking);
+        Debug.Log(entity.name + " - isParrying: " + isParrying + ", isBlocking: " + isBlocking);
 
         GetHealthDamage(damageComponent, isParrying, isBlocking);
         GetPostureDamage(damageComponent, isParrying, isBlocking);
