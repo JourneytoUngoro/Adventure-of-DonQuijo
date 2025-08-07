@@ -1,15 +1,51 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     [field: SerializeField] public Player player { get; private set; }
-    [SerializeField] public float cameraShakeForce = 20.0f;
+    [SerializeField] private float cameraShakeForce = 20.0f;
     public bool isPaused { get; private set; }
+
+    public event Action sceneClearedAction;
+    public Trigger initialInvoke { get; private set; }
+
     private float originalTimeScale = 1.0f;
     private Coroutine pauseGameCoroutine;
+
+    private void Awake()
+    {
+        initialInvoke = false;
+    }
+
+    private void Update()
+    {
+        Enemy[] currentSceneEnemies = FindObjectsByType<Enemy>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+
+        bool enemyEliminated = true;
+
+
+        foreach (Enemy enemy in currentSceneEnemies)
+        {
+            if (enemy.gameObject.scene.name.Equals(Manager.Instance.sceneTransitionManager.currentActiveScene.SceneName))
+            {
+                if (!enemy.isDead)
+                {
+                    enemyEliminated = false;
+                    break;
+                }
+            }
+        }
+
+        if (enemyEliminated && currentSceneEnemies.Count() > 0 && initialInvoke.Value)
+        {
+            sceneClearedAction?.Invoke();
+        }
+    }
 
     public void PauseGame(float? duration = null)
     {
