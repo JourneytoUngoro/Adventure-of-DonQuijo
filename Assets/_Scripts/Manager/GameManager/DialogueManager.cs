@@ -120,7 +120,6 @@ public class DialogueManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("space down");
             return true;
         }
         return false;
