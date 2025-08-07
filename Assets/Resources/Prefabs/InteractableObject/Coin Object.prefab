@@ -55,9 +55,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   value: 2
-  coinLifeTime: 3
-  moveSpeed: 2.5
-  epsilon: 2
+  coinLifeTime: 6
+  moveSpeed: 3
+  epsilon: 2.5
 --- !u!114 &449691791892981287
 MonoBehaviour:
   m_ObjectHideFlags: 0
