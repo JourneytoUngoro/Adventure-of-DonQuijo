@@ -16,6 +16,8 @@ public class PlayerBlockParryState : PlayerAbilityState
     {
         base.AnimationStartTrigger(index);
 
+        if (player.animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Equals("Player_BlockParry")) return;
+
         canTransit = false;
 
         if (index == 0)
@@ -51,7 +53,6 @@ public class PlayerBlockParryState : PlayerAbilityState
     {
         base.Enter();
 
-        player.stateMachineToAnimator.state = this;
         player.animator.SetBool("inAir", !isGrounded);
 
         available = false;

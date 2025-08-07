@@ -71,7 +71,7 @@ public class EnemyMovement : Movement
                         {
                             navMeshAgent.SetDestination(destinationPosition.Value);
 
-                            if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance && !enemy.navMeshAgent.hasPath)
+                            if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance && (!navMeshAgent.hasPath || enemy.navMeshAgent.velocity.sqrMagnitude < epsilon))
                             {
                                 Debug.Log("Destination Arrived. NavMeshAgent Disabled.");
                                 navMeshAgent.enabled = false;
@@ -100,7 +100,7 @@ public class EnemyMovement : Movement
                             {
                                 navMeshAgent.SetDestination(destinationPosition.Value);
 
-                                if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance && !navMeshAgent.hasPath)
+                                if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance && (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude < epsilon))
                                 {
                                     ChangeNavMeshAgentState(NavMeshAgentState.Chase);
                                 }
