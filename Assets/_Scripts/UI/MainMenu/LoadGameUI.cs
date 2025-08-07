@@ -20,13 +20,13 @@ public class LoadGameUI : MonoBehaviour
     public string nowProfileId = string.Empty;
     public string deleteProfileId = string.Empty;
 
-    SaveSlotUI[] saveSlotUI;
-    PopupUI loadPopup;
-    PopupUI guidePopup;
+    private SaveSlotUI[] saveSlotUI;
+    private PopupUI loadPopup;
+    private PopupUI guidePopup;
 
-    Dictionary<string, GameData> allProfilesGameData;
+    private Dictionary<string, GameData> allProfilesGameData;
 
-    bool editing;
+    public bool editing { get; private set; }
     bool playOpening;
 
     private void Awake()
@@ -128,13 +128,27 @@ public class LoadGameUI : MonoBehaviour
     {
         editing = !editing;
 
+        editStateImage.sprite = editing ? saveSprtie : editSprtie;
+
+        DisplayButtonsOnEdit();
+    }
+
+    public void DisplayButtonsOnEdit()
+    {
         for (int i = 0; i < saveSlotUI.Length; i++)
         {
-            if (saveSlotUI[i].isNull) continue;
-            saveSlotUI[i].deleteButton.gameObject.SetActive(editing);
+            if (!saveSlotUI[i].isNull)
+            {
+                saveSlotUI[i].deleteButton.gameObject.SetActive(editing);
+            }
+            else
+            {
+                saveSlotUI[i].buttonsScaler.canEffect = !editing;
+                saveSlotUI[i].saveSlotButton.interactable = !editing;
+            }
         }
-        editStateImage.sprite = editing ? saveSprtie : editSprtie;
     }
+
 
     public void OnClickDeleteButton(int index)
     {
@@ -221,6 +235,8 @@ public class LoadGameUI : MonoBehaviour
 
             deleteProfileId = string.Empty;
         }
+
+        DisplayButtonsOnEdit();
     }
 
     void OnDeletedSaveSlot()
