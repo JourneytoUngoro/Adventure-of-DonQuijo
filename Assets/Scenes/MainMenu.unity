@@ -415,6 +415,7 @@ MonoBehaviour:
   clickScale: 0.9
   duration: 0.2
   printDebug: 0
+  canEffect: 0
 --- !u!1 &142473640
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,6 +553,7 @@ MonoBehaviour:
   clickScale: 0.9
   duration: 0.2
   printDebug: 0
+  canEffect: 0
 --- !u!1 &159372077
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,6 +876,22 @@ PrefabInstance:
     - target: {fileID: 3231106636775292840, guid: f29949327a69d9641b9b043607a19734, type: 3}
       propertyPath: m_Colors.m_PressedColor.r
       value: 0.74213827
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231106636775292840, guid: f29949327a69d9641b9b043607a19734, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 0.70980394
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231106636775292840, guid: f29949327a69d9641b9b043607a19734, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231106636775292840, guid: f29949327a69d9641b9b043607a19734, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231106636775292840, guid: f29949327a69d9641b9b043607a19734, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3231106636775292840, guid: f29949327a69d9641b9b043607a19734, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.a
@@ -1571,6 +1589,7 @@ MonoBehaviour:
   clickScale: 0.9
   duration: 0.2
   printDebug: 0
+  canEffect: 0
 --- !u!1 &826765699
 GameObject:
   m_ObjectHideFlags: 0
@@ -1708,6 +1727,7 @@ MonoBehaviour:
   clickScale: 0.9
   duration: 0.2
   printDebug: 0
+  canEffect: 0
 --- !u!1 &832436233
 GameObject:
   m_ObjectHideFlags: 0
@@ -1962,6 +1982,22 @@ PrefabInstance:
     - target: {fileID: 3231106636775292840, guid: f29949327a69d9641b9b043607a19734, type: 3}
       propertyPath: m_Colors.m_PressedColor.r
       value: 0.74213827
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231106636775292840, guid: f29949327a69d9641b9b043607a19734, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 0.70980394
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231106636775292840, guid: f29949327a69d9641b9b043607a19734, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231106636775292840, guid: f29949327a69d9641b9b043607a19734, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231106636775292840, guid: f29949327a69d9641b9b043607a19734, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3231106636775292840, guid: f29949327a69d9641b9b043607a19734, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.a
@@ -2306,6 +2342,7 @@ MonoBehaviour:
   clickScale: 0.9
   duration: 0.2
   printDebug: 0
+  canEffect: 0
 --- !u!222 &1116433713
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2388,6 +2425,7 @@ MonoBehaviour:
   clickScale: 0.9
   duration: 0.2
   printDebug: 0
+  canEffect: 0
 --- !u!114 &1139050430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2497,6 +2535,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2459928498427478367, guid: f3f2e7d01e1683e4aa2b4d87fc6a03b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5036717883988986037, guid: f3f2e7d01e1683e4aa2b4d87fc6a03b3, type: 3}
       propertyPath: <health>k__BackingField.slider
       value: 
@@ -2505,6 +2547,18 @@ PrefabInstance:
       propertyPath: <posture>k__BackingField.slider
       value: 
       objectReference: {fileID: 1460566164}
+    - target: {fileID: 5507597803940219266, guid: f3f2e7d01e1683e4aa2b4d87fc6a03b3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067600097976771328, guid: f3f2e7d01e1683e4aa2b4d87fc6a03b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7250338767595556175, guid: f3f2e7d01e1683e4aa2b4d87fc6a03b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8112502894736453738, guid: f3f2e7d01e1683e4aa2b4d87fc6a03b3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2544,6 +2598,14 @@ PrefabInstance:
     - target: {fileID: 8112502894736453738, guid: f3f2e7d01e1683e4aa2b4d87fc6a03b3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8159415450540775106, guid: f3f2e7d01e1683e4aa2b4d87fc6a03b3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8567894801335608184, guid: f3f2e7d01e1683e4aa2b4d87fc6a03b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4567157840486701381, guid: f3f2e7d01e1683e4aa2b4d87fc6a03b3, type: 3}
@@ -3159,6 +3221,22 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: e27fe21c27c0bc544bd10ae5ee8a0e25, type: 3}
+    - target: {fileID: 3231106636775292840, guid: f29949327a69d9641b9b043607a19734, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 0.70980394
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231106636775292840, guid: f29949327a69d9641b9b043607a19734, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231106636775292840, guid: f29949327a69d9641b9b043607a19734, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231106636775292840, guid: f29949327a69d9641b9b043607a19734, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4190789629759724616, guid: f29949327a69d9641b9b043607a19734, type: 3}
       propertyPath: m_text
       value: "\uC2AC\uB86F 3\n"
@@ -3737,6 +3815,7 @@ MonoBehaviour:
   clickScale: 0.9
   duration: 0.2
   printDebug: 0
+  canEffect: 0
 --- !u!1 &71463001325637014
 GameObject:
   m_ObjectHideFlags: 0
@@ -5081,6 +5160,7 @@ MonoBehaviour:
   clickScale: 0.9
   duration: 0.2
   printDebug: 0
+  canEffect: 0
 --- !u!114 &5682952442146110746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5548,6 +5628,7 @@ MonoBehaviour:
   clickScale: 0.9
   duration: 0.2
   printDebug: 0
+  canEffect: 0
 --- !u!1 &7168665755651936216
 GameObject:
   m_ObjectHideFlags: 0
@@ -5662,6 +5743,7 @@ MonoBehaviour:
   clickScale: 0.9
   duration: 0.2
   printDebug: 0
+  canEffect: 0
 --- !u!222 &7753401354187633122
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6058,6 +6140,7 @@ MonoBehaviour:
   clickScale: 0.9
   duration: 0.2
   printDebug: 0
+  canEffect: 0
 --- !u!114 &8072433623885503178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6388,6 +6471,7 @@ MonoBehaviour:
   clickScale: 0.9
   duration: 0.2
   printDebug: 0
+  canEffect: 0
 --- !u!222 &8753698968331375927
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6496,6 +6580,7 @@ MonoBehaviour:
   clickScale: 0.9
   duration: 0.2
   printDebug: 0
+  canEffect: 0
 --- !u!222 &8946201712740150510
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6783,6 +6868,7 @@ MonoBehaviour:
   clickScale: 0.9
   duration: 0.2
   printDebug: 0
+  canEffect: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

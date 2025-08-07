@@ -55,7 +55,7 @@ public class MemoryFragmentObject : InteractBase
         if (isChasingPlayer) { return; }
 
         if (chasingPlayerCoroutine != null) { chasingPlayerCoroutine = null; }
-        StartCoroutine(NearToPlayer());
+        chasingPlayerCoroutine = StartCoroutine(NearToPlayer());
     }
     protected override void OnTriggerExit2D(Collider2D collision)
     {
