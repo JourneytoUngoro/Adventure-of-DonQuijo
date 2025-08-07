@@ -156,8 +156,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpHeight: 15
   jumpDuration: 0.15
-  horizontalDistance: 9
-  horizontalmultiplier: 2
+  horizontalDistance: 6
+  horizontalmultiplier: 1.7
   fallDuration: 0.5
   bounceDuration: 0.4
   isCoin: 0

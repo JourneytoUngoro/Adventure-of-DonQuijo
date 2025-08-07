@@ -70,10 +70,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f4d48e594c6a044b13cf27a39f8b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 15
+  jumpHeight: 12
   jumpDuration: 0.2
-  horizontalDistance: 7
-  horizontalmultiplier: 1.5
+  horizontalDistance: 5
+  horizontalmultiplier: 1.2
   fallDuration: 0.4
   bounceDuration: 0.5
   isCoin: 0
