@@ -14,7 +14,7 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
     public bool isFadingIn { get; private set; }
     public bool isFadingOut { get; private set; }
 
-    [SerializeField] private SceneField currentActiveScene;
+    [field: SerializeField] public SceneField currentActiveScene { get; private set; }
     [SerializeField] private SerializedDictionary<SceneField, List<SceneField>> adjacentScene;
 
     [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
@@ -377,13 +377,6 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
         FindDoor(doorToSpawnAt);
         MoveByDirection(direction);
         ChangePosition(destinationTransform);
-
-        Enemy[] activeSceneEnemies = FindObjectsByType<Enemy>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-
-        /*foreach (Enemy enemy in activeSceneEnemies)
-        {
-            enemy.Revive();
-        }*/
         
         if (current.name != "" && next.name != "MainMenu" && next.name != "OpeningCutscene")
         {
@@ -391,6 +384,7 @@ public class SceneTransitionManager : MonoBehaviour, IDataPersistance
             statusBar.SetActive(true);
             ChangeVirtualCameraConfinement(next);
             Manager.Instance.dataManager.SaveGame();
+            Manager.Instance.gameManager.initialInvoke.Reset();
         }
         else
         {

@@ -3513,6 +3513,14 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
+      propertyPath: <currentActiveScene>k__BackingField.m_SceneName
+      value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
+      propertyPath: <currentActiveScene>k__BackingField.m_SceneAsset
+      value: 
+      objectReference: {fileID: 102900000, guid: 9990e03c20d31a34e992fa6f781bd427, type: 3}
+    - target: {fileID: 3498992804018308358, guid: e4d442129d5040549878cad154901725, type: 3}
       propertyPath: adjacentScene._serializedList.Array.data[1].Key.m_SceneName
       value: OpeningCutscene
       objectReference: {fileID: 0}
