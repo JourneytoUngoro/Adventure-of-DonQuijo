@@ -9,7 +9,7 @@ public class StageManager : MonoBehaviour, IDataPersistance
     private Dictionary<string, Stage> stageDict;
     public TextMeshProUGUI mfTMP; // 인스펙터 할당 
     public Stage nowStage {  get; private set; }
-
+    private bool isRegistered = false;
     private void Awake()
     {
         LoadAllStages();
@@ -96,9 +96,8 @@ public class StageManager : MonoBehaviour, IDataPersistance
             Debug.Log("Last Stage Cleared");
         }
 
-        PopupUI stageClearPopup = Object.Instantiate(Resources.Load<GameObject>("Prefabs/UI/Stage Clear")).GetComponent<PopupUI>();
+        PopupUI stageClearPopup = Manager.Instance.uiManager.GetUI(UIType.GameClear).GetComponent<PopupUI>();
         Debug.Assert(stageClearPopup != null, "can't find Stage Clear Popup");
-        stageClearPopup.transform.SetParent(Manager.Instance.uiManager.GetUICanvasTransfrom(), false);
         stageClearPopup.ShowUI();
         stageClearPopup.gameObject.GetComponent<GameClearController>().ShowPlayInfo();
 

@@ -18,7 +18,8 @@ public enum UIType
     DynamicTextInfo, // 동적으로 생성되는 텍스트 정보
     DynamicImage,  // 동적으로 생성되는 이미지
     PlayerStatus, // 플레이어 상태(체력, 체간 등)
-    GameOver // 게임 재시작 패널 
+    GameOver, // 게임 재시작 패널 
+    GameClear,
  }
 
 [RequireComponent(typeof(CanvasGroup))]

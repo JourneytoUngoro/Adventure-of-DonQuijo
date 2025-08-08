@@ -12,6 +12,8 @@ public class GameClearController : MonoBehaviour
 
     private PopupUI clearPopupUI;
 
+    private Sequence seq;
+
     public void TEST_DisplayTMP()
     {
         clearPopupUI.ShowUI();
@@ -33,6 +35,8 @@ public class GameClearController : MonoBehaviour
 
     public void ShowPlayInfo()
     {
+        seq?.Kill(); // 이전 시퀀스 중단
+
         Manager.Instance.dataManager.SaveGame();
         GameData clearedStageData = Manager.Instance.dataManager.gameData;
 
@@ -43,15 +47,15 @@ public class GameClearController : MonoBehaviour
 
         string[] lines =
         {
-            $"총 플레이 타임 : {playTime}\n",
-            $"클리어 시간 : {clearedTime}\n",
-            $"수집한 메모리 조각 : {collectedMemory} 개\n",
-            $"처치한 적 : {killedEnemy} 마리\n"
-         };
+        $"총 플레이 타임 : {playTime}\n",
+        $"클리어 시간 : {clearedTime}\n",
+        $"수집한 메모리 조각 : {collectedMemory} 개\n",
+        $"처치한 적 : {killedEnemy} 마리\n"
+    };
 
-        displayDataTMP.text = ""; 
+        displayDataTMP.text = "";
 
-        Sequence seq = DOTween.Sequence();
+        seq = DOTween.Sequence();
         seq.AppendInterval(clearPopupUI.FadeTime());
 
         float delayPerLine = 0.3f;
@@ -65,11 +69,11 @@ public class GameClearController : MonoBehaviour
                 displayDataTMP.text += lines[index] + "\n";
             });
         }
-        seq.AppendCallback(() => {
+        seq.AppendCallback(() =>
+        {
             mainMenuButton.gameObject.SetActive(true);
         });
     }
-
 
 
 
@@ -84,7 +88,6 @@ public class GameClearController : MonoBehaviour
     {
         clearPopupUI.HideUI();
         Manager.Instance.sceneTransitionManager.SceneTransition("MainMenu", true, true);
-        Destroy(gameObject);
     }
 
 }

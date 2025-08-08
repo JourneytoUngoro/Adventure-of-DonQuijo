@@ -1147,7 +1147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEditing: 0
-  transitionTime: 1
+  transitionTime: 0.3
   HandObj: {fileID: 138773258}
   handStartPosition: {x: 2.5, y: -2, z: 0}
   handStartScale: {x: 0.9, y: 0.9, z: 0}

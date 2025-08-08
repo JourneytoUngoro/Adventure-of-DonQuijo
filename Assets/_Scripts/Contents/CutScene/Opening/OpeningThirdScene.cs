@@ -67,7 +67,7 @@ public class OpeningThirdScene : MonoBehaviour, ICutScene
                 )
             );
 
-        transitionSequence.AppendInterval(0.5f).OnComplete(() => { handAnim.Play("HandMove"); });
+        transitionSequence.AppendInterval(0.2f).OnComplete(() => { handAnim.Play("HandMove"); });
     }
 
     public void OnFinishHandAnimation()

@@ -71,7 +71,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 162.5
+  orthographic size: 180
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -587,6 +587,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35759dad7fdd9346b679819876d7215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  excludedScene:
+    m_SceneAsset: {fileID: 102900000, guid: 126f19c2386a521478c33f7989575d9d, type: 3}
+    m_SceneName: OpeningCutscene
 --- !u!1 &8731713275359170293
 GameObject:
   m_ObjectHideFlags: 0

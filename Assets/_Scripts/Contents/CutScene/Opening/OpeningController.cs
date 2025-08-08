@@ -12,7 +12,7 @@ public class OpeningController : MonoBehaviour
     private int cutscenesCount;
     private int currentIndex;
 
-    private GameObject persistentObject;
+    // private GameObject persistentObject;
 
     private void Awake()
     {
@@ -44,8 +44,8 @@ public class OpeningController : MonoBehaviour
 
     private void Start()
     {
-        persistentObject = GameObject.Find("Persistant GameObject");
-        persistentObject.SetActive(false);
+/*        persistentObject = GameObject.Find("Persistant GameObject");
+        persistentObject.SetActive(false);*/
 
         StartOpeningCutScene();
     }
@@ -53,7 +53,7 @@ public class OpeningController : MonoBehaviour
     private void OnDestroy()
     {
         // Disabled objects during the cutscene should be re-enabled after the cutscene ends.
-        if (persistentObject != null && !persistentObject.activeSelf) persistentObject?.SetActive(true);
+        // if (persistentObject != null && !persistentObject.activeSelf) persistentObject?.SetActive(true);
     }
 
     public void StartOpeningCutScene()
@@ -80,7 +80,7 @@ public class OpeningController : MonoBehaviour
 
     private void OnFinishOpening()
     {
-        persistentObject.SetActive(true);
+        // persistentObject.SetActive(true);
         Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("Stage1"), true, false);
         Manager.Instance.soundManager.PlayBGMTransition("battleBGM", 0.3f, 0.03f, 0.5f);
 

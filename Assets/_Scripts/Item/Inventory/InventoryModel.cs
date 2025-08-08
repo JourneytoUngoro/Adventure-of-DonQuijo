@@ -45,7 +45,7 @@ public class InventoryModel
         Debug.Log($"set coin to : {inventoryData.coins}");
         if (data.coins <= 0)
         {
-            inventoryData.coins = 1000;
+            inventoryData.coins = 50;
         }
 
         bool isNew = inventoryData.items == null || inventoryData.items.Length == 0;
