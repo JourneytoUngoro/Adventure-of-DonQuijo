@@ -13,7 +13,10 @@ public class StageManager : MonoBehaviour, IDataPersistance
     private void Awake()
     {
         LoadAllStages();
+    }
 
+    private void Start()
+    {
         Debug.Log(Manager.Instance.gameManager == null ? "GameManager is null" : "GameManager is not null");
 
         Manager.Instance.gameManager.sceneClearedAction -= DisplayStageClear;
