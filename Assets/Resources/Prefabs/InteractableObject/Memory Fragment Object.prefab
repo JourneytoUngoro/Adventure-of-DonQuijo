@@ -156,8 +156,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpHeight: 15
   jumpDuration: 0.15
-  horizontalDistance: 9
-  horizontalmultiplier: 2
+  horizontalDistance: 6
+  horizontalmultiplier: 1.7
   fallDuration: 0.5
   bounceDuration: 0.4
   isCoin: 0
@@ -197,8 +197,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.29173523, y: 1.0298635}
-  m_Size: {x: 38.72933, y: 34.215137}
+  m_Offset: {x: -0.57775015, y: 1.0298635}
+  m_Size: {x: 48.00206, y: 34.215363}
   m_Direction: 1
 --- !u!114 &-157961625697691282
 MonoBehaviour:

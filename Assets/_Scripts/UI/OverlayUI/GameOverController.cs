@@ -31,6 +31,7 @@ public class GameOverController : MonoBehaviour
         }
         else
         {
+            Manager.Instance.soundManager.PlaySoundFXClip("gameOverSFX", Player.Instance.gameObject.transform);
             gameOverPopup.ShowUI();
         }
     }

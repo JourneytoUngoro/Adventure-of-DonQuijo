@@ -528,7 +528,7 @@ GameObject:
   - component: {fileID: 3264910052462798690}
   - component: {fileID: 2906291279344099662}
   - component: {fileID: 291317945555400602}
-  - component: {fileID: 1349030759745255376}
+  - component: {fileID: 3410789736161127177}
   m_Layer: 5
   m_Name: Vending Machine Item Slot
   m_TagString: Untagged
@@ -609,6 +609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0759e51944fd6d44eb43ed5b2f33c7b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  printDebug: 1
   slotId: 0
   itemId: 0
   itemName: {fileID: 4762282124203844023}
@@ -664,7 +665,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1349030759745255376
+--- !u!114 &3410789736161127177
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -673,9 +674,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5829865627673853768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4185aa3d4fbff764f95d9b2cb43d9849, type: 3}
+  m_Script: {fileID: 11500000, guid: dcefa28154b0f5f4781d4b7304a16d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  printStage: 1
   selectedScale: 1.05
   duration: 0.15
 --- !u!1 &7665293854572670219

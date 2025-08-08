@@ -28,6 +28,7 @@ public class GameClearController : MonoBehaviour
     public void Initialize()
     {
         clearPopupUI = GetComponent<PopupUI>();
+        mainMenuButton.gameObject.SetActive(false);
     }
 
     public void ShowPlayInfo()
@@ -64,6 +65,9 @@ public class GameClearController : MonoBehaviour
                 displayDataTMP.text += lines[index] + "\n";
             });
         }
+        seq.AppendCallback(() => {
+            mainMenuButton.gameObject.SetActive(true);
+        });
     }
 
 

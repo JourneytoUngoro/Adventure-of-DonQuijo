@@ -13,18 +13,26 @@ public class VendingMachineController : InteractBase
     private TextInfoUI textUI;
 
     private float delayTime = 0.4f;
+    private Transform originalParent;
 
     private void Start()
     {
         popup = VendingMachinePanel.GetComponent<PopupUI>();
         vmPopup = VendingMachinePanel.GetComponent<VendingMachinePopupUI>();
+        originalParent = popup.transform.parent;
 
-        popup.SetOnHide(SetCanOpenGuideFalse);
+        SetPopupEvent();
     }
 
     public override void Interact()
     {
         ShowVendinMachinePanel();
+    }
+
+    private void SetPopupEvent()
+    {
+        popup.SetOnShow(OnPopupShow);
+        popup.SetOnHide(OnPopupHide);
     }
 
     private void ShowVendinMachinePanel()
@@ -65,5 +73,16 @@ public class VendingMachineController : InteractBase
     }
 
     private void SetCanOpenGuideFalse() => vmPopup.canOpenGuide = false;
+
+    private void OnPopupShow()
+    {
+        popup.gameObject.transform.SetParent(Manager.Instance.uiManager.GetUICanvasTransfrom(), false);
+    }
+
+    private void OnPopupHide()
+    {
+        SetCanOpenGuideFalse();
+        popup.gameObject.transform.SetParent(originalParent, false);
+    }
 
 }
