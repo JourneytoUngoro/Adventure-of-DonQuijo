@@ -30,6 +30,8 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
     private Color normalColor;
     private Color highlightColor;
 
+    private float originalFontSize;
+
     private void Start()
     {
         effect = GetComponent<VendingMachineSlotEffect>();
@@ -42,6 +44,7 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
         buttonSlotImage = GetComponent<Image>();
         normalColor = GetComponent<Button>().colors.normalColor;
         highlightColor = GetComponent<Button>().colors.highlightedColor;
+        originalFontSize = itemPrice.fontSize;
 
         if (effect == null)
         {
@@ -56,9 +59,22 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
         itemId = item.id;
         itemName.text = item.details.label;
         itemInfo.text = item.details.description;
-        itemPrice.text = item.details.price.ToString();
-
         itemImage.sprite = item.details.icon;
+
+        if (Manager.Instance.itemManager.CanPurchaseItem(item))
+        {
+            itemPrice.text = item.details.price.ToString();
+            itemPrice.fontSize = originalFontSize;
+            gameObject.GetComponent<Button>().enabled = true;
+            effect.canEffect = true;
+        }
+        else
+        {
+            itemPrice.text = "구매 불가";
+            itemPrice.fontSize = 12f;
+            gameObject.GetComponent<Button>().enabled = false;
+            effect.canEffect = false;
+        }
     }
 
     public void OnSelect(BaseEventData eventData)
@@ -77,9 +93,9 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
     public void ChangeSelectedState(bool chosen)
     {
 
-        Debug.Log(effect == null ? "effect null" : "effect not null");
+        // Debug.Log(effect == null ? "effect null" : "effect not null");
 
-        if (chosen)
+        if (chosen && effect.canEffect)
         {
             effect.OnSelectedState();
             buttonSlotImage.color = highlightColor;

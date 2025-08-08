@@ -56,8 +56,9 @@ public class VendingMachinePopupUI : MonoBehaviour
     }
 
     // 자판기에 아이템 등록 
-    private void SetUpItems()
+    public void SetUpItems()
     {
+        Debug.Log("SetUpItems Executed");
         for (int i = 1; i <= ItemDatabase.totalItems; i++)
         {
             Item item = ItemDatabase.GetDetailsById(i).Create();

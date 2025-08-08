@@ -76,6 +76,7 @@ public class VendingMachineController : InteractBase
 
     private void OnPopupShow()
     {
+        vmPopup.SetUpItems();
         popup.gameObject.transform.SetParent(Manager.Instance.uiManager.GetUICanvasTransfrom(), false);
     }
 

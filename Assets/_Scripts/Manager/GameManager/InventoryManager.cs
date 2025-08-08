@@ -119,6 +119,12 @@ public class InventoryManager : MonoBehaviour
         return use;
     }
 
+    public bool UseItemOnDead(int index)
+    {
+        bool use = controller().UseItemOnDead(index, Player);
+        return use;
+    }
+
     public int HasItem(string itemLabel)
     {
         int has = controller().HasItem(itemLabel);
@@ -135,6 +141,11 @@ public class InventoryManager : MonoBehaviour
         controller().UpdateCoins(amount);
     }
 
+    public bool CanPurchaseItem(Item item)
+    {
+        bool canPurchase = controller().CanPurchaseItem(item);
+        return canPurchase;
+    }
 
     public async void CheckAbandonItem(DraggableItem requester, Item item)
     {
