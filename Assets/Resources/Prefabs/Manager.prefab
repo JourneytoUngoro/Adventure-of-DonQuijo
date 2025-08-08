@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c91fb02248d4d64488724f029c0af4c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentActiveScene:
+  <currentActiveScene>k__BackingField:
     m_SceneAsset: {fileID: 0}
     m_SceneName: 
   adjacentScene:
@@ -441,6 +441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <player>k__BackingField: {fileID: 0}
+  cameraShakeForce: 10
 --- !u!1 &5225713252320322654
 GameObject:
   m_ObjectHideFlags: 0
