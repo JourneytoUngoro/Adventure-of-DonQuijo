@@ -925,7 +925,7 @@ MonoBehaviour:
   bgEase: 6
   vCam1: {fileID: 1740422538}
   vCam1StartPosition: {x: 0, y: 0.5, z: -1}
-  zoomEndPosition: {x: 2, y: 2.2, z: -1}
+  zoomEndPosition: {x: 1.2, y: 2.2, z: -1}
   vCam1StratOrthoSize: 5.5
   zoomOrthographicSize: 4.5
   zoomDuration: 3.5

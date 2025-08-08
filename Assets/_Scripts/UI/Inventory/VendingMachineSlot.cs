@@ -32,6 +32,8 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
 
     private float originalFontSize;
 
+    public bool canPurchase;
+
     private void Start()
     {
         effect = GetComponent<VendingMachineSlotEffect>();
@@ -45,6 +47,7 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
         normalColor = GetComponent<Button>().colors.normalColor;
         highlightColor = GetComponent<Button>().colors.highlightedColor;
         originalFontSize = itemPrice.fontSize;
+        canPurchase = true;
 
         if (effect == null)
         {
@@ -67,6 +70,7 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
             itemPrice.fontSize = originalFontSize;
             gameObject.GetComponent<Button>().enabled = true;
             effect.canEffect = true;
+            canPurchase = true;
         }
         else
         {
@@ -74,6 +78,7 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
             itemPrice.fontSize = 12f;
             gameObject.GetComponent<Button>().enabled = false;
             effect.canEffect = false;
+            canPurchase = false;
         }
     }
 
@@ -95,7 +100,7 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
 
         // Debug.Log(effect == null ? "effect null" : "effect not null");
 
-        if (chosen && effect.canEffect)
+        if (chosen && canPurchase)
         {
             effect.OnSelectedState();
             buttonSlotImage.color = highlightColor;

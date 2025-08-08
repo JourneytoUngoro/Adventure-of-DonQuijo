@@ -43,8 +43,7 @@ public class PlayerDodgeState : PlayerAbilityState
 
         if (inputX == 0 && inputY == 0)
         {
-            player.animator.SetBool("backstep", true);
-            player.movement.SetVelocityXChangeOverTime(playerData.backstepSpeed * -facingDirection, playerData.backstepTime, Ease.InCubic, true, false);
+            player.movement.SetVelocityChangeOverTime(player.orthogonalRigidbody.transform.right, playerData.dodgeSpeed, playerData.dodgeTime, Ease.InSine, true, false, playerData.moveSpeed);
         }
         else
         {

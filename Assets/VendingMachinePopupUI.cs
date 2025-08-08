@@ -135,6 +135,7 @@ public class VendingMachinePopupUI : MonoBehaviour
 
     public void ShowPurchaseGuide()
     {
+        if (!selectedSlot.canPurchase) return;
         guidePopup.SetPopupInfo($"{selectedSlot.item.details.label} 아이템을 \n구매하시겠습니까?");
         guidePopup.ShowUI();
     }
