@@ -359,7 +359,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1489314779622455560}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -2199,6 +2199,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4598386608385768616}
     m_Modifications:
+    - target: {fileID: 291317945555400602, guid: bfbdf3aa019807d45b605c150c8f6255, type: 3}
+      propertyPath: m_Navigation.m_SelectOnLeft
+      value: 
+      objectReference: {fileID: 4112029589006167637}
+    - target: {fileID: 291317945555400602, guid: bfbdf3aa019807d45b605c150c8f6255, type: 3}
+      propertyPath: m_Navigation.m_SelectOnRight
+      value: 
+      objectReference: {fileID: 642109836551903222}
     - target: {fileID: 5829865627673853768, guid: bfbdf3aa019807d45b605c150c8f6255, type: 3}
       propertyPath: m_Name
       value: Vending Machine Item Slot 2
