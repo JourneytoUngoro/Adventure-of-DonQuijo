@@ -16,19 +16,25 @@ public class PlayerBlockParryState : PlayerAbilityState
     {
         base.AnimationStartTrigger(index);
 
-        if (player.animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Equals("Player_BlockParry")) return;
-
-        canTransit = false;
-
-        if (index == 0)
+        if (index != -1)
         {
-            isBlocked = true;
-            player.animator.ResetTrigger("blockParryButtonPressed");
+            if (player.animator.GetCurrentAnimatorClipInfo(0)[0].clip.name.Equals("Player_BlockParry")) return;
+
+            canTransit = false;
+
+            if (index == 0)
+            {
+                isBlocked = true;
+            }
+            else if (index == 1)
+            {
+                isParried = true;
+                Manager.Instance.soundManager.PlaySoundFXClip("playerParrySuccessSFX", player.transform);
+            }
         }
-        else if (index == 1)
+        else
         {
-            isParried = true;
-            Manager.Instance.soundManager.PlaySoundFXClip("playerParrySuccessSFX", player.transform);
+            canTransit = true;
         }
     }
 
