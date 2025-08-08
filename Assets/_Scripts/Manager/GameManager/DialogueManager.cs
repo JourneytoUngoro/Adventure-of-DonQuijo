@@ -6,6 +6,7 @@ using UnityEngine;
 using Ink.Runtime;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -54,6 +55,8 @@ public class DialogueManager : MonoBehaviour
     private DialogueVariables dialogueVariables;
     private InkExternalFunction inkExternalFunction;
 
+    private Action onExitDialgoue;
+
     #endregion 
 
     private void Awake()
@@ -71,6 +74,8 @@ public class DialogueManager : MonoBehaviour
 
         audioSource = this.gameObject.AddComponent<AudioSource>();
         currentAudioClip = defaultAudioClip;
+
+        onExitDialgoue = null;
     }
 
     private void Start()
@@ -143,8 +148,10 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterDialogue(TextAsset inkJSON, Animator anim, NPCDialogueSO npcSO)
     {
-        Manager.Instance.inputHandler.SetCharacterControlEnabled(false);
-
+        if (Manager.Instance.inputHandler.IsCharacterControlEnabled())
+        {
+            Manager.Instance.inputHandler.SetCharacterControlEnabled(false);
+        }
 
         currentStory = new Story(inkJSON.text);
         this.npcSO = npcSO;
@@ -171,6 +178,14 @@ public class DialogueManager : MonoBehaviour
         dialogueTMP.text = "";
         SetCurrentAudioClip(defaultAudioClip);
         Manager.Instance.inputHandler.SetCharacterControlEnabled(true);
+
+        onExitDialgoue?.Invoke();
+        onExitDialgoue = null;
+    }
+
+    public void SetOnExitDialogue(Action onExit)
+    {
+        onExitDialgoue = onExit;
     }
 
     private void ContinueStory()
