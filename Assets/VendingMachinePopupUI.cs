@@ -26,7 +26,6 @@ public class VendingMachinePopupUI : MonoBehaviour
 
     private void Start()
     {
-        SetUpItems();
         SetEvents();
         AddGuidePopupListener();
     }
@@ -77,8 +76,6 @@ public class VendingMachinePopupUI : MonoBehaviour
         vmPopup.confirmButton.onClick.RemoveAllListeners();
         vmPopup.confirmButton.onClick.AddListener(() => { vmPopup.HideUI(); Debug.Log("close vm popup");  });
 
-        vmPopup.SetOnShow(() => StartSelectSlotUI(slots[0]));
-
         guidePopup.SetOnShow(() => { EventSystem.current.sendNavigationEvents = false; });
         guidePopup.SetOnHide(() => { EventSystem.current.sendNavigationEvents = true; });
     }
@@ -93,6 +90,7 @@ public class VendingMachinePopupUI : MonoBehaviour
 
     public void SetSelectedSlot(VendingMachineSlot slot)
     {
+        Debug.Log(selectedSlot?.effect == null ? "effect null" : "effect not null");
         if (selectedSlot != null && selectedSlot.effect != null) { selectedSlot?.ChangeSelectedState(false); } // Release prev slot
         selectedSlot = slot; // Register new slot
     }

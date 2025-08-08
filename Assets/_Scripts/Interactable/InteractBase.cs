@@ -41,9 +41,13 @@ public abstract class InteractBase : MonoBehaviour, IInteractable
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
+        if (!Player.Instance.gameObject.activeSelf) return;
+
         if (collision.gameObject.layer == LayerMask.NameToLayer("PlayerInteraction"))
         {
             Player player = collision.gameObject.GetComponentInParent<Player>();
+
+            if (player == null) return;
 
             if (interactionType != InteractionType.SceneTransition)
             {
@@ -61,9 +65,13 @@ public abstract class InteractBase : MonoBehaviour, IInteractable
 
     protected virtual void OnCollisionExit2D(Collision2D collision)
     {
+        if (!Player.Instance.gameObject.activeSelf) return;
+
         if (collision.gameObject.layer == LayerMask.NameToLayer("PlayerInteraction"))
         {
             Player player = collision.gameObject.GetComponentInParent<Player>();
+
+            if (player == null) return;
 
             if (interactionType != InteractionType.SceneTransition)
             {
@@ -79,9 +87,12 @@ public abstract class InteractBase : MonoBehaviour, IInteractable
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!Player.Instance.gameObject.activeSelf) return;
+
         if (collision.gameObject.layer == LayerMask.NameToLayer("PlayerInteraction"))
         {
             Player player = collision.gameObject.GetComponentInParent<Player>();
+            if (player == null) return;
 
             if (interactionType != InteractionType.SceneTransition)
             {
@@ -99,9 +110,11 @@ public abstract class InteractBase : MonoBehaviour, IInteractable
 
     protected virtual void OnTriggerExit2D(Collider2D collision)
     {
+        if (!Player.Instance.gameObject.activeSelf) return;
         if (collision.gameObject.layer == LayerMask.NameToLayer("PlayerInteraction"))
         {
             Player player = collision.gameObject.GetComponentInParent<Player>();
+            if (player == null) return;
 
             if (interactionType != InteractionType.SceneTransition)
             {

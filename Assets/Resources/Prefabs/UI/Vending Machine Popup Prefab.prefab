@@ -1839,6 +1839,10 @@ PrefabInstance:
       propertyPath: m_Navigation.m_SelectOnRight
       value: 
       objectReference: {fileID: 329547728607436418}
+    - target: {fileID: 4245035894026927054, guid: bfbdf3aa019807d45b605c150c8f6255, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5829865627673853768, guid: bfbdf3aa019807d45b605c150c8f6255, type: 3}
       propertyPath: m_Name
       value: Vending Machine Item Slot 3

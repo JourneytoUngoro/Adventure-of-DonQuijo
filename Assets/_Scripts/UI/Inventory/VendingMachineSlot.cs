@@ -36,7 +36,7 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
 
     private void Start()
     {
-        effect = GetComponent<VendingMachineSlotEffect>();
+        if (effect == null) { effect = GetComponent<VendingMachineSlotEffect>(); }
         vmUI = GetComponentInParent<VendingMachinePopupUI>();
         vmPopup = vmUI.GetComponent<PopupUI>();
 
@@ -53,6 +53,10 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
         {
             effect = GetComponent<VendingMachineSlotEffect>();
         }
+
+        Debug.Log(effect == null ? "null" : "not null");
+        Debug.Log(vmUI == null ? "null" : "not null");
+        Debug.Log(vmPopup == null ? "null" : "not null");
     }
 
 
@@ -64,12 +68,16 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
         itemInfo.text = item.details.description;
         itemImage.sprite = item.details.icon;
 
-        if (Manager.Instance.itemManager.CanPurchaseItem(item))
+        if (effect == null) { Debug.LogError("itemEffect is null!"); effect = GetComponent<VendingMachineSlotEffect>(); }
+
+        Debug.Log($"{(Manager.Instance == null ? "Manager null" : "Manager not null")}");
+        Debug.Log($"아이템 구매 여부 : {Manager.Instance.itemManager.CanPurchaseItem(item)}");
+
+        if (/*Manager.Instance.itemManager.CanPurchaseItem(item)*/ true)
         {
             itemPrice.text = item.details.price.ToString();
             itemPrice.fontSize = originalFontSize;
             gameObject.GetComponent<Button>().enabled = true;
-            effect.canEffect = true;
             canPurchase = true;
         }
         else
@@ -77,7 +85,6 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
             itemPrice.text = "구매 불가";
             itemPrice.fontSize = 12f;
             gameObject.GetComponent<Button>().enabled = false;
-            effect.canEffect = false;
             canPurchase = false;
         }
     }
@@ -92,22 +99,24 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
 
     public void OnDeselect(BaseEventData eventData)
     {
+        if (!vmPopup.isOpened) return;
+
         ChangeSelectedState(false);
     }
 
     public void ChangeSelectedState(bool chosen)
     {
 
-        // Debug.Log(effect == null ? "effect null" : "effect not null");
+        Debug.Log(effect == null ? "effect null" : "effect not null");
 
         if (chosen && canPurchase)
         {
-            effect.OnSelectedState();
+            effect?.OnSelectedState();
             buttonSlotImage.color = highlightColor;
         }
         else
         {
-            effect.OnUnSelectedState();
+            effect?.OnUnSelectedState();
             buttonSlotImage.color = normalColor;
         }
     }

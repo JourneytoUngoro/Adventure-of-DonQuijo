@@ -621,6 +621,8 @@ MonoBehaviour:
     details: {fileID: 0}
     quantity: 0
     nowUseCount: 0
+  effect: {fileID: 3410789736161127177}
+  canPurchase: 0
 --- !u!114 &291317945555400602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -677,9 +679,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcefa28154b0f5f4781d4b7304a16d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  printStage: 1
   selectedScale: 1.05
   duration: 0.15
+  canEffect: 0
 --- !u!1 &7665293854572670219
 GameObject:
   m_ObjectHideFlags: 0
