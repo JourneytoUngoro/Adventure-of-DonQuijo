@@ -35,7 +35,7 @@ public class VendingMachinePopupUI : MonoBehaviour
     {
         if (!vmPopup.isOpened) return;
 
-        KeepSelectedSlot();
+        // KeepSelectedSlot();
 
         if (Manager.Instance.inputHandler.confirmInputPressed && canOpenGuide) // UI Confirm Pressed
         {
@@ -74,7 +74,7 @@ public class VendingMachinePopupUI : MonoBehaviour
     private void SetEvents()
     {
         vmPopup.confirmButton.onClick.RemoveAllListeners();
-        vmPopup.confirmButton.onClick.AddListener(() => { vmPopup.HideUI(); });
+        vmPopup.confirmButton.onClick.AddListener(() => { vmPopup.HideUI(); Debug.Log("close vm popup");  });
 
         vmPopup.SetOnShow(() => StartSelectSlotUI(slots[0]));
 
@@ -92,7 +92,7 @@ public class VendingMachinePopupUI : MonoBehaviour
 
     public void SetSelectedSlot(VendingMachineSlot slot)
     {
-        selectedSlot?.ChangeSelectedState(false); // Release prev slot
+        if (selectedSlot != null && selectedSlot.effect != null) { selectedSlot?.ChangeSelectedState(false); } // Release prev slot
         selectedSlot = slot; // Register new slot
     }
 
