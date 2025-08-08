@@ -25,6 +25,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool whirlwindInputPressed { get; private set; }
     public bool rangedAttackInputPressed { get; private set; }
     public bool chargedAttackInputPressed { get; private set; }
+    public bool cheetInputPressed { get; private set; }
 
     public bool confirmInputPressed { get; private set; }
     public bool cancelInputPressed { get; private set; }
@@ -60,6 +61,7 @@ public class PlayerInputHandler : MonoBehaviour
         interactInputPressed = controls.CharacterControl.InteractSelect.WasPressedThisFrame();
         returnInputPressed = controls.CharacterControl.Return.WasPressedThisFrame();
         itemInputPressed = controls.CharacterControl.UseItem.WasPressedThisFrame();
+        cheetInputPressed = controls.CharacterControl.CheatCode.WasPressedThisFrame();
 
         confirmInputPressed = controls.UIControl.Confirm.WasPressedThisFrame();
         cancelInputPressed = controls.UIControl.Cancel.WasPressedThisFrame();
