@@ -201,6 +201,33 @@ public class InventoryController
             Debug.Log("비어있는 인벤토리를 사용했습니다.");
             return false;
         }
+
+        if (item.details.label == "기억의 조각")
+        {
+            SetInventoryTextInfo("플레이어 사망 시 자동 섭취되는 아이템입니다.");
+           
+            return false;
+        }
+
+        if (UseItem(item, quantity))
+        {
+            item.details.UseItem(player);
+            return true;
+        }
+        return false;
+    }
+
+    public bool UseItemOnDead(int index, Player player, int quantity = 1)
+    {
+        // 1번 키 입력 -> 0번 슬롯 사용 
+        Item item = model.Get(index - 1);
+        if (item == null)
+        {
+            // 비어있는 슬롯 사용
+            Debug.Log("비어있는 인벤토리를 사용했습니다.");
+            return false;
+        }
+
         if (UseItem(item, quantity))
         {
             item.details.UseItem(player);
@@ -254,6 +281,21 @@ public class InventoryController
         return false;
     }
 
+    public bool CanPurchaseItem(Item item)
+    {
+        for (int i = 0; i < this.itemUsageData.Length; i++)
+        {
+            if (item.id == this.itemUsageData[i].id)
+            {
+                if (this.itemUsageData[i].nowUseCount < this.itemUsageData[i].details.maxOverlap)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public void SwapItems(int index1, int index2)
     {
         model.Swap(index1-1, index2-1);
@@ -263,7 +305,7 @@ public class InventoryController
     {
         TextInfoUI textInfo = Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData(info));
         textInfo.SetAnchoredPosition(0, -400);
-        textInfo.ShowAndHideUI(2f);
+        textInfo.ShowAndHideUI(1.8f);
     }
 
 

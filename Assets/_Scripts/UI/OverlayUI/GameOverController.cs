@@ -26,7 +26,7 @@ public class GameOverController : MonoBehaviour
 
         if (index != -1) // player has mf
         {
-            bool success = Manager.Instance.itemManager.UseItem(index);
+            bool success = Manager.Instance.itemManager.UseItemOnDead(index);
             Player.Instance.ReviveWithMemoryFragment();
         }
         else

@@ -56,8 +56,9 @@ public class VendingMachinePopupUI : MonoBehaviour
     }
 
     // 자판기에 아이템 등록 
-    private void SetUpItems()
+    public void SetUpItems()
     {
+        Debug.Log("SetUpItems Executed");
         for (int i = 1; i <= ItemDatabase.totalItems; i++)
         {
             Item item = ItemDatabase.GetDetailsById(i).Create();
@@ -134,6 +135,7 @@ public class VendingMachinePopupUI : MonoBehaviour
 
     public void ShowPurchaseGuide()
     {
+        if (!selectedSlot.canPurchase) return;
         guidePopup.SetPopupInfo($"{selectedSlot.item.details.label} 아이템을 \n구매하시겠습니까?");
         guidePopup.ShowUI();
     }

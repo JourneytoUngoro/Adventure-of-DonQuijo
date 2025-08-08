@@ -10,20 +10,27 @@ public class VendingMachineSlotEffect : MonoBehaviour
     private Vector3 originalScale;
     private Tweener currentTweener;
 
+    public bool canEffect;
+
 
     private void Start()
     {
         originalScale = transform.localScale;
+        canEffect = true;
     }
 
     public void OnSelectedState()
     {
+        if (!canEffect) return;
+
         AnimateScale(originalScale * selectedScale);
         Manager.Instance.soundManager.PlayUI("vendingMachinSlotSFX");
     }
 
     public void OnUnSelectedState()
     {
+        if (!canEffect) return;
+
         AnimateScale(originalScale);
     }
 

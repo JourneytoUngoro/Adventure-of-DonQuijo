@@ -83,6 +83,11 @@ public class OpeningController : MonoBehaviour
         persistentObject.SetActive(true);
         Manager.Instance.sceneTransitionManager.SceneTransition(new SceneField("Stage1"), true, false);
         Manager.Instance.soundManager.PlayBGMTransition("battleBGM", 0.3f, 0.03f, 0.5f);
+
+        if (!Manager.Instance.inputHandler.IsCharacterControlEnabled())
+        {
+            Manager.Instance.inputHandler.SetCharacterControlEnabled(true);
+        }
     }
 
 }
