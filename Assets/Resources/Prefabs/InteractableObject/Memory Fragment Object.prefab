@@ -139,9 +139,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   relatedQuest: {fileID: 11400000, guid: 2ef76d0428a67ce458697ab894beaecd, type: 2}
-  mfLifeTime: 7
+  mfLifeTime: 10
   moveSpeed: 3
-  epsilon: 2.5
+  epsilon: 2.8
 --- !u!114 &6087498623338046745
 MonoBehaviour:
   m_ObjectHideFlags: 0

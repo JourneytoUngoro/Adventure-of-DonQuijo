@@ -88,7 +88,7 @@ public class GameData
         this.currentDurability = 1.0f;
         this.currentExperience = 0.0f;
         this.currentAgility = 1.0f; // Stats.speedLevel
-        this.lastPlayerPosition = new Vector3(-600.0f, -100.0f, 0.0f);
+        this.lastPlayerPosition = new Vector3(-600.0f, -50.0f, 0.0f);
         this.currentScene = "SampleScene";
         // mapOpened = new Dictionary<string, bool>();
 
@@ -96,7 +96,5 @@ public class GameData
         this.itemUsageData = new ItemUsageData();
         this.questsData = new QuestsData();
         this.stageData = new StageData();
-        this.coinData = new CoinData();
-        this.memoryFragmentData = new MemoryFragmentData();
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PooledCoinController : MonoBehaviour, IDataPersistance
+public class PooledCoinController : MonoBehaviour
 {
     [SerializeField] public GameObject coinPrefab;
     private string coinPrefabName;
@@ -84,40 +84,5 @@ public class PooledCoinController : MonoBehaviour, IDataPersistance
     public void RequestRemoveActivatedCoinObject(CoinObject coinObject)
     {
         unactivatedCoinObjects.Add(coinObject);
-    }
-
-    public void LoadData(GameData data)
-    {
-        CoinData coinData = data.coinData;
-
-        bool isNew = (coinData.coinPositions.Count == 0 || coinData.count == 0);
-
-        if (!isNew)
-        {
-            foreach (SerializableVector3 pos in coinData.coinPositions)
-            {
-                GameObject obj = Manager.Instance.objectPoolingManager.GetGameObject(coinPrefabName);
-
-                obj.transform.position = pos.ToVector3();
-
-                float newLifeTime = obj.GetComponent<CoinObject>().coinLifeTime - Random.Range(0.01f, 1.5f);
-
-                SetTimer(obj, newLifeTime);
-            }
-        }
-    }
-
-    public void SaveData(GameData data)
-    {
-        CoinData coinData = new CoinData();
-        
-        coinData.count = activatedCoinObjects.Count;
-
-        foreach (CoinObject coin in activatedCoinObjects)
-        {
-            coinData.AddCoinPositions(coin.transform.position);
-        }
-
-        data.coinData = coinData;
     }
 }

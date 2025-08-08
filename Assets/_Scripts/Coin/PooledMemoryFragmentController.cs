@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PooledMemoryFragmentController : MonoBehaviour, IDataPersistance
+public class PooledMemoryFragmentController : MonoBehaviour
 {
     [SerializeField] public GameObject memoryFragmentPrefab;
 
@@ -83,41 +83,4 @@ public class PooledMemoryFragmentController : MonoBehaviour, IDataPersistance
     {
         activatedMemoryFragmentObjects.Remove(mfObject);
     }
-
-
-    public void LoadData(GameData data)
-    {
-        MemoryFragmentData mfData = data.memoryFragmentData;
-
-        bool isNew = (mfData.memoryFragmentPositions.Count == 0 || mfData.count == 0);
-
-        if (!isNew)
-        {
-            foreach (SerializableVector3 pos in mfData.memoryFragmentPositions)
-            {
-                GameObject obj = Manager.Instance.objectPoolingManager.GetGameObject(memoryFragmentPrefabName);
-
-                obj.transform.position = pos.ToVector3();
-
-                float newLifeTime = obj.GetComponent<MemoryFragmentObject>().mfLifeTime - Random.Range(0.01f, 1.5f);
-
-                SetTimer(obj, newLifeTime);
-            }
-        }
-    }
-
-    public void SaveData(GameData data)
-    {
-        MemoryFragmentData mfData = new MemoryFragmentData();
-
-        mfData.count = activatedMemoryFragmentObjects.Count;
-
-        foreach (MemoryFragmentObject mf in activatedMemoryFragmentObjects)
-        {
-            mfData.AddMemoryFragmentPositions(mf.transform.position);
-        }
-
-        data.memoryFragmentData = mfData;
-    }
-
 }
