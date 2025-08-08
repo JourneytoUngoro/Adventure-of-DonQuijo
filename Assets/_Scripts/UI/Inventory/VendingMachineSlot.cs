@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    public bool printDebug = true;
+
+
     public int slotId;
 
     public int itemId;
@@ -19,7 +22,7 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
 
     private Image backgroundImage;
 
-    private VendingMachineSlotEffect effect;
+    public VendingMachineSlotEffect effect;
     private VendingMachinePopupUI vmUI;
     private PopupUI vmPopup;
 
@@ -40,8 +43,10 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
         normalColor = GetComponent<Button>().colors.normalColor;
         highlightColor = GetComponent<Button>().colors.highlightedColor;
 
-        Debug.Assert(vmUI != null, "VendingMachinePopupUI is null!");
-
+        if (effect == null)
+        {
+            effect = GetComponent<VendingMachineSlotEffect>();
+        }
     }
 
 
@@ -71,6 +76,9 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
 
     public void ChangeSelectedState(bool chosen)
     {
+
+        Debug.Log(effect == null ? "effect null" : "effect not null");
+
         if (chosen)
         {
             effect.OnSelectedState();
@@ -86,7 +94,6 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
     public void OnClickVMSlot()
     {
         vmUI.ShowPurchaseGuide();
-        Debug.Log("on click vm slot");
     }
 
     public void OnPointerEnter(PointerEventData eventData)

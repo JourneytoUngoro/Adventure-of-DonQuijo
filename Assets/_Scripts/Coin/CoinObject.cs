@@ -12,7 +12,7 @@ public class CoinObject : InteractBase
     public Timer timer { get; private set; }
 
     public float moveSpeed = 1f;
-    public float epsilon = 2.0f;
+    public float epsilon = 3f;
 
     private Player player;
     private bool isChasingPlayer;

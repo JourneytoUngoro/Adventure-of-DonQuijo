@@ -2550,6 +2550,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4702582468519300369, guid: f3f2e7d01e1683e4aa2b4d87fc6a03b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5036717883988986037, guid: f3f2e7d01e1683e4aa2b4d87fc6a03b3, type: 3}
       propertyPath: <health>k__BackingField.slider
       value: 

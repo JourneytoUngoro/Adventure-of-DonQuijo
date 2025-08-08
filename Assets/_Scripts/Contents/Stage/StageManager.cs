@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class StageManager : MonoBehaviour, IDataPersistance
 {
@@ -12,6 +13,11 @@ public class StageManager : MonoBehaviour, IDataPersistance
     private void Awake()
     {
         LoadAllStages();
+
+        Debug.Log(Manager.Instance.gameManager == null ? "GameManager is null" : "GameManager is not null");
+
+        Manager.Instance.gameManager.sceneClearedAction -= DisplayStageClear;
+        Manager.Instance.gameManager.sceneClearedAction += DisplayStageClear;
     }
 
     private void LoadAllStages()
@@ -77,11 +83,23 @@ public class StageManager : MonoBehaviour, IDataPersistance
 
     public void DisplayStageClear()
     {
+        if (!Manager.Instance.sceneTransitionManager.currentActiveScene.SceneName.Equals("Stage4"))
+        {
+            Debug.Log("Not Last Stage");
+            return;
+        }
+        else
+        {
+            Debug.Log("Last Stage Cleared");
+        }
+
         PopupUI stageClearPopup = Object.Instantiate(Resources.Load<GameObject>("Prefabs/UI/Stage Clear")).GetComponent<PopupUI>();
         Debug.Assert(stageClearPopup != null, "can't find Stage Clear Popup");
         stageClearPopup.transform.SetParent(Manager.Instance.uiManager.GetUICanvasTransfrom(), false);
         stageClearPopup.ShowUI();
         stageClearPopup.gameObject.GetComponent<GameClearController>().ShowPlayInfo();
+
+        Manager.Instance.soundManager.PlaySoundFXClip("gameWinSFX", transform);
     }
 
     public void OnEnemyDeath(Transform enemy) => nowStage.OnEnemyDeath(enemy);
