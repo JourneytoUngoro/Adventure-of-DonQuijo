@@ -61,6 +61,7 @@ public class GameOverController : MonoBehaviour
         gameOverPopup.HideUI();
 
         Player.Instance.Revive(true);
+        Manager.Instance.dataManager.SaveGame();
         Manager.Instance.sceneTransitionManager.SceneTransition("MainMenu", true, true);
     }
 }
