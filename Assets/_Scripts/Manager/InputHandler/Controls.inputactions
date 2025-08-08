@@ -105,7 +105,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "New action",
+                    "name": "CheatCode",
                     "type": "Button",
                     "id": "3dcb4f7b-08fa-4fc0-90d5-10122733967c",
                     "expectedControlType": "",
@@ -314,11 +314,11 @@
                 {
                     "name": "",
                     "id": "4cc6db1d-3472-4dd3-be2f-10fda565f917",
-                    "path": "",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "New action",
+                    "groups": ";PC",
+                    "action": "CheatCode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -127,7 +127,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""CheatCode"",
                     ""type"": ""Button"",
                     ""id"": ""3dcb4f7b-08fa-4fc0-90d5-10122733967c"",
                     ""expectedControlType"": """",
@@ -336,11 +336,11 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""4cc6db1d-3472-4dd3-be2f-10fda565f917"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""New action"",
+                    ""groups"": "";PC"",
+                    ""action"": ""CheatCode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -480,7 +480,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_CharacterControl_UseItem = m_CharacterControl.FindAction("UseItem", throwIfNotFound: true);
         m_CharacterControl_Dodge = m_CharacterControl.FindAction("Dodge", throwIfNotFound: true);
         m_CharacterControl_StrongAttack = m_CharacterControl.FindAction("StrongAttack", throwIfNotFound: true);
-        m_CharacterControl_Newaction = m_CharacterControl.FindAction("New action", throwIfNotFound: true);
+        m_CharacterControl_CheatCode = m_CharacterControl.FindAction("CheatCode", throwIfNotFound: true);
         m_CharacterControl_Skills = m_CharacterControl.FindAction("Skills", throwIfNotFound: true);
         // UIControl
         m_UIControl = asset.FindActionMap("UIControl", throwIfNotFound: true);
@@ -565,7 +565,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControl_UseItem;
     private readonly InputAction m_CharacterControl_Dodge;
     private readonly InputAction m_CharacterControl_StrongAttack;
-    private readonly InputAction m_CharacterControl_Newaction;
+    private readonly InputAction m_CharacterControl_CheatCode;
     private readonly InputAction m_CharacterControl_Skills;
     public struct CharacterControlActions
     {
@@ -582,7 +582,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @UseItem => m_Wrapper.m_CharacterControl_UseItem;
         public InputAction @Dodge => m_Wrapper.m_CharacterControl_Dodge;
         public InputAction @StrongAttack => m_Wrapper.m_CharacterControl_StrongAttack;
-        public InputAction @Newaction => m_Wrapper.m_CharacterControl_Newaction;
+        public InputAction @CheatCode => m_Wrapper.m_CharacterControl_CheatCode;
         public InputAction @Skills => m_Wrapper.m_CharacterControl_Skills;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControl; }
         public void Enable() { Get().Enable(); }
@@ -626,9 +626,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @StrongAttack.started += instance.OnStrongAttack;
             @StrongAttack.performed += instance.OnStrongAttack;
             @StrongAttack.canceled += instance.OnStrongAttack;
-            @Newaction.started += instance.OnNewaction;
-            @Newaction.performed += instance.OnNewaction;
-            @Newaction.canceled += instance.OnNewaction;
+            @CheatCode.started += instance.OnCheatCode;
+            @CheatCode.performed += instance.OnCheatCode;
+            @CheatCode.canceled += instance.OnCheatCode;
             @Skills.started += instance.OnSkills;
             @Skills.performed += instance.OnSkills;
             @Skills.canceled += instance.OnSkills;
@@ -669,9 +669,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @StrongAttack.started -= instance.OnStrongAttack;
             @StrongAttack.performed -= instance.OnStrongAttack;
             @StrongAttack.canceled -= instance.OnStrongAttack;
-            @Newaction.started -= instance.OnNewaction;
-            @Newaction.performed -= instance.OnNewaction;
-            @Newaction.canceled -= instance.OnNewaction;
+            @CheatCode.started -= instance.OnCheatCode;
+            @CheatCode.performed -= instance.OnCheatCode;
+            @CheatCode.canceled -= instance.OnCheatCode;
             @Skills.started -= instance.OnSkills;
             @Skills.performed -= instance.OnSkills;
             @Skills.canceled -= instance.OnSkills;
@@ -776,7 +776,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnUseItem(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
         void OnStrongAttack(InputAction.CallbackContext context);
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnCheatCode(InputAction.CallbackContext context);
         void OnSkills(InputAction.CallbackContext context);
     }
     public interface IUIControlActions
