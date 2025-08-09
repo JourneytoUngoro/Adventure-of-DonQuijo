@@ -19,6 +19,8 @@ public class EnemyStateMachine : EntityStateMachine
         entityNextState = nextState;
         this.nextState = nextState as EnemyState;
 
+        Debug.Assert(currentState != null, "Enemy StateMachine CurrentState is null!");
+
         currentState.Exit();
 
         entityPrevState = entityCurrentState;
@@ -26,6 +28,10 @@ public class EnemyStateMachine : EntityStateMachine
 
         entityCurrentState = nextState;
         currentState = nextState as EnemyState;
+
+        Debug.Assert(currentState != null, "Enemy StateMachine CurrentState is null!");
+
+        if (currentState == null) { currentState = prevState; } // 임시로 한 프레임 더 유지해보기
 
         currentState.Enter();
 

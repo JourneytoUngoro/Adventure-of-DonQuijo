@@ -66,6 +66,8 @@ public class Entity : MonoBehaviour
     protected virtual void Update()
     {
         // entityStateMachine.entityCurrentState.PhysicsUpdate();
+        if (entityStateMachine.entityCurrentState == null) return;
+
         entityStateMachine.entityCurrentState.LogicUpdate();
         entityStateMachine.entityCurrentState.PhysicsUpdate();
     }
@@ -77,6 +79,11 @@ public class Entity : MonoBehaviour
 
     protected virtual void LateUpdate()
     {
+        Debug.Assert(entityStateMachine != null, "Entity StateMachine is null!");
+        Debug.Assert(entityStateMachine.entityCurrentState != null, "Entity StateMachine CurrentState is null!");
+
+        if (entityStateMachine.entityCurrentState == null) return;
+
         entityStateMachine.entityCurrentState.LateLogicUpdate();
         Array.Fill(status, false);
     }
