@@ -73,6 +73,11 @@ public class EnemyCombat : Combat
         currentParryStack = Mathf.Clamp(currentParryStack + 1, 0, enemy.enemyData.maxParryableCount);
         Manager.Instance.soundManager.PlaySoundFXClip("lightAttack1SFX", enemy.transform);
 
+        Debug.Assert(enemy != null, "Enemy is null!");
+        Debug.Assert(enemy.enemyStateMachine != null, "Enemy StateMachine is null!");
+        Debug.Assert(enemy.enemyStateMachine.currentState != null, "Enemy StateMachine CurrentState is null!");
+
+
         if (enemy.enemyStateMachine.currentState.Equals(enemy.knockbackState))
         {
             enemy.animator.SetTrigger("gotHit");

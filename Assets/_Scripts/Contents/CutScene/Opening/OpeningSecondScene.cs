@@ -12,14 +12,6 @@ public class OpeningSecondScene : MonoBehaviour, ICutScene
 
     public float waitTimeToStart;
 
-/*    [TabGroup("SecondCut"), LabelText("Second Cut Obj")]
-    public GameObject SecondCutObj;
-    [TabGroup("SecondCut")] [Tooltip("")]
-    public float transitionDuration;
-    [TabGroup("SecondCut")]
-    public Ease transitionEase;*/
-
-
     [TabGroup("Knight"), LabelText("Knight Obj")]
     public GameObject KnightObj;
     [TabGroup("Knight")] [Tooltip("기사 시작 위치")]
@@ -90,33 +82,6 @@ public class OpeningSecondScene : MonoBehaviour, ICutScene
     {
         Sequence master = DOTween.Sequence();
 
-/*        Sequence transitionSequence = DOTween.Sequence();
-        transitionSequence.Append(
-                    DOTween.To(
-                        () => GetterColor(knightSp),
-                        x => SetterColor(knightSp, x),
-                        1f,
-                        transitionDuration
-                        )
-            );
-        transitionSequence.Join(
-                     DOTween.To(
-                        () => GetterColor(lightSp),
-                        x => SetterColor(lightSp, x),
-                        1f,
-                        transitionDuration
-                        )
-            );
-        transitionSequence.Join(
-                     DOTween.To(
-                        () => GetterColor(bgSp),
-                        x => SetterColor(bgSp, x),
-                        1f,
-                        transitionDuration
-                        )
-            );*/
-
-
         // knight
         Sequence knightSequence = DOTween.Sequence();
         knightSequence.Append(
@@ -157,37 +122,5 @@ public class OpeningSecondScene : MonoBehaviour, ICutScene
         master.Append(lightSequence);
         master.AppendInterval(1.5f).OnComplete(() => { if (!isEditing) onFinish?.Invoke(); });
 
-    }
-
-    private void InitializeObjColor()
-    {
-        // set sprite render's alpha value to Zero
-        knightSp = KnightObj.GetComponent<SpriteRenderer>();
-        lightSp = LightObj.GetComponent<SpriteRenderer>();
-        bgSp = BackgroundObj.GetComponent<SpriteRenderer>();
-
-        Color knightColor = knightSp.color;
-        knightColor.a = 0f;
-        knightSp.color = knightColor;
-
-        Color lightColor = lightSp.color;
-        lightColor.a = 0f;
-        lightSp.color = lightColor;
-
-        Color bgColor = bgSp.color;
-        bgColor.a = 0f;
-        bgSp.color = bgColor;
-    }
-
-    private float GetterColor(SpriteRenderer sp)
-    {
-        return sp.color.a;
-    }
-
-    private void SetterColor(SpriteRenderer sp, float x)
-    {
-        Color newColor = sp.color;
-        newColor.a = x;
-        sp.color = newColor;
     }
 }

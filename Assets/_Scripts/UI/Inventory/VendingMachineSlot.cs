@@ -107,7 +107,7 @@ public class VendingMachineSlot : MonoBehaviour, ISelectHandler, IDeselectHandle
     public void ChangeSelectedState(bool chosen)
     {
 
-        Debug.Log(effect == null ? "effect null" : "effect not null");
+        // Debug.Log(effect == null ? "effect null" : "effect not null");
 
         if (chosen && canPurchase)
         {

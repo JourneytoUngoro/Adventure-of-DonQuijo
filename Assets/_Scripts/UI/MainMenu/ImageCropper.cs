@@ -9,7 +9,7 @@ public class ImageCropper : MonoBehaviour
 
     void Awake()
     {
-        ScaleImage();
+        // ScaleImage();
     }
 
     public void ScaleImage()
@@ -26,7 +26,7 @@ public class ImageCropper : MonoBehaviour
         if (containerAspect > spriteAspect)
         {
             float newWidth = containerWidth;
-            float newHeight = (float)(newWidth / spriteAspect);
+            float newHeight = (float)(newWidth / spriteWidth * spriteHeight);
 
             image.rectTransform.sizeDelta = new Vector2(newWidth, newHeight);
             image.rectTransform.anchoredPosition = new Vector2(0, (newHeight - containerHeight) / 2);
@@ -34,11 +34,10 @@ public class ImageCropper : MonoBehaviour
         else
         {
             float newHeight = containerHeight;
-            float newWidth = (float)(newHeight * spriteAspect);
+            float newWidth = (float)(newHeight / spriteHeight * spriteWidth);
 
             image.rectTransform.sizeDelta = new Vector2(newWidth, newHeight);
             image.rectTransform.anchoredPosition = new Vector2((newHeight - containerHeight) / 2, 0);
         }
-
     }
 }

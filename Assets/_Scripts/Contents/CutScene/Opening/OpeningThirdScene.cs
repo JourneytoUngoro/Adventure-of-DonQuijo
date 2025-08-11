@@ -40,32 +40,11 @@ public class OpeningThirdScene : MonoBehaviour, ICutScene
 
         HandObj.transform.position = handStartPosition;
         HandObj.transform.localScale = handStartScale;
-
-        InitializeObjColor();
     }
 
     public  void PlayScene()
     {
-
         Sequence transitionSequence = DOTween.Sequence();
-
-        transitionSequence.Append(
-            DOTween.To(
-                () => GetterColor(bgSp), // getter 
-                x => SetterColor(bgSp, x), // setter 
-                1, // end value
-                transitionTime // duration
-                )
-            );
-
-        transitionSequence.Join(
-            DOTween.To(
-                () => GetterColor(handSp), // getter 
-                x => SetterColor(handSp, x), // setter 
-                1, // end value
-                transitionTime // duration
-                )
-            );
 
         transitionSequence.AppendInterval(0.2f).OnComplete(() => { handAnim.Play("HandMove"); });
     }
@@ -74,32 +53,5 @@ public class OpeningThirdScene : MonoBehaviour, ICutScene
     {
         Sequence waitSequence = DOTween.Sequence();
         waitSequence.AppendInterval(1.5f).OnComplete(() => { if (!isEditing) onFinish?.Invoke(); });
-    }
-
-    private void InitializeObjColor()
-    {
-        // set sprite render's alpha value to Zero
-        handSp = HandObj.GetComponent<SpriteRenderer>();
-        bgSp = BackgroundObj.GetComponent<SpriteRenderer>();
-
-        Color handColor = handSp.color;
-        handColor.a = 0f;
-        handSp.color = handColor;
-
-        Color bgColor = bgSp.color;
-        bgColor.a = 0f;
-        bgSp.color = bgColor;
-    }
-
-    private float GetterColor(SpriteRenderer sp)
-    {
-        return sp.color.a;
-    }
-
-    private void SetterColor(SpriteRenderer sp, float x)
-    {
-        Color newColor = sp.color;
-        newColor.a = x;
-        sp.color = newColor;
     }
 }

@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,10 +7,10 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public abstract class InteractBase : MonoBehaviour, IInteractable
 {
-    [SerializeField] private InteractionType interactionType;
+    [SerializeField] public InteractionType interactionType { get; private set; }
     [SerializeField, EnumFlags] private ObjectType interactionObjectType;
-    public bool canInteract { get; set; }
-    private enum InteractionType { Object, NPC, Door, SceneTransition }
+    [ShowInInspector] public bool canInteract { get; set; }
+    public enum InteractionType { Object, NPC, Door, SceneTransition }
     private enum ObjectType { Interactable, Breakable, Moveable }
 
     public abstract void Interact();
@@ -126,5 +127,5 @@ public abstract class InteractBase : MonoBehaviour, IInteractable
                 }
             }
         }
-    }
+    }  
 }
