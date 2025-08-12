@@ -22,37 +22,37 @@ MonoBehaviour:
   - key: startButtonSFX
     clip: {fileID: 8300000, guid: 5403d6dd7f799de44b1ce6abfa80f2a2, type: 3}
   - key: buttonSFX
-    clip: {fileID: 8300000, guid: 58e7827fc0a3bd345a345c35be6c0c71, type: 3}
+    clip: {fileID: 8300000, guid: 35ade6dc86ac81b4393607b69337fc90, type: 3}
   - key: heavyAttackSFX
-    clip: {fileID: 8300000, guid: 9e28cfae91511c1479a61078c3d3e3b9, type: 3}
+    clip: {fileID: 8300000, guid: 38024b4214036964589f8c73022d5290, type: 3}
   - key: dashAttackSFX
-    clip: {fileID: 8300000, guid: 6af8084f691be4c4699fdb72b5cb2888, type: 3}
+    clip: {fileID: 8300000, guid: 980c83851d5a87d4a96256e6a048bf75, type: 3}
   - key: lightAttack1SFX
-    clip: {fileID: 8300000, guid: a48ac912634804e42a419a22ca5499a2, type: 3}
+    clip: {fileID: 8300000, guid: 8a8f73cdd5679a94ea33157bdd61fc43, type: 3}
   - key: lightAttack2SFX
-    clip: {fileID: 8300000, guid: 5d450ca1575ea0f43b27ae603f92e035, type: 3}
+    clip: {fileID: 8300000, guid: 148113ddb4ea0684084edba3355d8192, type: 3}
   - key: lightAttack3SFX
-    clip: {fileID: 8300000, guid: 5727e8398cc5d6b4593eb3d20848f728, type: 3}
+    clip: {fileID: 8300000, guid: c6b21db6e2dbbe24497bf63f8d207e38, type: 3}
   - key: playerWalkSFX
-    clip: {fileID: 8300000, guid: 407a2e05c8d27854ea80d0320cc0ce63, type: 3}
+    clip: {fileID: 8300000, guid: d84e8339586d6ac4c998a575ac202198, type: 3}
   - key: playerStaggerSFX
     clip: {fileID: 8300000, guid: 2aa605c4d48359146baa3d622300d96c, type: 3}
   - key: playerMissAttackSFX
-    clip: {fileID: 8300000, guid: c6f928982333c75469dd41a3c762aa61, type: 3}
+    clip: {fileID: 8300000, guid: e10551f067db49b40abcfa38c8555473, type: 3}
   - key: playerDashSFX
-    clip: {fileID: 8300000, guid: 23516d1af3f0ed144a6899d34d2747bd, type: 3}
+    clip: {fileID: 8300000, guid: c44cdcc71a261bd4bb5399a2a745a7aa, type: 3}
   - key: playerHitSFX
-    clip: {fileID: 8300000, guid: 8160e987beff83945a93e757721a4a39, type: 3}
+    clip: {fileID: 8300000, guid: a05b1249ef430244d928be6278acadcb, type: 3}
   - key: playerParrySuccessSFX
-    clip: {fileID: 8300000, guid: 84fda23d32834a447820805d63977b85, type: 3}
+    clip: {fileID: 8300000, guid: 8dd34bebbd28ac24ea19410fcab01f74, type: 3}
   - key: healthRecorverSFX
     clip: {fileID: 8300000, guid: 33a4798d4f748024982b59c37fccf1a1, type: 3}
   - key: playerAttack1SFX
-    clip: {fileID: 8300000, guid: 33cf01ed119b3214f8dc43969904f3ab, type: 3}
+    clip: {fileID: 8300000, guid: b4cdcb33186dc1848a8bafec72268852, type: 3}
   - key: playerAttack2SFX
-    clip: {fileID: 8300000, guid: d41cc594ba7a34f4780de4c83a58ac88, type: 3}
+    clip: {fileID: 8300000, guid: e3ee0489036cffc48a9560c3acf8e51e, type: 3}
   - key: playerAttack3SFX
-    clip: {fileID: 8300000, guid: ba8864fa2435f3d48a368c21c4ddbf0f, type: 3}
+    clip: {fileID: 8300000, guid: 164b4f0fabb95a247946322afefa89b8, type: 3}
   - key: coinCollectSFX
     clip: {fileID: 8300000, guid: ce67402fbcf52434dbdda26ac4a06175, type: 3}
   - key: coinDropSFX

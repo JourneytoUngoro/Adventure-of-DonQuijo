@@ -7,7 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public abstract class InteractBase : MonoBehaviour, IInteractable
 {
-    [SerializeField] public InteractionType interactionType { get; private set; }
+    [SerializeField] public InteractionType interactionType { get; set; }
     [SerializeField, EnumFlags] private ObjectType interactionObjectType;
     [ShowInInspector] public bool canInteract { get; set; }
     public enum InteractionType { Object, NPC, Door, SceneTransition }
@@ -22,6 +22,7 @@ public abstract class InteractBase : MonoBehaviour, IInteractable
             switch (interactionType)
             {
                 case InteractionType.SceneTransition:
+                    Debug.Log($"SceneTransition Try Interact()");
                     Interact();
                     break;
 

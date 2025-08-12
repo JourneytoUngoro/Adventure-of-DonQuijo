@@ -19,6 +19,7 @@ public class SceneConnectorInteraction : InteractBase
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         initialDirection = direction;
+        interactionType = InteractionType.SceneTransition;
     }
 
     private void OnEnable()

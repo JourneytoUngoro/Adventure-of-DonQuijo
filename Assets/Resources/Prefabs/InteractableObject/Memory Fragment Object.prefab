@@ -133,14 +133,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c900d6db79d994dbdcad55b4d5db07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionType: 0
   interactionObjectType: 0
   playerMask:
     serializedVersion: 2
     m_Bits: 0
   relatedQuest: {fileID: 11400000, guid: 2ef76d0428a67ce458697ab894beaecd, type: 2}
-  mfLifeTime: 10
-  moveSpeed: 3
+  mfLifeTime: 15
+  moveSpeed: 3.5
   epsilon: 2.8
 --- !u!114 &6087498623338046745
 MonoBehaviour:
@@ -197,8 +196,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.57775015, y: 1.0298635}
-  m_Size: {x: 48.00206, y: 34.215363}
+  m_Offset: {x: 0.02387995, y: -0.47396347}
+  m_Size: {x: 62.84039, y: 43.63988}
   m_Direction: 1
 --- !u!114 &-157961625697691282
 MonoBehaviour:
