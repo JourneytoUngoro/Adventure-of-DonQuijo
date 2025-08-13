@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GuideNPC
   m_EditorClassIdentifier: 
   npcName: 
-  npcAudioClip: {fileID: 8300000, guid: d762a90e47077564191455bb55443be0, type: 3}
+  npcAudioClip: {fileID: 8300000, guid: 1bfca3795b4acfc438e5279b9f0d19ee, type: 3}
   portraitEntries: []

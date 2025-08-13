@@ -416,7 +416,7 @@ MonoBehaviour:
   - {fileID: 6337492114140168505}
   - {fileID: 2730541874606694723}
   - {fileID: 4321720173480737322}
-  defaultAudioClip: {fileID: 8300000, guid: d762a90e47077564191455bb55443be0, type: 3}
+  defaultAudioClip: {fileID: 8300000, guid: 1bfca3795b4acfc438e5279b9f0d19ee, type: 3}
 --- !u!95 &8140726651237201054
 Animator:
   serializedVersion: 5

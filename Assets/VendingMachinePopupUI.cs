@@ -82,15 +82,12 @@ public class VendingMachinePopupUI : MonoBehaviour
 
     private void PurchaseItem(Item item)
     {
-        Debug.Assert(item != null, "vending machine item null!");
-        Debug.Assert(Manager.Instance.itemManager != null, "item manager is null");
         Manager.Instance.itemManager.PurchaseItem(item);
     }
 
 
     public void SetSelectedSlot(VendingMachineSlot slot)
     {
-        Debug.Log(selectedSlot?.effect == null ? "effect null" : "effect not null");
         if (selectedSlot != null && selectedSlot.effect != null) { selectedSlot?.ChangeSelectedState(false); } // Release prev slot
         selectedSlot = slot; // Register new slot
     }
@@ -134,8 +131,19 @@ public class VendingMachinePopupUI : MonoBehaviour
     public void ShowPurchaseGuide()
     {
         if (!selectedSlot.canPurchase) return;
-        guidePopup.SetPopupInfo($"{selectedSlot.item.details.label} 아이템을 \n구매하시겠습니까?");
-        guidePopup.ShowUI();
+
+        if(Manager.Instance.itemManager.CanPurchaseItem(selectedSlot.item))
+        {
+            guidePopup.SetPopupInfo($"{selectedSlot.item.details.label} 아이템을 \n구매하시겠습니까?");
+            guidePopup.ShowUI();
+        }
+        else
+        {
+            TextInfoUI textInfo = Manager.Instance.uiManager.ShowDynamicTextInfo(new TextInfoData("최대 섭취 횟수에 도달한 아이템은\n 구매 불가합니다."));
+            textInfo.SetAnchoredPosition(0, -400);
+            textInfo.ShowAndHideUI(1.8f);
+        }
+
     }
 
     private void OnClickGuideConfirmBtn()

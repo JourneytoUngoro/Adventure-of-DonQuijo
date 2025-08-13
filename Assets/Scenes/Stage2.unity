@@ -947,12 +947,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1666196178936740477, guid: 14970df520f57e442b6c302c11bf093f, type: 3}
       propertyPath: targetScene.m_SceneName
-      value: Stage3
+      value: Stage1
       objectReference: {fileID: 0}
     - target: {fileID: 1666196178936740477, guid: 14970df520f57e442b6c302c11bf093f, type: 3}
       propertyPath: targetScene.m_SceneAsset
       value: 
-      objectReference: {fileID: 102900000, guid: 17e0f369f76f4fb4ea8790a0c7761fd1, type: 3}
+      objectReference: {fileID: 102900000, guid: b2ceeace8e03cd944bafec8aca6121d4, type: 3}
     - target: {fileID: 5095821053025836881, guid: 14970df520f57e442b6c302c11bf093f, type: 3}
       propertyPath: m_Name
       value: Left Portal
@@ -1330,12 +1330,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1666196178936740477, guid: 14970df520f57e442b6c302c11bf093f, type: 3}
       propertyPath: targetScene.m_SceneName
-      value: Stage1
+      value: Stage3
       objectReference: {fileID: 0}
     - target: {fileID: 1666196178936740477, guid: 14970df520f57e442b6c302c11bf093f, type: 3}
       propertyPath: targetScene.m_SceneAsset
       value: 
-      objectReference: {fileID: 102900000, guid: b2ceeace8e03cd944bafec8aca6121d4, type: 3}
+      objectReference: {fileID: 102900000, guid: 17e0f369f76f4fb4ea8790a0c7761fd1, type: 3}
     - target: {fileID: 5095821053025836881, guid: 14970df520f57e442b6c302c11bf093f, type: 3}
       propertyPath: m_Name
       value: Right Portal
