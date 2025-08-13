@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class DisplayController : MonoBehaviour
 {
     #region Display Variables
-    [TabGroup("Resolution"), LabelText("Resolution Dropdown")]
+/*    [TabGroup("Resolution"), LabelText("Resolution Dropdown")]
     public TMP_Dropdown resolutionDrop;
     private Resolution[] resolutions;
     private Resolution currentResolution;
@@ -16,7 +16,7 @@ public class DisplayController : MonoBehaviour
     [TabGroup("Screen Mode"), LabelText("Fullscreen Toggle")]
     public Toggle fullScreenToggle;
     [TabGroup("Screen Mode"), LabelText("Windowed Toggle")]
-    public Toggle windowScreenToggle;
+    public Toggle windowScreenToggle;*/
 
     [TabGroup("Brightness"), LabelText("Brightness Overlay Image")]
     public Image brightControlImage;
@@ -40,14 +40,14 @@ public class DisplayController : MonoBehaviour
     private void Awake()
     {
         if (isInitialized) return;
-        fullScreenToggle.onValueChanged.RemoveAllListeners();
+        // fullScreenToggle.onValueChanged.RemoveAllListeners();
 
         Initialize();
 
         // get all resolutions of player
-        resolutions = Screen.resolutions;
+        // resolutions = Screen.resolutions;
 
-        InitResolutionDrop();
+        // InitResolutionDrop();
         InitFrameDrop();
         AddListenerToUI();
 
@@ -57,17 +57,17 @@ public class DisplayController : MonoBehaviour
     private void Initialize()
     {
         // resolution
-        currentResolution = Screen.currentResolution;
+        // currentResolution = Screen.currentResolution;
         
         // screen mode
-        if (Screen.fullScreen)
+/*        if (Screen.fullScreen)
         {
             fullScreenToggle.isOn = true;
         }
         else
         {
             windowScreenToggle.isOn = true;
-        }
+        }*/
 
         // brightness
         currentBrightTMP.text = "100";
@@ -80,7 +80,7 @@ public class DisplayController : MonoBehaviour
         currentFps = (int) (1f / Time.deltaTime);
     }
 
-    private void InitResolutionDrop()
+/*    private void InitResolutionDrop()
     {
         // clear
         resolutionDrop.ClearOptions();
@@ -104,7 +104,7 @@ public class DisplayController : MonoBehaviour
         resolutionDrop.AddOptions(new List<string>(options));
         resolutionDrop.value = currentResolutionIndex;
         resolutionDrop.RefreshShownValue();
-    }
+    }*/
 
     private void InitFrameDrop()
     {
@@ -125,7 +125,7 @@ public class DisplayController : MonoBehaviour
             }
         }
 
-        options.Add("ÌîÑÎ†àÏûÑ Ï†úÌïú ÏóÜÏùå");
+        options.Add("«¡∑π¿” ¡¶«— æ¯¿Ω");
 
         frameDrop.AddOptions(new List<string>(options));
         if (currentFrameIndex == -1)
@@ -139,9 +139,9 @@ public class DisplayController : MonoBehaviour
 
     private void AddListenerToUI()
     {
-        resolutionDrop.onValueChanged.AddListener(value => SetCurrentResolution(value));
+        // resolutionDrop.onValueChanged.AddListener(value => SetCurrentResolution(value));
 
-        fullScreenToggle.onValueChanged.AddListener(isOn => SetCurrentScreenMode(isOn));
+        // fullScreenToggle.onValueChanged.AddListener(isOn => SetCurrentScreenMode(isOn));
 
         brightnessSlider.onValueChanged.AddListener(value => SetCurrentBrightness(value));
 
@@ -150,15 +150,15 @@ public class DisplayController : MonoBehaviour
 
     public void SetCurrentResolution(int chosenIndex)
     {
-        Resolution chosenResolution = resolutions[chosenIndex];
+/*        Resolution chosenResolution = resolutions[chosenIndex];
         Screen.SetResolution(chosenResolution.width, chosenResolution.height, Screen.fullScreen);
 
-        Debug.Log($"Resoultion changed -> {chosenResolution}");
+        Debug.Log($"Resoultion changed -> {chosenResolution}");*/
     }
 
     public void SetCurrentScreenMode(bool isOn)
     {
-        if (isOn) // full screen mode
+/*        if (isOn) // full screen mode
         {
             Screen.SetResolution(currentResolution.width, currentResolution.height, true);
         }
@@ -167,7 +167,7 @@ public class DisplayController : MonoBehaviour
             Screen.SetResolution(currentResolution.width, currentResolution.height, false);
         }
 
-        Debug.Log($"current display info : {Screen.currentResolution} / {(Screen.fullScreen ? "full screen mode" : "window screen mode")} ");
+        Debug.Log($"current display info : {Screen.currentResolution} / {(Screen.fullScreen ? "full screen mode" : "window screen mode")} ");*/
     }
 
     public void SetCurrentBrightness(float brightness)
