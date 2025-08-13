@@ -343,6 +343,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5156577600876284831, guid: a81ffddd917817242acf02331f9993b3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156577600876284831, guid: a81ffddd917817242acf02331f9993b3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -454,6 +458,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5156577600876284831, guid: a81ffddd917817242acf02331f9993b3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5156577600876284831, guid: a81ffddd917817242acf02331f9993b3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -698,6 +706,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5156577600876284831, guid: a81ffddd917817242acf02331f9993b3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5156577600876284831, guid: a81ffddd917817242acf02331f9993b3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1318,12 +1330,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1666196178936740477, guid: 14970df520f57e442b6c302c11bf093f, type: 3}
       propertyPath: targetScene.m_SceneName
-      value: Stage3
+      value: Stage1
       objectReference: {fileID: 0}
     - target: {fileID: 1666196178936740477, guid: 14970df520f57e442b6c302c11bf093f, type: 3}
       propertyPath: targetScene.m_SceneAsset
       value: 
-      objectReference: {fileID: 102900000, guid: 17e0f369f76f4fb4ea8790a0c7761fd1, type: 3}
+      objectReference: {fileID: 102900000, guid: b2ceeace8e03cd944bafec8aca6121d4, type: 3}
     - target: {fileID: 5095821053025836881, guid: 14970df520f57e442b6c302c11bf093f, type: 3}
       propertyPath: m_Name
       value: Right Portal
@@ -1442,6 +1454,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5156577600876284831, guid: a81ffddd917817242acf02331f9993b3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5156577600876284831, guid: a81ffddd917817242acf02331f9993b3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1572,6 +1588,10 @@ PrefabInstance:
       value: 175
       objectReference: {fileID: 0}
     - target: {fileID: 5779271540194620812, guid: b868f0779fa44c04fb11cf0bd7d87959, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5779271540194620812, guid: b868f0779fa44c04fb11cf0bd7d87959, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -1619,6 +1639,10 @@ PrefabInstance:
     - target: {fileID: 3203514117111065455, guid: d35c26b26bd993d49a330137c186f56f, type: 3}
       propertyPath: detectionCounterclockwiseAngle
       value: 165
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196642822497740318, guid: d35c26b26bd993d49a330137c186f56f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4196642822497740318, guid: d35c26b26bd993d49a330137c186f56f, type: 3}
       propertyPath: m_AnchorMax.y
