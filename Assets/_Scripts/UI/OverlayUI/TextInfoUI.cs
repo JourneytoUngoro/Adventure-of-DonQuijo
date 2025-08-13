@@ -12,6 +12,7 @@ public class TextInfoUI : UIBase
     // 오브젝트                      // 씬 상의 오브젝트 이름
     private TextMeshProUGUI infoTMP; // Info TMP
     private Image backgroundImage; // Background Image
+    private AutoSizeTextInfo autoSize;
 
     public bool canOverlap = false;
 
@@ -19,6 +20,7 @@ public class TextInfoUI : UIBase
     {
         infoTMP = GetComponentInChildren<TextMeshProUGUI>();
         backgroundImage = GetComponent<Image>();
+        autoSize = GetComponent<AutoSizeTextInfo>();
 
         canOverlap = false;
     }
@@ -32,7 +34,8 @@ public class TextInfoUI : UIBase
         }
 
         Manager.Instance.uiManager.OpenTextInfoUI(this);
-        
+
+        autoSize.SetDynamicAutoSize();
         base.ShowUI(onFadeInComplete);
     }
 
@@ -65,6 +68,8 @@ public class TextInfoUI : UIBase
     {
         if (data.info != null && infoTMP) infoTMP.text = data.info;
         if (data.background != null && backgroundImage != null) backgroundImage.sprite = data.background;
+
+        autoSize.SetDynamicAutoSize();
 
         return this;
     }

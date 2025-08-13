@@ -169,7 +169,7 @@ public class InventoryController
             if (!IsUnderMaxOverlap(item))
             {
                 // 최대 가용 횟수 초과
-                string text = $"{item.details.label} 아이템은 최대 섭취 횟수에 도달했습니다.";
+                string text = $"{item.details.label} 아이템은 최대 섭취 횟수에 도달했습니다.\n아이템을 드래그하여 버릴 수 있습니다.";
                 SetInventoryTextInfo(text);
                 return false;
             }

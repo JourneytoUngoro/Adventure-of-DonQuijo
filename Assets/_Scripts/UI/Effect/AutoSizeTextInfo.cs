@@ -8,7 +8,7 @@ public class AutoSizeTextInfo : MonoBehaviour
 
     public Vector2 padding = new Vector2(20f, 20f); 
 
-    void LateUpdate()
+    public void SetDynamicAutoSize()
     {
         Vector2 textSize = tmpText.GetPreferredValues(tmpText.text);
         background.sizeDelta = textSize + padding;

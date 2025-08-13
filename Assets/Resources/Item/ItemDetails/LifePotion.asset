@@ -15,7 +15,7 @@ MonoBehaviour:
   <id>k__BackingField: 2
   <label>k__BackingField: "\uC0DD\uBA85\uC758 \uBB3C\uC57D"
   <maxStack>k__BackingField: 1
-  <maxOverlap>k__BackingField: 10
+  <maxOverlap>k__BackingField: 5
   <description>k__BackingField: "\uCD5C\uB300 HP +15"
   <price>k__BackingField: 20
   <effect>k__BackingField: {fileID: 11400000, guid: e9914342524d43343b019500fc0ee7c8, type: 2}

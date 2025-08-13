@@ -15,7 +15,7 @@ MonoBehaviour:
   <id>k__BackingField: 3
   <label>k__BackingField: "\uAC15\uCCA0 \uC8FC\uBA39"
   <maxStack>k__BackingField: 1
-  <maxOverlap>k__BackingField: 10
+  <maxOverlap>k__BackingField: 3
   <description>k__BackingField: "\uAC15\uACF5\uACA9 \uD53C\uD574\uB7C9 +20%"
   <price>k__BackingField: 20
   <effect>k__BackingField: {fileID: 11400000, guid: 933c78d751033e1489d80bf7e2c48d1a, type: 2}
